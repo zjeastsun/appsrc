@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0431F19C19CC759D00F1718A /* eutils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0431F19A19CC759D00F1718A /* eutils.mm */; };
+		0431F19D19CC759D00F1718A /* mq_interface.ice in Sources */ = {isa = PBXBuildFile; fileRef = 0431F19B19CC759D00F1718A /* mq_interface.ice */; };
+		0431F1A019CC76C300F1718A /* loginViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0431F19F19CC76C300F1718A /* loginViewController.mm */; };
+		0431F1A219CC795200F1718A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0431F1A119CC795200F1718A /* CFNetwork.framework */; };
+		0431F1A419CC796A00F1718A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0431F1A319CC796A00F1718A /* Security.framework */; };
+		0431F1A619CC797800F1718A /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0431F1A519CC797800F1718A /* ExternalAccessory.framework */; };
 		0448780D19CC70FB0086CE1B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0448780C19CC70FB0086CE1B /* Foundation.framework */; };
 		0448780F19CC70FB0086CE1B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0448780E19CC70FB0086CE1B /* CoreGraphics.framework */; };
 		0448781119CC70FB0086CE1B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0448781019CC70FB0086CE1B /* UIKit.framework */; };
@@ -35,6 +41,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0431F19919CC759D00F1718A /* eutils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = eutils.h; path = BreakRule/eutils/eutils.h; sourceTree = "<group>"; };
+		0431F19A19CC759D00F1718A /* eutils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = eutils.mm; path = BreakRule/eutils/eutils.mm; sourceTree = "<group>"; };
+		0431F19B19CC759D00F1718A /* mq_interface.ice */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.slice; name = mq_interface.ice; path = BreakRule/eutils/mq_interface.ice; sourceTree = "<group>"; };
+		0431F19E19CC76C300F1718A /* loginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginViewController.h; sourceTree = "<group>"; };
+		0431F19F19CC76C300F1718A /* loginViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = loginViewController.mm; sourceTree = "<group>"; };
+		0431F1A119CC795200F1718A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		0431F1A319CC796A00F1718A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		0431F1A519CC797800F1718A /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		0448780919CC70FB0086CE1B /* BreakRule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BreakRule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0448780C19CC70FB0086CE1B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0448780E19CC70FB0086CE1B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -63,6 +77,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0431F1A619CC797800F1718A /* ExternalAccessory.framework in Frameworks */,
+				0431F1A419CC796A00F1718A /* Security.framework in Frameworks */,
+				0431F1A219CC795200F1718A /* CFNetwork.framework in Frameworks */,
 				0448780F19CC70FB0086CE1B /* CoreGraphics.framework in Frameworks */,
 				0448781119CC70FB0086CE1B /* UIKit.framework in Frameworks */,
 				0448780D19CC70FB0086CE1B /* Foundation.framework in Frameworks */,
@@ -82,9 +99,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0431F19819CC74D300F1718A /* eutils */ = {
+			isa = PBXGroup;
+			children = (
+				0431F19919CC759D00F1718A /* eutils.h */,
+				0431F19A19CC759D00F1718A /* eutils.mm */,
+				0431F19B19CC759D00F1718A /* mq_interface.ice */,
+			);
+			name = eutils;
+			sourceTree = "<group>";
+		};
 		0448780019CC70FB0086CE1B = {
 			isa = PBXGroup;
 			children = (
+				0431F19819CC74D300F1718A /* eutils */,
 				0448781219CC70FB0086CE1B /* BreakRule */,
 				0448783419CC70FB0086CE1B /* BreakRuleTests */,
 				0448780B19CC70FB0086CE1B /* Frameworks */,
@@ -104,6 +132,9 @@
 		0448780B19CC70FB0086CE1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0431F1A519CC797800F1718A /* ExternalAccessory.framework */,
+				0431F1A319CC796A00F1718A /* Security.framework */,
+				0431F1A119CC795200F1718A /* CFNetwork.framework */,
 				0448780C19CC70FB0086CE1B /* Foundation.framework */,
 				0448780E19CC70FB0086CE1B /* CoreGraphics.framework */,
 				0448781019CC70FB0086CE1B /* UIKit.framework */,
@@ -118,6 +149,8 @@
 				0448781B19CC70FB0086CE1B /* AppDelegate.h */,
 				0448781C19CC70FB0086CE1B /* AppDelegate.m */,
 				0448781E19CC70FB0086CE1B /* Main.storyboard */,
+				0431F19E19CC76C300F1718A /* loginViewController.h */,
+				0431F19F19CC76C300F1718A /* loginViewController.mm */,
 				0448782119CC70FB0086CE1B /* FirstViewController.h */,
 				0448782219CC70FB0086CE1B /* FirstViewController.m */,
 				0448782419CC70FB0086CE1B /* SecondViewController.h */,
@@ -257,7 +290,10 @@
 				0448782619CC70FB0086CE1B /* SecondViewController.m in Sources */,
 				0448781D19CC70FB0086CE1B /* AppDelegate.m in Sources */,
 				0448782319CC70FB0086CE1B /* FirstViewController.m in Sources */,
+				0431F1A019CC76C300F1718A /* loginViewController.mm in Sources */,
+				0431F19D19CC759D00F1718A /* mq_interface.ice in Sources */,
 				0448781919CC70FB0086CE1B /* main.m in Sources */,
+				0431F19C19CC759D00F1718A /* eutils.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,11 +416,19 @@
 		0448783F19CC70FB0086CE1B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ADDITIONAL_SDKS = "/Library/Developer/IceTouch-1.3/SDKs/Cpp/$(PLATFORM_NAME).sdk";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BreakRule/BreakRule-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"/Library/Developer/IceTouch-1.3/SDKs/Cpp/$(PLATFORM_NAME).sdk/usr/local/include",
+				);
 				INFOPLIST_FILE = "BreakRule/BreakRule-Info.plist";
+				LIBRARY_SEARCH_PATHS = "/Library/Developer/IceTouch-1.3/SDKs/ObjC/$(PLATFORM_NAME).sdk/usr/local/lib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -393,11 +437,19 @@
 		0448784019CC70FB0086CE1B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ADDITIONAL_SDKS = "/Library/Developer/IceTouch-1.3/SDKs/Cpp/$(PLATFORM_NAME).sdk";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BreakRule/BreakRule-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"/Library/Developer/IceTouch-1.3/SDKs/Cpp/$(PLATFORM_NAME).sdk/usr/local/include",
+				);
 				INFOPLIST_FILE = "BreakRule/BreakRule-Info.plist";
+				LIBRARY_SEARCH_PATHS = "/Library/Developer/IceTouch-1.3/SDKs/ObjC/$(PLATFORM_NAME).sdk/usr/local/lib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -462,6 +514,7 @@
 				0448784019CC70FB0086CE1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0448784119CC70FB0086CE1B /* Build configuration list for PBXNativeTarget "BreakRuleTests" */ = {
 			isa = XCConfigurationList;
@@ -470,6 +523,7 @@
 				0448784319CC70FB0086CE1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
