@@ -28,6 +28,8 @@
 		0448783119CC70FB0086CE1B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0448781019CC70FB0086CE1B /* UIKit.framework */; };
 		0448783919CC70FB0086CE1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0448783719CC70FB0086CE1B /* InfoPlist.strings */; };
 		0448783B19CC70FB0086CE1B /* BreakRuleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0448783A19CC70FB0086CE1B /* BreakRuleTests.m */; };
+		04635CD519CE50490084822D /* StringConverterI.mm in Sources */ = {isa = PBXBuildFile; fileRef = 046C937F19CDE54A008221FD /* StringConverterI.mm */; };
+		046C938019CDE54A008221FD /* StringConverterI.mm in Resources */ = {isa = PBXBuildFile; fileRef = 046C937F19CDE54A008221FD /* StringConverterI.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04090E2119CDF5D300B8366D /* libiconv.2.4.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.4.0.dylib; path = usr/lib/libiconv.2.4.0.dylib; sourceTree = SDKROOT; };
 		0431F19919CC759D00F1718A /* eutils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = eutils.h; path = BreakRule/eutils/eutils.h; sourceTree = "<group>"; };
 		0431F19A19CC759D00F1718A /* eutils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = eutils.mm; path = BreakRule/eutils/eutils.mm; sourceTree = "<group>"; };
 		0431F19B19CC759D00F1718A /* mq_interface.ice */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.slice; name = mq_interface.ice; path = BreakRule/eutils/mq_interface.ice; sourceTree = "<group>"; };
@@ -70,6 +73,8 @@
 		0448783619CC70FB0086CE1B /* BreakRuleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BreakRuleTests-Info.plist"; sourceTree = "<group>"; };
 		0448783819CC70FB0086CE1B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0448783A19CC70FB0086CE1B /* BreakRuleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BreakRuleTests.m; sourceTree = "<group>"; };
+		046C937E19CDE536008221FD /* StringConverterI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringConverterI.h; path = BreakRule/eutils/StringConverterI.h; sourceTree = "<group>"; };
+		046C937F19CDE54A008221FD /* StringConverterI.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = StringConverterI.mm; path = BreakRule/eutils/StringConverterI.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +110,8 @@
 				0431F19919CC759D00F1718A /* eutils.h */,
 				0431F19A19CC759D00F1718A /* eutils.mm */,
 				0431F19B19CC759D00F1718A /* mq_interface.ice */,
+				046C937E19CDE536008221FD /* StringConverterI.h */,
+				046C937F19CDE54A008221FD /* StringConverterI.mm */,
 			);
 			name = eutils;
 			sourceTree = "<group>";
@@ -132,6 +139,7 @@
 		0448780B19CC70FB0086CE1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04090E2119CDF5D300B8366D /* libiconv.2.4.0.dylib */,
 				0431F1A519CC797800F1718A /* ExternalAccessory.framework */,
 				0431F1A319CC796A00F1718A /* Security.framework */,
 				0431F1A119CC795200F1718A /* CFNetwork.framework */,
@@ -266,6 +274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				046C938019CDE54A008221FD /* StringConverterI.mm in Resources */,
 				0448782819CC70FB0086CE1B /* Images.xcassets in Resources */,
 				0448781719CC70FB0086CE1B /* InfoPlist.strings in Resources */,
 				0448782019CC70FB0086CE1B /* Main.storyboard in Resources */,
@@ -287,6 +296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04635CD519CE50490084822D /* StringConverterI.mm in Sources */,
 				0448782619CC70FB0086CE1B /* SecondViewController.m in Sources */,
 				0448781D19CC70FB0086CE1B /* AppDelegate.m in Sources */,
 				0448782319CC70FB0086CE1B /* FirstViewController.m in Sources */,

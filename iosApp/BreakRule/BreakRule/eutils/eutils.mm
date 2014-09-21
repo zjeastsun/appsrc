@@ -2,6 +2,9 @@
 #include <pthread.h>
 #include <IceUtil/UUID.h>
 #include<Ice/Initialize.h>
+//#include <iconv.h>
+#include "StringConverterI.h"
+
 LogLevel g_mLogLevel = LOG_LEVEL_FULL;
 LogType  g_mLogType = LOG_FULL;
 
@@ -50,6 +53,29 @@ void CEDateTime::dump()
          m_iMinute,
          m_iSecond);
 }
+
+//int CSystemUtil::CodeChange(char *p_inBuf, char *p_OutBuf, int *p_OutSize, const char  *p_inCode, const char *p_OutCode)
+//{
+//    iconv_t cd;
+//    int inLen;
+//    
+//    inLen = strlen(p_inBuf);
+//    
+//    if ((cd = iconv_open(p_OutCode, p_inCode)) == (iconv_t) -1)
+//    {
+//        return  - 1;
+//    }
+//    
+//    if (iconv(cd, &p_inBuf, (size_t*) &inLen, &p_OutBuf, (size_t*)p_OutSize) ==  (size_t) -1)
+//    {
+//        iconv_close(cd);
+//        return  - 1;
+//    }
+//    
+//    iconv_close(cd);
+//    
+//    return 0;
+//}
 
 string CSystemUtil::getID()
 {
@@ -2845,9 +2871,6 @@ bool CICEBaseDBUtil::login()
             util::string_format(sMaxSize,"%d",m_iMaxRecvSize);
             
             //IC_GET_IC = Ice::initialize(argc, argv);
-            //            ICE_API PropertiesPtr createProperties(const StringConverterPtr& = 0);
-            //            ICE_API PropertiesPtr createProperties(StringSeq&, const PropertiesPtr& = 0, const StringConverterPtr& = 0);
-            //            ICE_API PropertiesPtr createProperties(int&, char*[], const PropertiesPtr& = 0, const StringConverterPtr& = 0);
             
             Ice::PropertiesPtr props = Ice::createProperties(argc, argv);
             props->setProperty("Ice.MessageSizeMax",sMaxSize.c_str());
@@ -2855,6 +2878,7 @@ bool CICEBaseDBUtil::login()
             Ice::InitializationData id;
             
             id.properties = props;
+            id.stringConverter = new StringConverterI();// 邦定转码器
             IC_GET_IC = Ice::initialize(id);
             
             m_bICEInited = true;

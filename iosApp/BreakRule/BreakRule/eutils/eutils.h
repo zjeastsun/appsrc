@@ -139,6 +139,7 @@ class  CSystemUtil
 public:
     CSystemUtil();
     
+//    static int CodeChange( char *p_inBuf, char *p_OutBuf, int *p_OutSize, const char  *p_inCode, const char *p_OutCode);
     static string getID();
     
     static void setLogType( LogType type);
