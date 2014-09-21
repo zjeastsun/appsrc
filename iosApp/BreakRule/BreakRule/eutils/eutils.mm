@@ -123,6 +123,44 @@ string& CSystemUtil::toString(string& out,int fv)
 	return out;
 }
 
+bool CSystemUtil::isIp(const  char*   sp)
+{
+	char   fst;
+	int   sum,num;
+	sum=0;
+	num=0;
+	if   ((fst=*sp)=='.')
+		return   0;
+    
+	while (*sp!='\0')
+	{
+		if (*sp=='.')
+		{
+			if   (fst=='0'   &&   sum>0)
+				return   0;
+			if   (++num>3)
+				return   0;
+			sum=0;
+			if   ((fst=*(sp+1))=='.')
+				return   0;
+			++sp;
+			continue;
+		}
+		else if(*sp<'0' || *sp>'9')
+		{
+			return   0;
+		}
+        
+		sum=sum*10+*sp-'0';
+		if   (sum>255)
+			return   0;
+		++sp;
+	}
+	if   (num!=3 || (fst=='0' && sum>0))
+		return   0;
+	return   1;
+}
+
 //----------------ffffffff
 
 #ifdef PLATFORM_WINDOWS
@@ -356,43 +394,7 @@ string CSystemUtil::fromBase64(const string &sql,int type)
 }
 
 
-bool CSystemUtil::isIp(const  char*   sp)
-{
-	char   fst;
-	int   sum,num;
-	sum=0;
-	num=0;
-	if   ((fst=*sp)=='.')
-		return   0;
-    
-	while (*sp!='\0')
-	{
-		if (*sp=='.')
-		{
-			if   (fst=='0'   &&   sum>0)
-				return   0;
-			if   (++num>3)
-				return   0;
-			sum=0;
-			if   ((fst=*(sp+1))=='.')
-				return   0;
-			++sp;
-			continue;
-		}
-		else if(*sp<'0' || *sp>'9')
-		{
-			return   0;
-		}
-        
-		sum=sum*10+*sp-'0';
-		if   (sum>255)
-			return   0;
-		++sp;
-	}
-	if   (num!=3 || (fst=='0' && sum>0))
-		return   0;
-	return   1;
-}
+
 
 string CSystemUtil::toBase64(const string &sql,int type)
 {

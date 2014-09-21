@@ -7,8 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import"eutils.h"
 
 @interface loginViewController : UIViewController
+{
+    CICEDBUtil g_db;
+    IBOutlet UITextField *serverIpField;
+    IBOutlet UITextField *userField;
+    IBOutlet UITextField *pwdField;
+}
 - (IBAction)login:(id)sender;
 
 @end

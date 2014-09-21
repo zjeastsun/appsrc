@@ -7,10 +7,11 @@
 //
 
 #import "loginViewController.h"
-#import"eutils.h"
+#import "FirstViewController.h"
+
 #import <netdb.h>
 #include <arpa/inet.h>
-
+//#import "AppDelegate.h"
 
 @interface loginViewController ()
 
@@ -59,32 +60,76 @@ string getIPWithHostName(string hostName)
 }
 
 - (IBAction)login:(id)sender {
-    CICEDBUtil g_db;
-    if( g_db.isLogin() ) return;
+
+//    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
 //    string sIp = getIPWithHostName("www.myxiu.com");
-    string sIp = getIPWithHostName("s911322.eicp.net");
+//    string sIp = getIPWithHostName("s911322.eicp.net");
+    NSString *server = serverIpField.text;
+    string sServer = [server UTF8String];
     
-    g_db.setServer(sIp.c_str(), 8840);
-
-    if( !g_db.login() )
+    NSString *user = userField.text;
+    string sUser = [user UTF8String];
+    
+    NSString *pwd = pwdField.text;
+    string sPwd = [pwd UTF8String];
+    
+    if( sServer.empty() )
     {
-        NSLog(@"数据库连接失败！");
+        [self MessageBox:@"请输入服务器域名或IP地址"];
         return;
     }
-    NSLog(@"数据库连接成功！");
+    if( sUser.empty() || sPwd.empty() )
+    {
+        [self MessageBox:@"请输入用户名和密码"];
+        return;
+    }
+    
+    string sIp;
+    if ( !util::isIp( sServer.c_str() ) )
+    {
+        sIp = getIPWithHostName(sServer);
+    }
+    else
+    {
+        sIp = sServer;
+    }
+
+    
+    g_db.setServer(sIp.c_str(), 8840);
+    
+    if( !g_db.isLogin() )
+    {
+        if( !g_db.login() )
+        {
+            //        NSLog(@"数据库连接失败！");
+            [self MessageBox:@"服务器连接失败"];
+            return;
+        }
+        NSLog(@"数据库连接成功！");
+    }
     
     string strSQL="";
 	string strError;
-    CSelectHelp		g_helpProvince;
+    CSelectHelp	helpUser;
     
-    util::string_format(strSQL, "select org_name from T_ORGANIZATION  order by org_id");
-    g_db.select(strSQL, g_helpProvince, strError);
+    util::string_format(strSQL, "select * from T_USER where login_name='%s' and pwd='%s' ", sUser.c_str(), sPwd.c_str());
+    g_db.select(strSQL, helpUser, strError);
 
-    string sName;
-    for( int j=0; j<g_helpProvince.size(); ++j )
+    if( helpUser.size() <= 0 )
     {
-        sName = g_helpProvince.valueString( j, "org_name" );
+        [self MessageBox:@"用户名或者密码错误"];
+        return;
+    }
+    NSLog(@"用户登录成功！");
+    
+    FirstViewController *firstViewCont = [self.storyboard instantiateViewControllerWithIdentifier:@"main"];
+    [self presentViewController:firstViewCont animated:YES completion:nil];
+/*
+    string sName;
+    for( int j=0; j<helpUser.size(); ++j )
+    {
+        sName = helpUser.valueString( j, "org_name" );
         char * ss =const_cast<char*>(sName.c_str());
         
         NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
@@ -101,7 +146,26 @@ string getIPWithHostName(string hostName)
         NSLog(@"组织机构：%@", str);
 
     }
+*/
+}
 
+-(void)MessageBox:(NSString *)msg
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误"
+                                                    message:msg
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
+- (void)performSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+}
+
+-(void)changeViewController
+{
+    [self performSegueWithIdentifier:@"ToFirstViewController" sender:self];
 }
 
 @end
