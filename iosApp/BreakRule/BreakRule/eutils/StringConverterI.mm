@@ -316,7 +316,8 @@ string strCoding::UrlGB2312Decode(string str)
 {
 	string output="";
 	char tmp[2];
-	int i=0,len=str.length();
+	int i=0;
+    unsigned long len=str.length();
     
 	while(i<len){
 		if(str[i]=='%'){
@@ -344,7 +345,7 @@ string strCoding::UrlUTF8Decode(string str)
     
 	string temp =UrlGB2312Decode(str);//
     
-	UTF_8ToGB2312(output,(char *)temp.data(),strlen(temp.data()));
+	UTF_8ToGB2312(output,(char *)temp.data(),static_cast<int>(strlen(temp.data())));
     
 	return output;
     

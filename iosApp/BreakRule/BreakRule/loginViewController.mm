@@ -7,7 +7,7 @@
 //
 
 #import "loginViewController.h"
-#import "FirstViewController.h"
+#import "ProjectViewController.h"
 
 #import <netdb.h>
 #include <arpa/inet.h>
@@ -123,8 +123,8 @@ string getIPWithHostName(string hostName)
     }
     NSLog(@"用户登录成功！");
     
-    FirstViewController *firstViewCont = [self.storyboard instantiateViewControllerWithIdentifier:@"main"];
-    [self presentViewController:firstViewCont animated:YES completion:nil];
+    ProjectViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
+    [self presentViewController:projectView animated:YES completion:nil];
 /*
     string sName;
     for( int j=0; j<helpUser.size(); ++j )

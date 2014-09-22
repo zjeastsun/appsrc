@@ -17,10 +17,9 @@
 		0448780F19CC70FB0086CE1B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0448780E19CC70FB0086CE1B /* CoreGraphics.framework */; };
 		0448781119CC70FB0086CE1B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0448781019CC70FB0086CE1B /* UIKit.framework */; };
 		0448781719CC70FB0086CE1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0448781519CC70FB0086CE1B /* InfoPlist.strings */; };
-		0448781919CC70FB0086CE1B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0448781819CC70FB0086CE1B /* main.m */; };
+		0448781919CC70FB0086CE1B /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0448781819CC70FB0086CE1B /* main.mm */; };
 		0448781D19CC70FB0086CE1B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0448781C19CC70FB0086CE1B /* AppDelegate.m */; };
 		0448782019CC70FB0086CE1B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0448781E19CC70FB0086CE1B /* Main.storyboard */; };
-		0448782319CC70FB0086CE1B /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0448782219CC70FB0086CE1B /* FirstViewController.m */; };
 		0448782619CC70FB0086CE1B /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0448782519CC70FB0086CE1B /* SecondViewController.m */; };
 		0448782819CC70FB0086CE1B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0448782719CC70FB0086CE1B /* Images.xcassets */; };
 		0448782F19CC70FB0086CE1B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0448782E19CC70FB0086CE1B /* XCTest.framework */; };
@@ -28,8 +27,14 @@
 		0448783119CC70FB0086CE1B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0448781019CC70FB0086CE1B /* UIKit.framework */; };
 		0448783919CC70FB0086CE1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0448783719CC70FB0086CE1B /* InfoPlist.strings */; };
 		0448783B19CC70FB0086CE1B /* BreakRuleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0448783A19CC70FB0086CE1B /* BreakRuleTests.m */; };
+		045D8A9219CF7CF400D8C6DA /* eastsun.ico in Resources */ = {isa = PBXBuildFile; fileRef = 045D8A8F19CF7CF400D8C6DA /* eastsun.ico */; };
+		045D8A9319CF7CF400D8C6DA /* righticon.png in Resources */ = {isa = PBXBuildFile; fileRef = 045D8A9019CF7CF400D8C6DA /* righticon.png */; };
+		045D8A9419CF7CF400D8C6DA /* share_this_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 045D8A9119CF7CF400D8C6DA /* share_this_icon.png */; };
+		045D8A9F19CF899B00D8C6DA /* ProjectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 045D8A9E19CF899B00D8C6DA /* ProjectViewController.mm */; };
 		04635CD519CE50490084822D /* StringConverterI.mm in Sources */ = {isa = PBXBuildFile; fileRef = 046C937F19CDE54A008221FD /* StringConverterI.mm */; };
 		046C938019CDE54A008221FD /* StringConverterI.mm in Resources */ = {isa = PBXBuildFile; fileRef = 046C937F19CDE54A008221FD /* StringConverterI.mm */; };
+		047167FF19CF3D9500A81F9B /* setViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047167FE19CF3D9500A81F9B /* setViewController.m */; };
+		0471680219CF678B00A81F9B /* BreakRuleTakePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0471680119CF678B00A81F9B /* BreakRuleTakePhotoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,13 +63,11 @@
 		0448781019CC70FB0086CE1B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0448781419CC70FB0086CE1B /* BreakRule-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BreakRule-Info.plist"; sourceTree = "<group>"; };
 		0448781619CC70FB0086CE1B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0448781819CC70FB0086CE1B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0448781819CC70FB0086CE1B /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		0448781A19CC70FB0086CE1B /* BreakRule-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BreakRule-Prefix.pch"; sourceTree = "<group>"; };
 		0448781B19CC70FB0086CE1B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0448781C19CC70FB0086CE1B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0448781F19CC70FB0086CE1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0448782119CC70FB0086CE1B /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		0448782219CC70FB0086CE1B /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		0448782419CC70FB0086CE1B /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		0448782519CC70FB0086CE1B /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		0448782719CC70FB0086CE1B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -73,8 +76,17 @@
 		0448783619CC70FB0086CE1B /* BreakRuleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BreakRuleTests-Info.plist"; sourceTree = "<group>"; };
 		0448783819CC70FB0086CE1B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0448783A19CC70FB0086CE1B /* BreakRuleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BreakRuleTests.m; sourceTree = "<group>"; };
+		045D8A8F19CF7CF400D8C6DA /* eastsun.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = eastsun.ico; sourceTree = "<group>"; };
+		045D8A9019CF7CF400D8C6DA /* righticon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = righticon.png; sourceTree = "<group>"; };
+		045D8A9119CF7CF400D8C6DA /* share_this_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_this_icon.png; sourceTree = "<group>"; };
+		045D8A9D19CF899B00D8C6DA /* ProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectViewController.h; sourceTree = "<group>"; };
+		045D8A9E19CF899B00D8C6DA /* ProjectViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ProjectViewController.mm; sourceTree = "<group>"; };
 		046C937E19CDE536008221FD /* StringConverterI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringConverterI.h; path = BreakRule/eutils/StringConverterI.h; sourceTree = "<group>"; };
 		046C937F19CDE54A008221FD /* StringConverterI.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = StringConverterI.mm; path = BreakRule/eutils/StringConverterI.mm; sourceTree = "<group>"; };
+		047167FD19CF3D9500A81F9B /* setViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setViewController.h; sourceTree = "<group>"; };
+		047167FE19CF3D9500A81F9B /* setViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = setViewController.m; sourceTree = "<group>"; };
+		0471680019CF678B00A81F9B /* BreakRuleTakePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BreakRuleTakePhotoViewController.h; sourceTree = "<group>"; };
+		0471680119CF678B00A81F9B /* BreakRuleTakePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BreakRuleTakePhotoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +131,7 @@
 		0448780019CC70FB0086CE1B = {
 			isa = PBXGroup;
 			children = (
+				045D8A8E19CF7CF400D8C6DA /* image */,
 				0431F19819CC74D300F1718A /* eutils */,
 				0448781219CC70FB0086CE1B /* BreakRule */,
 				0448783419CC70FB0086CE1B /* BreakRuleTests */,
@@ -157,10 +170,14 @@
 				0448781B19CC70FB0086CE1B /* AppDelegate.h */,
 				0448781C19CC70FB0086CE1B /* AppDelegate.m */,
 				0448781E19CC70FB0086CE1B /* Main.storyboard */,
+				045D8A9D19CF899B00D8C6DA /* ProjectViewController.h */,
+				045D8A9E19CF899B00D8C6DA /* ProjectViewController.mm */,
+				0471680019CF678B00A81F9B /* BreakRuleTakePhotoViewController.h */,
+				0471680119CF678B00A81F9B /* BreakRuleTakePhotoViewController.m */,
+				047167FD19CF3D9500A81F9B /* setViewController.h */,
+				047167FE19CF3D9500A81F9B /* setViewController.m */,
 				0431F19E19CC76C300F1718A /* loginViewController.h */,
 				0431F19F19CC76C300F1718A /* loginViewController.mm */,
-				0448782119CC70FB0086CE1B /* FirstViewController.h */,
-				0448782219CC70FB0086CE1B /* FirstViewController.m */,
 				0448782419CC70FB0086CE1B /* SecondViewController.h */,
 				0448782519CC70FB0086CE1B /* SecondViewController.m */,
 				0448782719CC70FB0086CE1B /* Images.xcassets */,
@@ -174,7 +191,7 @@
 			children = (
 				0448781419CC70FB0086CE1B /* BreakRule-Info.plist */,
 				0448781519CC70FB0086CE1B /* InfoPlist.strings */,
-				0448781819CC70FB0086CE1B /* main.m */,
+				0448781819CC70FB0086CE1B /* main.mm */,
 				0448781A19CC70FB0086CE1B /* BreakRule-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -196,6 +213,16 @@
 				0448783719CC70FB0086CE1B /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		045D8A8E19CF7CF400D8C6DA /* image */ = {
+			isa = PBXGroup;
+			children = (
+				045D8A8F19CF7CF400D8C6DA /* eastsun.ico */,
+				045D8A9019CF7CF400D8C6DA /* righticon.png */,
+				045D8A9119CF7CF400D8C6DA /* share_this_icon.png */,
+			);
+			path = image;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,6 +303,9 @@
 			files = (
 				046C938019CDE54A008221FD /* StringConverterI.mm in Resources */,
 				0448782819CC70FB0086CE1B /* Images.xcassets in Resources */,
+				045D8A9419CF7CF400D8C6DA /* share_this_icon.png in Resources */,
+				045D8A9219CF7CF400D8C6DA /* eastsun.ico in Resources */,
+				045D8A9319CF7CF400D8C6DA /* righticon.png in Resources */,
 				0448781719CC70FB0086CE1B /* InfoPlist.strings in Resources */,
 				0448782019CC70FB0086CE1B /* Main.storyboard in Resources */,
 			);
@@ -296,13 +326,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				047167FF19CF3D9500A81F9B /* setViewController.m in Sources */,
 				04635CD519CE50490084822D /* StringConverterI.mm in Sources */,
 				0448782619CC70FB0086CE1B /* SecondViewController.m in Sources */,
 				0448781D19CC70FB0086CE1B /* AppDelegate.m in Sources */,
-				0448782319CC70FB0086CE1B /* FirstViewController.m in Sources */,
+				045D8A9F19CF899B00D8C6DA /* ProjectViewController.mm in Sources */,
 				0431F1A019CC76C300F1718A /* loginViewController.mm in Sources */,
+				0471680219CF678B00A81F9B /* BreakRuleTakePhotoViewController.m in Sources */,
 				0431F19D19CC759D00F1718A /* mq_interface.ice in Sources */,
-				0448781919CC70FB0086CE1B /* main.m in Sources */,
+				0448781919CC70FB0086CE1B /* main.mm in Sources */,
 				0431F19C19CC759D00F1718A /* eutils.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
