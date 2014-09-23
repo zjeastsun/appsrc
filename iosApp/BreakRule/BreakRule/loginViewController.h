@@ -7,16 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import"eutils.h"
+
+#import "singletonIce.h"
 
 @interface loginViewController : UIViewController
 {
-    CICEDBUtil g_db;
     IBOutlet UITextField *serverIpField;
     IBOutlet UITextField *userField;
     IBOutlet UITextField *pwdField;
 }
 - (IBAction)login:(id)sender;
 - (IBAction)backGround:(id)sender;
+- (IBAction)loginTest:(id)sender;
+
 
 @end

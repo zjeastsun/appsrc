@@ -8,7 +8,6 @@
 
 #import "ProjectViewController.h"
 #import "BreakRuleTakePhotoViewController.h"
-#import "loginViewController.h"
 
 @interface ProjectViewController ()
 
@@ -28,6 +27,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    string strSQL="";
+	string strError;
+    CSelectHelp	helpUser;
+    
+    util::string_format(strSQL, "select * from T_USER where login_name='admin' and pwd='12345' ");
+    [singletonIce sharedInstance].g_db->select(strSQL, helpUser, strError);
+    
+    if( helpUser.size() <= 0 )
+    {
+        NSLog(@"ProjectViewController用户登录失败！");
+        return;
+    }
+    NSLog(@"ProjectViewController用户登录成功！");
+    
     // Do any additional setup after loading the view.
 }
 

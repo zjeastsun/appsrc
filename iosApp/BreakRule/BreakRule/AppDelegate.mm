@@ -7,11 +7,11 @@
 //
 
 #import "AppDelegate.h"
+#import "singletonIce.h"
 
 @implementation AppDelegate
 
 @synthesize g_int;
-//@synthesize g_db;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -45,6 +45,8 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    singletonIce *oneIce = [singletonIce sharedInstance];
+//    oneIce.unInit();
 }
 
 @end

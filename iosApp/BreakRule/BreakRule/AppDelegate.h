@@ -7,16 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import"eutils.h"
+#import"eutils.h"
+#define ONEICE [singletonIce sharedInstance]
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
     int g_int;
-//    CICEDBUtil g_db;
 }
 
 @property (nonatomic) int g_int;
-//@property (nonatomic) CICEDBUtil g_db;
 @property (strong, nonatomic) UIWindow *window;
 
 @end

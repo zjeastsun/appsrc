@@ -11,7 +11,7 @@
 
 #import <netdb.h>
 #include <arpa/inet.h>
-#import "AppDelegate.h"
+
 
 @interface loginViewController ()
 
@@ -96,12 +96,12 @@ string getIPWithHostName(string hostName)
         sIp = sServer;
     }
 
+    singletonIce *oneIce = [singletonIce sharedInstance];
+    oneIce.g_db->setServer(sIp.c_str(), 8840);
     
-    g_db.setServer(sIp.c_str(), 8840);
-    
-    if( !g_db.isLogin() )
+    if( !oneIce.g_db->isLogin() )
     {
-        if( !g_db.login() )
+        if( !oneIce.g_db->login() )
         {
             //        NSLog(@"数据库连接失败！");
             [self MessageBox:@"服务器连接失败"];
@@ -115,7 +115,7 @@ string getIPWithHostName(string hostName)
     CSelectHelp	helpUser;
     
     util::string_format(strSQL, "select * from T_USER where login_name='%s' and pwd='%s' ", sUser.c_str(), sPwd.c_str());
-    g_db.select(strSQL, helpUser, strError);
+    oneIce.g_db->select(strSQL, helpUser, strError);
 
     if( helpUser.size() <= 0 )
     {
@@ -155,6 +155,69 @@ string getIPWithHostName(string hostName)
     [serverIpField resignFirstResponder];
     [userField resignFirstResponder];
     [pwdField resignFirstResponder];
+}
+
+- (IBAction)loginTest:(id)sender {
+//    NSString *server = serverIpField.text;
+//    string sServer = [server UTF8String];
+//    
+//    NSString *user = userField.text;
+//    string sUser = [user UTF8String];
+//    
+//    NSString *pwd = pwdField.text;
+//    string sPwd = [pwd UTF8String];
+//    
+//    if( sServer.empty() )
+//    {
+//        [self MessageBox:@"请输入服务器域名或IP地址"];
+//        return;
+//    }
+//    if( sUser.empty() || sPwd.empty() )
+//    {
+//        [self MessageBox:@"请输入用户名和密码"];
+//        return;
+//    }
+//    
+//    string sIp;
+//    if ( !util::isIp( sServer.c_str() ) )
+//    {
+//        sIp = getIPWithHostName(sServer);
+//    }
+//    else
+//    {
+//        sIp = sServer;
+//    }
+//    
+//    singletonIce *oneIce = [singletonIce sharedInstance];
+//    oneIce.g_db->setServer(sIp.c_str(), 8840);
+//    
+//    if( !oneIce.g_db->isLogin() )
+//    {
+//        if( !oneIce.g_db->login() )
+//        {
+//            //        NSLog(@"数据库连接失败！");
+//            [self MessageBox:@"服务器连接失败"];
+//            return;
+//        }
+//        NSLog(@"数据库连接成功！");
+//    }
+//    
+//    string strSQL="";
+//	string strError;
+//    CSelectHelp	helpUser;
+//    
+//    util::string_format(strSQL, "select * from T_USER where login_name='%s' and pwd='%s' ", sUser.c_str(), sPwd.c_str());
+//    oneIce.g_db->select(strSQL, helpUser, strError);
+//    
+//    if( helpUser.size() <= 0 )
+//    {
+//        [self MessageBox:@"用户名或者密码错误"];
+//        return;
+//    }
+//    NSLog(@"用户登录成功！");
+//    
+//    ProjectViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
+//    [self presentViewController:projectView animated:YES completion:nil];
 }
 
 -(void)MessageBox:(NSString *)msg

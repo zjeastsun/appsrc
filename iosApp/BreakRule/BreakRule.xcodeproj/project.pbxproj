@@ -35,6 +35,7 @@
 		046C938019CDE54A008221FD /* StringConverterI.mm in Resources */ = {isa = PBXBuildFile; fileRef = 046C937F19CDE54A008221FD /* StringConverterI.mm */; };
 		047167FF19CF3D9500A81F9B /* setViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047167FE19CF3D9500A81F9B /* setViewController.mm */; };
 		0471680219CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0471680119CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm */; };
+		047F3EA619D18500004123F7 /* singletonIce.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047F3EA519D18500004123F7 /* singletonIce.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,8 @@
 		047167FE19CF3D9500A81F9B /* setViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = setViewController.mm; sourceTree = "<group>"; };
 		0471680019CF678B00A81F9B /* BreakRuleTakePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BreakRuleTakePhotoViewController.h; sourceTree = "<group>"; };
 		0471680119CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BreakRuleTakePhotoViewController.mm; sourceTree = "<group>"; };
+		047F3EA419D184E6004123F7 /* singletonIce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = singletonIce.h; sourceTree = "<group>"; };
+		047F3EA519D18500004123F7 /* singletonIce.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = singletonIce.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +122,8 @@
 		0431F19819CC74D300F1718A /* eutils */ = {
 			isa = PBXGroup;
 			children = (
+				047F3EA419D184E6004123F7 /* singletonIce.h */,
+				047F3EA519D18500004123F7 /* singletonIce.mm */,
 				0431F19919CC759D00F1718A /* eutils.h */,
 				0431F19A19CC759D00F1718A /* eutils.mm */,
 				0431F19B19CC759D00F1718A /* mq_interface.ice */,
@@ -329,6 +334,7 @@
 				047167FF19CF3D9500A81F9B /* setViewController.mm in Sources */,
 				04635CD519CE50490084822D /* StringConverterI.mm in Sources */,
 				0448782619CC70FB0086CE1B /* SecondViewController.mm in Sources */,
+				047F3EA619D18500004123F7 /* singletonIce.mm in Sources */,
 				0448781D19CC70FB0086CE1B /* AppDelegate.mm in Sources */,
 				045D8A9F19CF899B00D8C6DA /* ProjectViewController.mm in Sources */,
 				0431F1A019CC76C300F1718A /* loginViewController.mm in Sources */,

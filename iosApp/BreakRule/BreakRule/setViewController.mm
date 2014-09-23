@@ -7,7 +7,6 @@
 //
 
 #import "setViewController.h"
-#import "AppDelegate.h"
 
 @interface setViewController ()
 
@@ -52,7 +51,6 @@
 }
 
 - (IBAction)UpdateDb:(id)sender {
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    int ii = appDelegate.g_int;
+
 }
 @end

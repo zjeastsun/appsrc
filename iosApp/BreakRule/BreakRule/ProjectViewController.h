@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "singletonIce.h"
 
 @interface ProjectViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UITableView *projectTable;
