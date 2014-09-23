@@ -10,6 +10,9 @@
 
 @implementation AppDelegate
 
+@synthesize g_int;
+//@synthesize g_db;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.

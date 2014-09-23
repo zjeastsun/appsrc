@@ -7,6 +7,7 @@
 //
 
 #import "setViewController.h"
+#import "AppDelegate.h"
 
 @interface setViewController ()
 
@@ -48,5 +49,10 @@
 
 - (IBAction)back:(id)sender {
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)UpdateDb:(id)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    int ii = appDelegate.g_int;
 }
 @end

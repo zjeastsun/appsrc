@@ -11,4 +11,5 @@
 @interface setViewController : UIViewController
 - (IBAction)back:(id)sender;
 
+- (IBAction)UpdateDb:(id)sender;
 @end

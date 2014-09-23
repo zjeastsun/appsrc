@@ -7,14 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-
+//#import"eutils.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
-  
+    int g_int;
+//    CICEDBUtil g_db;
 }
 
-
+@property (nonatomic) int g_int;
+//@property (nonatomic) CICEDBUtil g_db;
 @property (strong, nonatomic) UIWindow *window;
 
 @end

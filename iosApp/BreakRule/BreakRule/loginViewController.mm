@@ -11,7 +11,7 @@
 
 #import <netdb.h>
 #include <arpa/inet.h>
-//#import "AppDelegate.h"
+#import "AppDelegate.h"
 
 @interface loginViewController ()
 
@@ -62,6 +62,7 @@ string getIPWithHostName(string hostName)
 - (IBAction)login:(id)sender {
 
 //    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    appDelegate.g_int = 10;
     
 //    string sIp = getIPWithHostName("www.myxiu.com");
 //    string sIp = getIPWithHostName("s911322.eicp.net");
@@ -147,6 +148,13 @@ string getIPWithHostName(string hostName)
 
     }
 */
+}
+
+- (IBAction)backGround:(id)sender {
+    //取消键盘
+    [serverIpField resignFirstResponder];
+    [userField resignFirstResponder];
+    [pwdField resignFirstResponder];
 }
 
 -(void)MessageBox:(NSString *)msg
