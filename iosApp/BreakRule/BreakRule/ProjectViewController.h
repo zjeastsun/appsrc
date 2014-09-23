@@ -10,6 +10,11 @@
 #import "singletonIce.h"
 
 @interface ProjectViewController : UIViewController
+{
+    singletonIce *oneIce;
+    
+}
+
 @property (strong, nonatomic) IBOutlet UITableView *projectTable;
 
 @end

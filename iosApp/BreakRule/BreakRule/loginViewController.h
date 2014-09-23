@@ -12,13 +12,14 @@
 
 @interface loginViewController : UIViewController
 {
+    singletonIce *oneIce;
+    
     IBOutlet UITextField *serverIpField;
     IBOutlet UITextField *userField;
     IBOutlet UITextField *pwdField;
 }
 - (IBAction)login:(id)sender;
 - (IBAction)backGround:(id)sender;
-- (IBAction)loginTest:(id)sender;
 
 
 @end

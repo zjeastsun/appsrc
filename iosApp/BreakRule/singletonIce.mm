@@ -18,14 +18,11 @@
 - (id)init {
     
     if (self = [super init]) {
-        
         _g_db = new CICEDBUtil();
-        //        self.value = [[UITextField alloc]init];
-        
+
     }
     
     return self;
-    
     
 }
 

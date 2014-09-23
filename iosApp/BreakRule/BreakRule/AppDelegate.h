@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import"eutils.h"
-#define ONEICE [singletonIce sharedInstance]
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {

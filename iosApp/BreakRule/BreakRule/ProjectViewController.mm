@@ -28,12 +28,15 @@
 {
     [super viewDidLoad];
     
+    ONEICE
+    
     string strSQL="";
 	string strError;
     CSelectHelp	helpUser;
     
     util::string_format(strSQL, "select * from T_USER where login_name='admin' and pwd='12345' ");
-    [singletonIce sharedInstance].g_db->select(strSQL, helpUser, strError);
+    
+    oneIce.g_db->select(strSQL, helpUser, strError);
     
     if( helpUser.size() <= 0 )
     {

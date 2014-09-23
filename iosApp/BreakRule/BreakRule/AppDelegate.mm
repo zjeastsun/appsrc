@@ -46,7 +46,7 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     singletonIce *oneIce = [singletonIce sharedInstance];
-//    oneIce.unInit();
+    [oneIce unInit];
 }
 
 @end
