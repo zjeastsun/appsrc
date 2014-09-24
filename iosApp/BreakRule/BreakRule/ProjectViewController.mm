@@ -34,7 +34,7 @@
 	string strError;
     CSelectHelp	helpUser;
     
-    util::string_format(strSQL, "select * from T_USER where login_name='admin' and pwd='12345' ");
+    util::string_format(strSQL, "select * from T_USER  ");
     
     oneIce.g_db->select(strSQL, helpUser, strError);
     

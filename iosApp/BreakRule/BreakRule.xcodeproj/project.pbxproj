@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0431F19C19CC759D00F1718A /* eutils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0431F19A19CC759D00F1718A /* eutils.mm */; };
+		040B0A6819D23A5A00D83461 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 040B0A6719D23A5A00D83461 /* AppDelegate.mm */; };
+		0431F19C19CC759D00F1718A /* Eutils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0431F19A19CC759D00F1718A /* Eutils.mm */; };
 		0431F19D19CC759D00F1718A /* mq_interface.ice in Sources */ = {isa = PBXBuildFile; fileRef = 0431F19B19CC759D00F1718A /* mq_interface.ice */; };
-		0431F1A019CC76C300F1718A /* loginViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0431F19F19CC76C300F1718A /* loginViewController.mm */; };
+		0431F1A019CC76C300F1718A /* LoginViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0431F19F19CC76C300F1718A /* LoginViewController.mm */; };
 		0431F1A219CC795200F1718A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0431F1A119CC795200F1718A /* CFNetwork.framework */; };
 		0431F1A419CC796A00F1718A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0431F1A319CC796A00F1718A /* Security.framework */; };
 		0431F1A619CC797800F1718A /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0431F1A519CC797800F1718A /* ExternalAccessory.framework */; };
@@ -18,7 +19,6 @@
 		0448781119CC70FB0086CE1B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0448781019CC70FB0086CE1B /* UIKit.framework */; };
 		0448781719CC70FB0086CE1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0448781519CC70FB0086CE1B /* InfoPlist.strings */; };
 		0448781919CC70FB0086CE1B /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0448781819CC70FB0086CE1B /* main.mm */; };
-		0448781D19CC70FB0086CE1B /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0448781C19CC70FB0086CE1B /* AppDelegate.mm */; };
 		0448782019CC70FB0086CE1B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0448781E19CC70FB0086CE1B /* Main.storyboard */; };
 		0448782619CC70FB0086CE1B /* SecondViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0448782519CC70FB0086CE1B /* SecondViewController.mm */; };
 		0448782819CC70FB0086CE1B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0448782719CC70FB0086CE1B /* Images.xcassets */; };
@@ -33,9 +33,9 @@
 		045D8A9F19CF899B00D8C6DA /* ProjectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 045D8A9E19CF899B00D8C6DA /* ProjectViewController.mm */; };
 		04635CD519CE50490084822D /* StringConverterI.mm in Sources */ = {isa = PBXBuildFile; fileRef = 046C937F19CDE54A008221FD /* StringConverterI.mm */; };
 		046C938019CDE54A008221FD /* StringConverterI.mm in Resources */ = {isa = PBXBuildFile; fileRef = 046C937F19CDE54A008221FD /* StringConverterI.mm */; };
-		047167FF19CF3D9500A81F9B /* setViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047167FE19CF3D9500A81F9B /* setViewController.mm */; };
+		047167FF19CF3D9500A81F9B /* SetViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047167FE19CF3D9500A81F9B /* SetViewController.mm */; };
 		0471680219CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0471680119CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm */; };
-		047F3EA619D18500004123F7 /* singletonIce.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047F3EA519D18500004123F7 /* singletonIce.mm */; };
+		047F3EA619D18500004123F7 /* SingletonIce.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047F3EA519D18500004123F7 /* SingletonIce.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,11 +50,13 @@
 
 /* Begin PBXFileReference section */
 		04090E2119CDF5D300B8366D /* libiconv.2.4.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.4.0.dylib; path = usr/lib/libiconv.2.4.0.dylib; sourceTree = SDKROOT; };
-		0431F19919CC759D00F1718A /* eutils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = eutils.h; path = BreakRule/eutils/eutils.h; sourceTree = "<group>"; };
-		0431F19A19CC759D00F1718A /* eutils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = eutils.mm; path = BreakRule/eutils/eutils.mm; sourceTree = "<group>"; };
+		040B0A6719D23A5A00D83461 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		040B0A6919D23B2B00D83461 /* SingletonIce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingletonIce.h; path = BreakRule/eutils/SingletonIce.h; sourceTree = "<group>"; };
+		0431F19919CC759D00F1718A /* Eutils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Eutils.h; path = BreakRule/eutils/Eutils.h; sourceTree = "<group>"; };
+		0431F19A19CC759D00F1718A /* Eutils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Eutils.mm; path = BreakRule/eutils/Eutils.mm; sourceTree = "<group>"; };
 		0431F19B19CC759D00F1718A /* mq_interface.ice */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.slice; name = mq_interface.ice; path = BreakRule/eutils/mq_interface.ice; sourceTree = "<group>"; };
-		0431F19E19CC76C300F1718A /* loginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginViewController.h; sourceTree = "<group>"; };
-		0431F19F19CC76C300F1718A /* loginViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = loginViewController.mm; sourceTree = "<group>"; };
+		0431F19E19CC76C300F1718A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		0431F19F19CC76C300F1718A /* LoginViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LoginViewController.mm; sourceTree = "<group>"; };
 		0431F1A119CC795200F1718A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		0431F1A319CC796A00F1718A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0431F1A519CC797800F1718A /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
@@ -67,7 +69,6 @@
 		0448781819CC70FB0086CE1B /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		0448781A19CC70FB0086CE1B /* BreakRule-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BreakRule-Prefix.pch"; sourceTree = "<group>"; };
 		0448781B19CC70FB0086CE1B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		0448781C19CC70FB0086CE1B /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		0448781F19CC70FB0086CE1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0448782419CC70FB0086CE1B /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		0448782519CC70FB0086CE1B /* SecondViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SecondViewController.mm; sourceTree = "<group>"; };
@@ -84,12 +85,11 @@
 		045D8A9E19CF899B00D8C6DA /* ProjectViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ProjectViewController.mm; sourceTree = "<group>"; };
 		046C937E19CDE536008221FD /* StringConverterI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringConverterI.h; path = BreakRule/eutils/StringConverterI.h; sourceTree = "<group>"; };
 		046C937F19CDE54A008221FD /* StringConverterI.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = StringConverterI.mm; path = BreakRule/eutils/StringConverterI.mm; sourceTree = "<group>"; };
-		047167FD19CF3D9500A81F9B /* setViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setViewController.h; sourceTree = "<group>"; };
-		047167FE19CF3D9500A81F9B /* setViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = setViewController.mm; sourceTree = "<group>"; };
+		047167FD19CF3D9500A81F9B /* SetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetViewController.h; sourceTree = "<group>"; };
+		047167FE19CF3D9500A81F9B /* SetViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SetViewController.mm; sourceTree = "<group>"; };
 		0471680019CF678B00A81F9B /* BreakRuleTakePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BreakRuleTakePhotoViewController.h; sourceTree = "<group>"; };
 		0471680119CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BreakRuleTakePhotoViewController.mm; sourceTree = "<group>"; };
-		047F3EA419D184E6004123F7 /* singletonIce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = singletonIce.h; sourceTree = "<group>"; };
-		047F3EA519D18500004123F7 /* singletonIce.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = singletonIce.mm; sourceTree = "<group>"; };
+		047F3EA519D18500004123F7 /* SingletonIce.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SingletonIce.mm; path = BreakRule/eutils/SingletonIce.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,10 +122,10 @@
 		0431F19819CC74D300F1718A /* eutils */ = {
 			isa = PBXGroup;
 			children = (
-				047F3EA419D184E6004123F7 /* singletonIce.h */,
-				047F3EA519D18500004123F7 /* singletonIce.mm */,
-				0431F19919CC759D00F1718A /* eutils.h */,
-				0431F19A19CC759D00F1718A /* eutils.mm */,
+				040B0A6919D23B2B00D83461 /* SingletonIce.h */,
+				047F3EA519D18500004123F7 /* SingletonIce.mm */,
+				0431F19919CC759D00F1718A /* Eutils.h */,
+				0431F19A19CC759D00F1718A /* Eutils.mm */,
 				0431F19B19CC759D00F1718A /* mq_interface.ice */,
 				046C937E19CDE536008221FD /* StringConverterI.h */,
 				046C937F19CDE54A008221FD /* StringConverterI.mm */,
@@ -173,16 +173,16 @@
 			isa = PBXGroup;
 			children = (
 				0448781B19CC70FB0086CE1B /* AppDelegate.h */,
-				0448781C19CC70FB0086CE1B /* AppDelegate.mm */,
+				040B0A6719D23A5A00D83461 /* AppDelegate.mm */,
 				0448781E19CC70FB0086CE1B /* Main.storyboard */,
 				045D8A9D19CF899B00D8C6DA /* ProjectViewController.h */,
 				045D8A9E19CF899B00D8C6DA /* ProjectViewController.mm */,
 				0471680019CF678B00A81F9B /* BreakRuleTakePhotoViewController.h */,
 				0471680119CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm */,
-				047167FD19CF3D9500A81F9B /* setViewController.h */,
-				047167FE19CF3D9500A81F9B /* setViewController.mm */,
-				0431F19E19CC76C300F1718A /* loginViewController.h */,
-				0431F19F19CC76C300F1718A /* loginViewController.mm */,
+				047167FD19CF3D9500A81F9B /* SetViewController.h */,
+				047167FE19CF3D9500A81F9B /* SetViewController.mm */,
+				0431F19E19CC76C300F1718A /* LoginViewController.h */,
+				0431F19F19CC76C300F1718A /* LoginViewController.mm */,
 				0448782419CC70FB0086CE1B /* SecondViewController.h */,
 				0448782519CC70FB0086CE1B /* SecondViewController.mm */,
 				0448782719CC70FB0086CE1B /* Images.xcassets */,
@@ -331,17 +331,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				047167FF19CF3D9500A81F9B /* setViewController.mm in Sources */,
+				047167FF19CF3D9500A81F9B /* SetViewController.mm in Sources */,
 				04635CD519CE50490084822D /* StringConverterI.mm in Sources */,
 				0448782619CC70FB0086CE1B /* SecondViewController.mm in Sources */,
-				047F3EA619D18500004123F7 /* singletonIce.mm in Sources */,
-				0448781D19CC70FB0086CE1B /* AppDelegate.mm in Sources */,
+				047F3EA619D18500004123F7 /* SingletonIce.mm in Sources */,
 				045D8A9F19CF899B00D8C6DA /* ProjectViewController.mm in Sources */,
-				0431F1A019CC76C300F1718A /* loginViewController.mm in Sources */,
+				0431F1A019CC76C300F1718A /* LoginViewController.mm in Sources */,
 				0471680219CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm in Sources */,
+				040B0A6819D23A5A00D83461 /* AppDelegate.mm in Sources */,
 				0431F19D19CC759D00F1718A /* mq_interface.ice in Sources */,
 				0448781919CC70FB0086CE1B /* main.mm in Sources */,
-				0431F19C19CC759D00F1718A /* eutils.mm in Sources */,
+				0431F19C19CC759D00F1718A /* Eutils.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

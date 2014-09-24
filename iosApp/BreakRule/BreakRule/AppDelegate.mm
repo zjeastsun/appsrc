@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "singletonIce.h"
+#import "SingletonIce.h"
 
 @implementation AppDelegate
 
@@ -45,7 +45,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    singletonIce *oneIce = [singletonIce sharedInstance];
+    SingletonIce *oneIce = [SingletonIce sharedInstance];
     [oneIce unInit];
 }
 

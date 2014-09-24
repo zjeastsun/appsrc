@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "singletonIce.h"
+#import "SingletonIce.h"
 
 @interface ProjectViewController : UIViewController
 {
-    singletonIce *oneIce;
+    SingletonIce *oneIce;
+    CSelectHelp	helpProject;
     
 }
 
