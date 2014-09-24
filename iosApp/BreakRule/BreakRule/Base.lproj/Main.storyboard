@@ -160,7 +160,7 @@
         <!--Set View Controller-->
         <scene sceneID="XOv-fr-UdW">
             <objects>
-                <viewController id="Sa8-vG-teg" customClass="setViewController" sceneMemberID="viewController">
+                <viewController id="Sa8-vG-teg" customClass="SetViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2Ng-HW-hkg"/>
                         <viewControllerLayoutGuide type="bottom" id="iXZ-2J-t42"/>
@@ -323,7 +323,7 @@
         <!--Login View Controller-->
         <scene sceneID="Uhb-qH-jpd">
             <objects>
-                <viewController id="B0J-9n-Uhr" customClass="loginViewController" sceneMemberID="viewController">
+                <viewController id="B0J-9n-Uhr" customClass="LoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iqF-iO-LYF"/>
                         <viewControllerLayoutGuide type="bottom" id="G4M-UJ-9T8"/>
