@@ -8,6 +8,7 @@
 
 #import "ProjectViewController.h"
 #import "BreakRuleTakePhotoViewController.h"
+#import "RectifyViewController.h"
 
 @interface ProjectViewController ()
 
@@ -109,8 +110,10 @@
     if(row == 0)
     {
     }
+//    RectifyViewController.h
+    ProjectViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"main"];
     
-    BreakRuleTakePhotoViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"main"];
+//    BreakRuleTakePhotoViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"main"];
     [self presentViewController:mainViewController animated:YES completion:nil];
     
 }

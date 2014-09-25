@@ -61,6 +61,10 @@ string getIPWithHostName(string hostName)
 
 - (IBAction)login:(id)sender {
 
+    ProjectViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
+    [self presentViewController:projectView animated:YES completion:nil];
+    
+    return;
 //    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 //    appDelegate.g_int = 10;
     
@@ -124,8 +128,9 @@ string getIPWithHostName(string hostName)
     }
     NSLog(@"用户登录成功！");
     
-    ProjectViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
-    [self presentViewController:projectView animated:YES completion:nil];
+//    ProjectViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
+//    [self presentViewController:projectView animated:YES completion:nil];
+    
 /*
     string sName;
     for( int j=0; j<helpUser.size(); ++j )
