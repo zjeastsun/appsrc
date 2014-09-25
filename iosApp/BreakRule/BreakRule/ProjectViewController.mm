@@ -110,10 +110,9 @@
     if(row == 0)
     {
     }
-//    RectifyViewController.h
-    ProjectViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"main"];
-    
-//    BreakRuleTakePhotoViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"main"];
+
+    ProjectViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MainView"];
+
     [self presentViewController:mainViewController animated:YES completion:nil];
     
 }

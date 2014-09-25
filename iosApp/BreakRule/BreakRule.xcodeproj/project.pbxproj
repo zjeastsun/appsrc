@@ -37,7 +37,6 @@
 		047F3EA619D18500004123F7 /* SingletonIce.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047F3EA519D18500004123F7 /* SingletonIce.mm */; };
 		04998F7719D3812300CECB16 /* RectifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04998F7619D3812300CECB16 /* RectifyViewController.m */; };
 		04998F7A19D38DF200CECB16 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04998F7919D38DF200CECB16 /* MainViewController.m */; };
-		04998F7D19D393A500CECB16 /* testViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04998F7C19D393A500CECB16 /* testViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,8 +93,6 @@
 		04998F7619D3812300CECB16 /* RectifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RectifyViewController.m; sourceTree = "<group>"; };
 		04998F7819D38DF200CECB16 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		04998F7919D38DF200CECB16 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		04998F7B19D393A500CECB16 /* testViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testViewController.h; sourceTree = "<group>"; };
-		04998F7C19D393A500CECB16 /* testViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,8 +178,6 @@
 				0448781B19CC70FB0086CE1B /* AppDelegate.h */,
 				040B0A6719D23A5A00D83461 /* AppDelegate.mm */,
 				0448781E19CC70FB0086CE1B /* Main.storyboard */,
-				04998F7B19D393A500CECB16 /* testViewController.h */,
-				04998F7C19D393A500CECB16 /* testViewController.m */,
 				04998F7819D38DF200CECB16 /* MainViewController.h */,
 				04998F7919D38DF200CECB16 /* MainViewController.m */,
 				04998F7519D3812300CECB16 /* RectifyViewController.h */,
@@ -351,7 +346,6 @@
 				04998F7A19D38DF200CECB16 /* MainViewController.m in Sources */,
 				040B0A6819D23A5A00D83461 /* AppDelegate.mm in Sources */,
 				0431F19D19CC759D00F1718A /* mq_interface.ice in Sources */,
-				04998F7D19D393A500CECB16 /* testViewController.m in Sources */,
 				0448781919CC70FB0086CE1B /* main.mm in Sources */,
 				0431F19C19CC759D00F1718A /* Eutils.mm in Sources */,
 			);
