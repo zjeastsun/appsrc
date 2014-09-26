@@ -37,6 +37,8 @@
 		0478B47219D4BA1A0077EDBA /* ReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0478B47119D4BA1A0077EDBA /* ReviewViewController.m */; };
 		0478B47519D4BCC40077EDBA /* QueryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0478B47419D4BCC40077EDBA /* QueryViewController.m */; };
 		047F3EA619D18500004123F7 /* SingletonIce.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047F3EA519D18500004123F7 /* SingletonIce.mm */; };
+		048F599519D6298B009BA27B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048F599419D6298B009BA27B /* MobileCoreServices.framework */; };
+		048F599719D62E4C009BA27B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048F599619D62E4C009BA27B /* ImageIO.framework */; };
 		04998F7719D3812300CECB16 /* RectifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04998F7619D3812300CECB16 /* RectifyViewController.m */; };
 		04998F7A19D38DF200CECB16 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04998F7919D38DF200CECB16 /* MainViewController.m */; };
 /* End PBXBuildFile section */
@@ -95,6 +97,8 @@
 		0478B47319D4BCC40077EDBA /* QueryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryViewController.h; sourceTree = "<group>"; };
 		0478B47419D4BCC40077EDBA /* QueryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryViewController.m; sourceTree = "<group>"; };
 		047F3EA519D18500004123F7 /* SingletonIce.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SingletonIce.mm; path = BreakRule/eutils/SingletonIce.mm; sourceTree = "<group>"; };
+		048F599419D6298B009BA27B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		048F599619D62E4C009BA27B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		04998F7519D3812300CECB16 /* RectifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectifyViewController.h; sourceTree = "<group>"; };
 		04998F7619D3812300CECB16 /* RectifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RectifyViewController.m; sourceTree = "<group>"; };
 		04998F7819D38DF200CECB16 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -106,6 +110,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				048F599719D62E4C009BA27B /* ImageIO.framework in Frameworks */,
+				048F599519D6298B009BA27B /* MobileCoreServices.framework in Frameworks */,
 				0431F1A619CC797800F1718A /* ExternalAccessory.framework in Frameworks */,
 				0431F1A419CC796A00F1718A /* Security.framework in Frameworks */,
 				0431F1A219CC795200F1718A /* CFNetwork.framework in Frameworks */,
@@ -166,6 +172,8 @@
 		0448780B19CC70FB0086CE1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				048F599619D62E4C009BA27B /* ImageIO.framework */,
+				048F599419D6298B009BA27B /* MobileCoreServices.framework */,
 				04090E2119CDF5D300B8366D /* libiconv.2.4.0.dylib */,
 				0431F1A519CC797800F1718A /* ExternalAccessory.framework */,
 				0431F1A319CC796A00F1718A /* Security.framework */,

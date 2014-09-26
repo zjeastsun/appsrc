@@ -100,7 +100,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh2-T1-AhA" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1091" y="-752"/>
+            <point key="canvasLocation" x="-2957" y="-816"/>
         </scene>
         <!--Rectify View Controller - Second-->
         <scene sceneID="ot8-2e-RuS">
@@ -150,7 +150,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qq-4t-Ow8" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1091" y="-150"/>
+            <point key="canvasLocation" x="-2957" y="-214"/>
         </scene>
         <!--Review View Controller - 批阅信息-->
         <scene sceneID="1zY-k5-7f7">
@@ -175,7 +175,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b6U-5K-uzd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1091" y="469"/>
+            <point key="canvasLocation" x="-2957" y="405"/>
         </scene>
         <!--Query View Controller - 查询信息-->
         <scene sceneID="8AF-wJ-a46">
@@ -200,7 +200,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q7C-YN-7SB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1101" y="1073"/>
+            <point key="canvasLocation" x="-2947" y="1009"/>
         </scene>
         <!--Set View Controller-->
         <scene sceneID="XOv-fr-UdW">
@@ -342,7 +342,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="diN-6e-k7i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-763" y="-493"/>
+            <point key="canvasLocation" x="-4835" y="-557"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Vex-rW-GRa">
@@ -363,7 +363,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FNP-y4-bzi" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="180"/>
+            <point key="canvasLocation" x="-3916" y="116"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="Uhb-qH-jpd">
@@ -468,7 +468,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A6k-s9-HjW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1186" y="180"/>
+            <point key="canvasLocation" x="-5342" y="116"/>
         </scene>
         <!--Project View Controller-->
         <scene sceneID="3sd-u3-975">
@@ -500,7 +500,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jS1-Tx-UcE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-723" y="180"/>
+            <point key="canvasLocation" x="-4835" y="116"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="euf-m2-ZUx">
@@ -514,7 +514,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CI6-9U-OYr">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CI6-9U-OYr">
                                 <rect key="frame" x="109" y="133" width="102" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="违规抓拍" image="first"/>
@@ -522,7 +522,7 @@
                                     <action selector="toBreakRuleView:" destination="ayi-31-HLA" eventType="touchUpInside" id="viY-A4-oIG"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="izF-lE-7L9">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="izF-lE-7L9">
                                 <rect key="frame" x="109" y="171" width="102" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="整改抓拍" image="second"/>
@@ -530,7 +530,7 @@
                                     <action selector="toRectifyView:" destination="ayi-31-HLA" eventType="touchUpInside" id="Vc8-DH-3qS"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K73-l0-6Jl">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K73-l0-6Jl">
                                 <rect key="frame" x="109" y="209" width="102" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="批阅信息" image="first"/>
@@ -538,12 +538,20 @@
                                     <action selector="toReviewView:" destination="ayi-31-HLA" eventType="touchUpInside" id="qc0-Qw-30t"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xir-JN-wXz">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xir-JN-wXz">
                                 <rect key="frame" x="109" y="247" width="102" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="查询信息" image="second"/>
                                 <connections>
                                     <action selector="toQueryView:" destination="ayi-31-HLA" eventType="touchUpInside" id="JTl-lU-6Kh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hMS-w4-i6k">
+                                <rect key="frame" x="109" y="285" width="85" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="设置" image="first"/>
+                                <connections>
+                                    <segue destination="Sa8-vG-teg" kind="modal" id="1tR-PN-Y3K"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -552,7 +560,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bsq-kS-qeb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-295" y="180"/>
+            <point key="canvasLocation" x="-4367" y="116"/>
         </scene>
         <!--Navigation Controller - 违规抓拍-->
         <scene sceneID="Cce-vs-QhG">
@@ -571,7 +579,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G84-eh-0wp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="613" y="-752"/>
+            <point key="canvasLocation" x="-3435" y="-816"/>
         </scene>
         <!--Navigation Controller - 整改抓拍-->
         <scene sceneID="qNM-nT-w27">
@@ -590,7 +598,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s8O-x1-f5F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="613" y="-150"/>
+            <point key="canvasLocation" x="-3435" y="-214"/>
         </scene>
         <!--Navigation Controller - 批阅信息-->
         <scene sceneID="yWN-5F-BQq">
@@ -609,7 +617,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dyf-Yb-Xr8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="613" y="469"/>
+            <point key="canvasLocation" x="-3435" y="405"/>
         </scene>
         <!--Navigation Controller - 查询信息-->
         <scene sceneID="Jg4-02-1Ea">
@@ -628,7 +636,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bHe-ta-9y0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="613" y="1073"/>
+            <point key="canvasLocation" x="-3435" y="1009"/>
         </scene>
     </scenes>
     <resources>
@@ -640,4 +648,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="4oh-eE-9JT"/>
+    </inferredMetricsTieBreakers>
 </document>

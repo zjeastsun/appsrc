@@ -7,6 +7,8 @@
 //
 
 #import "BreakRuleTakePhotoViewController.h"
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <ImageIO/ImageIO.h>
 
 @interface BreakRuleTakePhotoViewController ()
 
@@ -129,6 +131,21 @@
 }
 
 - (IBAction)fromVideo:(id)sender {
+    imagePicker = [[UIImagePickerController alloc] init];
+    //检测照相设备是否可用
+    if( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeMovie, nil];
+        imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModeVideo;
+//        imagePicker.showsCameraControls = NO;
+//        imagePicker.toolbarHidden = YES;
+//        imagePicker.navigationBarHidden = YES;
+        imagePicker.delegate = (id<UINavigationControllerDelegate,UIImagePickerControllerDelegate>)self;
+        imagePicker.allowsEditing = NO;
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+    
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -137,6 +154,12 @@
     
 //    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];//裁剪的照片
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];//原始照片
+    //获取照片时间？
+    NSDictionary *metaData = [info objectForKey:UIImagePickerControllerMediaMetadata];
+    NSLog(@"meta=%@", metaData);
+//    NSDictionary *exifData = [metaData objectForKey:exif];
+//    NSString *photoData = [exifData objectForKey:@"{DataTimeOriginal}"];
+    //这里保存有问题，选择相册时候会多保存一次
     UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
     imageView.image = image;
     
