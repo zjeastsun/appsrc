@@ -46,17 +46,23 @@
 }
 */
 
-- (IBAction)a:(id)sender {
+- (IBAction)toBreakRuleView:(id)sender {
     MainViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"BreakRuleView"];
-    
-    //    BreakRuleTakePhotoViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"main"];
     [self presentViewController:mainViewController animated:YES completion:nil];
 }
 
-- (IBAction)b:(id)sender {
+- (IBAction)toQueryView:(id)sender {
+    MainViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"QueryView"];
+    [self presentViewController:mainViewController animated:YES completion:nil];
+}
+
+- (IBAction)toRectifyView:(id)sender {
     MainViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RectifyView"];
-    
-    //    BreakRuleTakePhotoViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"main"];
+    [self presentViewController:mainViewController animated:YES completion:nil];
+}
+
+- (IBAction)toReviewView:(id)sender {
+    MainViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReviewView"];
     [self presentViewController:mainViewController animated:YES completion:nil];
 }
 @end

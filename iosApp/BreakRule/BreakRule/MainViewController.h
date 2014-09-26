@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface MainViewController : UIViewController
-- (IBAction)a:(id)sender;
-
-- (IBAction)b:(id)sender;
+- (IBAction)toRectifyView:(id)sender;
+- (IBAction)toReviewView:(id)sender;
+- (IBAction)toBreakRuleView:(id)sender;
+- (IBAction)toQueryView:(id)sender;
 @end
