@@ -107,4 +107,62 @@
 - (IBAction)back:(id)sender {
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (IBAction)fromPhotosAlbum:(id)sender {
+    imagePicker = [[UIImagePickerController alloc]init];
+//    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;//图片库
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;//相册
+    imagePicker.delegate = (id<UINavigationControllerDelegate,UIImagePickerControllerDelegate>)self;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+- (IBAction)fromCamera:(id)sender {
+    imagePicker = [[UIImagePickerController alloc] init];
+    //检测照相设备是否可用
+    if( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePicker.delegate = (id<UINavigationControllerDelegate,UIImagePickerControllerDelegate>)self;
+//        imagePicker.allowsEditing =YES;
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+}
+
+- (IBAction)fromVideo:(id)sender {
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [imagePicker dismissViewControllerAnimated:YES completion:nil];
+    
+//    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];//裁剪的照片
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];//原始照片
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    imageView.image = image;
+    
+}
+
+-(void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    UIAlertView *alert;
+    if(error)
+    {
+        alert = [[UIAlertView alloc] initWithTitle:@"错误"
+                                           message:@"不能保存照片到相册"
+                                          delegate:self
+                                 cancelButtonTitle:@"OK"
+                                 otherButtonTitles:nil];
+    }
+    else
+    {
+//        alert = [[UIAlertView alloc] initWithTitle:@"成功"
+//                                           message:@"保存照片到相册成功"
+//                                          delegate:self
+//                                 cancelButtonTitle:@"OK"
+//                                 otherButtonTitles:nil];
+    }
+    [alert show];
+    
+}
+
 @end

@@ -56,6 +56,9 @@
                                 <state key="normal" title="拍照">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="fromCamera:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="VyE-CY-wJA"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnj-00-0nw">
                                 <rect key="frame" x="225" y="439" width="30" height="30"/>
@@ -63,6 +66,9 @@
                                 <state key="normal" title="视频">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="fromVideo:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="Cma-Pg-jV1"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0TF-Fr-CIZ">
                                 <rect key="frame" x="64" y="439" width="30" height="30"/>
@@ -70,6 +76,9 @@
                                 <state key="normal" title="照片">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="fromPhotosAlbum:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="Dg1-IQ-tZI"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -85,6 +94,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="imageView" destination="Sh7-IR-P9j" id="XSi-1n-Vft"/>
                         <outlet property="optionTable" destination="zXM-fP-IkZ" id="aoO-91-dgU"/>
                     </connections>
                 </viewController>
