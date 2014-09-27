@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		040B0A6819D23A5A00D83461 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 040B0A6719D23A5A00D83461 /* AppDelegate.mm */; };
+		0410892819D738D100BB3D66 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0410892719D738D100BB3D66 /* AssetsLibrary.framework */; };
 		0431F19C19CC759D00F1718A /* Eutils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0431F19A19CC759D00F1718A /* Eutils.mm */; };
 		0431F19D19CC759D00F1718A /* mq_interface.ice in Sources */ = {isa = PBXBuildFile; fileRef = 0431F19B19CC759D00F1718A /* mq_interface.ice */; };
 		0431F1A019CC76C300F1718A /* LoginViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0431F19F19CC76C300F1718A /* LoginViewController.mm */; };
@@ -57,6 +58,7 @@
 		04090E2119CDF5D300B8366D /* libiconv.2.4.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.4.0.dylib; path = usr/lib/libiconv.2.4.0.dylib; sourceTree = SDKROOT; };
 		040B0A6719D23A5A00D83461 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		040B0A6919D23B2B00D83461 /* SingletonIce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingletonIce.h; path = BreakRule/eutils/SingletonIce.h; sourceTree = "<group>"; };
+		0410892719D738D100BB3D66 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		0431F19919CC759D00F1718A /* Eutils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Eutils.h; path = BreakRule/eutils/Eutils.h; sourceTree = "<group>"; };
 		0431F19A19CC759D00F1718A /* Eutils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Eutils.mm; path = BreakRule/eutils/Eutils.mm; sourceTree = "<group>"; };
 		0431F19B19CC759D00F1718A /* mq_interface.ice */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.slice; name = mq_interface.ice; path = BreakRule/eutils/mq_interface.ice; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0410892819D738D100BB3D66 /* AssetsLibrary.framework in Frameworks */,
 				048F599719D62E4C009BA27B /* ImageIO.framework in Frameworks */,
 				048F599519D6298B009BA27B /* MobileCoreServices.framework in Frameworks */,
 				0431F1A619CC797800F1718A /* ExternalAccessory.framework in Frameworks */,
@@ -172,6 +175,7 @@
 		0448780B19CC70FB0086CE1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0410892719D738D100BB3D66 /* AssetsLibrary.framework */,
 				048F599619D62E4C009BA27B /* ImageIO.framework */,
 				048F599419D6298B009BA27B /* MobileCoreServices.framework */,
 				04090E2119CDF5D300B8366D /* libiconv.2.4.0.dylib */,

@@ -9,6 +9,7 @@
 #import "BreakRuleTakePhotoViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <ImageIO/ImageIO.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface BreakRuleTakePhotoViewController ()
 
@@ -159,21 +160,34 @@
         //    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];//裁剪的照片
         UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];//原始照片
         
+        __block NSDictionary *metaData;
+        NSDictionary *exifData;
+        __block NSString *nsPhotoData;
+        
         //如果是从摄像头拍照来的保存照片到相册
         if(picker.sourceType == UIImagePickerControllerSourceTypeCamera)
         {
             //获取新拍照片的元数据
-            NSDictionary *metaData = [info objectForKey:UIImagePickerControllerMediaMetadata];
-            NSDictionary *exifData = [metaData objectForKey:@"{Exif}"];
+            metaData = [info objectForKey:UIImagePickerControllerMediaMetadata];
+            exifData = [metaData objectForKey:@"{Exif}"];
             //获取照片时间
-            NSString *photoData = [exifData objectForKey:@"DateTimeOriginal"];
-            NSLog(@"拍照时间=%@", photoData);
+            nsPhotoData = [exifData objectForKey:@"DateTimeOriginal"];
+            NSLog(@"拍照时间=%@", nsPhotoData);
             
             UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
         }
         else
         {
-            //如何获取相册中相片的时间等信息？
+            NSURL *assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
+            ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+            [library assetForURL:assetURL
+                     resultBlock:^(ALAsset *asset) {
+//                         metaData = [[NSMutableDictionary alloc] initWithDictionary:asset.defaultRepresentation.metadata];
+                         nsPhotoData = [ asset valueForProperty:ALAssetPropertyDate ] ;
+                         NSLog(@"拍照时间=%@", nsPhotoData);
+                     }
+                    failureBlock:^(NSError *error) {
+                    }];
         }
         imageView.image = image;
     }
