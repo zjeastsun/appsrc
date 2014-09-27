@@ -121,7 +121,7 @@
 - (IBAction)fromCamera:(id)sender {
     imagePicker = [[UIImagePickerController alloc] init];
     //检测照相设备是否可用
-    if( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    if( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] )
     {
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         imagePicker.delegate = (id<UINavigationControllerDelegate,UIImagePickerControllerDelegate>)self;
@@ -133,11 +133,13 @@
 - (IBAction)fromVideo:(id)sender {
     imagePicker = [[UIImagePickerController alloc] init];
     //检测照相设备是否可用
-    if( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    if( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] )
     {
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        //kUTTypeMovie带声音的视频，kUTTypeVideo不带声音的视频，kUTTypeImage图片
         imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeMovie, nil];
         imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModeVideo;
+        imagePicker.videoQuality = UIImagePickerControllerQualityTypeMedium;//视频质量
 //        imagePicker.showsCameraControls = NO;
 //        imagePicker.toolbarHidden = YES;
 //        imagePicker.navigationBarHidden = YES;
@@ -150,18 +152,36 @@
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    [imagePicker dismissViewControllerAnimated:YES completion:nil];
+    [picker dismissViewControllerAnimated:YES completion:nil];
     
-//    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];//裁剪的照片
-    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];//原始照片
-    //获取照片时间？
-    NSDictionary *metaData = [info objectForKey:UIImagePickerControllerMediaMetadata];
-    NSLog(@"meta=%@", metaData);
-//    NSDictionary *exifData = [metaData objectForKey:exif];
-//    NSString *photoData = [exifData objectForKey:@"{DataTimeOriginal}"];
-    //这里保存有问题，选择相册时候会多保存一次
-    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-    imageView.image = image;
+    if( picker.sourceType == UIImagePickerControllerSourceTypeSavedPhotosAlbum || picker.cameraCaptureMode == UIImagePickerControllerCameraCaptureModePhoto )
+    {
+        //    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];//裁剪的照片
+        UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];//原始照片
+        
+        //如果是从摄像头拍照来的保存照片到相册
+        if(picker.sourceType == UIImagePickerControllerSourceTypeCamera)
+        {
+            //获取新拍照片的元数据
+            NSDictionary *metaData = [info objectForKey:UIImagePickerControllerMediaMetadata];
+            NSDictionary *exifData = [metaData objectForKey:@"{Exif}"];
+            //获取照片时间
+            NSString *photoData = [exifData objectForKey:@"DateTimeOriginal"];
+            NSLog(@"拍照时间=%@", photoData);
+            
+            UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        }
+        else
+        {
+            //如何获取相册中相片的时间等信息？
+        }
+        imageView.image = image;
+    }
+    else//视频
+    {
+        NSURL *mediaURL = [info objectForKey:UIImagePickerControllerMediaURL];
+        [self saveVideo:mediaURL];
+    }
     
 }
 
@@ -186,6 +206,30 @@
     }
     [alert show];
     
+}
+
+-(void)video:(UIImage *)video didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    UIAlertView *alert;
+    if(error)
+    {
+        alert = [[UIAlertView alloc] initWithTitle:@"错误"
+                                           message:@"不能保存视频到相册"
+                                          delegate:self
+                                 cancelButtonTitle:@"OK"
+                                 otherButtonTitles:nil];
+    }
+    [alert show];
+    
+}
+
+- (void)saveVideo:(NSURL *)mediaURL
+{
+    BOOL bCompatible = UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(mediaURL.path);
+    if( bCompatible )
+    {
+        UISaveVideoAtPathToSavedPhotosAlbum(mediaURL.path, self, @selector(video:didFinishSavingWithError:contextInfo:), NULL);
+    }
 }
 
 @end
