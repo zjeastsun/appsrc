@@ -10,6 +10,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <ImageIO/ImageIO.h>
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "SJAvatarBrowser.h"
 
 @interface BreakRuleTakePhotoViewController ()
 
@@ -32,6 +33,19 @@
     // Do any additional setup after loading the view.
     title = [[NSMutableArray alloc]initWithObjects:@"判定性质", @"违规选项",nil];
     subTitle = [[NSMutableArray alloc]initWithObjects:@"一般违规", @"自定义",nil];
+    
+    imageView.userInteractionEnabled = YES;
+    //点击放大图片
+    UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(magnifyImage)];
+    
+    [imageView addGestureRecognizer:tap];
+    
+}
+
+- (void)magnifyImage
+{
+    NSLog(@"局部放大");
+    [SJAvatarBrowser showImage:imageView];//调用方法
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,10 +100,10 @@
 {
     return 0;
 }
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    
     
 //    tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0,0,5,20)] ;
     
@@ -105,6 +119,22 @@
 
     return cell;
     
+}
+
+//选择、响应
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if( [indexPath row] == 0 )
+    {
+        BreakRuleTakePhotoViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RuleTypeView"];
+        [self presentViewController:viewController animated:YES completion:nil];
+    }
+    else
+    {
+        BreakRuleTakePhotoViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RuleOptionView"];
+        [self presentViewController:viewController animated:YES completion:nil];
+        
+    }
 }
 
 - (IBAction)back:(id)sender {

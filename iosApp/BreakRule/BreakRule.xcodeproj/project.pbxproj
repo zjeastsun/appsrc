@@ -40,6 +40,9 @@
 		047F3EA619D18500004123F7 /* SingletonIce.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047F3EA519D18500004123F7 /* SingletonIce.mm */; };
 		048F599519D6298B009BA27B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048F599419D6298B009BA27B /* MobileCoreServices.framework */; };
 		048F599719D62E4C009BA27B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048F599619D62E4C009BA27B /* ImageIO.framework */; };
+		049104B519D8AD74004E052B /* SJAvatarBrowser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049104B419D8AD74004E052B /* SJAvatarBrowser.mm */; };
+		049104B819D8C829004E052B /* RuleTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049104B719D8C829004E052B /* RuleTypeViewController.m */; };
+		049104BB19D8CAF8004E052B /* RuleOptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049104BA19D8CAF8004E052B /* RuleOptionViewController.m */; };
 		04998F7719D3812300CECB16 /* RectifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04998F7619D3812300CECB16 /* RectifyViewController.m */; };
 		04998F7A19D38DF200CECB16 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04998F7919D38DF200CECB16 /* MainViewController.m */; };
 /* End PBXBuildFile section */
@@ -101,6 +104,12 @@
 		047F3EA519D18500004123F7 /* SingletonIce.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SingletonIce.mm; path = BreakRule/eutils/SingletonIce.mm; sourceTree = "<group>"; };
 		048F599419D6298B009BA27B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		048F599619D62E4C009BA27B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		049104B319D8AD3E004E052B /* SJAvatarBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SJAvatarBrowser.h; path = BreakRule/eutils/SJAvatarBrowser.h; sourceTree = "<group>"; };
+		049104B419D8AD74004E052B /* SJAvatarBrowser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SJAvatarBrowser.mm; path = BreakRule/eutils/SJAvatarBrowser.mm; sourceTree = "<group>"; };
+		049104B619D8C829004E052B /* RuleTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuleTypeViewController.h; sourceTree = "<group>"; };
+		049104B719D8C829004E052B /* RuleTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuleTypeViewController.m; sourceTree = "<group>"; };
+		049104B919D8CAF8004E052B /* RuleOptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuleOptionViewController.h; sourceTree = "<group>"; };
+		049104BA19D8CAF8004E052B /* RuleOptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuleOptionViewController.m; sourceTree = "<group>"; };
 		04998F7519D3812300CECB16 /* RectifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectifyViewController.h; sourceTree = "<group>"; };
 		04998F7619D3812300CECB16 /* RectifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RectifyViewController.m; sourceTree = "<group>"; };
 		04998F7819D38DF200CECB16 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -147,6 +156,8 @@
 				0431F19B19CC759D00F1718A /* mq_interface.ice */,
 				046C937E19CDE536008221FD /* StringConverterI.h */,
 				046C937F19CDE54A008221FD /* StringConverterI.mm */,
+				049104B319D8AD3E004E052B /* SJAvatarBrowser.h */,
+				049104B419D8AD74004E052B /* SJAvatarBrowser.mm */,
 			);
 			name = eutils;
 			sourceTree = "<group>";
@@ -196,6 +207,10 @@
 				0448781B19CC70FB0086CE1B /* AppDelegate.h */,
 				040B0A6719D23A5A00D83461 /* AppDelegate.mm */,
 				0448781E19CC70FB0086CE1B /* Main.storyboard */,
+				049104B619D8C829004E052B /* RuleTypeViewController.h */,
+				049104B719D8C829004E052B /* RuleTypeViewController.m */,
+				049104B919D8CAF8004E052B /* RuleOptionViewController.h */,
+				049104BA19D8CAF8004E052B /* RuleOptionViewController.m */,
 				0478B47319D4BCC40077EDBA /* QueryViewController.h */,
 				0478B47419D4BCC40077EDBA /* QueryViewController.m */,
 				0478B47019D4BA1A0077EDBA /* ReviewViewController.h */,
@@ -369,9 +384,12 @@
 				040B0A6819D23A5A00D83461 /* AppDelegate.mm in Sources */,
 				0478B47519D4BCC40077EDBA /* QueryViewController.m in Sources */,
 				0478B47219D4BA1A0077EDBA /* ReviewViewController.m in Sources */,
+				049104BB19D8CAF8004E052B /* RuleOptionViewController.m in Sources */,
 				0431F19D19CC759D00F1718A /* mq_interface.ice in Sources */,
+				049104B819D8C829004E052B /* RuleTypeViewController.m in Sources */,
 				0448781919CC70FB0086CE1B /* main.mm in Sources */,
 				0431F19C19CC759D00F1718A /* Eutils.mm in Sources */,
+				049104B519D8AD74004E052B /* SJAvatarBrowser.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
