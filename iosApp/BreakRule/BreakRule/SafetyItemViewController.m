@@ -1,19 +1,18 @@
 //
-//  RuleTypeViewController.m
+//  SafetyItemViewController.m
 //  BreakRule
 //
-//  Created by mac on 14-9-28.
+//  Created by mac on 14-9-29.
 //  Copyright (c) 2014年 mac. All rights reserved.
 //
 
-#import "RuleTypeViewController.h"
-#import "SingletonBridge.h"
+#import "SafetyItemViewController.h"
 
-@interface RuleTypeViewController ()
+@interface SafetyItemViewController ()
 
 @end
 
-@implementation RuleTypeViewController
+@implementation SafetyItemViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,7 +27,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    title = [[NSMutableArray alloc]initWithObjects:@"一般违规", @"严重违规", @"重大违规", nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,6 +57,9 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (tableView.tag == 0) {
+        return 3;
+    }
     return 3;
 }
 
@@ -76,20 +77,15 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] ;
     }
-    UIImage *ima = [UIImage imageNamed:@"share_this_icon.png"];
-    cell.imageView.image =ima;
-    cell.textLabel.text = [title objectAtIndex:indexPath.row];
     
-    BRIDGE
-    if ([cell.textLabel.text isEqualToString:bridge.sRuleType]) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    if (tableView.tag == 0) {
+        
     }
-    else
-    {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
-    
-    
+//    UIImage *ima = [UIImage imageNamed:@"share_this_icon.png"];
+//    cell.imageView.image =ima;
+//    cell.textLabel.text = [title objectAtIndex:indexPath.row];
+//    cell.accessoryType = UITableViewCellAccessoryNone;
+
     return cell;
     
 }
@@ -109,11 +105,6 @@
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
     
-    BRIDGE
-    bridge.sRuleType = [title objectAtIndex:indexPath.row];
-    [self back:nil];
     
-
 }
-
 @end

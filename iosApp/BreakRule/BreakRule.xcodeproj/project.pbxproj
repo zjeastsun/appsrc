@@ -32,6 +32,9 @@
 		046C938019CDE54A008221FD /* StringConverterI.mm in Resources */ = {isa = PBXBuildFile; fileRef = 046C937F19CDE54A008221FD /* StringConverterI.mm */; };
 		047167FF19CF3D9500A81F9B /* SetViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047167FE19CF3D9500A81F9B /* SetViewController.mm */; };
 		0471680219CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0471680119CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm */; };
+		0478794419D9F7EA00555F0D /* SingletonBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0478794319D9F7EA00555F0D /* SingletonBridge.mm */; };
+		0478794919DA176D00555F0D /* SafetyItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0478794819DA176D00555F0D /* SafetyItemViewController.m */; };
+		0478794C19DA179B00555F0D /* HazardItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0478794B19DA179B00555F0D /* HazardItemViewController.m */; };
 		0478B47219D4BA1A0077EDBA /* ReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0478B47119D4BA1A0077EDBA /* ReviewViewController.m */; };
 		0478B47519D4BCC40077EDBA /* QueryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0478B47419D4BCC40077EDBA /* QueryViewController.m */; };
 		047F3EA619D18500004123F7 /* SingletonIce.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047F3EA519D18500004123F7 /* SingletonIce.mm */; };
@@ -86,7 +89,6 @@
 		0448783619CC70FB0086CE1B /* BreakRuleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BreakRuleTests-Info.plist"; sourceTree = "<group>"; };
 		0448783819CC70FB0086CE1B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0448783A19CC70FB0086CE1B /* BreakRuleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BreakRuleTests.m; sourceTree = "<group>"; };
-		045D8A9D19CF899B00D8C6DA /* ProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectViewController.h; sourceTree = "<group>"; };
 		045D8A9E19CF899B00D8C6DA /* ProjectViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ProjectViewController.mm; sourceTree = "<group>"; };
 		046C937E19CDE536008221FD /* StringConverterI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringConverterI.h; path = BreakRule/eutils/StringConverterI.h; sourceTree = "<group>"; };
 		046C937F19CDE54A008221FD /* StringConverterI.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = StringConverterI.mm; path = BreakRule/eutils/StringConverterI.mm; sourceTree = "<group>"; };
@@ -94,6 +96,13 @@
 		047167FE19CF3D9500A81F9B /* SetViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SetViewController.mm; sourceTree = "<group>"; };
 		0471680019CF678B00A81F9B /* BreakRuleTakePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BreakRuleTakePhotoViewController.h; sourceTree = "<group>"; };
 		0471680119CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BreakRuleTakePhotoViewController.mm; sourceTree = "<group>"; };
+		0478794319D9F7EA00555F0D /* SingletonBridge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SingletonBridge.mm; path = BreakRule/eutils/SingletonBridge.mm; sourceTree = "<group>"; };
+		0478794519D9F81B00555F0D /* SingletonBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingletonBridge.h; path = BreakRule/eutils/SingletonBridge.h; sourceTree = "<group>"; };
+		0478794619D9FBFA00555F0D /* ProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectViewController.h; sourceTree = "<group>"; };
+		0478794719DA176D00555F0D /* SafetyItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SafetyItemViewController.h; sourceTree = "<group>"; };
+		0478794819DA176D00555F0D /* SafetyItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SafetyItemViewController.m; sourceTree = "<group>"; };
+		0478794A19DA179B00555F0D /* HazardItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HazardItemViewController.h; sourceTree = "<group>"; };
+		0478794B19DA179B00555F0D /* HazardItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HazardItemViewController.m; sourceTree = "<group>"; };
 		0478B47019D4BA1A0077EDBA /* ReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewViewController.h; sourceTree = "<group>"; };
 		0478B47119D4BA1A0077EDBA /* ReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewViewController.m; sourceTree = "<group>"; };
 		0478B47319D4BCC40077EDBA /* QueryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryViewController.h; sourceTree = "<group>"; };
@@ -151,6 +160,8 @@
 			children = (
 				040B0A6919D23B2B00D83461 /* SingletonIce.h */,
 				047F3EA519D18500004123F7 /* SingletonIce.mm */,
+				0478794519D9F81B00555F0D /* SingletonBridge.h */,
+				0478794319D9F7EA00555F0D /* SingletonBridge.mm */,
 				0431F19919CC759D00F1718A /* Eutils.h */,
 				0431F19A19CC759D00F1718A /* Eutils.mm */,
 				0431F19B19CC759D00F1718A /* mq_interface.ice */,
@@ -207,6 +218,10 @@
 				0448781B19CC70FB0086CE1B /* AppDelegate.h */,
 				040B0A6719D23A5A00D83461 /* AppDelegate.mm */,
 				0448781E19CC70FB0086CE1B /* Main.storyboard */,
+				0478794719DA176D00555F0D /* SafetyItemViewController.h */,
+				0478794819DA176D00555F0D /* SafetyItemViewController.m */,
+				0478794A19DA179B00555F0D /* HazardItemViewController.h */,
+				0478794B19DA179B00555F0D /* HazardItemViewController.m */,
 				049104B619D8C829004E052B /* RuleTypeViewController.h */,
 				049104B719D8C829004E052B /* RuleTypeViewController.m */,
 				049104B919D8CAF8004E052B /* RuleOptionViewController.h */,
@@ -219,7 +234,7 @@
 				04998F7919D38DF200CECB16 /* MainViewController.m */,
 				04998F7519D3812300CECB16 /* RectifyViewController.h */,
 				04998F7619D3812300CECB16 /* RectifyViewController.m */,
-				045D8A9D19CF899B00D8C6DA /* ProjectViewController.h */,
+				0478794619D9FBFA00555F0D /* ProjectViewController.h */,
 				045D8A9E19CF899B00D8C6DA /* ProjectViewController.mm */,
 				0471680019CF678B00A81F9B /* BreakRuleTakePhotoViewController.h */,
 				0471680119CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm */,
@@ -373,6 +388,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0478794419D9F7EA00555F0D /* SingletonBridge.mm in Sources */,
 				047167FF19CF3D9500A81F9B /* SetViewController.mm in Sources */,
 				04635CD519CE50490084822D /* StringConverterI.mm in Sources */,
 				047F3EA619D18500004123F7 /* SingletonIce.mm in Sources */,
@@ -385,8 +401,10 @@
 				0478B47519D4BCC40077EDBA /* QueryViewController.m in Sources */,
 				0478B47219D4BA1A0077EDBA /* ReviewViewController.m in Sources */,
 				049104BB19D8CAF8004E052B /* RuleOptionViewController.m in Sources */,
+				0478794C19DA179B00555F0D /* HazardItemViewController.m in Sources */,
 				0431F19D19CC759D00F1718A /* mq_interface.ice in Sources */,
 				049104B819D8C829004E052B /* RuleTypeViewController.m in Sources */,
+				0478794919DA176D00555F0D /* SafetyItemViewController.m in Sources */,
 				0448781919CC70FB0086CE1B /* main.mm in Sources */,
 				0431F19C19CC759D00F1718A /* Eutils.mm in Sources */,
 				049104B519D8AD74004E052B /* SJAvatarBrowser.mm in Sources */,

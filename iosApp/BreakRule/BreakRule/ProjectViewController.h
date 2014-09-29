@@ -11,7 +11,6 @@
 
 @interface ProjectViewController : UIViewController
 {
-    SingletonIce *oneIce;
     CSelectHelp	helpProject;
     
 }

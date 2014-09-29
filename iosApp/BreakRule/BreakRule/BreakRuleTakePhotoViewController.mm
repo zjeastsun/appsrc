@@ -11,6 +11,7 @@
 #import <ImageIO/ImageIO.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "SJAvatarBrowser.h"
+#import "SingletonBridge.h"
 
 @interface BreakRuleTakePhotoViewController ()
 
@@ -39,6 +40,21 @@
     UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(magnifyImage)];
     
     [imageView addGestureRecognizer:tap];
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    //重新载入所有数据
+    [ruleTableView reloadData];
+    
+//    //只更新其中一行
+//    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+//    UITableViewCell *cell = [ruleTableView cellForRowAtIndexPath:indexPath];
+//    BRIDGE
+//    cell.detailTextLabel.text = bridge.sRuleType;
+//    [ruleTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+//                          withRowAnimation:UITableViewRowAnimationFade];
     
 }
 
@@ -114,7 +130,30 @@
     UIImage *ima = [UIImage imageNamed:@"share_this_icon.png"];
     cell.imageView.image =ima;
     cell.textLabel.text = [title objectAtIndex:indexPath.row];
-    cell.detailTextLabel.text = [subTitle objectAtIndex:indexPath.row];
+    
+    BRIDGE
+    if (indexPath.row == 0) {
+        if (bridge.sRuleType == nil || [bridge.sRuleType length] == 0)
+        {
+            cell.detailTextLabel.text = [subTitle objectAtIndex:indexPath.row];
+        }
+        else
+        {
+            cell.detailTextLabel.text = bridge.sRuleType;
+        }
+    }
+    else
+    {
+        if (bridge.sRuleOption == nil || [bridge.sRuleOption length] == 0)
+        {
+            cell.detailTextLabel.text = [subTitle objectAtIndex:indexPath.row];
+        }
+        else
+        {
+            cell.detailTextLabel.text = bridge.sRuleOption;
+        }
+    }
+    
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
     return cell;

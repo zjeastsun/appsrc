@@ -95,7 +95,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="imageView" destination="Sh7-IR-P9j" id="XSi-1n-Vft"/>
-                        <outlet property="optionTable" destination="zXM-fP-IkZ" id="aoO-91-dgU"/>
+                        <outlet property="ruleTableView" destination="zXM-fP-IkZ" id="MWq-Yt-aIM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh2-T1-AhA" sceneMemberID="firstResponder"/>
@@ -173,6 +173,95 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Rp-pR-fZa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1937" y="-790"/>
+        </scene>
+        <!--Hazard Item View Controller - 危险源辨识库-->
+        <scene sceneID="5lX-uQ-6wL">
+            <objects>
+                <viewController id="xJx-Tw-Kbl" customClass="HazardItemViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SWn-xI-IMj"/>
+                        <viewControllerLayoutGuide type="bottom" id="oO0-c2-DmA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="C4U-O7-3Ot">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="q6Q-ph-HcH">
+                                <rect key="frame" x="0.0" y="155" width="320" height="325"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="2lR-TC-yaA">
+                                <rect key="frame" x="0.0" y="66" width="320" height="45"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="内容：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rW6-mt-9AF">
+                                <rect key="frame" x="9" y="126" width="51" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="危险源辨识库" id="kdd-Ag-doQ">
+                        <barButtonItem key="leftBarButtonItem" title="返回" id="jSa-D9-Mtp">
+                            <connections>
+                                <action selector="back:" destination="xJx-Tw-Kbl" id="Xdl-z6-5SK"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="保存" id="cni-v9-kh6"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c7m-wO-kVv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-921" y="-531"/>
+        </scene>
+        <!--Safety Item View Controller - 违规行为辨识库-->
+        <scene sceneID="gYm-73-m55">
+            <objects>
+                <viewController id="o9l-rI-sdF" customClass="SafetyItemViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aka-7a-uEY"/>
+                        <viewControllerLayoutGuide type="bottom" id="c3e-PW-p7Y"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6jb-0X-KJW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="3F3-nf-eUa">
+                                <rect key="frame" x="0.0" y="203" width="320" height="277"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="内容：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyT-vD-SSN">
+                                <rect key="frame" x="10" y="168" width="51" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bJf-9x-TFb">
+                                <rect key="frame" x="0.0" y="66" width="320" height="94"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="违规行为辨识库" id="PGD-6x-NHa">
+                        <barButtonItem key="leftBarButtonItem" title="返回" id="tCs-uM-QyJ">
+                            <connections>
+                                <action selector="back:" destination="o9l-rI-sdF" id="RWD-pv-Ud0"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="保存" id="u02-wv-arz"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j2V-Ru-V5i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-921" y="-1115"/>
         </scene>
         <!--Rectify View Controller - Second-->
         <scene sceneID="ot8-2e-RuS">
@@ -750,6 +839,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tsO-of-vAX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2463" y="-790"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cxF-YZ-YPM">
+            <objects>
+                <navigationController storyboardIdentifier="SafetyItemView" automaticallyAdjustsScrollViewInsets="NO" id="Y0F-xt-pOc" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CXg-5z-bWz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="o9l-rI-sdF" kind="relationship" relationship="rootViewController" id="Rol-n9-FFG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tx5-n6-2JL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1447" y="-1115"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="YQU-av-7Aw">
+            <objects>
+                <navigationController storyboardIdentifier="HazardItemView" automaticallyAdjustsScrollViewInsets="NO" id="5oT-fA-ede" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5Te-M6-aNG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="xJx-Tw-Kbl" kind="relationship" relationship="rootViewController" id="51I-Yt-NVF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Sm-x6-clS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1447" y="-531"/>
         </scene>
     </scenes>
     <resources>

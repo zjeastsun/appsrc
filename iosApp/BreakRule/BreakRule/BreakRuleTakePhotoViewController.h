@@ -14,11 +14,12 @@
     NSMutableArray *subTitle;
     UIImagePickerController *imagePicker;
     IBOutlet UIImageView *imageView;
+    IBOutlet UITableView *ruleTableView;
 }
 - (IBAction)back:(id)sender;
 - (IBAction)fromPhotosAlbum:(id)sender;
 - (IBAction)fromCamera:(id)sender;
 - (IBAction)fromVideo:(id)sender;
-@property (strong, nonatomic) IBOutlet UITableView *optionTable;
+
 
 @end

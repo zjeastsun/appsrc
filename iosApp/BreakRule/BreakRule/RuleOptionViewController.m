@@ -91,6 +91,19 @@
     {
         [self back:nil];
     }
+    else if( [indexPath row] == 1 )
+    {
+        UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SafetyItemView"];
+        
+        [self presentViewController:viewController animated:YES completion:nil];
+    }
+    else if( [indexPath row] == 2 )
+    {
+        UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"HazardItemView"];
+        
+        [self presentViewController:viewController animated:YES completion:nil];
+    }
+
 }
 
 @end

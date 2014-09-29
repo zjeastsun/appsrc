@@ -12,8 +12,6 @@
 
 @interface LoginViewController : UIViewController
 {
-    SingletonIce *oneIce;
-    
     IBOutlet UITextField *serverIpField;
     IBOutlet UITextField *userField;
     IBOutlet UITextField *pwdField;
