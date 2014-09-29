@@ -47,22 +47,22 @@
 */
 
 - (IBAction)toBreakRuleView:(id)sender {
-    MainViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"BreakRuleView"];
-    [self presentViewController:mainViewController animated:YES completion:nil];
+    UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"BreakRuleView"];
+    [self presentViewController:viewController animated:YES completion:nil];
 }
 
 - (IBAction)toQueryView:(id)sender {
-    MainViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"QueryView"];
-    [self presentViewController:mainViewController animated:YES completion:nil];
+    UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"QueryView"];
+    [self presentViewController:viewController animated:YES completion:nil];
 }
 
 - (IBAction)toRectifyView:(id)sender {
-    MainViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RectifyView"];
-    [self presentViewController:mainViewController animated:YES completion:nil];
+    UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RectifyView"];
+    [self presentViewController:viewController animated:YES completion:nil];
 }
 
 - (IBAction)toReviewView:(id)sender {
-    MainViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReviewView"];
-    [self presentViewController:mainViewController animated:YES completion:nil];
+    UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReviewView"];
+    [self presentViewController:viewController animated:YES completion:nil];
 }
 @end

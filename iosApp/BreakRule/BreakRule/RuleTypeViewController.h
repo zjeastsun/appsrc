@@ -11,6 +11,7 @@
 @interface RuleTypeViewController : UIViewController
 {
     NSMutableArray *title;
+    NSString *sRuleType;
 }
 - (IBAction)back:(id)sender;
 

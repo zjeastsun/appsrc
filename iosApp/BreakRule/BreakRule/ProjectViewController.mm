@@ -7,8 +7,6 @@
 //
 
 #import "ProjectViewController.h"
-#import "BreakRuleTakePhotoViewController.h"
-#import "RectifyViewController.h"
 
 @interface ProjectViewController ()
 
@@ -111,7 +109,7 @@
     {
     }
 
-    ProjectViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MainView"];
+    UIViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MainView"];
 
     [self presentViewController:mainViewController animated:YES completion:nil];
     

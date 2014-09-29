@@ -27,9 +27,6 @@
 		0448783119CC70FB0086CE1B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0448781019CC70FB0086CE1B /* UIKit.framework */; };
 		0448783919CC70FB0086CE1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0448783719CC70FB0086CE1B /* InfoPlist.strings */; };
 		0448783B19CC70FB0086CE1B /* BreakRuleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0448783A19CC70FB0086CE1B /* BreakRuleTests.m */; };
-		045D8A9219CF7CF400D8C6DA /* eastsun.ico in Resources */ = {isa = PBXBuildFile; fileRef = 045D8A8F19CF7CF400D8C6DA /* eastsun.ico */; };
-		045D8A9319CF7CF400D8C6DA /* righticon.png in Resources */ = {isa = PBXBuildFile; fileRef = 045D8A9019CF7CF400D8C6DA /* righticon.png */; };
-		045D8A9419CF7CF400D8C6DA /* share_this_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 045D8A9119CF7CF400D8C6DA /* share_this_icon.png */; };
 		045D8A9F19CF899B00D8C6DA /* ProjectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 045D8A9E19CF899B00D8C6DA /* ProjectViewController.mm */; };
 		04635CD519CE50490084822D /* StringConverterI.mm in Sources */ = {isa = PBXBuildFile; fileRef = 046C937F19CDE54A008221FD /* StringConverterI.mm */; };
 		046C938019CDE54A008221FD /* StringConverterI.mm in Resources */ = {isa = PBXBuildFile; fileRef = 046C937F19CDE54A008221FD /* StringConverterI.mm */; };
@@ -38,6 +35,9 @@
 		0478B47219D4BA1A0077EDBA /* ReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0478B47119D4BA1A0077EDBA /* ReviewViewController.m */; };
 		0478B47519D4BCC40077EDBA /* QueryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0478B47419D4BCC40077EDBA /* QueryViewController.m */; };
 		047F3EA619D18500004123F7 /* SingletonIce.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047F3EA519D18500004123F7 /* SingletonIce.mm */; };
+		047F5A1619D9B53A00E4DA2D /* eastsun.ico in Resources */ = {isa = PBXBuildFile; fileRef = 047F5A1319D9B53A00E4DA2D /* eastsun.ico */; };
+		047F5A1719D9B53A00E4DA2D /* righticon.png in Resources */ = {isa = PBXBuildFile; fileRef = 047F5A1419D9B53A00E4DA2D /* righticon.png */; };
+		047F5A1819D9B53A00E4DA2D /* share_this_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 047F5A1519D9B53A00E4DA2D /* share_this_icon.png */; };
 		048F599519D6298B009BA27B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048F599419D6298B009BA27B /* MobileCoreServices.framework */; };
 		048F599719D62E4C009BA27B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048F599619D62E4C009BA27B /* ImageIO.framework */; };
 		049104B519D8AD74004E052B /* SJAvatarBrowser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049104B419D8AD74004E052B /* SJAvatarBrowser.mm */; };
@@ -86,9 +86,6 @@
 		0448783619CC70FB0086CE1B /* BreakRuleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BreakRuleTests-Info.plist"; sourceTree = "<group>"; };
 		0448783819CC70FB0086CE1B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0448783A19CC70FB0086CE1B /* BreakRuleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BreakRuleTests.m; sourceTree = "<group>"; };
-		045D8A8F19CF7CF400D8C6DA /* eastsun.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = eastsun.ico; sourceTree = "<group>"; };
-		045D8A9019CF7CF400D8C6DA /* righticon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = righticon.png; sourceTree = "<group>"; };
-		045D8A9119CF7CF400D8C6DA /* share_this_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_this_icon.png; sourceTree = "<group>"; };
 		045D8A9D19CF899B00D8C6DA /* ProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectViewController.h; sourceTree = "<group>"; };
 		045D8A9E19CF899B00D8C6DA /* ProjectViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ProjectViewController.mm; sourceTree = "<group>"; };
 		046C937E19CDE536008221FD /* StringConverterI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringConverterI.h; path = BreakRule/eutils/StringConverterI.h; sourceTree = "<group>"; };
@@ -102,6 +99,9 @@
 		0478B47319D4BCC40077EDBA /* QueryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryViewController.h; sourceTree = "<group>"; };
 		0478B47419D4BCC40077EDBA /* QueryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryViewController.m; sourceTree = "<group>"; };
 		047F3EA519D18500004123F7 /* SingletonIce.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SingletonIce.mm; path = BreakRule/eutils/SingletonIce.mm; sourceTree = "<group>"; };
+		047F5A1319D9B53A00E4DA2D /* eastsun.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; name = eastsun.ico; path = res/eastsun.ico; sourceTree = SOURCE_ROOT; };
+		047F5A1419D9B53A00E4DA2D /* righticon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = righticon.png; path = res/righticon.png; sourceTree = SOURCE_ROOT; };
+		047F5A1519D9B53A00E4DA2D /* share_this_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share_this_icon.png; path = res/share_this_icon.png; sourceTree = SOURCE_ROOT; };
 		048F599419D6298B009BA27B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		048F599619D62E4C009BA27B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		049104B319D8AD3E004E052B /* SJAvatarBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SJAvatarBrowser.h; path = BreakRule/eutils/SJAvatarBrowser.h; sourceTree = "<group>"; };
@@ -265,9 +265,9 @@
 		045D8A8E19CF7CF400D8C6DA /* image */ = {
 			isa = PBXGroup;
 			children = (
-				045D8A8F19CF7CF400D8C6DA /* eastsun.ico */,
-				045D8A9019CF7CF400D8C6DA /* righticon.png */,
-				045D8A9119CF7CF400D8C6DA /* share_this_icon.png */,
+				047F5A1319D9B53A00E4DA2D /* eastsun.ico */,
+				047F5A1419D9B53A00E4DA2D /* righticon.png */,
+				047F5A1519D9B53A00E4DA2D /* share_this_icon.png */,
 			);
 			path = image;
 			sourceTree = "<group>";
@@ -350,9 +350,9 @@
 			files = (
 				046C938019CDE54A008221FD /* StringConverterI.mm in Resources */,
 				0448782819CC70FB0086CE1B /* Images.xcassets in Resources */,
-				045D8A9419CF7CF400D8C6DA /* share_this_icon.png in Resources */,
-				045D8A9219CF7CF400D8C6DA /* eastsun.ico in Resources */,
-				045D8A9319CF7CF400D8C6DA /* righticon.png in Resources */,
+				047F5A1819D9B53A00E4DA2D /* share_this_icon.png in Resources */,
+				047F5A1619D9B53A00E4DA2D /* eastsun.ico in Resources */,
+				047F5A1719D9B53A00E4DA2D /* righticon.png in Resources */,
 				0448781719CC70FB0086CE1B /* InfoPlist.strings in Resources */,
 				0448782019CC70FB0086CE1B /* Main.storyboard in Resources */,
 			);

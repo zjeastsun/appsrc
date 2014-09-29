@@ -126,12 +126,13 @@
 {
     if( [indexPath row] == 0 )
     {
-        BreakRuleTakePhotoViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RuleTypeView"];
+        UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RuleTypeView"];
+        
         [self presentViewController:viewController animated:YES completion:nil];
     }
     else
     {
-        BreakRuleTakePhotoViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RuleOptionView"];
+        UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RuleOptionView"];
         [self presentViewController:viewController animated:YES completion:nil];
         
     }

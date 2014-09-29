@@ -7,7 +7,6 @@
 //
 
 #import "loginViewController.h"
-#import "ProjectViewController.h"
 
 #import <netdb.h>
 #include <arpa/inet.h>
@@ -61,7 +60,7 @@ string getIPWithHostName(string hostName)
 
 - (IBAction)login:(id)sender {
 
-    ProjectViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
+    UIViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
     [self presentViewController:projectView animated:YES completion:nil];
     
     return;
