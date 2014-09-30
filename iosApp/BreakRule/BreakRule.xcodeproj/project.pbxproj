@@ -48,6 +48,8 @@
 		049104BB19D8CAF8004E052B /* RuleOptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049104BA19D8CAF8004E052B /* RuleOptionViewController.m */; };
 		04998F7719D3812300CECB16 /* RectifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04998F7619D3812300CECB16 /* RectifyViewController.m */; };
 		04998F7A19D38DF200CECB16 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04998F7919D38DF200CECB16 /* MainViewController.m */; };
+		049CD04019DB56360079D3E2 /* SingletonDB.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049CD03F19DB56360079D3E2 /* SingletonDB.mm */; };
+		049CD04219DB5DA00079D3E2 /* break_law_init.db in Resources */ = {isa = PBXBuildFile; fileRef = 049CD04119DB5DA00079D3E2 /* break_law_init.db */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +125,9 @@
 		04998F7619D3812300CECB16 /* RectifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RectifyViewController.m; sourceTree = "<group>"; };
 		04998F7819D38DF200CECB16 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		04998F7919D38DF200CECB16 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		049CD03E19DB56090079D3E2 /* SingletonDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingletonDB.h; path = BreakRule/eutils/SingletonDB.h; sourceTree = "<group>"; };
+		049CD03F19DB56360079D3E2 /* SingletonDB.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SingletonDB.mm; path = BreakRule/eutils/SingletonDB.mm; sourceTree = "<group>"; };
+		049CD04119DB5DA00079D3E2 /* break_law_init.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = break_law_init.db; path = res/break_law_init.db; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +165,8 @@
 			children = (
 				040B0A6919D23B2B00D83461 /* SingletonIce.h */,
 				047F3EA519D18500004123F7 /* SingletonIce.mm */,
+				049CD03E19DB56090079D3E2 /* SingletonDB.h */,
+				049CD03F19DB56360079D3E2 /* SingletonDB.mm */,
 				0478794519D9F81B00555F0D /* SingletonBridge.h */,
 				0478794319D9F7EA00555F0D /* SingletonBridge.mm */,
 				0431F19919CC759D00F1718A /* Eutils.h */,
@@ -176,7 +183,7 @@
 		0448780019CC70FB0086CE1B = {
 			isa = PBXGroup;
 			children = (
-				045D8A8E19CF7CF400D8C6DA /* image */,
+				045D8A8E19CF7CF400D8C6DA /* res */,
 				0431F19819CC74D300F1718A /* eutils */,
 				0448781219CC70FB0086CE1B /* BreakRule */,
 				0448783419CC70FB0086CE1B /* BreakRuleTests */,
@@ -277,13 +284,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		045D8A8E19CF7CF400D8C6DA /* image */ = {
+		045D8A8E19CF7CF400D8C6DA /* res */ = {
 			isa = PBXGroup;
 			children = (
+				049CD04119DB5DA00079D3E2 /* break_law_init.db */,
 				047F5A1319D9B53A00E4DA2D /* eastsun.ico */,
 				047F5A1419D9B53A00E4DA2D /* righticon.png */,
 				047F5A1519D9B53A00E4DA2D /* share_this_icon.png */,
 			);
+			name = res;
 			path = image;
 			sourceTree = "<group>";
 		};
@@ -363,6 +372,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				049CD04219DB5DA00079D3E2 /* break_law_init.db in Resources */,
 				046C938019CDE54A008221FD /* StringConverterI.mm in Resources */,
 				0448782819CC70FB0086CE1B /* Images.xcassets in Resources */,
 				047F5A1819D9B53A00E4DA2D /* share_this_icon.png in Resources */,
@@ -408,6 +418,7 @@
 				0448781919CC70FB0086CE1B /* main.mm in Sources */,
 				0431F19C19CC759D00F1718A /* Eutils.mm in Sources */,
 				049104B519D8AD74004E052B /* SJAvatarBrowser.mm in Sources */,
+				049CD04019DB56360079D3E2 /* SingletonDB.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

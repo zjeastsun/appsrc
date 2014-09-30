@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface SafetyItemViewController : UIViewController
+{
+    IBOutlet UITableView *itemTableView;
+    IBOutlet UITableView *contentTableView;
+    
+    NSMutableArray *title;
+    NSMutableArray *subTitle;
+}
 - (IBAction)back:(id)sender;
 
 @end

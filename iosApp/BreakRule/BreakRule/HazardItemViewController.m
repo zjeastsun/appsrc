@@ -57,6 +57,9 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (tableView.tag == 0) {
+        return 1;
+    }
     return 3;
 }
 
@@ -74,11 +77,18 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] ;
     }
-//    tableView.tag == 
-    //    UIImage *ima = [UIImage imageNamed:@"share_this_icon.png"];
-    //    cell.imageView.image =ima;
-    //    cell.textLabel.text = [title objectAtIndex:indexPath.row];
-    //    cell.accessoryType = UITableViewCellAccessoryNone;
+
+    if (tableView.tag == 0) {
+        UIImage *ima = [UIImage imageNamed:@"share_this_icon.png"];
+        cell.imageView.image =ima;
+        cell.textLabel.text = @"类别";
+        cell.detailTextLabel.text = @"基坑";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+    }
+    else
+    {
+    }
     
     return cell;
     
@@ -87,17 +97,7 @@
 //选择、响应
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cellView = [tableView cellForRowAtIndexPath:indexPath];
-    if(cellView.accessoryType == UITableViewCellAccessoryNone)
-    {
-        cellView.accessoryType =UITableViewCellAccessoryCheckmark;
-        
-    }
-    else
-    {
-        cellView.accessoryType = UITableViewCellAccessoryNone;
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    }
+
     
     
 }

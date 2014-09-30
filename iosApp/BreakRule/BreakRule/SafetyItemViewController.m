@@ -27,6 +27,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    title = [[NSMutableArray alloc]initWithObjects:@"安全分项", @"项目类别", @"检查项目",nil];
+    subTitle = [[NSMutableArray alloc]initWithObjects:@"安全文明生产", @"一般项目", @"安全生产责任制", nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,13 +81,17 @@
     }
     
     if (tableView.tag == 0) {
+        UIImage *ima = [UIImage imageNamed:@"share_this_icon.png"];
+        cell.imageView.image =ima;
+        cell.textLabel.text = [title objectAtIndex:indexPath.row];
+        cell.detailTextLabel.text = [subTitle objectAtIndex:indexPath.row];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
     }
-//    UIImage *ima = [UIImage imageNamed:@"share_this_icon.png"];
-//    cell.imageView.image =ima;
-//    cell.textLabel.text = [title objectAtIndex:indexPath.row];
-//    cell.accessoryType = UITableViewCellAccessoryNone;
-
+    else
+    {
+    }
+    
     return cell;
     
 }
@@ -93,17 +99,7 @@
 //选择、响应
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cellView = [tableView cellForRowAtIndexPath:indexPath];
-    if(cellView.accessoryType == UITableViewCellAccessoryNone)
-    {
-        cellView.accessoryType =UITableViewCellAccessoryCheckmark;
-        
-    }
-    else
-    {
-        cellView.accessoryType = UITableViewCellAccessoryNone;
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    }
+
     
     
 }
