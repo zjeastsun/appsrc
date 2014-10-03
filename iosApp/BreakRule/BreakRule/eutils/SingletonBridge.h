@@ -5,8 +5,9 @@
 @interface SingletonBridge: NSObject
 
 
-@property (strong, nonatomic) NSString *sRuleType;
-@property (strong, nonatomic) NSString *sRuleOption;
+@property (strong, nonatomic) NSString *nsRuleType;
+@property (strong, nonatomic) NSString *nsRuleOption;
+@property (strong, nonatomic) NSString *nsContent;//违规内容、整改内容、批阅内容等
 
 + (SingletonBridge *)sharedInstance;
 - (void)unInit;

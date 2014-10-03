@@ -55,7 +55,8 @@
 //    cell.detailTextLabel.text = bridge.sRuleType;
 //    [ruleTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
 //                          withRowAnimation:UITableViewRowAnimationFade];
-    
+    BRIDGE
+    contentTextView.text = bridge.nsContent;
 }
 
 - (void)magnifyImage
@@ -133,24 +134,24 @@
     
     BRIDGE
     if (indexPath.row == 0) {
-        if (bridge.sRuleType == nil || [bridge.sRuleType length] == 0)
+        if (bridge.nsRuleType == nil || [bridge.nsRuleType length] == 0)
         {
             cell.detailTextLabel.text = [subTitle objectAtIndex:indexPath.row];
         }
         else
         {
-            cell.detailTextLabel.text = bridge.sRuleType;
+            cell.detailTextLabel.text = bridge.nsRuleType;
         }
     }
     else
     {
-        if (bridge.sRuleOption == nil || [bridge.sRuleOption length] == 0)
+        if (bridge.nsRuleOption == nil || [bridge.nsRuleOption length] == 0)
         {
             cell.detailTextLabel.text = [subTitle objectAtIndex:indexPath.row];
         }
         else
         {
-            cell.detailTextLabel.text = bridge.sRuleOption;
+            cell.detailTextLabel.text = bridge.nsRuleOption;
         }
     }
     

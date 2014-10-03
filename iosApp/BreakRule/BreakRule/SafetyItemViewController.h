@@ -17,8 +17,10 @@
     NSMutableArray *title;
     NSMutableArray *subTitle;
     
-    CSelectHelp m_ItemHelp;
+    CSelectHelp m_itemHelp;
+    vector<int> m_vSelectedLine;
 }
 - (IBAction)back:(id)sender;
+- (IBAction)save:(id)sender;
 
 @end

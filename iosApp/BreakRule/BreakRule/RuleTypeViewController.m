@@ -81,7 +81,7 @@
     cell.textLabel.text = [title objectAtIndex:indexPath.row];
     
     BRIDGE
-    if ([cell.textLabel.text isEqualToString:bridge.sRuleType]) {
+    if ([cell.textLabel.text isEqualToString:bridge.nsRuleType]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     else
@@ -110,7 +110,7 @@
     }
     
     BRIDGE
-    bridge.sRuleType = [title objectAtIndex:indexPath.row];
+    bridge.nsRuleType = [title objectAtIndex:indexPath.row];
     [self back:nil];
     
 

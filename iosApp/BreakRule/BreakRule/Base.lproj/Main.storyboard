@@ -94,6 +94,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="contentTextView" destination="lpU-mm-Zz1" id="VDu-KX-SiU"/>
                         <outlet property="imageView" destination="Sh7-IR-P9j" id="XSi-1n-Vft"/>
                         <outlet property="ruleTableView" destination="zXM-fP-IkZ" id="MWq-Yt-aIM"/>
                     </connections>
@@ -272,7 +273,11 @@
                                 <action selector="back:" destination="o9l-rI-sdF" id="RWD-pv-Ud0"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="保存" id="u02-wv-arz"/>
+                        <barButtonItem key="rightBarButtonItem" title="保存" id="u02-wv-arz">
+                            <connections>
+                                <action selector="save:" destination="o9l-rI-sdF" id="fxU-Il-SxQ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="contentTableView" destination="3F3-nf-eUa" id="m4j-ql-Iwf"/>

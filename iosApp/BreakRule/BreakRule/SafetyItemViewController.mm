@@ -7,6 +7,8 @@
 //
 
 #import "SafetyItemViewController.h"
+#import "SingletonBridge.h"
+#import "RuleOptionViewController.h"
 
 @interface SafetyItemViewController ()
 
@@ -62,7 +64,7 @@
     
     string error, sql;
     util::string_format(sql, "select * from BR_CHECK_ITEM_DETAIL");
-    localDB.g_localDB->select(sql, m_ItemHelp, error);
+    localDB.g_localDB->select(sql, m_itemHelp, error);
     
 }
 
@@ -81,6 +83,18 @@
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)save:(id)sender {
+    BRIDGE
+    string sContent;
+    for (int i=0; i<m_vSelectedLine.size(); ++i) {
+        sContent += m_itemHelp.valueString(m_vSelectedLine[i], "content");
+    }
+    bridge.nsContent = [NSString stringWithCString:(char*)sContent.c_str() encoding:NSUTF8StringEncoding];
+    
+    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -93,7 +107,7 @@
     }
     else
     {
-        return m_ItemHelp._count;
+        return m_itemHelp._count;
     }
     return 0;
 }
@@ -125,11 +139,18 @@
     {
         UIImage *ima = [UIImage imageNamed:@"share_this_icon.png"];
         cell.imageView.image =ima;
-        string sContent = m_ItemHelp.valueString(static_cast<int>(indexPath.row), "content");
+        string sContent = m_itemHelp.valueString(static_cast<int>(indexPath.row), "content");
         NSString *content = [NSString stringWithCString:(char*)sContent.c_str() encoding:NSUTF8StringEncoding];
         cell.textLabel.text = content;
 //        cell.detailTextLabel.text = [subTitle objectAtIndex:indexPath.row];
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        if ([self isCheckmark:indexPath.row])
+        {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+        else
+        {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
         
     }
     
@@ -143,15 +164,28 @@
     UITableViewCell *cellView = [tableView cellForRowAtIndexPath:indexPath];
     if(cellView.accessoryType == UITableViewCellAccessoryNone)
     {
-        cellView.accessoryType =UITableViewCellAccessoryCheckmark;
+        cellView.accessoryType = UITableViewCellAccessoryCheckmark;
+        m_vSelectedLine.push_back(static_cast<int>(indexPath.row));
         
     }
     else
     {
         cellView.accessoryType = UITableViewCellAccessoryNone;
+        m_vSelectedLine.erase(remove(m_vSelectedLine.begin(), m_vSelectedLine.end(), static_cast<int>(indexPath.row)), m_vSelectedLine.end());
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
     
     
 }
+
+- (BOOL)isCheckmark:(NSInteger )row
+{
+    vector<int>::iterator iter;
+    iter=find( m_vSelectedLine.begin(), m_vSelectedLine.end(), row );
+    if (iter != m_vSelectedLine.end()) {
+        return true;
+    }
+    return false;
+}
+
 @end

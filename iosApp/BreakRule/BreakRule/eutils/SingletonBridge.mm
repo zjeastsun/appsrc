@@ -19,8 +19,8 @@
     
     if (self = [super init]) {
 
-        _sRuleType = @"一般违规";
-        _sRuleOption = @"用户自定义";
+        _nsRuleType = @"一般违规";
+        _nsRuleOption = @"用户自定义";
     }
     
     return self;

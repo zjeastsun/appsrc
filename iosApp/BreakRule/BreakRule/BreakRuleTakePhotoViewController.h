@@ -15,6 +15,7 @@
     UIImagePickerController *imagePicker;
     IBOutlet UIImageView *imageView;
     IBOutlet UITableView *ruleTableView;
+    IBOutlet UITextView *contentTextView;
 }
 - (IBAction)back:(id)sender;
 - (IBAction)fromPhotosAlbum:(id)sender;
