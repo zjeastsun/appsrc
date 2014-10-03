@@ -29,12 +29,41 @@
     // Do any additional setup after loading the view.
     title = [[NSMutableArray alloc]initWithObjects:@"安全分项", @"项目类别", @"检查项目",nil];
     subTitle = [[NSMutableArray alloc]initWithObjects:@"安全文明生产", @"一般项目", @"安全生产责任制", nil];
+    [self querySafetyItem];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)querySafetyItem
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *dbFileName = @"break_law_init.db";
+    NSString *dataFilePath = [documentsDirectory stringByAppendingPathComponent:dbFileName];
+    
+    LOCALDB
+    string sDataFilePath = [dataFilePath UTF8String];
+    if (!localDB.g_localDB->isLogin()) {
+        bool bLogin = localDB.g_localDB->login( sDataFilePath );
+        if (!bLogin) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误"
+                                                            message:@"本地数据库连接失败"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
+    }
+    
+    string error, sql;
+    util::string_format(sql, "select * from BR_CHECK_ITEM_DETAIL");
+    localDB.g_localDB->select(sql, m_ItemHelp, error);
+    
 }
 
 /*
@@ -62,7 +91,11 @@
     if (tableView.tag == 0) {
         return 3;
     }
-    return 3;
+    else
+    {
+        return m_ItemHelp._count;
+    }
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -90,6 +123,14 @@
     }
     else
     {
+        UIImage *ima = [UIImage imageNamed:@"share_this_icon.png"];
+        cell.imageView.image =ima;
+        string sContent = m_ItemHelp.valueString(static_cast<int>(indexPath.row), "content");
+        NSString *content = [NSString stringWithCString:(char*)sContent.c_str() encoding:NSUTF8StringEncoding];
+        cell.textLabel.text = content;
+//        cell.detailTextLabel.text = [subTitle objectAtIndex:indexPath.row];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        
     }
     
     return cell;
@@ -99,7 +140,17 @@
 //选择、响应
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    UITableViewCell *cellView = [tableView cellForRowAtIndexPath:indexPath];
+    if(cellView.accessoryType == UITableViewCellAccessoryNone)
+    {
+        cellView.accessoryType =UITableViewCellAccessoryCheckmark;
+        
+    }
+    else
+    {
+        cellView.accessoryType = UITableViewCellAccessoryNone;
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
     
     
 }

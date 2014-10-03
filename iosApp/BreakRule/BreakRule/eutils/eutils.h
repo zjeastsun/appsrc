@@ -2698,3 +2698,50 @@ private:
 };
 
 #endif //END of USE_ICE
+
+//操作SQLite 数据库，同一个程序不要有多个SQLite实例
+class  CSQLiteUtil
+{
+public:
+    CSQLiteUtil();
+    
+    ~CSQLiteUtil();
+    
+    bool login(const std::string& file);
+    void logout();
+    
+    bool isLogin();
+    
+    int select(const string& sql,CSelectHelp& help,string& error);
+    int select(const string& sql,string& out,string& error);
+    
+    bool execSQL(const string& sql,string& error);
+    
+	//插入一个二进制流数据
+	/*db.insertBlob("insert into  ab values(11,:bindata)","c:\\a.bmp",error);
+     *MString file = db.readBinary("select image from  ab where id=11");
+     *用法请看上面的例子
+     */
+	bool updateBlob(const string& sql,const string& sFile,string& error);
+	bool insertBlob(const string& sql,const string& sFile,string& error);
+	bool insertBlob(const string& sql,byte* pContent,int filesize,string& error);
+    
+    
+	int getBlob(const string& sql,const string& sField,byte* pContent);
+	
+	//将blob文件存到文件中
+	int getBlob(const string& sql,const string& sField,const string& sFieldFileName,const string& sDir);
+    
+    
+    //事务功能
+    bool begin();
+    bool commit();
+    bool rollback();
+    std::string& getMsg(string& error);
+    
+    
+private:
+    std::string _sDBFile;
+    std::string _sError;
+    bool		_bconnected;
+};

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SingletonDB.h"
 
 @interface SafetyItemViewController : UIViewController
 {
@@ -15,6 +16,8 @@
     
     NSMutableArray *title;
     NSMutableArray *subTitle;
+    
+    CSelectHelp m_ItemHelp;
 }
 - (IBAction)back:(id)sender;
 

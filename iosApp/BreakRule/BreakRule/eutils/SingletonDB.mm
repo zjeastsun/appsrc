@@ -18,12 +18,16 @@
 + (void)moveDbToSandBox
 {
     //1、获得数据库文件在工程中的路径——源路径。
-    NSString *sourcesPath = [[NSBundle mainBundle] pathForResource:@"database" ofType:@"sqlite"];
+    NSString *sourcesPath = [[NSBundle mainBundle] pathForResource:@"break_law_init" ofType:@"db"];
     
     //2、获得沙盒中Document文件夹的路径——目的路径
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentPath = [paths objectAtIndex:0];
     NSString *desPath = [documentPath stringByAppendingPathComponent:@"break_law_init.db"];
+    
+    if (sourcesPath == nil ) {
+        return;
+    }
     
     //3、通过NSFileManager类，将工程中的数据库文件复制到沙盒中。
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -45,7 +49,7 @@
 - (id)init {
     
     if (self = [super init]) {
-        
+        _g_localDB = new CSQLiteUtil();
         [SingletonDB moveDbToSandBox];
     }
     
