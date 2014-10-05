@@ -162,17 +162,37 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cellView = [tableView cellForRowAtIndexPath:indexPath];
-    if(cellView.accessoryType == UITableViewCellAccessoryNone)
+    
+    if (tableView.tag == 0)
     {
-        cellView.accessoryType = UITableViewCellAccessoryCheckmark;
-        m_vSelectedLine.push_back(static_cast<int>(indexPath.row));
-        
+        UIViewController *viewController;
+        if (indexPath.row == 0) {
+            viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SafetySubItemView"];
+        }
+        else if (tableView.tag == 0)
+        {
+            viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProjectTypeView"];
+        }
+        else
+        {
+            viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckItemView"];
+        }
+        [self presentViewController:viewController animated:YES completion:nil];
     }
     else
     {
-        cellView.accessoryType = UITableViewCellAccessoryNone;
-        m_vSelectedLine.erase(remove(m_vSelectedLine.begin(), m_vSelectedLine.end(), static_cast<int>(indexPath.row)), m_vSelectedLine.end());
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        if(cellView.accessoryType == UITableViewCellAccessoryNone)
+        {
+            cellView.accessoryType = UITableViewCellAccessoryCheckmark;
+            m_vSelectedLine.push_back(static_cast<int>(indexPath.row));
+            
+        }
+        else
+        {
+            cellView.accessoryType = UITableViewCellAccessoryNone;
+            m_vSelectedLine.erase(remove(m_vSelectedLine.begin(), m_vSelectedLine.end(), static_cast<int>(indexPath.row)), m_vSelectedLine.end());
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        }
     }
     
     

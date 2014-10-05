@@ -173,7 +173,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Rp-pR-fZa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1937" y="-790"/>
+            <point key="canvasLocation" x="-1937" y="-816"/>
         </scene>
         <!--Hazard Item View Controller - 危险源辨识库-->
         <scene sceneID="5lX-uQ-6wL">
@@ -287,6 +287,81 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j2V-Ru-V5i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-921" y="-1115"/>
+        </scene>
+        <!--Project Type View Controller - 项目类别-->
+        <scene sceneID="8jE-zt-9Fj">
+            <objects>
+                <viewController id="HqY-SC-EBl" customClass="ProjectTypeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pbc-pg-ccn"/>
+                        <viewControllerLayoutGuide type="bottom" id="lhi-tO-PX7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4PY-9A-Tow">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="项目类别" id="0Pj-pZ-VRd">
+                        <barButtonItem key="leftBarButtonItem" title="返回" id="nCo-XF-0Nm">
+                            <connections>
+                                <action selector="back:" destination="HqY-SC-EBl" id="zu3-J3-JDW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vwR-sH-D0H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="45" y="-1716"/>
+        </scene>
+        <!--Check Item View Controller - 检查项目-->
+        <scene sceneID="hxu-cy-NFq">
+            <objects>
+                <viewController id="iO7-qV-40j" customClass="CheckItemViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VMa-Qx-Nbx"/>
+                        <viewControllerLayoutGuide type="bottom" id="uM4-1D-A5c"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cIX-II-Yp9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="检查项目" id="WNL-dg-Niv">
+                        <barButtonItem key="leftBarButtonItem" title="返回" id="rcq-aK-ZhN">
+                            <connections>
+                                <action selector="back:" destination="iO7-qV-40j" id="3xi-bn-5ID"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y1l-Ii-oMk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="45" y="-1115"/>
+        </scene>
+        <!--Safety Sub Item View Controller - 安全分项-->
+        <scene sceneID="hm4-qC-WVa">
+            <objects>
+                <viewController id="Bfd-OY-cfp" customClass="SafetySubItemViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="V3K-vq-jvV"/>
+                        <viewControllerLayoutGuide type="bottom" id="Q6O-8I-kWo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6sA-3o-3YQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="安全分项" id="JHb-qc-OJb">
+                        <barButtonItem key="leftBarButtonItem" title="返回" id="CuC-84-YZ4">
+                            <connections>
+                                <action selector="back:" destination="Bfd-OY-cfp" id="UaF-M1-h8L"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gjd-2q-GtQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="45" y="-2317"/>
         </scene>
         <!--Rectify View Controller - Second-->
         <scene sceneID="ot8-2e-RuS">
@@ -863,7 +938,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tsO-of-vAX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2463" y="-790"/>
+            <point key="canvasLocation" x="-2463" y="-816"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cxF-YZ-YPM">
@@ -900,6 +975,60 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Sm-x6-clS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1447" y="-531"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="PeW-3B-lec">
+            <objects>
+                <navigationController storyboardIdentifier="SafetySubItemView" automaticallyAdjustsScrollViewInsets="NO" id="DQa-HB-G2F" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="S6m-ru-8WU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Bfd-OY-cfp" kind="relationship" relationship="rootViewController" id="jxS-pR-zIw"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="prz-Qf-HSv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-481" y="-2317"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="28A-Cs-4qS">
+            <objects>
+                <navigationController storyboardIdentifier="ProjectTypeView" automaticallyAdjustsScrollViewInsets="NO" id="9SV-fj-JTm" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qFx-A4-tZp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="HqY-SC-EBl" kind="relationship" relationship="rootViewController" id="Vfa-Tq-t5t"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hfh-iW-57a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-481" y="-1716"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ovv-xH-SI1">
+            <objects>
+                <navigationController storyboardIdentifier="CheckItemView" automaticallyAdjustsScrollViewInsets="NO" id="7Gj-Yx-HX8" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RmQ-eJ-e1c">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="iO7-qV-40j" kind="relationship" relationship="rootViewController" id="e4G-XA-4hg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VIk-8D-mWB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-481" y="-1115"/>
         </scene>
     </scenes>
     <resources>

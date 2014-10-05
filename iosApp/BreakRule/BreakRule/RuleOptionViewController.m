@@ -7,6 +7,7 @@
 //
 
 #import "RuleOptionViewController.h"
+#import "SingletonBridge.h"
 
 @interface RuleOptionViewController ()
 
@@ -87,6 +88,9 @@
 //选择、响应
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    BRIDGE
+    bridge.nsRuleOption = [title objectAtIndex:indexPath.row];
+    
     if( [indexPath row] == 0 )
     {
         [self back:nil];
