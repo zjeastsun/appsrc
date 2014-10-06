@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SingletonDB.h"
 
 @interface SafetySubItemViewController : UIViewController
+{
+    CSelectHelp m_safetyItemHelp;
+}
 - (IBAction)back:(id)sender;
 
 @end

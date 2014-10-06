@@ -42,29 +42,13 @@
 
 - (void)querySafetyItem
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *dbFileName = @"break_law_init.db";
-    NSString *dataFilePath = [documentsDirectory stringByAppendingPathComponent:dbFileName];
-    
     LOCALDB
-    string sDataFilePath = [dataFilePath UTF8String];
-    if (!localDB.g_localDB->isLogin()) {
-        bool bLogin = localDB.g_localDB->login( sDataFilePath );
-        if (!bLogin) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误"
-                                                            message:@"本地数据库连接失败"
-                                                           delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-            return;
-        }
-    }
-    
     string error, sql;
-    util::string_format(sql, "select * from BR_CHECK_ITEM_DETAIL");
-    localDB.g_localDB->select(sql, m_itemHelp, error);
+    if (localDB.g_localDB->isLogin())
+    {
+        util::string_format(sql, "select * from BR_CHECK_ITEM_DETAIL");
+        localDB.g_localDB->select(sql, m_itemHelp, error);
+    }
     
 }
 
@@ -133,6 +117,39 @@
         cell.textLabel.text = [title objectAtIndex:indexPath.row];
         cell.detailTextLabel.text = [subTitle objectAtIndex:indexPath.row];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        BRIDGE
+        if (indexPath.row == 0) {//安全分项
+            if (bridge.nsSafetySubItemName == nil || [bridge.nsSafetySubItemName length] == 0)
+            {
+                cell.detailTextLabel.text = [subTitle objectAtIndex:indexPath.row];
+            }
+            else
+            {
+                cell.detailTextLabel.text = bridge.nsSafetySubItemName;
+            }
+        }
+        else if (indexPath.row == 1)//项目类别
+        {
+            if (bridge.nsProjectType == nil || [bridge.nsProjectType length] == 0)
+            {
+                cell.detailTextLabel.text = [subTitle objectAtIndex:indexPath.row];
+            }
+            else
+            {
+                cell.detailTextLabel.text = bridge.nsProjectType;
+            }
+        }
+        else if (indexPath.row == 2)//检查项目
+        {
+            if (bridge.nsCheckItem == nil || [bridge.nsCheckItem length] == 0)
+            {
+                cell.detailTextLabel.text = [subTitle objectAtIndex:indexPath.row];
+            }
+            else
+            {
+                cell.detailTextLabel.text = bridge.nsCheckItem;
+            }
+        }
         
     }
     else
@@ -206,6 +223,13 @@
         return true;
     }
     return false;
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    //重新载入所有数据
+    [itemTableView reloadData];
+    
 }
 
 @end

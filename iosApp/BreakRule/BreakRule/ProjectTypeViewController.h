@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface ProjectTypeViewController : UIViewController
+{
+    NSMutableArray *title;
+    NSString *sProjectType;
+}
 - (IBAction)back:(id)sender;
 
 @end

@@ -46,11 +46,34 @@
     
 }
 
+- (void)loginDb
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *dbFileName = @"break_law_init.db";
+    NSString *dataFilePath = [documentsDirectory stringByAppendingPathComponent:dbFileName];
+    
+    string sDataFilePath = [dataFilePath UTF8String];
+    if (!_g_localDB->isLogin()) {
+        bool bLogin = _g_localDB->login( sDataFilePath );
+        if (!bLogin) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误"
+                                                            message:@"本地数据库连接失败"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
+    }
+}
+
 - (id)init {
     
     if (self = [super init]) {
         _g_localDB = new CSQLiteUtil();
         [SingletonDB moveDbToSandBox];
+        [self loginDb];
     }
     
     return self;

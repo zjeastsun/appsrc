@@ -46,8 +46,8 @@
 		048F599519D6298B009BA27B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048F599419D6298B009BA27B /* MobileCoreServices.framework */; };
 		048F599719D62E4C009BA27B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048F599619D62E4C009BA27B /* ImageIO.framework */; };
 		0490BE1B19E0984E00C83D82 /* ProjectTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0490BE1A19E0984E00C83D82 /* ProjectTypeViewController.m */; };
-		0490BE1E19E0A04700C83D82 /* SafetySubItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0490BE1D19E0A04700C83D82 /* SafetySubItemViewController.m */; };
-		0490BE2119E0A28600C83D82 /* CheckItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0490BE2019E0A28600C83D82 /* CheckItemViewController.m */; };
+		0490BE1E19E0A04700C83D82 /* SafetySubItemViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0490BE1D19E0A04700C83D82 /* SafetySubItemViewController.mm */; };
+		0490BE2119E0A28600C83D82 /* CheckItemViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0490BE2019E0A28600C83D82 /* CheckItemViewController.mm */; };
 		049104B519D8AD74004E052B /* SJAvatarBrowser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049104B419D8AD74004E052B /* SJAvatarBrowser.mm */; };
 		049104B819D8C829004E052B /* RuleTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049104B719D8C829004E052B /* RuleTypeViewController.m */; };
 		049104BB19D8CAF8004E052B /* RuleOptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049104BA19D8CAF8004E052B /* RuleOptionViewController.m */; };
@@ -125,9 +125,9 @@
 		0490BE1919E0984E00C83D82 /* ProjectTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectTypeViewController.h; sourceTree = "<group>"; };
 		0490BE1A19E0984E00C83D82 /* ProjectTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectTypeViewController.m; sourceTree = "<group>"; };
 		0490BE1C19E0A04700C83D82 /* SafetySubItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SafetySubItemViewController.h; sourceTree = "<group>"; };
-		0490BE1D19E0A04700C83D82 /* SafetySubItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SafetySubItemViewController.m; sourceTree = "<group>"; };
+		0490BE1D19E0A04700C83D82 /* SafetySubItemViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SafetySubItemViewController.mm; sourceTree = "<group>"; };
 		0490BE1F19E0A28600C83D82 /* CheckItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckItemViewController.h; sourceTree = "<group>"; };
-		0490BE2019E0A28600C83D82 /* CheckItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckItemViewController.m; sourceTree = "<group>"; };
+		0490BE2019E0A28600C83D82 /* CheckItemViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CheckItemViewController.mm; sourceTree = "<group>"; };
 		049104B319D8AD3E004E052B /* SJAvatarBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SJAvatarBrowser.h; path = BreakRule/eutils/SJAvatarBrowser.h; sourceTree = "<group>"; };
 		049104B419D8AD74004E052B /* SJAvatarBrowser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SJAvatarBrowser.mm; path = BreakRule/eutils/SJAvatarBrowser.mm; sourceTree = "<group>"; };
 		049104B619D8C829004E052B /* RuleTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuleTypeViewController.h; sourceTree = "<group>"; };
@@ -308,9 +308,9 @@
 				0490BE1919E0984E00C83D82 /* ProjectTypeViewController.h */,
 				0490BE1A19E0984E00C83D82 /* ProjectTypeViewController.m */,
 				0490BE1C19E0A04700C83D82 /* SafetySubItemViewController.h */,
-				0490BE1D19E0A04700C83D82 /* SafetySubItemViewController.m */,
+				0490BE1D19E0A04700C83D82 /* SafetySubItemViewController.mm */,
 				0490BE1F19E0A28600C83D82 /* CheckItemViewController.h */,
-				0490BE2019E0A28600C83D82 /* CheckItemViewController.m */,
+				0490BE2019E0A28600C83D82 /* CheckItemViewController.mm */,
 				0478794A19DA179B00555F0D /* HazardItemViewController.h */,
 				0478794B19DA179B00555F0D /* HazardItemViewController.m */,
 			);
@@ -440,7 +440,7 @@
 				047167FF19CF3D9500A81F9B /* SetViewController.mm in Sources */,
 				04635CD519CE50490084822D /* StringConverterI.mm in Sources */,
 				047F3EA619D18500004123F7 /* SingletonIce.mm in Sources */,
-				0490BE1E19E0A04700C83D82 /* SafetySubItemViewController.m in Sources */,
+				0490BE1E19E0A04700C83D82 /* SafetySubItemViewController.mm in Sources */,
 				045D8A9F19CF899B00D8C6DA /* ProjectViewController.mm in Sources */,
 				0431F1A019CC76C300F1718A /* LoginViewController.mm in Sources */,
 				0490BE1B19E0984E00C83D82 /* ProjectTypeViewController.m in Sources */,
@@ -456,7 +456,7 @@
 				0431F19D19CC759D00F1718A /* mq_interface.ice in Sources */,
 				049104B819D8C829004E052B /* RuleTypeViewController.m in Sources */,
 				0478794919DA176D00555F0D /* SafetyItemViewController.mm in Sources */,
-				0490BE2119E0A28600C83D82 /* CheckItemViewController.m in Sources */,
+				0490BE2119E0A28600C83D82 /* CheckItemViewController.mm in Sources */,
 				0448781919CC70FB0086CE1B /* main.mm in Sources */,
 				0431F19C19CC759D00F1718A /* Eutils.mm in Sources */,
 				049104B519D8AD74004E052B /* SJAvatarBrowser.mm in Sources */,
@@ -596,6 +596,7 @@
 				);
 				INFOPLIST_FILE = "BreakRule/BreakRule-Info.plist";
 				LIBRARY_SEARCH_PATHS = "/Library/Developer/IceTouch-1.3/SDKs/ObjC/$(PLATFORM_NAME).sdk/usr/local/lib";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SingletonDB.h"
 
 @interface CheckItemViewController : UIViewController
 - (IBAction)back:(id)sender;

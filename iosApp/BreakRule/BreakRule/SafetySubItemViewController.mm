@@ -1,19 +1,19 @@
 //
-//  ProjectTypeViewController.m
+//  SafetySubItemViewController.m
 //  BreakRule
 //
 //  Created by mac on 14-10-4.
 //  Copyright (c) 2014年 mac. All rights reserved.
 //
 
-#import "ProjectTypeViewController.h"
+#import "SafetySubItemViewController.h"
 #import "SingletonBridge.h"
 
-@interface ProjectTypeViewController ()
+@interface SafetySubItemViewController ()
 
 @end
 
-@implementation ProjectTypeViewController
+@implementation SafetySubItemViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,7 +28,19 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    title = [[NSMutableArray alloc]initWithObjects:@"一般项目", @"其他项目", @"保护项目", nil];
+    [self querySubItem];
+}
+
+- (void)querySubItem
+{
+    LOCALDB
+    
+    string error, sql;
+    if (localDB.g_localDB->isLogin())
+    {
+        util::string_format(sql, "select * from BR_SAFETY_ITEM");
+        localDB.g_localDB->select(sql, m_safetyItemHelp, error);
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,7 +71,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return m_safetyItemHelp._count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -78,17 +90,10 @@
     }
     UIImage *ima = [UIImage imageNamed:@"share_this_icon.png"];
     cell.imageView.image =ima;
-    cell.textLabel.text = [title objectAtIndex:indexPath.row];
-    
-    BRIDGE
-    if ([cell.textLabel.text isEqualToString:bridge.nsProjectType]) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    }
-    else
-    {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
-    
+    string sContent = m_safetyItemHelp.valueString(static_cast<int>(indexPath.row), "safety_item_name");
+    NSString *content = [NSString stringWithCString:(char*)sContent.c_str() encoding:NSUTF8StringEncoding];
+    cell.textLabel.text = content;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
     
@@ -97,20 +102,11 @@
 //选择、响应
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cellView = [tableView cellForRowAtIndexPath:indexPath];
-    if(cellView.accessoryType == UITableViewCellAccessoryNone)
-    {
-        cellView.accessoryType =UITableViewCellAccessoryCheckmark;
-        
-    }
-    else
-    {
-        cellView.accessoryType = UITableViewCellAccessoryNone;
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    }
-    
     BRIDGE
-    bridge.nsProjectType = [title objectAtIndex:indexPath.row];
+    string sContent = m_safetyItemHelp.valueString(static_cast<int>(indexPath.row), "safety_item_id");
+    bridge.nsSafetySubItemId = [NSString stringWithCString:(char*)sContent.c_str() encoding:NSUTF8StringEncoding];
+    sContent = m_safetyItemHelp.valueString(static_cast<int>(indexPath.row), "safety_item_name");
+    bridge.nsSafetySubItemName = [NSString stringWithCString:(char*)sContent.c_str() encoding:NSUTF8StringEncoding];
     [self back:nil];
     
     
