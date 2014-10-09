@@ -60,15 +60,18 @@ string getIPWithHostName(string hostName)
 
 - (IBAction)login:(id)sender {
 
-    UIViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
-    [self presentViewController:projectView animated:YES completion:nil];
+//    UIViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
+//    [self presentViewController:projectView animated:YES completion:nil];
+//    
+//    return;
     
-    return;
 //    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 //    appDelegate.g_int = 10;
     
 //    string sIp = getIPWithHostName("www.myxiu.com");
 //    string sIp = getIPWithHostName("s911322.eicp.net");
+//    string sIp = getIPWithHostName("192.168.3.109");
+    
     NSString *server = serverIpField.text;
     string sServer = [server UTF8String];
     
@@ -99,6 +102,8 @@ string getIPWithHostName(string hostName)
         sIp = sServer;
     }
 
+    sIp = "192.168.3.109";
+    
     ONEICE
     oneIce.g_db->setServer(sIp.c_str(), 8840);
     
@@ -127,8 +132,8 @@ string getIPWithHostName(string hostName)
     }
     NSLog(@"用户登录成功！");
     
-//    ProjectViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
-//    [self presentViewController:projectView animated:YES completion:nil];
+    UIViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
+    [self presentViewController:projectView animated:YES completion:nil];
     
 /*
     string sName;

@@ -28,7 +28,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    title = [[NSMutableArray alloc]initWithObjects:@"一般项目", @"其他项目", @"保护项目", nil];
+    title = [[NSMutableArray alloc]initWithObjects:@"全部项目", @"一般项目", @"其他项目", @"保护项目", nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,7 +59,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return title.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -110,9 +110,9 @@
     }
     
     BRIDGE
-    bridge.nsProjectType = [title objectAtIndex:indexPath.row];
+    bridge.nsProjectType = [NSString stringWithFormat:@"%d", indexPath.row];
+    bridge.nsProjectTypeName = [title objectAtIndex:indexPath.row];
     [self back:nil];
-    
     
 }
 

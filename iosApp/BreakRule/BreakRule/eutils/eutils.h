@@ -39,7 +39,7 @@
  
  #define USE_ICE   //代表使用ICE类库,会Line ICE相关类库
  ***************************************************************************/
-#import <UIKit/UIKit.h>
+//#import <UIKit/UIKit.h>
 
 #include <vector>
 #include <string>

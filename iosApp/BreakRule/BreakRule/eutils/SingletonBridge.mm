@@ -21,6 +21,8 @@
 
         _nsRuleType = @"一般违规";
         _nsRuleOption = @"用户自定义";
+        _nsProjectType = @"0";
+        _nsProjectTypeName = @"全部项目";
     }
     
     return self;

@@ -29,9 +29,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self querySafetySubItem];
+    [self queryCheckItem];
+    
+    BRIDGE
     title = [[NSMutableArray alloc]initWithObjects:@"安全分项", @"项目类别", @"检查项目",nil];
-    subTitle = [[NSMutableArray alloc]initWithObjects:@"安全文明生产", @"一般项目", @"安全生产责任制", nil];
-    [self querySafetyItem];
+    subTitle = [[NSMutableArray alloc]initWithObjects:bridge.nsSafetySubItemName, bridge.nsProjectTypeName, bridge.nsCheckItemName, nil];
+    [self querySafetyItemDetail];
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,13 +44,73 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)querySafetyItem
+- (void)querySafetySubItem
 {
+    BRIDGE
     LOCALDB
     string error, sql;
+    CSelectHelp safetySubItemHelp;
+    
     if (localDB.g_localDB->isLogin())
     {
-        util::string_format(sql, "select * from BR_CHECK_ITEM_DETAIL");
+        util::string_format(sql, "select * from BR_SAFETY_ITEM limit 0,1");
+        localDB.g_localDB->select(sql, safetySubItemHelp, error);
+        if (safetySubItemHelp.size()>0) {
+            string sSafetySubItemId = safetySubItemHelp.valueString(0, "safety_item_id");
+            bridge.nsSafetySubItemId = [NSString stringWithCString:(char*)sSafetySubItemId.c_str() encoding:NSUTF8StringEncoding];
+            
+            string sSafetySubItemName = safetySubItemHelp.valueString(0, "safety_item_name");
+            bridge.nsSafetySubItemName = [NSString stringWithCString:(char*)sSafetySubItemName.c_str() encoding:NSUTF8StringEncoding];
+        }
+
+    }
+    
+}
+
+- (void)queryCheckItem
+{
+    BRIDGE
+    LOCALDB
+    string error, sql;
+    CSelectHelp checkItemHelp;
+    
+    string sSafetyItemId = [bridge.nsSafetySubItemId UTF8String];
+    string sCheckItemType = [bridge.nsProjectType UTF8String];
+    
+    if (localDB.g_localDB->isLogin())
+    {
+        util::string_format(sql, "select * from BR_CHECK_ITEM where safety_item_id='%s' ", sSafetyItemId.c_str());
+        if (sCheckItemType != "0") {
+            string sTemp;
+            util::string_format(sTemp, " and check_item_type='%s' ", sCheckItemType.c_str());
+            sql += sTemp;
+        }
+        sql += " limit 0,1 ";
+        
+        localDB.g_localDB->select(sql, checkItemHelp, error);
+        if (checkItemHelp.size()>0) {
+            string sCheckItemId = checkItemHelp.valueString(0, "check_item_id");
+            bridge.nsCheckItemId = [NSString stringWithCString:(char*)sCheckItemId.c_str() encoding:NSUTF8StringEncoding];
+            
+            string sCheckItemName = checkItemHelp.valueString(0, "check_item_name");
+            bridge.nsCheckItemName = [NSString stringWithCString:(char*)sCheckItemName.c_str() encoding:NSUTF8StringEncoding];
+        }
+        
+    }
+    
+}
+
+- (void)querySafetyItemDetail
+{
+    BRIDGE
+    LOCALDB
+    string error, sql;
+    
+    string sCheckItemId = [bridge.nsCheckItemId UTF8String];
+    
+    if (localDB.g_localDB->isLogin())
+    {
+        util::string_format(sql, "select * from BR_CHECK_ITEM_DETAIL where check_item_id='%s'", sCheckItemId.c_str());
         localDB.g_localDB->select(sql, m_itemHelp, error);
     }
     
@@ -141,13 +205,13 @@
         }
         else if (indexPath.row == 2)//检查项目
         {
-            if (bridge.nsCheckItem == nil || [bridge.nsCheckItem length] == 0)
+            if (bridge.nsCheckItemName == nil || [bridge.nsCheckItemName length] == 0)
             {
                 cell.detailTextLabel.text = [subTitle objectAtIndex:indexPath.row];
             }
             else
             {
-                cell.detailTextLabel.text = bridge.nsCheckItem;
+                cell.detailTextLabel.text = bridge.nsCheckItemName;
             }
         }
         
@@ -229,6 +293,7 @@
 {
     //重新载入所有数据
     [itemTableView reloadData];
+    判断哪行改变了
     
 }
 

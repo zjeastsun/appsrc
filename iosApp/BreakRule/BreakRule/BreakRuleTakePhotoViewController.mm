@@ -317,4 +317,9 @@
     }
 }
 
+- (IBAction)commit:(id)sender {
+    //获取temp目录
+    NSString *tempPath = NSTemporaryDirectory();
+}
+
 @end

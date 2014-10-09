@@ -21,6 +21,7 @@
 - (IBAction)fromPhotosAlbum:(id)sender;
 - (IBAction)fromCamera:(id)sender;
 - (IBAction)fromVideo:(id)sender;
+- (IBAction)commit:(id)sender;
 
 
 @end

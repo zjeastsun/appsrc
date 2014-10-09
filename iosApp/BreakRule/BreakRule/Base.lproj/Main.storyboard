@@ -32,7 +32,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="未按规定配备专职安全员" translatesAutoresizingMaskIntoConstraints="NO" id="lpU-mm-Zz1">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lpU-mm-Zz1">
                                 <rect key="frame" x="9" y="183" width="291" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.68979279891304346" green="0.68979279891304346" blue="0.68979279891304346" alpha="1" colorSpace="calibratedRGB"/>
@@ -90,7 +90,11 @@
                                 <action selector="back:" destination="CZ4-MO-1fc" id="cIH-pQ-r5P"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="提交" id="Iw3-Lv-lka"/>
+                        <barButtonItem key="rightBarButtonItem" title="提交" id="Iw3-Lv-lka">
+                            <connections>
+                                <action selector="commit:" destination="CZ4-MO-1fc" id="8Nm-as-RAq"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

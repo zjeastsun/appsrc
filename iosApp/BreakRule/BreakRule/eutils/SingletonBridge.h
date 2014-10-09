@@ -13,7 +13,12 @@
 @property (strong, nonatomic) NSString *nsSafetySubItemName;
 
 @property (strong, nonatomic) NSString *nsProjectType;
-@property (strong, nonatomic) NSString *nsCheckItem;
+@property (strong, nonatomic) NSString *nsProjectTypeName;
+
+@property (strong, nonatomic) NSString *nsCheckItemId;
+@property (strong, nonatomic) NSString *nsCheckItemName;
+
+
 
 + (SingletonBridge *)sharedInstance;
 - (void)unInit;

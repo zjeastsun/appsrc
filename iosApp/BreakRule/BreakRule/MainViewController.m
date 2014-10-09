@@ -56,6 +56,8 @@
     [self presentViewController:viewController animated:YES completion:nil];
 }
 
+
+
 - (IBAction)toRectifyView:(id)sender {
     UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RectifyView"];
     [self presentViewController:viewController animated:YES completion:nil];

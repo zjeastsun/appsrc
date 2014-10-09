@@ -95,6 +95,28 @@
     cell.textLabel.text = content;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
+    BRIDGE
+    if (bridge.nsSafetySubItemName == nil || [bridge.nsSafetySubItemName length] == 0)
+    {
+        if (indexPath.row == 0) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+        else
+        {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+    }
+    else
+    {
+        if ([cell.textLabel.text isEqualToString:bridge.nsSafetySubItemName]) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+        else
+        {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+    }
+    
     return cell;
     
 }
