@@ -35,7 +35,7 @@
 		0471680219CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0471680119CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm */; };
 		0478794419D9F7EA00555F0D /* SingletonBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0478794319D9F7EA00555F0D /* SingletonBridge.mm */; };
 		0478794919DA176D00555F0D /* SafetyItemViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0478794819DA176D00555F0D /* SafetyItemViewController.mm */; };
-		0478794C19DA179B00555F0D /* HazardItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0478794B19DA179B00555F0D /* HazardItemViewController.m */; };
+		0478794C19DA179B00555F0D /* HazardItemViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0478794B19DA179B00555F0D /* HazardItemViewController.mm */; };
 		0478B47219D4BA1A0077EDBA /* ReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0478B47119D4BA1A0077EDBA /* ReviewViewController.m */; };
 		0478B47519D4BCC40077EDBA /* QueryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0478B47419D4BCC40077EDBA /* QueryViewController.m */; };
 		047CBA7F19DC75CD00F85937 /* sqlite_utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047CBA7E19DC75CD00F85937 /* sqlite_utils.mm */; };
@@ -43,6 +43,7 @@
 		047F5A1619D9B53A00E4DA2D /* eastsun.ico in Resources */ = {isa = PBXBuildFile; fileRef = 047F5A1319D9B53A00E4DA2D /* eastsun.ico */; };
 		047F5A1719D9B53A00E4DA2D /* righticon.png in Resources */ = {isa = PBXBuildFile; fileRef = 047F5A1419D9B53A00E4DA2D /* righticon.png */; };
 		047F5A1819D9B53A00E4DA2D /* share_this_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 047F5A1519D9B53A00E4DA2D /* share_this_icon.png */; };
+		048E0BE419E8278C004CAF24 /* HazardTypeViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 048E0BE319E8278C004CAF24 /* HazardTypeViewController.mm */; };
 		048F599519D6298B009BA27B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048F599419D6298B009BA27B /* MobileCoreServices.framework */; };
 		048F599719D62E4C009BA27B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048F599619D62E4C009BA27B /* ImageIO.framework */; };
 		0490BE1B19E0984E00C83D82 /* ProjectTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0490BE1A19E0984E00C83D82 /* ProjectTypeViewController.m */; };
@@ -110,7 +111,7 @@
 		0478794719DA176D00555F0D /* SafetyItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SafetyItemViewController.h; sourceTree = "<group>"; };
 		0478794819DA176D00555F0D /* SafetyItemViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SafetyItemViewController.mm; sourceTree = "<group>"; };
 		0478794A19DA179B00555F0D /* HazardItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HazardItemViewController.h; sourceTree = "<group>"; };
-		0478794B19DA179B00555F0D /* HazardItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HazardItemViewController.m; sourceTree = "<group>"; };
+		0478794B19DA179B00555F0D /* HazardItemViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HazardItemViewController.mm; sourceTree = "<group>"; };
 		0478B47019D4BA1A0077EDBA /* ReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewViewController.h; sourceTree = "<group>"; };
 		0478B47119D4BA1A0077EDBA /* ReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewViewController.m; sourceTree = "<group>"; };
 		0478B47319D4BCC40077EDBA /* QueryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryViewController.h; sourceTree = "<group>"; };
@@ -120,6 +121,8 @@
 		047F5A1319D9B53A00E4DA2D /* eastsun.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; name = eastsun.ico; path = res/eastsun.ico; sourceTree = SOURCE_ROOT; };
 		047F5A1419D9B53A00E4DA2D /* righticon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = righticon.png; path = res/righticon.png; sourceTree = SOURCE_ROOT; };
 		047F5A1519D9B53A00E4DA2D /* share_this_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share_this_icon.png; path = res/share_this_icon.png; sourceTree = SOURCE_ROOT; };
+		048E0BE219E8278C004CAF24 /* HazardTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HazardTypeViewController.h; sourceTree = "<group>"; };
+		048E0BE319E8278C004CAF24 /* HazardTypeViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HazardTypeViewController.mm; sourceTree = "<group>"; };
 		048F599419D6298B009BA27B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		048F599619D62E4C009BA27B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		0490BE1919E0984E00C83D82 /* ProjectTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectTypeViewController.h; sourceTree = "<group>"; };
@@ -312,7 +315,9 @@
 				0490BE1F19E0A28600C83D82 /* CheckItemViewController.h */,
 				0490BE2019E0A28600C83D82 /* CheckItemViewController.mm */,
 				0478794A19DA179B00555F0D /* HazardItemViewController.h */,
-				0478794B19DA179B00555F0D /* HazardItemViewController.m */,
+				0478794B19DA179B00555F0D /* HazardItemViewController.mm */,
+				048E0BE219E8278C004CAF24 /* HazardTypeViewController.h */,
+				048E0BE319E8278C004CAF24 /* HazardTypeViewController.mm */,
 			);
 			name = BreakRuleTakePhoto;
 			sourceTree = "<group>";
@@ -450,9 +455,10 @@
 				040B0A6819D23A5A00D83461 /* AppDelegate.mm in Sources */,
 				0478B47519D4BCC40077EDBA /* QueryViewController.m in Sources */,
 				047CBA7F19DC75CD00F85937 /* sqlite_utils.mm in Sources */,
+				048E0BE419E8278C004CAF24 /* HazardTypeViewController.mm in Sources */,
 				0478B47219D4BA1A0077EDBA /* ReviewViewController.m in Sources */,
 				049104BB19D8CAF8004E052B /* RuleOptionViewController.m in Sources */,
-				0478794C19DA179B00555F0D /* HazardItemViewController.m in Sources */,
+				0478794C19DA179B00555F0D /* HazardItemViewController.mm in Sources */,
 				0431F19D19CC759D00F1718A /* mq_interface.ice in Sources */,
 				049104B819D8C829004E052B /* RuleTypeViewController.m in Sources */,
 				0478794919DA176D00555F0D /* SafetyItemViewController.mm in Sources */,

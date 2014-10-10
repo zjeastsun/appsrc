@@ -90,7 +90,7 @@
                                 <action selector="back:" destination="CZ4-MO-1fc" id="cIH-pQ-r5P"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="提交" id="Iw3-Lv-lka">
+                        <barButtonItem key="rightBarButtonItem" title="保存" id="Iw3-Lv-lka">
                             <connections>
                                 <action selector="commit:" destination="CZ4-MO-1fc" id="8Nm-as-RAq"/>
                             </connections>
@@ -225,12 +225,59 @@
                                 <action selector="back:" destination="xJx-Tw-Kbl" id="Xdl-z6-5SK"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="保存" id="cni-v9-kh6"/>
+                        <barButtonItem key="rightBarButtonItem" title="保存" id="cni-v9-kh6">
+                            <connections>
+                                <action selector="save:" destination="xJx-Tw-Kbl" id="TCa-DN-yqE"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="hazardItemTableView" destination="q6Q-ph-HcH" id="8Hj-im-PhE"/>
+                        <outlet property="hazardTypeTableView" destination="2lR-TC-yaA" id="oTX-vd-emt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c7m-wO-kVv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-921" y="-531"/>
+        </scene>
+        <!--Hazard Type View Controller-->
+        <scene sceneID="Wom-W3-2D9">
+            <objects>
+                <viewController id="gf6-Wf-Fv6" customClass="HazardTypeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dgJ-7v-KMv"/>
+                        <viewControllerLayoutGuide type="bottom" id="mmB-bA-SO0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="asi-y8-C0q">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="3PS-vA-jMI">
+                                <rect key="frame" x="0.0" y="66" width="320" height="414"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="gf6-Wf-Fv6" id="HvO-fj-O2A"/>
+                                    <outlet property="delegate" destination="gf6-Wf-Fv6" id="UtF-A1-etf"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="WUw-9t-DsD">
+                        <barButtonItem key="leftBarButtonItem" title="返回" id="Kuh-R8-LeW">
+                            <connections>
+                                <action selector="back:" destination="gf6-Wf-Fv6" id="K3g-Yi-bdC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="hazardTypeTableView" destination="3PS-vA-jMI" id="Fkj-o9-FbA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YJQ-Av-U3T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="45" y="-531"/>
         </scene>
         <!--Safety Item View Controller - 违规行为辨识库-->
         <scene sceneID="gYm-73-m55">
@@ -1066,6 +1113,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VIk-8D-mWB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-481" y="-1115"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Jwa-TU-pv8">
+            <objects>
+                <navigationController storyboardIdentifier="HazardTypeView" automaticallyAdjustsScrollViewInsets="NO" id="1H8-h3-DXs" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3tn-qN-5xK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gf6-Wf-Fv6" kind="relationship" relationship="rootViewController" id="A9f-YB-rgt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cm0-G3-7cZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-481" y="-531"/>
         </scene>
     </scenes>
     <resources>

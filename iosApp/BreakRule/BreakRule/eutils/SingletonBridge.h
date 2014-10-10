@@ -18,7 +18,8 @@
 @property (strong, nonatomic) NSString *nsCheckItemId;
 @property (strong, nonatomic) NSString *nsCheckItemName;
 
-
+@property (strong, nonatomic) NSString *nsHazardTypeId;
+@property (strong, nonatomic) NSString *nsHazardTypeName;
 
 + (SingletonBridge *)sharedInstance;
 - (void)unInit;
