@@ -19,6 +19,10 @@
     
     CSelectHelp m_itemHelp;
     vector<int> m_vSelectedLine;
+    
+    NSString *nsSafetySubItemIdOld;
+    NSString *nsProjectTypeOld;
+    NSString *nsCheckItemIdOld;
 }
 - (IBAction)back:(id)sender;
 - (IBAction)save:(id)sender;

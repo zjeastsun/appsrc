@@ -10,6 +10,9 @@
 #import "SingletonDB.h"
 
 @interface CheckItemViewController : UIViewController
+{
+    CSelectHelp m_checkItemHelp;
+}
 - (IBAction)back:(id)sender;
 
 @end

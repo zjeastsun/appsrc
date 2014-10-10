@@ -60,6 +60,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return title.count;
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -81,7 +82,7 @@
     cell.textLabel.text = [title objectAtIndex:indexPath.row];
     
     BRIDGE
-    if ([cell.textLabel.text isEqualToString:bridge.nsProjectType]) {
+    if ([cell.textLabel.text isEqualToString:bridge.nsProjectTypeName]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     else

@@ -102,7 +102,7 @@ string getIPWithHostName(string hostName)
         sIp = sServer;
     }
 
-    sIp = "192.168.3.109";
+//    sIp = "192.168.3.109";
     
     ONEICE
     oneIce.g_db->setServer(sIp.c_str(), 8840);

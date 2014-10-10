@@ -29,10 +29,17 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self querySafetySubItem];
-    [self queryCheckItem];
-    
     BRIDGE
+    
+    if (bridge.nsSafetySubItemId == nil || [bridge.nsSafetySubItemId length] == 0)
+    {
+        [self querySafetySubItem];
+    }
+    if (bridge.nsCheckItemId == nil || [bridge.nsCheckItemId length] == 0)
+    {
+        [self queryCheckItem];
+    }
+    
     title = [[NSMutableArray alloc]initWithObjects:@"安全分项", @"项目类别", @"检查项目",nil];
     subTitle = [[NSMutableArray alloc]initWithObjects:bridge.nsSafetySubItemName, bridge.nsProjectTypeName, bridge.nsCheckItemName, nil];
     [self querySafetyItemDetail];
@@ -94,6 +101,11 @@
             
             string sCheckItemName = checkItemHelp.valueString(0, "check_item_name");
             bridge.nsCheckItemName = [NSString stringWithCString:(char*)sCheckItemName.c_str() encoding:NSUTF8StringEncoding];
+        }
+        else
+        {
+            bridge.nsCheckItemId = @"";
+            bridge.nsCheckItemName  = @"";
         }
         
     }
@@ -194,25 +206,18 @@
         }
         else if (indexPath.row == 1)//项目类别
         {
-            if (bridge.nsProjectType == nil || [bridge.nsProjectType length] == 0)
+            if (bridge.nsProjectTypeName == nil || [bridge.nsProjectTypeName length] == 0)
             {
                 cell.detailTextLabel.text = [subTitle objectAtIndex:indexPath.row];
             }
             else
             {
-                cell.detailTextLabel.text = bridge.nsProjectType;
+                cell.detailTextLabel.text = bridge.nsProjectTypeName;
             }
         }
         else if (indexPath.row == 2)//检查项目
         {
-            if (bridge.nsCheckItemName == nil || [bridge.nsCheckItemName length] == 0)
-            {
-                cell.detailTextLabel.text = [subTitle objectAtIndex:indexPath.row];
-            }
-            else
-            {
-                cell.detailTextLabel.text = bridge.nsCheckItemName;
-            }
+            cell.detailTextLabel.text = bridge.nsCheckItemName;
         }
         
     }
@@ -250,7 +255,7 @@
         if (indexPath.row == 0) {
             viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SafetySubItemView"];
         }
-        else if (tableView.tag == 0)
+        else if (indexPath.row == 1)
         {
             viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProjectTypeView"];
         }
@@ -266,7 +271,6 @@
         {
             cellView.accessoryType = UITableViewCellAccessoryCheckmark;
             m_vSelectedLine.push_back(static_cast<int>(indexPath.row));
-            
         }
         else
         {
@@ -275,7 +279,6 @@
             [tableView deselectRowAtIndexPath:indexPath animated:YES];
         }
     }
-    
     
 }
 
@@ -291,9 +294,27 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    BRIDGE
+    if (![nsSafetySubItemIdOld isEqualToString:bridge.nsSafetySubItemId] || ![nsProjectTypeOld isEqualToString:bridge.nsProjectType]) {
+        [self queryCheckItem];
+        [self querySafetyItemDetail];
+    }
+    else if (![nsCheckItemIdOld isEqualToString:bridge.nsCheckItemId] )
+    {
+        [self querySafetyItemDetail];
+    }
+    else
+    {
+        return;
+    }
+    
+    nsSafetySubItemIdOld = bridge.nsSafetySubItemId;
+    nsProjectTypeOld = bridge.nsProjectType;
+    nsCheckItemIdOld = bridge.nsCheckItemId;
+    
     //重新载入所有数据
     [itemTableView reloadData];
-    判断哪行改变了
+    [contentTableView reloadData];
     
 }
 

@@ -67,6 +67,8 @@ int CSQLiteUtil::select(const string& sql,CSelectHelp& help,string& error)
 	{
 		return -1;
 	}
+    
+    help.reset();
 	sqlite3_stmt *res; ///< Stored result
     
 	const char *s = NULL;
