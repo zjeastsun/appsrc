@@ -240,7 +240,7 @@
             </objects>
             <point key="canvasLocation" x="-921" y="-531"/>
         </scene>
-        <!--Hazard Type View Controller-->
+        <!--Hazard Type View Controller - 危险源类别-->
         <scene sceneID="Wom-W3-2D9">
             <objects>
                 <viewController id="gf6-Wf-Fv6" customClass="HazardTypeViewController" sceneMemberID="viewController">
@@ -264,16 +264,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="WUw-9t-DsD">
+                    <navigationItem key="navigationItem" title="危险源类别" id="WUw-9t-DsD">
                         <barButtonItem key="leftBarButtonItem" title="返回" id="Kuh-R8-LeW">
                             <connections>
                                 <action selector="back:" destination="gf6-Wf-Fv6" id="K3g-Yi-bdC"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="hazardTypeTableView" destination="3PS-vA-jMI" id="Fkj-o9-FbA"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YJQ-Av-U3T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -774,7 +771,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="s911322.eicp.net" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E2k-yx-La7">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="192.168.3.15" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E2k-yx-La7">
                                 <rect key="frame" x="118" y="143" width="139" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>

@@ -111,7 +111,7 @@
     }
     
     BRIDGE
-    bridge.nsProjectType = [NSString stringWithFormat:@"%d", indexPath.row];
+    bridge.nsProjectType = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
     bridge.nsProjectTypeName = [title objectAtIndex:indexPath.row];
     [self back:nil];
     

@@ -12,7 +12,6 @@
 @interface HazardTypeViewController : UIViewController
 {
     CSelectHelp m_hazardTypeHelp;
-    IBOutlet UITableView *hazardTypeTableView;
 }
 - (IBAction)back:(id)sender;
 
