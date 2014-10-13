@@ -73,7 +73,6 @@
 		040B0A6719D23A5A00D83461 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		040B0A6919D23B2B00D83461 /* SingletonIce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingletonIce.h; path = BreakRule/eutils/SingletonIce.h; sourceTree = "<group>"; };
 		0410892719D738D100BB3D66 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
-		0431F19919CC759D00F1718A /* Eutils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Eutils.h; path = BreakRule/eutils/Eutils.h; sourceTree = "<group>"; };
 		0431F19A19CC759D00F1718A /* Eutils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Eutils.mm; path = BreakRule/eutils/Eutils.mm; sourceTree = "<group>"; };
 		0431F19B19CC759D00F1718A /* mq_interface.ice */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.slice; name = mq_interface.ice; path = BreakRule/eutils/mq_interface.ice; sourceTree = "<group>"; };
 		0431F19E19CC76C300F1718A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -97,6 +96,7 @@
 		0448783619CC70FB0086CE1B /* BreakRuleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BreakRuleTests-Info.plist"; sourceTree = "<group>"; };
 		0448783819CC70FB0086CE1B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0448783A19CC70FB0086CE1B /* BreakRuleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BreakRuleTests.m; sourceTree = "<group>"; };
+		0458F3B019EC8F9C0022BC96 /* Eutils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Eutils.h; path = BreakRule/eutils/Eutils.h; sourceTree = "<group>"; };
 		045D8A9E19CF899B00D8C6DA /* ProjectViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ProjectViewController.mm; sourceTree = "<group>"; };
 		0463A73E19DD6B5D003D966B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		046C937E19CDE536008221FD /* StringConverterI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringConverterI.h; path = BreakRule/eutils/StringConverterI.h; sourceTree = "<group>"; };
@@ -180,6 +180,7 @@
 		0431F19819CC74D300F1718A /* eutils */ = {
 			isa = PBXGroup;
 			children = (
+				0458F3B019EC8F9C0022BC96 /* Eutils.h */,
 				047CBA7E19DC75CD00F85937 /* sqlite_utils.mm */,
 				040B0A6919D23B2B00D83461 /* SingletonIce.h */,
 				047F3EA519D18500004123F7 /* SingletonIce.mm */,
@@ -187,7 +188,6 @@
 				049CD03F19DB56360079D3E2 /* SingletonDB.mm */,
 				0478794519D9F81B00555F0D /* SingletonBridge.h */,
 				0478794319D9F7EA00555F0D /* SingletonBridge.mm */,
-				0431F19919CC759D00F1718A /* Eutils.h */,
 				0431F19A19CC759D00F1718A /* Eutils.mm */,
 				0431F19B19CC759D00F1718A /* mq_interface.ice */,
 				046C937E19CDE536008221FD /* StringConverterI.h */,
