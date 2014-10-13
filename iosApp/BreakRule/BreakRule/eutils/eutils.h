@@ -1718,7 +1718,9 @@ public:
 
 #ifdef USE_ICE
 
-
+#include <Ice/BuiltinSequences.h>
+typedef void(*ProgressFileCallback)(string path, double iProgress);
+typedef void(*ProgressFileDoneCallback)(string path, int iResult, const string& sError);
 
 class CICEBaseDBUtil
 {
@@ -1806,7 +1808,53 @@ public:
 	//数据库类型包括
 	//Oracle,SQL Server,Access,MySQL
     
+    //用于文件服务
+	//新增加用于文件服务
+	virtual  bool getFileInfo(const string& sFilePath, string& sHelpInfo) const;    //用于查询一个文件的信息
+	virtual  bool getFileInfoSeq(const string& sFilePath, string& sHelpInfo) const; //用于查询目录下所有文件的信息
+    
+    
+    
+	//pos开始位置,num代表读取的大小,sFile代表文件名称，相对于文件服务的根目录下的目录
+	int getFileCompressed(const ::std::string& sFile, int pos, int num, Ice::ByteSeq& bytes) const;
+    
+	//下载文件
+	bool downloadFile(const string& sFile, const string& sDestPath, ProgressFileCallback pF = NULL, ProgressFileDoneCallback pFinished = NULL);
+    
+    
+	//上传文件
+	/*
+     *  sFile 本地文件
+     *  sRemotePath 远程目录
+     */
+	int upload(const string& sFile, const string& sRemotePath, ProgressFileCallback pF = NULL, ProgressFileDoneCallback pFinished = NULL);
+    
+	//上传文件
+	int uploadFileCompressed(const ::std::string& sSrcFile, ::Ice::Int pos,int num,const ::Ice::ByteSeq& fileContent);
+    
+    
+    
+	int getFileRetryTimes()
+	{
+		return m_iFileRetryTimes;
+	}
+	void setFileRetryTimes(int iCount)
+	{
+		m_iFileRetryTimes = iCount;
+	}
+    
+	int getFileCache()
+	{
+		return m_iCacheSize;
+	}
+	void setFileCache(int iCacheSize)
+	{
+		m_iCacheSize = iCacheSize;
+	}
+    
 private:
+    int					 m_iFileRetryTimes; //文件下载和上传重试次数
+	int					 m_iCacheSize; //文件下载和上传每次上传数据包大小
     
 	int					m_iConnectTimeOut; //连接超时时间
 	string				m_sLastQueryID;
@@ -1975,6 +2023,42 @@ public:
         out = "";
         return m_db.command(cmd,param,out);
     }
+    
+    //用于文件相关服务////////////////////////
+	//用于文件服务
+	//新增加用于文件服务
+    bool getFileInfo(const string& sFilePath, string& sHelpInfo)
+	{
+        return m_db.getFileInfo(sFilePath, sHelpInfo);
+	}
+    bool getFileInfoSeq(const string& sFilePath, string& sHelpInfo)
+    {
+        return m_db.getFileInfoSeq(sFilePath, sHelpInfo);
+    }
+    
+	//pos开始位置,num代表读取的大小,sFile代表文件名称，相对于文件服务的根目录下的目录
+    int getFileCompressed(const ::std::string& sFile, int pos, int num, Ice::ByteSeq& bytes)
+    {
+        return m_db.getFileCompressed(sFile, pos, num, bytes);
+    }
+    
+    bool downloadFile(const string& sFile, const string& sDestPath, ProgressFileCallback pF = NULL, ProgressFileDoneCallback pFinished = NULL)
+    {
+        return m_db.downloadFile(sFile, sDestPath, pF, pFinished);
+    }
+    
+    //上传文件
+    int uploadFileCompressed(const ::std::string& sSrcFile, ::Ice::Int pos, int num,
+                             const ::Ice::ByteSeq& fileContent)
+    {
+        return m_db.uploadFileCompressed(sSrcFile, pos,num, fileContent);
+    }
+    
+    int upload(const string& sFile, const string& sRemotePath, ProgressFileCallback pF = NULL, ProgressFileDoneCallback pFinished = NULL)
+    {
+        return m_db.upload(sFile, sRemotePath, pF,pFinished);
+    }
+///////////////////////////////////////////////
     
     int plugin(const string& pname,const string& cmd,const string& param,string& out)
     {
@@ -2744,4 +2828,35 @@ private:
     std::string _sDBFile;
     std::string _sError;
     bool		_bconnected;
+};
+
+/*
+ *用于发送参数至中心，便于组装
+ */
+class SelectHelpParam
+{
+public:
+    SelectHelpParam()
+    {
+        
+    }
+    void add(string src)
+    {
+        m_vs.push_back(src);
+    }
+    string get()
+    {
+        char c = 0x01;
+        string sDest;
+        for( int i=0; i<m_vs.size(); ++i)
+        {
+            sDest += m_vs[i];
+            if( i!=m_vs.size() -1 )
+                sDest += c;
+        }
+        
+        return sDest;
+    }
+private:
+    vector<string> m_vs;
 };

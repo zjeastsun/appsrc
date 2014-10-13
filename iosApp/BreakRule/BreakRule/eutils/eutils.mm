@@ -2808,6 +2808,302 @@ void CICEBaseDBUtil::setServer(const char* server,int iTcpPort,int iUdpPort,int 
     }
     m_iSSLPort = iSSLPort;
 }
+
+//上传文件
+int CICEBaseDBUtil::uploadFileCompressed(const ::std::string& sSrcFile, ::Ice::Int pos,int num,
+                                         const ::Ice::ByteSeq& fileContent)
+{
+	int iResult = -1;
+    
+	if (fileContent.size() <= 0)
+		return false;
+    
+    
+	if (!IC_GET_DB)
+	{
+		return -1;
+	}
+    
+	try
+	{
+		iResult  = IC_GET_DB->UploadFile(sSrcFile, pos,num,fileContent);
+		return iResult;
+	}
+	catch (const Ice::Exception& e)
+	{
+		wlog("%s\n", e.what());
+		return -1;
+	}
+	catch (...)
+	{
+		return -1;
+	}
+	
+	return iResult;
+}
+
+bool CICEBaseDBUtil::downloadFile(const string& sFile, const string& sDestPath, ProgressFileCallback pF,
+                                  ProgressFileDoneCallback pFinished)
+{
+	//int iRetryTimes = 10;
+    
+	string sError = "";
+	string sInfo, sTmp;
+	getFileInfo(sFile, sInfo);
+    
+	CSelectHelp help;
+	help.fromString(sInfo.c_str());
+    
+	if (help._count <= 0) return false;
+    
+	int iSize = help.valueInt(0, "size");
+    
+	string sNewSaveFile = sDestPath + "/" + util::getFileName(sFile, sTmp);
+	string sNewSaveFileTmp = sNewSaveFile + ".tmp";
+    
+	FILE *fp = fopen(sNewSaveFileTmp.c_str(), "wb");
+    
+	if (fp == NULL)
+	{
+		sError = sFile + " 文件保存失败";
+		if (pFinished)
+		{
+			pFinished(sFile, -1, sError);
+		}
+		return false;;
+	}
+    
+	int iCurPos = 0;
+    
+	int iCurRetryTimes = 0;
+	Ice::ByteSeq bytes;
+	while (iSize > iCurPos)
+	{
+        
+		bytes.clear();
+		//保存的值在bytes
+		int iReadSize = getFileCompressed(sFile, iCurPos, getFileCache(), bytes);
+        
+		if ( iReadSize < 0 )
+		{
+			util::Sleep(10);
+			iCurRetryTimes++;
+            
+			if (iCurRetryTimes >= getFileRetryTimes() )
+			{
+				if (pFinished)
+				{
+					sError = "超过重试次数";
+					pFinished(sFile, -1, sError);
+                    
+//					CDiskObject obj;
+//					obj.RemoveFile(sNewSaveFileTmp);
+				}
+				return false;
+			}
+			continue;
+		}
+        
+		//util::Sleep(100);
+		if (bytes.size() <= 0) continue;
+        
+		//写入到文件
+		if (fwrite(reinterpret_cast<char*>(&bytes[0]), bytes.size(), 1, fp) != 1)
+		{
+			printf("cannot write `\n");
+			return false;
+		}
+        
+		//移动位置
+		iCurPos += bytes.size();
+        
+        
+		//处理回调函数
+		if (pF)
+		{
+			pF(sFile, ((double)iCurPos / iSize) * 100);
+		}
+        
+		iCurRetryTimes = 0;
+        
+		if (iReadSize != getFileCache())
+			break;
+        
+	}
+    
+	fclose(fp);
+//	CDiskObject obj;
+	::rename(sNewSaveFileTmp.c_str(), sNewSaveFile.c_str());
+	//obj.RenameFile(sNewSaveFileTmp, util::getFileName(sFile, sTmp));
+    
+	pFinished(sFile, 1, "");
+	return true;
+    
+}
+
+int CICEBaseDBUtil::upload(const string& sSrcFile,const string& sRemotePath, ProgressFileCallback pF , ProgressFileDoneCallback pFinished )
+{
+	int iCacheSize = getFileCache();
+	int iRetryTimes = getFileRetryTimes();
+    
+    
+	
+	string sFileName;
+	util::getFileName(sSrcFile, sFileName);
+	long fSize = util::fileSize((char*)sSrcFile.c_str());
+	FILE* fp = fopen(sSrcFile.c_str(), "rb");
+    
+	if (fp == NULL)
+	{
+        
+		if (pFinished)
+		{
+			pFinished(sSrcFile, -1, "文件打开失败");
+			
+		}
+		return -1;
+        
+        
+	}
+    
+    
+	int iRead = 0;
+    
+	int iCurPos = 0;
+    
+    
+    
+    
+	Ice::ByteSeq bytes;
+	bytes.resize(iCacheSize);
+    
+	int iCurRetry = 0;
+	while ((iRead = fread(&bytes[0], 1, iCacheSize, fp)) > 0)
+	{
+		int iWrite = IC_GET_DB->UploadFile(sRemotePath + "/" + sFileName, iCurPos,bytes.size(), bytes);
+        
+		if (iWrite <= 0)
+		{
+			iCurRetry++;
+            
+			if (iCurRetry >= iRetryTimes) break;
+            
+            
+			if (iWrite == -3)
+			{
+				iCurPos = 0;
+				fseek(fp, 0, SEEK_SET);
+			}
+            
+			continue;
+		}
+        
+        
+		iCurPos += iRead;
+        
+        
+        
+		bytes.clear();
+		bytes.resize(iCacheSize);
+        
+        
+		if (pF)
+		{
+            
+			pF(sSrcFile, ((double)iCurPos / fSize) * 100);
+		}
+        
+		//for test only
+		//util::Sleep(1000);
+        
+	}
+    
+	if (pFinished)
+	{
+		pFinished(sSrcFile, 1, "");
+        
+	}
+	return 0;
+    
+}
+//getFileCompressed
+int CICEBaseDBUtil::getFileCompressed(const ::std::string& sFile, int pos, int num, Ice::ByteSeq& bytes) const
+{
+	int iResult = -1;
+	
+	bytes.clear();
+    
+	if (!IC_GET_DB)
+	{
+		return -1;
+	}
+    
+	try
+	{
+		bytes = IC_GET_DB->getFileCompressed(sFile, pos,num,iResult);
+		return iResult;
+	}
+	catch (const Ice::Exception& e)
+	{
+		wlog("%s\n", e.what());
+		return -1;
+	}
+	catch (...)
+	{
+		return -1;
+	}
+	return iResult;
+    
+}
+
+bool CICEBaseDBUtil::getFileInfo(const string& sFilePath, string& sHelpInfo) const
+{
+    sHelpInfo = "";
+	if (!IC_GET_DB)
+	{
+		return false;
+	}
+    
+	try
+	{
+		return IC_GET_DB->getFileInfo(sFilePath,sHelpInfo);
+	}
+	catch (const Ice::Exception& e)
+	{
+		wlog("%s\n", e.what());
+		return false;
+	}
+	catch (...)
+	{
+		return false;
+	}
+	return true;
+}
+bool CICEBaseDBUtil::getFileInfoSeq(const string& sFilePath, string& sHelpInfo) const
+{
+	sHelpInfo = "";
+	if (!IC_GET_DB)
+	{
+		return false;
+	}
+    
+	try
+	{
+		return  IC_GET_DB->getFileInfoSeq(sFilePath, sHelpInfo);
+		
+	}
+	catch (const Ice::Exception& e)
+	{
+		wlog("%s\n", e.what());
+		return false;
+	}
+	catch (...)
+	{
+		return false;
+	}
+	return true;
+}
+
 std::string& CICEBaseDBUtil::getVersion(std::string& out)
 {
     out = "";
