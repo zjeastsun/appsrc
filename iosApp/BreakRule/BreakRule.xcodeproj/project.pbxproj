@@ -244,12 +244,11 @@
 				0448781E19CC70FB0086CE1B /* Main.storyboard */,
 				0490BE1819E096F300C83D82 /* main */,
 				0490BE1719E0969500C83D82 /* BreakRuleTakePhoto */,
+				049B740A19EBCC90000BE808 /* RectifyTakePhoto */,
 				0478B47319D4BCC40077EDBA /* QueryViewController.h */,
 				0478B47419D4BCC40077EDBA /* QueryViewController.m */,
 				0478B47019D4BA1A0077EDBA /* ReviewViewController.h */,
 				0478B47119D4BA1A0077EDBA /* ReviewViewController.m */,
-				04998F7519D3812300CECB16 /* RectifyViewController.h */,
-				04998F7619D3812300CECB16 /* RectifyViewController.m */,
 				0448782719CC70FB0086CE1B /* Images.xcassets */,
 				0448781319CC70FB0086CE1B /* Supporting Files */,
 			);
@@ -337,6 +336,15 @@
 				047167FE19CF3D9500A81F9B /* SetViewController.mm */,
 			);
 			name = main;
+			sourceTree = "<group>";
+		};
+		049B740A19EBCC90000BE808 /* RectifyTakePhoto */ = {
+			isa = PBXGroup;
+			children = (
+				04998F7519D3812300CECB16 /* RectifyViewController.h */,
+				04998F7619D3812300CECB16 /* RectifyViewController.m */,
+			);
+			name = RectifyTakePhoto;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

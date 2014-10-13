@@ -60,10 +60,10 @@ string getIPWithHostName(string hostName)
 
 - (IBAction)login:(id)sender {
 
-//    UIViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
-//    [self presentViewController:projectView animated:YES completion:nil];
-//    
-//    return;
+    UIViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
+    [self presentViewController:view animated:YES completion:nil];
+    
+    return;
     
 //    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 //    appDelegate.g_int = 10;

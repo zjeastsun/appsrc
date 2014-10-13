@@ -1,6 +1,6 @@
 /***************************************************************************
 *                                 
-* ÏîÄ¿Ãû³Æ                     
+* é¡¹ç›®åç§°                     
 *             __  __    _    ____                           
 *             |  \/  |  / \  / ___|  ___ _ ____   _____ _ __ 
 *             | |\/| | / _ \ \___ \ / _ \ '__\ \ / / _ \ '__|
@@ -8,18 +8,21 @@
 *             |_|  |_/_/   \_\____/ \___|_|    \_/ \___|_|
 *
 *
-* Copyright (C) 2007 - 2009, ¹ÈÎ°Äê [Eric Goo] , <guwncn@gmail.com>.
-* ±¾ÎÄ¼şÊÇICE ½Ó¿ÚÎÄ¼ş,ÊÇ¿Í»§¶ËÓë·şÎñÆ÷Stub´úÂëÉú³ÉµÄ»ù´¡
-* ÎÄ¼şĞŞ¸Ä¼ÇÂ¼:
-*          2009-11-01 ĞÂ½¨   by Eric Goo
-*          2009-11-13 ĞÂÔö reInitApp,getConfigure,loadPlugin½Ó¿Ú  by Eric Goo
-*          2009-11-19 ĞÂÔö ²å¼şÊµÏÖ,¿ÉÒÔ×Ô¶¯¼ÓÔØÍâ²¿²å¼ş  by Eric Goo
-*		   2009-12-11 ĞÂÔö execHCProc½Ó¿Ú by Eric Goo
-*		   2009-01-06 µ÷ÕûÁËÏµÍ³½Ó¿Ú£¬É¾³ıÁËÒ»Ğ©ÎŞÓÃµÄ½Ó¿Ú£¬½«½Ó¿Ú¸ÄÎªÒì²½µ÷ÓÃ·½Ê½
+* Copyright (C) 2007 - 2009, è°·ä¼Ÿå¹´ [Eric Goo] , <guwncn@gmail.com>.
+* æœ¬æ–‡ä»¶æ˜¯ICE æ¥å£æ–‡ä»¶,æ˜¯å®¢æˆ·ç«¯ä¸æœåŠ¡å™¨Stubä»£ç ç”Ÿæˆçš„åŸºç¡€
+* æ–‡ä»¶ä¿®æ”¹è®°å½•:
+*          2009-11-01 æ–°å»º   by Eric Goo
+*          2009-11-13 æ–°å¢ reInitApp,getConfigure,loadPluginæ¥å£  by Eric Goo
+*          2009-11-19 æ–°å¢ æ’ä»¶å®ç°,å¯ä»¥è‡ªåŠ¨åŠ è½½å¤–éƒ¨æ’ä»¶  by Eric Goo
+*		   2009-12-11 æ–°å¢ execHCProcæ¥å£ by Eric Goo
+*		   2009-01-06 è°ƒæ•´äº†ç³»ç»Ÿæ¥å£ï¼Œåˆ é™¤äº†ä¸€äº›æ— ç”¨çš„æ¥å£ï¼Œå°†æ¥å£æ”¹ä¸ºå¼‚æ­¥è°ƒç”¨æ–¹å¼
 ***************************************************************************/     
 
 #ifndef MQ_INTERFACE_ICE
 #define MQ_INTERFACE_ICE
+
+#include <Ice/BuiltinSequences.ice>
+
 
 module MQServerModule
 {
@@ -27,14 +30,14 @@ module MQServerModule
 
 interface MQInterface
 {
-	//½Ó¿Ú°æ±¾ĞÅÏ¢
+	//æ¥å£ç‰ˆæœ¬ä¿¡æ¯
 	string version();
 	
-	//·şÎñÆ÷¶ËÊ±¼ä
+	//æœåŠ¡å™¨ç«¯æ—¶é—´
 	string getTime();
 
-	//»ñÈ¡·şÎñÆ÷µÄÅäÖÃĞÅÏ¢
-	/*  ¸ñÊ½ĞÎÈç key = value ,²»Í¬ÖµÖ®¼äÒÔ\n·Ö¸ô
+	//è·å–æœåŠ¡å™¨çš„é…ç½®ä¿¡æ¯
+	/*  æ ¼å¼å½¢å¦‚ key = value ,ä¸åŒå€¼ä¹‹é—´ä»¥\nåˆ†éš”
 		[common]
 		server=localhost
 		tcp_port=8780
@@ -51,60 +54,95 @@ interface MQInterface
 	string getConfigure(string segment,string key);
 
 	
-	//ÆÕÍ¨ÏûÏ¢
-	void sendOneway(string msg);   //×î¼òµ¥µÄUDPÊı¾İ·¢ËÍ
-	bool send(string msg);   //·¢ËÍÆÕÍ¨ÏûÏ¢
+	//æ™®é€šæ¶ˆæ¯
+	void sendOneway(string msg);   //æœ€ç®€å•çš„UDPæ•°æ®å‘é€
+	bool send(string msg);   //å‘é€æ™®é€šæ¶ˆæ¯
 	
-	//Í¨ÓÃÃüÁîÖ§³Ö
+	//é€šç”¨å‘½ä»¤æ”¯æŒ
 	int command(string cmd,string param,out string outmsg); 
 	
-	//²å¼ş½Ó¿Ú
+	//æ’ä»¶æ¥å£
 	int plugin(string pname,string func,string param,out string outmsg); 
 	
-	["ami","amd"] idempotent int selectCmd(string cmd,string sqlcode,string param,out string set,out string error);    //Ô¶³Ì¹ÜÀí£¬ÓÃÓÚ²éÑ¯
-	["ami","amd"] idempotent int execCmd(string cmd,string sqlcode,string param,out string set,out string error);    //Ô¶³Ì¹ÜÀí,ÓÃÓÚÖ´ĞĞSQLµÈ
+	["ami","amd"] idempotent int selectCmd(string cmd,string sqlcode,string param,out string set,out string error);    //è¿œç¨‹ç®¡ç†ï¼Œç”¨äºæŸ¥è¯¢
+	["ami","amd"] idempotent int execCmd(string cmd,string sqlcode,string param,out string set,out string error);    //è¿œç¨‹ç®¡ç†,ç”¨äºæ‰§è¡ŒSQLç­‰
 
 
-	//Êı¾İ¿âÏà¹Ø½Ó¿Ú
-	["ami","amd"] idempotent int select(string sql,string param,out string set,out string error);    //Ô¶³Ì²éÑ¯Êı¾İ¿â
+	//æ•°æ®åº“ç›¸å…³æ¥å£
+	["ami","amd"] idempotent int select(string sql,string param,out string set,out string error);    //è¿œç¨‹æŸ¥è¯¢æ•°æ®åº“
 
-	//Êı¾İ¿âÏà¹Ø½Ó¿Ú,Ìá¹©·ÖÒ³²éÑ¯½Ó¿Ú
+	//æ•°æ®åº“ç›¸å…³æ¥å£,æä¾›åˆ†é¡µæŸ¥è¯¢æ¥å£
 	["ami","amd"] idempotent int selectPage(
 						string sql,string param,int iStart,int iCount,
-						out string set,out string error);    //Ô¶³Ì·ÖÒ³²éÑ¯Êı¾İ¿â
+						out string set,out string error);    //è¿œç¨‹åˆ†é¡µæŸ¥è¯¢æ•°æ®åº“
 
 
-	["ami","amd"] bool execSQL(string sql,string param,out string error);    //Ô¶³ÌÖ´ĞĞÊı¾İ¿â
+	["ami","amd"] bool execSQL(string sql,string param,out string error);    //è¿œç¨‹æ‰§è¡Œæ•°æ®åº“
 
-	//Ô¶³ÌÖ´ĞĞ´æ´¢¹ı³Ì
+	//è¿œç¨‹æ‰§è¡Œå­˜å‚¨è¿‡ç¨‹
 	["ami","amd"] bool execProc(string sql,string param,out string set,out string error);   
 
 	
-	//ÅúÁ¿Êı¾İ²Ù×÷¹¦ÄÜ£¬¿ÉÒÔÒ»´ÎĞÔ½«Ò»´óÅúĞèÒªÖ´ĞĞµÄSQL pushÖÁ·şÎñÆ÷¶Ë
-	//sqlblock Ã¿Ò»²»Í¬Óï¾äÖ®¼äÒÔ ×Ö·û 0x02Îª·Ö¸ô·û 
-	//sIDÎª¿Í»§¶Ë´«¸ø·şÎñÆ÷¶ËµÄÊ¶±ğÂë£¬¿ÉÒÔÓÃÀ´²éÑ¯Ö´ĞĞµÄ½á¹û
-	["ami","amd"]  bool execSQLBatch(string sqlblock,out string error);    //Ô¶³ÌÖ´ĞĞÊı¾İ¿â
+	//æ‰¹é‡æ•°æ®æ“ä½œåŠŸèƒ½ï¼Œå¯ä»¥ä¸€æ¬¡æ€§å°†ä¸€å¤§æ‰¹éœ€è¦æ‰§è¡Œçš„SQL pushè‡³æœåŠ¡å™¨ç«¯
+	//sqlblock æ¯ä¸€ä¸åŒè¯­å¥ä¹‹é—´ä»¥ å­—ç¬¦ 0x02ä¸ºåˆ†éš”ç¬¦ 
+	//sIDä¸ºå®¢æˆ·ç«¯ä¼ ç»™æœåŠ¡å™¨ç«¯çš„è¯†åˆ«ç ï¼Œå¯ä»¥ç”¨æ¥æŸ¥è¯¢æ‰§è¡Œçš„ç»“æœ
+	["ami","amd"]  bool execSQLBatch(string sqlblock,out string error);    //è¿œç¨‹æ‰§è¡Œæ•°æ®åº“
 	
 	
-	//¿Í»§¶ËÒµÎñÈÕ¼Ç½Ó¿Ú
+	//å®¢æˆ·ç«¯ä¸šåŠ¡æ—¥è®°æ¥å£
 	idempotent bool writeBusiLog(string personid,string ip,string busiType,string comment);
 
 
 
 
-	//Õë¶ÔÒì²½½Ó¿Ú,ÒòÎª²»¿ÉÄÜÒ»¿ªÊ¼¾Í·µ»Ø½á¹ûÖµ¸ø¿Í»§¶Ë,Òò´Ë¿Í»§¶Ë¿ÉÒÔÍ¨¹ıĞ©½Ó¿ÚÀ´µ÷ÓÃ¡£
-	//ÒÑ¾­²»ÔÙÖ§³Ö´Ë½Ó¿Ú
+	//é’ˆå¯¹å¼‚æ­¥æ¥å£,å› ä¸ºä¸å¯èƒ½ä¸€å¼€å§‹å°±è¿”å›ç»“æœå€¼ç»™å®¢æˆ·ç«¯,å› æ­¤å®¢æˆ·ç«¯å¯ä»¥é€šè¿‡äº›æ¥å£æ¥è°ƒç”¨ã€‚
+	//å·²ç»ä¸å†æ”¯æŒæ­¤æ¥å£
 	bool getRespone(string sID,out string outinfo,out string error);
 	
-	//¶à´Î²éÑ¯½á¹û
-	//ÏÂÃæ½Ó¿ÚÔİÊ±²»Ö§³Ö
-	idempotent bool desc(string sql,out string set,out string insertsql,out string error);    //Ô¶³Ì²éÑ¯±í½á¹¹ĞÅÏ¢	
+	//å¤šæ¬¡æŸ¥è¯¢ç»“æœ
+	//ä¸‹é¢æ¥å£æš‚æ—¶ä¸æ”¯æŒ
+	idempotent bool desc(string sql,out string set,out string insertsql,out string error);    //è¿œç¨‹æŸ¥è¯¢è¡¨ç»“æ„ä¿¡æ¯	
 	idempotent bool selectPrepareByParam(string sql,string param,out string sID,out string error);  
 	idempotent bool selectPrepare(string sql,out string sID,out string error);
 	idempotent int  selectNext(string sID,out string set);
 	idempotent bool selectFinish(string sID);
 
 
+
+	//å­˜å‚¨ä¸ºä¸€ä¸ªHelpä¿¡æ¯
+	//path,checksum(äºŒè¿›åˆ¶å†è½¬ä¸ºå­—ç¬¦ä¸²),æ–‡ä»¶å¤§å°
+	/*è·å–æ–‡ä»¶çš„æ ¡éªŒå’Œç›¸å…³ä¿¡æ¯*/
+	["ami", "nonmutating", "cpp:const"] idempotent bool getFileInfo(string sFilePath,out string sHelpInfo);
+
+	/*è·å–æŒ‡å®šæ–‡ä»¶å¤¹çš„æ ¡éªŒå’Œç›¸å…³ä¿¡æ¯*/
+	["ami", "nonmutating", "cpp:const"] idempotent bool getFileInfoSeq(string sPath,out string sHelpInfo);
+
+
+    /**
+     *
+     * Read the specified file. If the read operation fails, the
+     * operation throws {@link FileAccessException}. This operation may only
+     * return fewer bytes than requested in case there was an
+     * end-of-file condition.
+     *
+     * @param path The pathname (relative to the data directory) for
+     * the file to be read.
+     *
+     * @param pos The file offset at which to begin reading.
+     *
+     * @param num The number of bytes to be read.
+     *
+     * @return A sequence containing the compressed file contents.
+     *
+     **/
+    ["ami", "amd", "nonmutating", "cpp:const", "cpp:array"] 
+    idempotent Ice::ByteSeq getFileCompressed(string path, int pos, int num,out int iResult);
+
+
+
+	//ä¸Šä¼ æ–‡ä»¶
+	 ["ami", "amd", "nonmutating", "cpp:const", "cpp:array"] 
+	int UploadFile(string sFile, int pos,int num,Ice::ByteSeq filecontent);
 	
 };
 
