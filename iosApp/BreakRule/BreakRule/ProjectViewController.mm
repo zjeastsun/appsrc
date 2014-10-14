@@ -7,6 +7,7 @@
 //
 
 #import "ProjectViewController.h"
+#import "SingletonBridge.h"
 
 @interface ProjectViewController ()
 
@@ -23,26 +24,29 @@
     return self;
 }
 
+- (void)queryProject:(NSString *)orgId
+{
+    ONEICE
+    
+    string strError;
+    string strParam="";
+    const string sqlcode="get_project";
+    
+    string sOrgId = [orgId UTF8String];
+    SelectHelpParam helpParam;
+    helpParam.add(sOrgId);
+    helpParam.add(sOrgId);
+    strParam = helpParam.get();
+
+    oneIce.g_db->selectCmd("", sqlcode, strParam, helpProject, strError);
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    ONEICE
-    
-    string strSQL="";
-	string strError;
-    CSelectHelp	helpUser;
-    
-    util::string_format(strSQL, "select * from T_USER  ");
-    
-    oneIce.g_db->select(strSQL, helpUser, strError);
-    
-    if( helpUser.size() <= 0 )
-    {
-        NSLog(@"ProjectViewController用户登录失败！");
-        return;
-    }
-    NSLog(@"ProjectViewController用户登录成功！");
+    BRIDGE
+    [self queryProject:bridge.nsOrgId];
     
     // Do any additional setup after loading the view.
 }
@@ -70,7 +74,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return helpProject.size();
 }
 
 //表段头
@@ -96,8 +100,12 @@
     
     UIImage *ima = [UIImage imageNamed:@"share_this_icon.png"];
     cell.imageView.image =ima;
-    cell.textLabel.text =@"项目1";
     
+    string sProject = helpProject.valueString( indexPath.row, "org_name" );
+    char *temp =const_cast<char*>(sProject.c_str());
+    
+    NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+    cell.textLabel.text = [NSString stringWithCString:temp encoding:enc];
 
     return cell;
 }
@@ -108,7 +116,12 @@
     if(row == 0)
     {
     }
-
+    BRIDGE
+    string sContent = helpProject.valueString(static_cast<int>(indexPath.row), "org_id");
+    bridge.nsOrgIdSelected = [NSString stringWithCString:(char*)sContent.c_str() encoding:NSUTF8StringEncoding];
+    sContent = helpProject.valueString(static_cast<int>(indexPath.row), "org_name");
+    bridge.nsOrgNameSelected = [NSString stringWithCString:(char*)sContent.c_str() encoding:NSUTF8StringEncoding];
+    
     UIViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MainView"];
 
     [self presentViewController:mainViewController animated:YES completion:nil];

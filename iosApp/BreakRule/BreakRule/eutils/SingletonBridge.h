@@ -1,9 +1,18 @@
 #import <Foundation/Foundation.h>
+#import"eutils.h"
 
 #define BRIDGE SingletonBridge *bridge; bridge = [SingletonBridge sharedInstance];
 
 @interface SingletonBridge: NSObject
 
+@property (strong, nonatomic) NSString *nsUserId;
+@property (strong, nonatomic) NSString *nsLoginName;
+
+@property (strong, nonatomic) NSString *nsOrgId;
+@property (strong, nonatomic) NSString *nsOrgIdSelected;
+@property (strong, nonatomic) NSString *nsOrgNameSelected;
+
+@property (nonatomic) CSelectHelp helpRight;
 
 @property (strong, nonatomic) NSString *nsRuleType;
 @property (strong, nonatomic) NSString *nsRuleOption;

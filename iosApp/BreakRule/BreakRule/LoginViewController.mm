@@ -11,6 +11,7 @@
 #import <netdb.h>
 #include <arpa/inet.h>
 
+#import "SingletonBridge.h"
 
 @interface LoginViewController ()
 
@@ -60,10 +61,10 @@ string getIPWithHostName(string hostName)
 
 - (IBAction)login:(id)sender {
 
-    UIViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
-    [self presentViewController:view animated:YES completion:nil];
-    
-    return;
+//    UIViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
+//    [self presentViewController:view animated:YES completion:nil];
+//    
+//    return;
     
 //    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 //    appDelegate.g_int = 10;
@@ -118,12 +119,17 @@ string getIPWithHostName(string hostName)
         NSLog(@"数据库连接成功！");
     }
     
-    string strSQL="";
 	string strError;
-    CSelectHelp	helpUser;
+    string strParam="";
+    const string sqlcode="login_check";
     
-    util::string_format(strSQL, "select * from T_USER where login_name='%s' and pwd='%s' ", sUser.c_str(), sPwd.c_str());
-    oneIce.g_db->select(strSQL, helpUser, strError);
+    SelectHelpParam helpParam;
+    helpParam.add(sUser);
+    helpParam.add(sPwd);
+    strParam = helpParam.get();
+    
+    CSelectHelp	helpUser;
+    oneIce.g_db->selectCmd("", sqlcode, strParam, helpUser, strError);
 
     if( helpUser.size() <= 0 )
     {
@@ -131,6 +137,27 @@ string getIPWithHostName(string hostName)
         return;
     }
     NSLog(@"用户登录成功！");
+    
+    BRIDGE
+    oneIce.g_db->selectCmd("", "get_user_info", sUser, helpUser, strError);
+    if (helpUser.size()>0) {
+        string sOrgId = helpUser.valueString( 0, "org_id" );
+        char *temp =const_cast<char*>(sOrgId.c_str());
+        
+        bridge.nsOrgId = [NSString stringWithCString:temp encoding:NSASCIIStringEncoding];
+
+        bridge.nsUserId = [NSString stringWithCString:const_cast<char*>(helpUser.valueString( 0, "user_id" ).c_str()) encoding:NSASCIIStringEncoding];
+        bridge.nsLoginName = userField.text;
+        
+        NSLog(@"组织ID：%@", bridge.nsOrgId);
+        
+    }
+    
+    CSelectHelp	helpRight;
+    oneIce.g_db->selectCmd("", "get_right", sUser, helpRight, strError);
+    if (helpRight.size()>0) {
+        bridge.helpRight.copy(helpRight);
+    }
     
     UIViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
     [self presentViewController:projectView animated:YES completion:nil];
