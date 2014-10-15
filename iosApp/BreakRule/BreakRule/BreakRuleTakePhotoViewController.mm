@@ -12,6 +12,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "SJAvatarBrowser.h"
 #import "SingletonBridge.h"
+#import "SingletonIce.h"
 
 @interface BreakRuleTakePhotoViewController ()
 
@@ -142,6 +143,19 @@
         {
             cell.detailTextLabel.text = bridge.nsRuleType;
         }
+        
+        if ([cell.detailTextLabel.text isEqualToString:@"一般违规"]) {
+            nsBreakRuleType = @"0";
+        }
+        else if ([cell.detailTextLabel.text isEqualToString:@"严重违规"])
+        {
+            nsBreakRuleType = @"1";
+        }
+        else if ([cell.detailTextLabel.text isEqualToString:@"重大违规"])
+        {
+            nsBreakRuleType = @"2";
+        }
+
     }
     else
     {
@@ -226,14 +240,14 @@
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
     
-    if( picker.sourceType == UIImagePickerControllerSourceTypeSavedPhotosAlbum || picker.cameraCaptureMode == UIImagePickerControllerCameraCaptureModePhoto )
+    if( picker.sourceType == UIImagePickerControllerSourceTypeSavedPhotosAlbum || picker.cameraCaptureMode == UIImagePickerControllerCameraCaptureModePhoto )//照片
     {
         //    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];//裁剪的照片
         UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];//原始照片
         
         __block NSDictionary *metaData;
         NSDictionary *exifData;
-        __block NSString *nsPhotoData;
+//        __block NSString *nsPhotoData;
         
         //如果是从摄像头拍照来的保存照片到相册
         if(picker.sourceType == UIImagePickerControllerSourceTypeCamera)
@@ -317,9 +331,90 @@
     }
 }
 
-- (IBAction)commit:(id)sender {
-    //获取temp目录
-    NSString *tempPath = NSTemporaryDirectory();
+-(void)insertInfoToDb
+{
+//    if (nsPhotoData == nil || [nsPhotoData length] == 0)
+//    {
+//        [self MessageBox:@"您还没有拍照或者导入照片！"];
+//        return;
+//    }
+    
+    BRIDGE
+    
+    NSDate *  senddate=[NSDate date];
+    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    NSString *  nsTime=[dateformatter stringFromDate:senddate];
+    
+    string strError;
+    string strParam="";
+    const string sqlcode="put_break_law_info";
+    
+    string sBreakRuleId = "1";
+    string sNodeId = "1";
+    string sOrgId = [bridge.nsOrgId UTF8String];
+    string sUserId = [bridge.nsUserId UTF8String];
+    string sBreakRuleContent = [contentTextView.text UTF8String];
+    string sPicName = "pic.jpg";
+    string sPicTime = [nsTime UTF8String];//[nsPhotoData UTF8String];
+    string sBreakRuleType = [nsBreakRuleType UTF8String];
+    string sUpdateTime = [nsTime UTF8String];
+    string sLongitude = "0";
+    string sLatitude = "0";
+    
+    SelectHelpParam helpParam;
+    helpParam.add(sBreakRuleId);
+    helpParam.add(sNodeId);
+    helpParam.add(sOrgId);
+    helpParam.add(sUserId);
+    helpParam.add(sBreakRuleContent);
+    helpParam.add(sPicName);
+    helpParam.add(sPicTime);
+    helpParam.add(sBreakRuleType);
+    helpParam.add(sUpdateTime);
+    helpParam.add(sLongitude);
+    helpParam.add(sLatitude);
+    strParam = helpParam.get();
+    
+    ONEICE
+    CSelectHelp	help;
+    oneIce.g_db->execCmd("", sqlcode, strParam, help, strError);
+    
 }
 
+- (IBAction)commit:(id)sender {
+    [self insertInfoToDb];
+    
+    //获取temp目录
+    NSString *filePath = NSTemporaryDirectory();
+    
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *filePath = [paths objectAtIndex:0];
+    NSString *desPath = [filePath stringByAppendingPathComponent:@"pic.jpg"];
+    
+    //获取保存得图片
+    UIImage *img = [UIImage imageWithContentsOfFile:desPath];
+    imageView.image = img;
+    
+    string sFileName = [desPath UTF8String];
+      //保存图片
+//    BOOL result = [UIImagePNGRepresentation(imageView.image)writeToFile: desPath    atomically:YES];
+//    if (result) {
+//        NSLog(@"success");
+//    }
+//  
+    ONEICE
+    oneIce.g_db->upload(sFileName, "test");
+
+}
+
+-(void)MessageBox:(NSString *)msg
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误"
+                                                    message:msg
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
 @end

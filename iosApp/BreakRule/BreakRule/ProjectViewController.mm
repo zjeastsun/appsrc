@@ -26,6 +26,11 @@
 
 - (void)queryProject:(NSString *)orgId
 {
+    if (orgId == nil || [orgId length] == 0)
+    {
+        return;
+    }
+    
     ONEICE
     
     string strError;
@@ -74,6 +79,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    int iRows = helpProject.size();
+    if (iRows == 0) {
+        return 1;
+    }
     return helpProject.size();
 }
 
@@ -105,7 +114,13 @@
     char *temp =const_cast<char*>(sProject.c_str());
     
     NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
-    cell.textLabel.text = [NSString stringWithCString:temp encoding:enc];
+    if (helpProject.size() == 0) {
+        cell.textLabel.text = @"目前没有项目";
+    }
+    else
+    {
+        cell.textLabel.text = [NSString stringWithCString:temp encoding:enc];
+    }
 
     return cell;
 }

@@ -16,6 +16,9 @@
     IBOutlet UIImageView *imageView;
     IBOutlet UITableView *ruleTableView;
     IBOutlet UITextView *contentTextView;
+    
+    __block NSString *nsPhotoData;
+    NSString *nsBreakRuleType;
 }
 - (IBAction)back:(id)sender;
 - (IBAction)fromPhotosAlbum:(id)sender;
