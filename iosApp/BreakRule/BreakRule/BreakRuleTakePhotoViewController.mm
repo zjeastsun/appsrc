@@ -383,7 +383,7 @@
 }
 
 - (IBAction)commit:(id)sender {
-    [self insertInfoToDb];
+//    [self insertInfoToDb];
     
     //获取temp目录
     NSString *filePath = NSTemporaryDirectory();

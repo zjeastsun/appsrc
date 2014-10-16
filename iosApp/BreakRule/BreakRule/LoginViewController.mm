@@ -61,15 +61,15 @@ string getIPWithHostName(string hostName)
 
 - (IBAction)login:(id)sender {
 
-//    UIViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
-//    [self presentViewController:view animated:YES completion:nil];
-//    
-//    return;
+    UIViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
+    [self presentViewController:view animated:YES completion:nil];
+    
+    return;
     
 //    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 //    appDelegate.g_int = 10;
     
-//    string sIp = getIPWithHostName("www.myxiu.com");
+//    string sIp = getIPWithHostName("www.myxui.com");
 //    string sIp = getIPWithHostName("s911322.eicp.net");
 //    string sIp = getIPWithHostName("192.168.3.109");
     

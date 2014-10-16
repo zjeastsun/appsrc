@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface MainViewController : UIViewController
-- (IBAction)toRectifyView:(id)sender;
-- (IBAction)toReviewView:(id)sender;
+
 - (IBAction)toBreakRuleView:(id)sender;
+- (IBAction)toReviewBreakRule:(id)sender;
+- (IBAction)toRectifyView:(id)sender;
+- (IBAction)toReviewRectifyView:(id)sender;
 - (IBAction)toQueryView:(id)sender;
+
 
 
 @end

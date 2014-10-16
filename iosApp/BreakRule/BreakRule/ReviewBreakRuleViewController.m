@@ -1,18 +1,18 @@
 //
-//  ReviewViewController.m
+//  ReviewBreakRuleViewController.m
 //  BreakRule
 //
-//  Created by mac on 14-9-25.
+//  Created by mac on 14-10-16.
 //  Copyright (c) 2014年 mac. All rights reserved.
 //
 
-#import "ReviewViewController.h"
+#import "ReviewBreakRuleViewController.h"
 
-@interface ReviewViewController ()
+@interface ReviewBreakRuleViewController ()
 
 @end
 
-@implementation ReviewViewController
+@implementation ReviewBreakRuleViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,7 +46,4 @@
 }
 */
 
-- (IBAction)back:(id)sender {
-    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-}
 @end

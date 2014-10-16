@@ -56,6 +56,9 @@
     [self presentViewController:viewController animated:YES completion:nil];
 }
 
+- (IBAction)toReviewBreakRule:(id)sender {
+}
+
 
 
 - (IBAction)toRectifyView:(id)sender {
@@ -63,7 +66,7 @@
     [self presentViewController:viewController animated:YES completion:nil];
 }
 
-- (IBAction)toReviewView:(id)sender {
+- (IBAction)toReviewRectifyView:(id)sender {
     UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReviewView"];
     [self presentViewController:viewController animated:YES completion:nil];
 }
