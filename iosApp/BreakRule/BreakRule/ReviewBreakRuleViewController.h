@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ReviewBreakRuleViewController : UIViewController
+- (IBAction)back:(id)sender;
+- (IBAction)save:(id)sender;
 
 @end

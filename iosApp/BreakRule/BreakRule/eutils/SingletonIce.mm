@@ -19,6 +19,7 @@
     
     if (self = [super init]) {
         _g_db = new CICEDBUtil();
+        _g_db->setFileCache(40960);
 
     }
     

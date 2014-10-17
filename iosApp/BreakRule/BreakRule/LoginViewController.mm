@@ -59,20 +59,8 @@ string getIPWithHostName(string hostName)
     return sRemoteInAddr;
 }
 
-- (IBAction)login:(id)sender {
-
-    UIViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
-    [self presentViewController:view animated:YES completion:nil];
-    
-    return;
-    
-//    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//    appDelegate.g_int = 10;
-    
-//    string sIp = getIPWithHostName("www.myxui.com");
-//    string sIp = getIPWithHostName("s911322.eicp.net");
-//    string sIp = getIPWithHostName("192.168.3.109");
-    
+- (void)dbHandleThread:(NSString *) param
+{
     NSString *server = serverIpField.text;
     string sServer = [server UTF8String];
     
@@ -102,8 +90,113 @@ string getIPWithHostName(string hostName)
     {
         sIp = sServer;
     }
+    
+    //    sIp = "192.168.3.109";
+    
+    ONEICE
+    oneIce.g_db->setServer(sIp.c_str(), 8840);
+    
+    if( !oneIce.g_db->isLogin() )
+    {
+        if( !oneIce.g_db->login() )
+        {
+            //        NSLog(@"数据库连接失败！");
+            [self MessageBox:@"服务器连接失败"];
+            return;
+        }
+        NSLog(@"数据库连接成功！");
+    }
+    
+	string strError;
+    string strParam="";
+    const string sqlcode="login_check";
+    
+    SelectHelpParam helpParam;
+    helpParam.add(sUser);
+    helpParam.add(sPwd);
+    strParam = helpParam.get();
+    
+    CSelectHelp	helpUser;
+    oneIce.g_db->selectCmd("", sqlcode, strParam, helpUser, strError);
+    
+    if( helpUser.size() <= 0 )
+    {
+        [self MessageBox:@"用户名或者密码错误"];
+        return;
+    }
+    NSLog(@"用户登录成功！");
+    
+    BRIDGE
+    oneIce.g_db->selectCmd("", "get_user_info", sUser, helpUser, strError);
+    if (helpUser.size()>0) {
+        string sOrgId = helpUser.valueString( 0, "org_id" );
+        char *temp =const_cast<char*>(sOrgId.c_str());
+        
+        bridge.nsOrgId = [NSString stringWithCString:temp encoding:NSASCIIStringEncoding];
+        
+        bridge.nsUserId = [NSString stringWithCString:const_cast<char*>(helpUser.valueString( 0, "user_id" ).c_str()) encoding:NSASCIIStringEncoding];
+        bridge.nsLoginName = userField.text;
+        
+        NSLog(@"组织ID：%@", bridge.nsOrgId);
+        
+    }
+    
+    CSelectHelp	helpRight;
+    oneIce.g_db->selectCmd("", "get_right", sUser, helpRight, strError);
+    if (helpRight.size()>0) {
+        bridge.helpRight.copy(helpRight);
+    }
+    
+    UIViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
+    [self presentViewController:projectView animated:YES completion:nil];
+}
 
-//    sIp = "192.168.3.109";
+- (IBAction)login:(id)sender {
+
+//    UIViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
+//    [self presentViewController:view animated:YES completion:nil];
+//    
+//    return;
+    
+    NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(dbHandleThread:) object:nil];
+    [thread start];
+    return;
+    //    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    appDelegate.g_int = 10;
+    
+//    string sIp = getIPWithHostName("www.myxui.com");
+//    string sIp = getIPWithHostName("s911322.eicp.net");
+//    string sIp = getIPWithHostName("192.168.3.109");
+  /*
+    NSString *server = serverIpField.text;
+    string sServer = [server UTF8String];
+    
+    NSString *user = userField.text;
+    string sUser = [user UTF8String];
+    
+    NSString *pwd = pwdField.text;
+    string sPwd = [pwd UTF8String];
+    
+    if( sServer.empty() )
+    {
+        [self MessageBox:@"请输入服务器域名或IP地址"];
+        return;
+    }
+    if( sUser.empty() || sPwd.empty() )
+    {
+        [self MessageBox:@"请输入用户名和密码"];
+        return;
+    }
+    
+    string sIp;
+    if ( !util::isIp( sServer.c_str() ) )
+    {
+        sIp = getIPWithHostName(sServer);
+    }
+    else
+    {
+        sIp = sServer;
+    }
     
     ONEICE
     oneIce.g_db->setServer(sIp.c_str(), 8840);
@@ -161,7 +254,7 @@ string getIPWithHostName(string hostName)
     
     UIViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
     [self presentViewController:projectView animated:YES completion:nil];
-    
+   */
 /*
     string sName;
     for( int j=0; j<helpUser.size(); ++j )

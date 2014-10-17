@@ -1009,10 +1009,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="-4367" y="116"/>
         </scene>
-        <!--View Controller - 批阅违规-->
+        <!--Review Break Rule View Controller - 批阅违规-->
         <scene sceneID="0iR-FO-Ek3">
             <objects>
-                <viewController id="970-ul-ylB" sceneMemberID="viewController">
+                <viewController id="970-ul-ylB" customClass="ReviewBreakRuleViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bPz-5E-XsA"/>
                         <viewControllerLayoutGuide type="bottom" id="Qtx-0j-jgd"/>
@@ -1030,8 +1030,16 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="批阅违规" id="RNe-V2-9uD">
-                        <barButtonItem key="leftBarButtonItem" title="返回" id="wKN-4c-ybt"/>
-                        <barButtonItem key="rightBarButtonItem" title="保存" id="eOT-k3-DSh"/>
+                        <barButtonItem key="leftBarButtonItem" title="返回" id="wKN-4c-ybt">
+                            <connections>
+                                <action selector="back:" destination="970-ul-ylB" id="RHh-xC-ked"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="保存" id="eOT-k3-DSh">
+                            <connections>
+                                <action selector="save:" destination="970-ul-ylB" id="vNJ-Hi-Fhx"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8wx-ci-Cgi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1279,7 +1287,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <!--Navigation Controller-->
         <scene sceneID="ecR-M0-Gnx">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sMv-eD-fTd" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ReviewBreakRuleView" automaticallyAdjustsScrollViewInsets="NO" id="sMv-eD-fTd" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vnw-NY-J7G">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

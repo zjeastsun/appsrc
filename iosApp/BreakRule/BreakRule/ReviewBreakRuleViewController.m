@@ -46,4 +46,10 @@
 }
 */
 
+- (IBAction)back:(id)sender {
+    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)save:(id)sender {
+}
 @end

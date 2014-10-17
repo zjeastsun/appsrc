@@ -331,8 +331,30 @@
     }
 }
 
--(void)insertInfoToDb
+-(void)insertInfoToDb:(NSString *)param
 {
+    //获取temp目录
+    NSString *filePath = NSTemporaryDirectory();
+    
+    //    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //    NSString *filePath = [paths objectAtIndex:0];
+    NSString *desPath = [filePath stringByAppendingPathComponent:@"pic.jpg"];
+    
+    //保存图片
+    BOOL result = [UIImagePNGRepresentation(imageView.image)writeToFile: desPath    atomically:YES];
+    if (result) {
+        NSLog(@"success");
+    }
+    
+    //获取保存得图片
+    UIImage *img = [UIImage imageWithContentsOfFile:desPath];
+    imageView.image = img;
+    
+    string sFileName = [desPath UTF8String];
+
+    ONEICE
+    oneIce.g_db->upload(sFileName, "test");
+    return;
 //    if (nsPhotoData == nil || [nsPhotoData length] == 0)
 //    {
 //        [self MessageBox:@"您还没有拍照或者导入照片！"];
@@ -376,35 +398,15 @@
     helpParam.add(sLatitude);
     strParam = helpParam.get();
     
-    ONEICE
     CSelectHelp	help;
     oneIce.g_db->execCmd("", sqlcode, strParam, help, strError);
     
 }
 
 - (IBAction)commit:(id)sender {
-//    [self insertInfoToDb];
     
-    //获取temp目录
-    NSString *filePath = NSTemporaryDirectory();
-    
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *filePath = [paths objectAtIndex:0];
-    NSString *desPath = [filePath stringByAppendingPathComponent:@"pic.jpg"];
-    
-    //获取保存得图片
-    UIImage *img = [UIImage imageWithContentsOfFile:desPath];
-    imageView.image = img;
-    
-    string sFileName = [desPath UTF8String];
-      //保存图片
-//    BOOL result = [UIImagePNGRepresentation(imageView.image)writeToFile: desPath    atomically:YES];
-//    if (result) {
-//        NSLog(@"success");
-//    }
-//  
-    ONEICE
-    oneIce.g_db->upload(sFileName, "test");
+    NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(insertInfoToDb:) object:nil];
+    [thread start];
 
 }
 

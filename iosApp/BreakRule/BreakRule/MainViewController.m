@@ -57,6 +57,8 @@
 }
 
 - (IBAction)toReviewBreakRule:(id)sender {
+    UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReviewBreakRuleView"];
+    [self presentViewController:viewController animated:YES completion:nil];
 }
 
 

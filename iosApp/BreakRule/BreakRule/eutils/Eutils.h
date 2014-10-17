@@ -2058,6 +2058,11 @@ public:
     {
         return m_db.upload(sFile, sRemotePath, pF,pFinished);
     }
+    
+    void setFileCache(int iCacheSize)
+	{
+		m_db.setFileCache(iCacheSize);
+	}
 ///////////////////////////////////////////////
     
     int plugin(const string& pname,const string& cmd,const string& param,string& out)
