@@ -29,7 +29,7 @@ public:
 };
 
 
-
+/*
 //这是个类strCoding (strCoding.h文件)
 #pragma once
 #include <iostream>
@@ -59,6 +59,7 @@ private:
 	char StrToBin(char *str);
     
 };
+*/
 
 //把str编
 

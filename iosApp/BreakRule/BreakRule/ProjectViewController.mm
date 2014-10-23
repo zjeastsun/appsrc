@@ -24,26 +24,24 @@
     return self;
 }
 
-- (void)queryProject:(NSString *)orgId
+- (void)queryProject:(NSString *)nsLoginName
 {
-    if (orgId == nil || [orgId length] == 0)
+    if (nsLoginName == nil || [nsLoginName length] == 0)
     {
         return;
     }
     
     ONEICE
     
+    string sLoginName = [nsLoginName UTF8String];
+    
     string strError;
     string strParam="";
-    const string sqlcode="get_project";
-    
-    string sOrgId = [orgId UTF8String];
-    SelectHelpParam helpParam;
-    helpParam.add(sOrgId);
-    helpParam.add(sOrgId);
-    strParam = helpParam.get();
+    string sql="select * from T_ORGANIZATION a,T_ORG_TYPE b where org_id in ( select org_id FROM func_query_project( '";
+    sql += sLoginName;
+    sql += "') ) and a.org_type_id=b.org_type_id and b.org_type='3'";
 
-    oneIce.g_db->selectCmd("", sqlcode, strParam, helpProject, strError);
+    oneIce.g_db->select(sql, helpProject, strError);
 }
 
 - (void)viewDidLoad
@@ -51,7 +49,7 @@
     [super viewDidLoad];
     
     BRIDGE
-    [self queryProject:bridge.nsOrgId];
+    [self queryProject:bridge.nsLoginName];
     
     // Do any additional setup after loading the view.
 }

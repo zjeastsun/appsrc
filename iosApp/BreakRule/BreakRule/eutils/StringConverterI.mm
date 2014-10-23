@@ -12,7 +12,7 @@
 
 using namespace std;
 
-strCoding  g_code;
+//strCoding  g_code;
 
 StringConverterI::StringConverterI()
 {
@@ -71,17 +71,8 @@ void
 StringConverterI::fromUTF8(const Ice::Byte* sourceStart, const Ice::Byte* sourceEnd,
                            string& target) const
 {
-    
-	//strCoding cd;
-	
     size_t inSize = static_cast<size_t>(sourceEnd - sourceStart);
 	target.resize(inSize);
-    
-//	g_code.UTF_8ToGB2312(target,(char*)sourceStart,inSize);
-    
-//	//target.resize();
-//	return;
-	
     
     unsigned int targetIndex = 0;
     unsigned int i = 0;
@@ -109,7 +100,7 @@ StringConverterI::fromUTF8(const Ice::Byte* sourceStart, const Ice::Byte* source
 	printf("%s\n",target.c_str());
 }
 
-
+/*
 //////////////////////////////////////////////////////////////////////////
 
 //这是个类strCoding (strCoding.cpp文件)
@@ -350,4 +341,5 @@ string strCoding::UrlUTF8Decode(string str)
 	return output;
     
 }
+ */
 

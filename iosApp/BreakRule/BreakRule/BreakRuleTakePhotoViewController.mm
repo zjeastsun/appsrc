@@ -257,7 +257,7 @@
             exifData = [metaData objectForKey:@"{Exif}"];
             //获取照片时间
             nsPhotoData = [exifData objectForKey:@"DateTimeOriginal"];
-            NSLog(@"拍照时间=%@", nsPhotoData);
+            NSLog(@"相册照片拍照时间=%@", nsPhotoData);
             
             UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
         }
@@ -333,6 +333,9 @@
 
 -(void)insertInfoToDb:(NSString *)param
 {
+    ONEICE
+    BRIDGE
+    
     //获取temp目录
     NSString *filePath = NSTemporaryDirectory();
     
@@ -351,17 +354,8 @@
     imageView.image = img;
     
     string sFileName = [desPath UTF8String];
-
-    ONEICE
+  
     oneIce.g_db->upload(sFileName, "test");
-    return;
-//    if (nsPhotoData == nil || [nsPhotoData length] == 0)
-//    {
-//        [self MessageBox:@"您还没有拍照或者导入照片！"];
-//        return;
-//    }
-    
-    BRIDGE
     
     NSDate *  senddate=[NSDate date];
     NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
@@ -371,12 +365,16 @@
     string strError;
     string strParam="";
     const string sqlcode="put_break_law_info";
-    
+
     string sBreakRuleId = "1";
     string sNodeId = "1";
     string sOrgId = [bridge.nsOrgId UTF8String];
     string sUserId = [bridge.nsUserId UTF8String];
-    string sBreakRuleContent = [contentTextView.text UTF8String];
+    
+    NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+    NSString *nsContent = contentTextView.text;
+    string sBreakRuleContent = [nsContent cStringUsingEncoding: enc];
+    
     string sPicName = "pic.jpg";
     string sPicTime = [nsTime UTF8String];//[nsPhotoData UTF8String];
     string sBreakRuleType = [nsBreakRuleType UTF8String];
@@ -400,10 +398,17 @@
     
     CSelectHelp	help;
     oneIce.g_db->execCmd("", sqlcode, strParam, help, strError);
-    
+
 }
 
 - (IBAction)commit:(id)sender {
+
+//    || nsPhotoData.length == 0//为什么这个判断会出错呢？
+    if (nsPhotoData == nil )
+    {
+        [self MessageBox:@"您还没有拍照或者导入照片！"];
+        return;
+    }
     
     NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(insertInfoToDb:) object:nil];
     [thread start];
