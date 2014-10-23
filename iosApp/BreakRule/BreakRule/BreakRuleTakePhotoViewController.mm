@@ -341,21 +341,26 @@
     
     //    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     //    NSString *filePath = [paths objectAtIndex:0];
-    NSString *desPath = [filePath stringByAppendingPathComponent:@"pic.jpg"];
+    string sPicName;
+    oneIce.g_db->command("get_sequence", "pic_id", sPicName);
+    sPicName += ".jpg";
+    NSString *nsPicName = [NSString stringWithFormat:@"%s", sPicName.c_str()];
+    
+    NSString *nsDesPathName = [filePath stringByAppendingPathComponent:nsPicName];
     
     //保存图片
-    BOOL result = [UIImagePNGRepresentation(imageView.image)writeToFile: desPath    atomically:YES];
+    BOOL result = [UIImagePNGRepresentation(imageView.image)writeToFile: nsDesPathName    atomically:YES];
     if (result) {
         NSLog(@"success");
     }
     
     //获取保存得图片
-    UIImage *img = [UIImage imageWithContentsOfFile:desPath];
+    UIImage *img = [UIImage imageWithContentsOfFile:nsDesPathName];
     imageView.image = img;
     
-    string sFileName = [desPath UTF8String];
+    string sDesPathName = [nsDesPathName UTF8String];
   
-    oneIce.g_db->upload(sFileName, "test");
+    oneIce.g_db->upload(sDesPathName, "test");
     
     NSDate *  senddate=[NSDate date];
     NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
@@ -366,17 +371,19 @@
     string strParam="";
     const string sqlcode="put_break_law_info";
 
-    string sBreakRuleId = "1";
+    string sBreakRuleId = "";
+    oneIce.g_db->command("get_sequence", "break_rule_id", sBreakRuleId);
+    
     string sNodeId = "1";
-    string sOrgId = [bridge.nsOrgId UTF8String];
+    string sOrgId = [bridge.nsOrgIdSelected UTF8String];
     string sUserId = [bridge.nsUserId UTF8String];
     
     NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
     NSString *nsContent = contentTextView.text;
     string sBreakRuleContent = [nsContent cStringUsingEncoding: enc];
     
-    string sPicName = "pic.jpg";
-    string sPicTime = [nsTime UTF8String];//[nsPhotoData UTF8String];
+//    string sPicName = "pic.jpg";
+    string sPicTime = [nsTime UTF8String];//[nsPhotoData UTF8String];//时间不能正确获取？？
     string sBreakRuleType = [nsBreakRuleType UTF8String];
     string sUpdateTime = [nsTime UTF8String];
     string sLongitude = "0";
