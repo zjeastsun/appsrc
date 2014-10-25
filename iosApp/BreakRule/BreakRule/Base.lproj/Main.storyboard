@@ -596,7 +596,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iOo-8Z-Bqa">
-                                <rect key="frame" x="106" y="191" width="30" height="30"/>
+                                <rect key="frame" x="253" y="191" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="设置">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -624,6 +624,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <outlet property="delegate" destination="O9P-HJ-kRg" id="ejD-gj-lBv"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="开始时间" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYN-1Y-pHS">
+                                <rect key="frame" x="126" y="195" width="68" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -633,7 +640,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <action selector="back:" destination="O9P-HJ-kRg" id="gRg-G1-r36"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="保存" id="t4C-eQ-dc4"/>
+                        <barButtonItem key="rightBarButtonItem" title="保存" id="t4C-eQ-dc4">
+                            <connections>
+                                <action selector="save:" destination="O9P-HJ-kRg" id="zdj-WH-aJD"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="cancelButton" destination="lDa-vi-ucR" id="5Io-hm-Uih"/>
@@ -643,11 +654,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="ruleTableView" destination="UWY-wb-sNY" id="Roh-VL-91a"/>
                         <outlet property="setButton" destination="iOo-8Z-Bqa" id="1Rd-XH-MSx"/>
                         <outlet property="startTimeText" destination="OKk-Fw-buP" id="dqT-8U-t6V"/>
+                        <outlet property="timeLabel" destination="dYN-1Y-pHS" id="TTe-qC-H4C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sZV-td-SzX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1809" y="1194"/>
+            <point key="canvasLocation" x="-2292" y="-162"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Eio-UD-t9e">
@@ -1105,6 +1117,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <barButtonItem key="rightBarButtonItem" title="条件" id="eOT-k3-DSh">
                             <connections>
                                 <action selector="condition:" destination="970-ul-ylB" id="SSh-Nr-Lnu"/>
+                                <segue destination="qVl-Or-5Fn" kind="push" id="1BR-9t-QJa"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1389,7 +1402,56 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="016-mR-cSk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2335" y="1194"/>
+            <point key="canvasLocation" x="-2818" y="-162"/>
+        </scene>
+        <!--Review Break Rule Single View Controller-->
+        <scene sceneID="9lJ-Y1-COc">
+            <objects>
+                <viewController id="qVl-Or-5Fn" customClass="ReviewBreakRuleSingleViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="C8a-vf-sia"/>
+                        <viewControllerLayoutGuide type="bottom" id="oAF-b8-euz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lFb-pI-juq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SXh-jY-k2K">
+                                <rect key="frame" x="0.0" y="33" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="DjY-21-623">
+                                        <rect key="frame" x="53" y="430" width="123" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <segments>
+                                            <segment title="First"/>
+                                            <segment title="Second"/>
+                                        </segments>
+                                    </segmentedControl>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Um3-z8-STN">
+                                        <rect key="frame" x="48" y="268" width="123" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <segments>
+                                            <segment title="First"/>
+                                            <segment title="Second"/>
+                                        </segments>
+                                    </segmentedControl>
+                                </subviews>
+                                <connections>
+                                    <outlet property="delegate" destination="qVl-Or-5Fn" id="fvs-ee-Ybi"/>
+                                </connections>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="RRu-Nn-867"/>
+                    <connections>
+                        <outlet property="scrollView" destination="SXh-jY-k2K" id="nFN-mg-PR0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rNH-ES-B9R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2821" y="412"/>
         </scene>
     </scenes>
     <resources>

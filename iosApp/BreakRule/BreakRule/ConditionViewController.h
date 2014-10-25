@@ -21,6 +21,9 @@
     NSMutableArray *title;
     NSMutableArray *subTitle;
     IBOutlet UITableView *ruleTableView;
+    IBOutlet UILabel *timeLabel;
+    
+    NSString *nsRuleTypeOld;
 }
 
 - (IBAction)back:(id)sender;
@@ -28,6 +31,7 @@
 - (IBAction)selectEndTime:(id)sender;
 - (IBAction)setTime:(id)sender;
 - (IBAction)cancel:(id)sender;
+- (IBAction)save:(id)sender;
 
 
 @end

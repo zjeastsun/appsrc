@@ -30,6 +30,11 @@
     [self setHiddenCtrl:YES];
     title = [[NSMutableArray alloc]initWithObjects:@"判定性质", nil];
     subTitle = [[NSMutableArray alloc]initWithObjects:@"全部", nil];
+    
+    BRIDGE
+    startTimeText.text = bridge.nsReviewStartTime;
+    endTimeText.text = bridge.nsReviewEndTime;
+    nsRuleTypeOld = bridge.nsRuleTypeForCondition;
     // Do any additional setup after loading the view.
 }
 
@@ -51,16 +56,28 @@
 */
 
 - (IBAction)back:(id)sender {
+    BRIDGE
+    bridge.nsRuleTypeForCondition = nsRuleTypeOld;
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)selectStartTime:(id)sender {
     bStartTime = true;
+    timeLabel.text = @"开始时间";
+    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"YYYY-MM-dd"];
+    NSDate *startTime = [dateformatter dateFromString:startTimeText.text];
+    [datePicker setDate:startTime animated:YES];
     [self setHiddenCtrl:NO];
 }
 
 - (IBAction)selectEndTime:(id)sender {
     bStartTime = false;
+    timeLabel.text = @"结束时间";
+    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"YYYY-MM-dd"];
+    NSDate *startTime = [dateformatter dateFromString:endTimeText.text];
+    [datePicker setDate:startTime animated:YES];
     [self setHiddenCtrl:NO];
 }
 
@@ -72,22 +89,26 @@
     NSDate *date = datePicker.date;
     NSString *nsTime = [dateformatter stringFromDate:date];
     
-    BRIDGE
     if (bStartTime) {
         startTimeText.text = nsTime;
-        [dateformatter setDateFormat:@"YYYY-MM-dd 00:00:00"];
-        bridge.nsReviewStartTime = [dateformatter stringFromDate:date];
     }
     else
     {
         endTimeText.text = nsTime;
-        [dateformatter setDateFormat:@"YYYY-MM-dd 23:59:59"];
-        bridge.nsReviewEndTime = [dateformatter stringFromDate:date];
     }
 }
 
 - (IBAction)cancel:(id)sender {
     [self setHiddenCtrl:YES];
+}
+
+- (IBAction)save:(id)sender {
+    BRIDGE
+    bridge.nsReviewStartTime = startTimeText.text;
+    bridge.nsReviewEndTime = endTimeText.text;
+    
+    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 - (void)setHiddenCtrl:(BOOL)bShow
@@ -96,6 +117,8 @@
     [dateBackground setHidden:bShow];
     [cancelButton setHidden:bShow];
     [datePicker setHidden:bShow];
+    [timeLabel setHidden:bShow];
+    
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -136,21 +159,6 @@
         cell.detailTextLabel.text = bridge.nsRuleTypeForCondition;
     }
     
-    if ([cell.detailTextLabel.text isEqualToString:@"一般违规"]) {
-//        nsBreakRuleType = @"0";
-    }
-    else if ([cell.detailTextLabel.text isEqualToString:@"严重违规"])
-    {
-//        nsBreakRuleType = @"1";
-    }
-    else if ([cell.detailTextLabel.text isEqualToString:@"重大违规"])
-    {
-//        nsBreakRuleType = @"2";
-    }
-    else
-    {
-    }
-    
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
@@ -167,7 +175,7 @@
     BRIDGE
     bridge.nsWhoUseRuleTypeViewController = @"ConditionViewController";
 
-    [self back:nil];
+//    [self back:nil];
     
     
 }

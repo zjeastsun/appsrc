@@ -101,19 +101,46 @@
     return cell;
 }
 
-- (void)queryDb
+- (void)queryDb//sql语句不对，没有根据项目过滤，还要调整，时间也没有？
 {
     BRIDGE
     ONEICE
     
     string strError;
     string strParam="";
-    const string sqlcode="get_break_last_view_all_review";
+    string sqlcode="get_break_last_view_review";
+    SelectHelpParam helpParam;
+    
+    if ([bridge.nsRuleTypeForCondition isEqualToString:@"全部"])
+    {
+        sqlcode = "get_break_last_view_all_review";
+    }
+    else
+    {
+        NSString *nsBreakRuleType;
+        if ([bridge.nsRuleTypeForCondition isEqualToString:@"一般违规"]) {
+            nsBreakRuleType = @"0";
+        }
+        else if ([bridge.nsRuleTypeForCondition isEqualToString:@"严重违规"])
+        {
+            nsBreakRuleType = @"1";
+        }
+        else if ([bridge.nsRuleTypeForCondition isEqualToString:@"重大违规"])
+        {
+            nsBreakRuleType = @"2";
+        }
+        else
+        {
+            nsBreakRuleType = @"0";
+        }
+        string sRuleType = [nsBreakRuleType UTF8String];
+        helpParam.add(sRuleType);
+    }
     
     if (bridge.nsReviewStartTime == nil || bridge.nsReviewEndTime == nil)
     {
         NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
-        [dateformatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+        [dateformatter setDateFormat:@"YYYY-MM-dd"];
         
         NSDate *  endDate=[NSDate date];
         bridge.nsReviewEndTime=[dateformatter stringFromDate:endDate];
@@ -127,7 +154,6 @@
     sStartTime = [bridge.nsReviewStartTime UTF8String];
     sEndTime = [bridge.nsReviewEndTime UTF8String];
     
-    SelectHelpParam helpParam;
     helpParam.add(sStartTime);
     helpParam.add(sEndTime);
     strParam = helpParam.get();
@@ -139,7 +165,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     BRIDGE
-    if (![nsReviewStartTimeOld isEqualToString:bridge.nsReviewStartTime] || ![nsReviewEndTimeOld isEqualToString:bridge.nsReviewEndTime]) {
+    if (![nsReviewStartTimeOld isEqualToString:bridge.nsReviewStartTime] || ![nsReviewEndTimeOld isEqualToString:bridge.nsReviewEndTime] || ![nsRuleTypeOld isEqualToString:bridge.nsRuleTypeForCondition]) {
 
         NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(queryDb) object:nil];
         [thread start];
@@ -151,6 +177,7 @@
     
     nsReviewStartTimeOld = bridge.nsReviewStartTime;
     nsReviewEndTimeOld = bridge.nsReviewEndTime;
+    nsRuleTypeOld = bridge.nsRuleTypeForCondition;
     
 }
 @end

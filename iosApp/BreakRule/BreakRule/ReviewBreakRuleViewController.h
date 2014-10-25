@@ -12,6 +12,7 @@
 @interface ReviewBreakRuleViewController : UIViewController
 {
     CSelectHelp	helpInfo;
+    NSString *nsRuleTypeOld;
     NSString *nsReviewStartTimeOld;
     NSString *nsReviewEndTimeOld;
     
