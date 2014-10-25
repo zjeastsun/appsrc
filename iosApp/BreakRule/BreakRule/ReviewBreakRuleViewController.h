@@ -19,6 +19,6 @@
 }
 
 - (IBAction)back:(id)sender;
-- (IBAction)save:(id)sender;
+- (IBAction)condition:(id)sender;
 
 @end

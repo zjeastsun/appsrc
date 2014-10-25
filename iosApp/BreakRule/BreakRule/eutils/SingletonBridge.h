@@ -33,6 +33,10 @@
 @property (strong, nonatomic) NSString *nsReviewStartTime;//批阅违规查询时间
 @property (strong, nonatomic) NSString *nsReviewEndTime;
 
+@property (strong, nonatomic) NSString *nsRuleTypeForCondition;//条件选择中的判定性质
+
+@property (strong, nonatomic) NSString *nsWhoUseRuleTypeViewController;//谁在使用判定性质选择页
+
 + (SingletonBridge *)sharedInstance;
 - (void)unInit;
 

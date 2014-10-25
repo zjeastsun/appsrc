@@ -49,4 +49,9 @@
 - (IBAction)back:(id)sender {
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (IBAction)condition:(id)sender {
+    UIViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"conditionView"];
+    [self presentViewController:projectView animated:YES completion:nil];
+}
 @end

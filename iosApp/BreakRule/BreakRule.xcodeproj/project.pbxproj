@@ -41,6 +41,7 @@
 		047CBA7F19DC75CD00F85937 /* sqlite_utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047CBA7E19DC75CD00F85937 /* sqlite_utils.mm */; };
 		047E878F19FBA5A400F7D452 /* CustomViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047E878D19FBA5A400F7D452 /* CustomViewCell.m */; };
 		047E879019FBA5A400F7D452 /* CustomViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047E878E19FBA5A400F7D452 /* CustomViewCell.xib */; };
+		047E879619FBDDFE00F7D452 /* ConditionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047E879519FBDDFE00F7D452 /* ConditionViewController.mm */; };
 		047F3EA619D18500004123F7 /* SingletonIce.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047F3EA519D18500004123F7 /* SingletonIce.mm */; };
 		047F5A1619D9B53A00E4DA2D /* eastsun.ico in Resources */ = {isa = PBXBuildFile; fileRef = 047F5A1319D9B53A00E4DA2D /* eastsun.ico */; };
 		047F5A1719D9B53A00E4DA2D /* righticon.png in Resources */ = {isa = PBXBuildFile; fileRef = 047F5A1419D9B53A00E4DA2D /* righticon.png */; };
@@ -122,6 +123,8 @@
 		047E878C19FBA5A400F7D452 /* CustomViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomViewCell.h; sourceTree = "<group>"; };
 		047E878D19FBA5A400F7D452 /* CustomViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomViewCell.m; sourceTree = "<group>"; };
 		047E878E19FBA5A400F7D452 /* CustomViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomViewCell.xib; sourceTree = "<group>"; };
+		047E879419FBDDFE00F7D452 /* ConditionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionViewController.h; sourceTree = "<group>"; };
+		047E879519FBDDFE00F7D452 /* ConditionViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ConditionViewController.mm; sourceTree = "<group>"; };
 		047F3EA519D18500004123F7 /* SingletonIce.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SingletonIce.mm; path = BreakRule/eutils/SingletonIce.mm; sourceTree = "<group>"; };
 		047F5A1319D9B53A00E4DA2D /* eastsun.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; name = eastsun.ico; path = res/eastsun.ico; sourceTree = SOURCE_ROOT; };
 		047F5A1419D9B53A00E4DA2D /* righticon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = righticon.png; path = res/righticon.png; sourceTree = SOURCE_ROOT; };
@@ -246,10 +249,7 @@
 		0448781219CC70FB0086CE1B /* BreakRule */ = {
 			isa = PBXGroup;
 			children = (
-				0448781E19CC70FB0086CE1B /* Main.storyboard */,
-				047E878C19FBA5A400F7D452 /* CustomViewCell.h */,
-				047E878D19FBA5A400F7D452 /* CustomViewCell.m */,
-				047E878E19FBA5A400F7D452 /* CustomViewCell.xib */,
+				046C338319FC0CA500B99A92 /* Common */,
 				0490BE1819E096F300C83D82 /* main */,
 				0490BE1719E0969500C83D82 /* BreakRuleTakePhoto */,
 				049B740A19EBCC90000BE808 /* RectifyTakePhoto */,
@@ -303,6 +303,21 @@
 			path = image;
 			sourceTree = "<group>";
 		};
+		046C338319FC0CA500B99A92 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				0448781E19CC70FB0086CE1B /* Main.storyboard */,
+				047E878C19FBA5A400F7D452 /* CustomViewCell.h */,
+				047E878D19FBA5A400F7D452 /* CustomViewCell.m */,
+				047E878E19FBA5A400F7D452 /* CustomViewCell.xib */,
+				047E879419FBDDFE00F7D452 /* ConditionViewController.h */,
+				047E879519FBDDFE00F7D452 /* ConditionViewController.mm */,
+				049104B619D8C829004E052B /* RuleTypeViewController.h */,
+				049104B719D8C829004E052B /* RuleTypeViewController.mm */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
 		0477AE5619F01C770088E875 /* Review */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,8 +334,6 @@
 				0471680119CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm */,
 				0478794719DA176D00555F0D /* SafetyItemViewController.h */,
 				0478794819DA176D00555F0D /* SafetyItemViewController.mm */,
-				049104B619D8C829004E052B /* RuleTypeViewController.h */,
-				049104B719D8C829004E052B /* RuleTypeViewController.mm */,
 				049104B919D8CAF8004E052B /* RuleOptionViewController.h */,
 				049104BA19D8CAF8004E052B /* RuleOptionViewController.mm */,
 				0490BE1919E0984E00C83D82 /* ProjectTypeViewController.h */,
@@ -472,6 +485,7 @@
 				047F3EA619D18500004123F7 /* SingletonIce.mm in Sources */,
 				0490BE1E19E0A04700C83D82 /* SafetySubItemViewController.mm in Sources */,
 				045D8A9F19CF899B00D8C6DA /* ProjectViewController.mm in Sources */,
+				047E879619FBDDFE00F7D452 /* ConditionViewController.mm in Sources */,
 				047E878F19FBA5A400F7D452 /* CustomViewCell.m in Sources */,
 				0431F1A019CC76C300F1718A /* LoginViewController.mm in Sources */,
 				0490BE1B19E0984E00C83D82 /* ProjectTypeViewController.mm in Sources */,

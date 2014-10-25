@@ -28,7 +28,15 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    title = [[NSMutableArray alloc]initWithObjects:@"一般违规", @"严重违规", @"重大违规", nil];
+    BRIDGE
+    if( [bridge.nsWhoUseRuleTypeViewController isEqualToString:@"ConditionViewController"] )
+    {
+        title = [[NSMutableArray alloc]initWithObjects:@"一般违规", @"严重违规", @"重大违规", @"全部", nil];
+    }
+    else
+    {
+        title = [[NSMutableArray alloc]initWithObjects:@"一般违规", @"严重违规", @"重大违规", nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,8 +88,18 @@
     cell.imageView.image =ima;
     cell.textLabel.text = [title objectAtIndex:indexPath.row];
     
+    NSString *nsRuleType;
     BRIDGE
-    if ([cell.textLabel.text isEqualToString:bridge.nsRuleType]) {
+    if( [bridge.nsWhoUseRuleTypeViewController isEqualToString:@"ConditionViewController"] )
+    {
+        nsRuleType = bridge.nsRuleTypeForCondition;
+    }
+    else
+    {
+        nsRuleType = bridge.nsRuleType;
+    }
+    
+    if ([cell.textLabel.text isEqualToString:nsRuleType]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     else
@@ -110,7 +128,14 @@
     }
     
     BRIDGE
-    bridge.nsRuleType = [title objectAtIndex:indexPath.row];
+    if( [bridge.nsWhoUseRuleTypeViewController isEqualToString:@"ConditionViewController"] )
+    {
+        bridge.nsRuleTypeForCondition = [title objectAtIndex:indexPath.row];
+    }
+    else
+    {
+        bridge.nsRuleType = [title objectAtIndex:indexPath.row];
+    }
     [self back:nil];
     
 

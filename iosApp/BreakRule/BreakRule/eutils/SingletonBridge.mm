@@ -23,6 +23,7 @@
         _nsRuleOption = @"用户自定义";
         _nsProjectType = @"0";
         _nsProjectTypeName = @"全部项目";
+        _nsRuleTypeForCondition = @"全部";
     }
     
     return self;

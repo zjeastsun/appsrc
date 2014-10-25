@@ -53,7 +53,9 @@
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)save:(id)sender {
+- (IBAction)condition:(id)sender {
+    UIViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"conditionView"];
+    [self presentViewController:projectView animated:YES completion:nil];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -117,7 +119,7 @@
         bridge.nsReviewEndTime=[dateformatter stringFromDate:endDate];
         
         NSDate* startDate = [[NSDate alloc] init];
-        startDate = [endDate dateByAddingTimeInterval:-70*3600*24];
+        startDate = [endDate dateByAddingTimeInterval:-60*3600*24];
         bridge.nsReviewStartTime =[dateformatter stringFromDate:startDate];
     }
     
