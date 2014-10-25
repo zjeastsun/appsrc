@@ -30,6 +30,9 @@
 @property (strong, nonatomic) NSString *nsHazardTypeId;
 @property (strong, nonatomic) NSString *nsHazardTypeName;
 
+@property (strong, nonatomic) NSString *nsReviewStartTime;//批阅违规查询时间
+@property (strong, nonatomic) NSString *nsReviewEndTime;
+
 + (SingletonBridge *)sharedInstance;
 - (void)unInit;
 

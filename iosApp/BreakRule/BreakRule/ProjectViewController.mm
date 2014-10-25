@@ -24,16 +24,17 @@
     return self;
 }
 
-- (void)queryProject:(NSString *)nsLoginName
+- (void)queryProject
 {
-    if (nsLoginName == nil || [nsLoginName length] == 0)
+    BRIDGE
+    ONEICE
+    
+    if (bridge.nsLoginName == nil || [bridge.nsLoginName length] == 0)
     {
         return;
     }
     
-    ONEICE
-    
-    string sLoginName = [nsLoginName UTF8String];
+    string sLoginName = [bridge.nsLoginName UTF8String];
     
     string strError;
     string strParam="";
@@ -42,14 +43,17 @@
     sql += "') ) and a.org_type_id=b.org_type_id and b.org_type='3'";
 
     oneIce.g_db->select(sql, helpProject, strError);
+    //重新载入所有数据
+    [projectTableView reloadData];
+    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    BRIDGE
-    [self queryProject:bridge.nsLoginName];
+    NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(queryProject) object:nil];
+    [thread start];
     
     // Do any additional setup after loading the view.
 }
@@ -113,7 +117,7 @@
     
     NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
     if (helpProject.size() == 0) {
-        cell.textLabel.text = @"目前没有项目";
+//        cell.textLabel.text = @"目前没有项目";
     }
     else
     {

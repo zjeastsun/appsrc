@@ -7,8 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SingletonIce.h"
 
 @interface ReviewBreakRuleViewController : UIViewController
+{
+    CSelectHelp	helpInfo;
+    NSString *nsReviewStartTimeOld;
+    NSString *nsReviewEndTimeOld;
+    
+    IBOutlet UITableView *reviewTableView;
+}
+
 - (IBAction)back:(id)sender;
 - (IBAction)save:(id)sender;
 

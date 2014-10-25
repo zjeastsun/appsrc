@@ -13,6 +13,7 @@
 {
     CSelectHelp	helpProject;
     
+    IBOutlet UITableView *projectTableView;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *projectTable;
