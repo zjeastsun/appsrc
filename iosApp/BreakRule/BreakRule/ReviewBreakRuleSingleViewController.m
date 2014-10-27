@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
 //    scrollView.contentSize = CGSizeMake(280.0, 1200.0);
-    [scrollView setContentSize:CGSizeMake(1280, 480)];
+//    [scrollView setContentSize:CGSizeMake(1280, 480)];
     // Do any additional setup after loading the view.
 }
 
@@ -40,7 +40,10 @@
 - (void)viewDidAppear:(BOOL)animated
 {
 //    [superview DidAppear:animated];
-    scrollView.contentSize = CGSizeMake(280.0, 1200.0);
+//    scrollView.contentSize = CGSizeMake(280.0, 1200.0);
+    scrollView.frame = CGRectMake(0, 0, 320, 480);
+    
+    [scrollView setContentSize:CGSizeMake(320, 1000)];
 }
 /*
 #pragma mark - Navigation
