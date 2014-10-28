@@ -180,4 +180,19 @@
     nsRuleTypeOld = bridge.nsRuleTypeForCondition;
     
 }
+
+//选择、响应
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    BRIDGE
+    string sBreakRuleId = helpInfo.valueString(static_cast<int>(indexPath.row), "break_rule_id");
+    bridge.nsBreakRuleIdSelected = [NSString stringWithCString:(char*)sBreakRuleId.c_str() encoding:NSUTF8StringEncoding];
+    
+    UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReviewBreakRuleSingleView"];
+    
+    [self presentViewController:viewController animated:YES completion:nil];
+    
+    
+}
+
 @end

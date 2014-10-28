@@ -11,6 +11,12 @@
 @interface ReviewBreakRuleSingleViewController : UIViewController
 {
     IBOutlet UIScrollView *scrollView;
+    IBOutlet UITableView *stateTableView;
+    
+    NSMutableArray *title;
+    NSMutableArray *subTitle;
 }
+- (IBAction)back:(id)sender;
+- (IBAction)save:(id)sender;
 
 @end

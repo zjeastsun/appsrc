@@ -37,6 +37,10 @@
 
 @property (strong, nonatomic) NSString *nsWhoUseRuleTypeViewController;//谁在使用判定性质选择页
 
+@property (strong, nonatomic) NSString *nsBreakRuleIdSelected;//当前选中的违规信息id号
+
+@property (strong, nonatomic) NSString *nsReviewState;//审核状态
+
 + (SingletonBridge *)sharedInstance;
 - (void)unInit;
 
