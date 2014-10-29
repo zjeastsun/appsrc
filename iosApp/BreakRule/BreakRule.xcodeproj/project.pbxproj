@@ -60,6 +60,7 @@
 		04998F7A19D38DF200CECB16 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04998F7919D38DF200CECB16 /* MainViewController.m */; };
 		049CD04019DB56360079D3E2 /* SingletonDB.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049CD03F19DB56360079D3E2 /* SingletonDB.mm */; };
 		049CD04219DB5DA00079D3E2 /* break_law_init.db in Resources */ = {isa = PBXBuildFile; fileRef = 049CD04119DB5DA00079D3E2 /* break_law_init.db */; };
+		049D6F921A018382006CA8D7 /* ReviewStateViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049D6F911A018382006CA8D7 /* ReviewStateViewController.mm */; };
 		04ADF1B819FE9E720017F2B1 /* btn_about_pic_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 04ADF1AE19FE9E720017F2B1 /* btn_about_pic_sel.png */; };
 		04ADF1B919FE9E720017F2B1 /* btn_end_time.png in Resources */ = {isa = PBXBuildFile; fileRef = 04ADF1AF19FE9E720017F2B1 /* btn_end_time.png */; };
 		04ADF1BA19FE9E720017F2B1 /* btn_start_time.png in Resources */ = {isa = PBXBuildFile; fileRef = 04ADF1B019FE9E720017F2B1 /* btn_start_time.png */; };
@@ -167,6 +168,8 @@
 		049CD03E19DB56090079D3E2 /* SingletonDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingletonDB.h; path = BreakRule/eutils/SingletonDB.h; sourceTree = "<group>"; };
 		049CD03F19DB56360079D3E2 /* SingletonDB.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SingletonDB.mm; path = BreakRule/eutils/SingletonDB.mm; sourceTree = "<group>"; };
 		049CD04119DB5DA00079D3E2 /* break_law_init.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = break_law_init.db; path = res/break_law_init.db; sourceTree = SOURCE_ROOT; };
+		049D6F901A018382006CA8D7 /* ReviewStateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewStateViewController.h; sourceTree = "<group>"; };
+		049D6F911A018382006CA8D7 /* ReviewStateViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ReviewStateViewController.mm; sourceTree = "<group>"; };
 		04ADF1AE19FE9E720017F2B1 /* btn_about_pic_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn_about_pic_sel.png; path = res/btn_about_pic_sel.png; sourceTree = SOURCE_ROOT; };
 		04ADF1AF19FE9E720017F2B1 /* btn_end_time.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn_end_time.png; path = res/btn_end_time.png; sourceTree = SOURCE_ROOT; };
 		04ADF1B019FE9E720017F2B1 /* btn_start_time.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn_start_time.png; path = res/btn_start_time.png; sourceTree = SOURCE_ROOT; };
@@ -353,6 +356,8 @@
 				047E879519FBDDFE00F7D452 /* ConditionViewController.mm */,
 				049104B619D8C829004E052B /* RuleTypeViewController.h */,
 				049104B719D8C829004E052B /* RuleTypeViewController.mm */,
+				049D6F901A018382006CA8D7 /* ReviewStateViewController.h */,
+				049D6F911A018382006CA8D7 /* ReviewStateViewController.mm */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -542,6 +547,7 @@
 				047E879619FBDDFE00F7D452 /* ConditionViewController.mm in Sources */,
 				047E878F19FBA5A400F7D452 /* CustomViewCell.m in Sources */,
 				0431F1A019CC76C300F1718A /* LoginViewController.mm in Sources */,
+				049D6F921A018382006CA8D7 /* ReviewStateViewController.mm in Sources */,
 				0490BE1B19E0984E00C83D82 /* ProjectTypeViewController.mm in Sources */,
 				0471680219CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm in Sources */,
 				04998F7719D3812300CECB16 /* RectifyViewController.mm in Sources */,

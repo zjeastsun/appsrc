@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SingletonIce.h"
 
 @interface ReviewBreakRuleSingleViewController : UIViewController
 {
@@ -15,6 +16,16 @@
     
     NSMutableArray *title;
     NSMutableArray *subTitle;
+    
+    IBOutlet UITextField *orgNameTextField;
+    IBOutlet UITextField *typeTextField;
+    IBOutlet UITextField *timeTextField;
+    IBOutlet UITextView *breakRuleContentTextField;
+    
+    IBOutlet UITextView *reviewContent1TextView;
+    
+    CSelectHelp	helpInfo;
+    
 }
 - (IBAction)back:(id)sender;
 - (IBAction)save:(id)sender;

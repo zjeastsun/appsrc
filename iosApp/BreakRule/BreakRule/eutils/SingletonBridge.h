@@ -36,8 +36,14 @@
 @property (strong, nonatomic) NSString *nsRuleTypeForCondition;//条件选择中的判定性质
 
 @property (strong, nonatomic) NSString *nsWhoUseRuleTypeViewController;//谁在使用判定性质选择页
+@property (strong, nonatomic) NSString *nsWhoUseReviewStateViewController;//谁在使用审核状态选择页
 
-@property (strong, nonatomic) NSString *nsBreakRuleIdSelected;//当前选中的违规信息id号
+//当前选中的违规信息
+@property (strong, nonatomic) NSString *nsReviewBR_BreakRuleIdSelected;//id号
+@property (strong, nonatomic) NSString *nsReviewBR_OrgNameSelected;
+@property (strong, nonatomic) NSString *nsReviewBR_BreakRuleTypeSelected;
+@property (strong, nonatomic) NSString *nsReviewBR_TimeSelected;
+@property (strong, nonatomic) NSString *nsReviewBR_BreakRuleContentSelected;
 
 @property (strong, nonatomic) NSString *nsReviewState;//审核状态
 

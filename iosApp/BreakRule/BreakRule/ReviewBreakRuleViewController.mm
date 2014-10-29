@@ -184,9 +184,21 @@
 //选择、响应
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+    
     BRIDGE
     string sBreakRuleId = helpInfo.valueString(static_cast<int>(indexPath.row), "break_rule_id");
-    bridge.nsBreakRuleIdSelected = [NSString stringWithCString:(char*)sBreakRuleId.c_str() encoding:NSUTF8StringEncoding];
+    string sOrgName = helpInfo.valueString(static_cast<int>(indexPath.row), "org_name");
+    string sBreakRuleType = helpInfo.valueString(static_cast<int>(indexPath.row), "break_rule_type");
+    string sTime = helpInfo.valueString(static_cast<int>(indexPath.row), "update_time");
+    string sBreakRuleContent = helpInfo.valueString(static_cast<int>(indexPath.row), "break_rule_content");
+    
+    bridge.nsReviewBR_BreakRuleIdSelected = [NSString stringWithCString:const_cast<char*>(sBreakRuleId.c_str()) encoding:enc];
+    bridge.nsReviewBR_OrgNameSelected = [NSString stringWithCString:const_cast<char*>(sOrgName.c_str()) encoding:enc];
+    bridge.nsReviewBR_BreakRuleTypeSelected = [NSString stringWithCString:const_cast<char*>(sBreakRuleType.c_str()) encoding:enc];
+    bridge.nsReviewBR_TimeSelected = [NSString stringWithCString:const_cast<char*>(sTime.c_str()) encoding:enc];
+    bridge.nsReviewBR_BreakRuleContentSelected = [NSString stringWithCString:const_cast<char*>(sBreakRuleContent.c_str()) encoding:enc];
+
     
     UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReviewBreakRuleSingleView"];
     

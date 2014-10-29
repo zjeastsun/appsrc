@@ -631,11 +631,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="批阅信息" id="jwx-jP-Dwi">
-                        <barButtonItem key="leftBarButtonItem" title="返回" id="NsS-nD-drr">
-                            <connections>
-                                <action selector="back:" destination="OLu-tJ-4dq" id="lVu-a8-GWa"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" title="返回" id="NsS-nD-drr"/>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b6U-5K-uzd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1438,7 +1434,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="wAE-Go-yRt">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="wAE-Go-yRt">
                                         <rect key="frame" x="112" y="141" width="180" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1518,13 +1514,50 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="breakRuleContentTextField" destination="6sd-5J-iPC" id="YXR-o6-r1O"/>
+                        <outlet property="orgNameTextField" destination="NRt-Bj-Nbh" id="elV-uG-3F6"/>
+                        <outlet property="reviewContent1TextView" destination="npY-lU-Aca" id="gI4-kW-iM4"/>
                         <outlet property="scrollView" destination="iw3-Ai-2FC" id="pgx-lw-tAU"/>
                         <outlet property="stateTableView" destination="eS5-fP-12x" id="YaB-FD-jPN"/>
+                        <outlet property="timeTextField" destination="wAE-Go-yRt" id="2Ql-jh-Vod"/>
+                        <outlet property="typeTextField" destination="tl7-AE-orb" id="b2S-gS-624"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rNH-ES-B9R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2295" y="412"/>
+        </scene>
+        <!--Review State View Controller - 审核状态-->
+        <scene sceneID="FBH-IC-PcJ">
+            <objects>
+                <viewController id="rU1-K0-ynO" customClass="ReviewStateViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9UL-Te-TB8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="iDl-Wm-1aP">
+                                <rect key="frame" x="0.0" y="65" width="320" height="154"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="rU1-K0-ynO" id="0WT-5B-tVO"/>
+                                    <outlet property="delegate" destination="rU1-K0-ynO" id="Ov8-WG-Zii"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="审核状态" id="9sn-Ou-mWi">
+                        <barButtonItem key="leftBarButtonItem" title="返回" id="5hd-We-NSO">
+                            <connections>
+                                <action selector="back:" destination="rU1-K0-ynO" id="aj0-wQ-FzM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FDj-vU-Oq0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1339" y="412"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Cad-pB-JaO">
@@ -1543,6 +1576,24 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wxt-eL-Ziz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2821" y="412"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="yhq-1H-AIA">
+            <objects>
+                <navigationController storyboardIdentifier="ReviewStateView" automaticallyAdjustsScrollViewInsets="NO" id="FqD-8a-PcQ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Tdp-NC-hRa">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="rU1-K0-ynO" kind="relationship" relationship="rootViewController" id="12T-ur-Ok6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ReY-mW-Kbl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1865" y="412"/>
         </scene>
     </scenes>
     <resources>
