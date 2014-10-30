@@ -148,6 +148,7 @@
     string sStartTime, sEndTime;
     sStartTime = [bridge.nsReviewStartTime UTF8String];
     sEndTime = [bridge.nsReviewEndTime UTF8String];
+    sEndTime += " 23:59:59";
     
     helpParam.add(sStartTime);
     helpParam.add(sEndTime);
@@ -188,7 +189,8 @@
     bridge.nsReviewBR_TimeSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"update_time"];
     bridge.nsReviewBR_BreakRuleContentSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"break_rule_content"];
     bridge.nsReviewBR_CurFlowNodeIdSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"node_id"];
-
+    bridge.nsReviewBR_PicNameSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"pic_name"];
+    
     UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReviewBreakRuleSingleView"];
     
     [self presentViewController:viewController animated:YES completion:nil];

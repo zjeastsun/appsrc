@@ -57,7 +57,10 @@
 //    [ruleTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
 //                          withRowAnimation:UITableViewRowAnimationFade];
     BRIDGE
-    contentTextView.text = bridge.nsContent;
+    if (![bridge.nsContent isEqualToString:@""]) {
+        contentTextView.text = bridge.nsContent;
+    }
+    
 }
 
 - (void)magnifyImage

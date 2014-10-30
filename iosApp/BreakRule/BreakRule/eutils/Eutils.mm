@@ -2936,7 +2936,10 @@ bool CICEBaseDBUtil::downloadFile(const string& sFile, const string& sDestPath, 
 	::rename(sNewSaveFileTmp.c_str(), sNewSaveFile.c_str());
 	//obj.RenameFile(sNewSaveFileTmp, util::getFileName(sFile, sTmp));
     
-	pFinished(sFile, 1, "");
+    if (pFinished)
+    {
+        pFinished(sFile, 1, "");
+    }
 	return true;
     
 }

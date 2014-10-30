@@ -58,4 +58,36 @@
     string sReturn = [nsString cStringUsingEncoding: enc];
     return sReturn;
 }
+
++ (NSString *)getFullTempPathName:(NSString *)nsFileName
+{
+    //获取temp目录
+    NSString *filePath = NSTemporaryDirectory();
+    
+    //获取Document目录
+    //    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //    NSString *filePath = [paths objectAtIndex:0];
+
+    NSString *nsFullPathName = [filePath stringByAppendingPathComponent:nsFileName];
+    
+    return nsFullPathName;
+}
+
+- (bool)downloadFile:(NSString *)nsFileName
+{
+    if (nsFileName == nil) {
+        return false;
+    }
+
+    NSString *nsDesPathName = NSTemporaryDirectory();
+    
+    string sDesPathName = [nsDesPathName UTF8String];
+    string sFileName = DATA_FILE_FOLDER + "/";
+    sFileName += [nsFileName UTF8String];
+    
+    bool bRerult = _g_db->downloadFile(sFileName, sDesPathName);
+    
+    return bRerult;
+}
+
 @end

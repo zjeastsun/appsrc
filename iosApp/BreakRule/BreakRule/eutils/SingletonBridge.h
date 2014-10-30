@@ -67,6 +67,7 @@ const int REVIEW_NO_PASS = 3;// 审核不通过
 @property (strong, nonatomic) NSString *nsReviewBR_TimeSelected;
 @property (strong, nonatomic) NSString *nsReviewBR_BreakRuleContentSelected;
 @property (strong, nonatomic) NSString *nsReviewBR_CurFlowNodeIdSelected;
+@property (strong, nonatomic) NSString *nsReviewBR_PicNameSelected;
 
 
 @property (strong, nonatomic) NSString *nsReviewState;//审核状态

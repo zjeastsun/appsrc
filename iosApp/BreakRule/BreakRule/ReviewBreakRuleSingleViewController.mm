@@ -23,6 +23,36 @@
     }
     return self;
 }
+
+- (void)updateUI
+{
+    if( helpInfo.size()== 0 )
+    {
+        [reviewContent1TextView setEditable:true];
+    }
+    
+    if( helpInfo.size()== 1 )
+    {
+        [reviewContent2TextView setEditable:true];
+        reviewContent1TextView.text = [SingletonIce valueNSString:helpInfo rowForHelp:0 KeyForHelp:"review_content"];
+        
+    }
+    
+    if( helpInfo.size()== 2 )
+    {
+        [reviewContent3TextView setEditable:true];
+        reviewContent2TextView.text = [SingletonIce valueNSString:helpInfo rowForHelp:1 KeyForHelp:"review_content"];
+        
+    }
+    
+    if( helpInfo.size()== 3 )
+    {
+        [reviewContent4TextView setEditable:true];
+        reviewContent3TextView.text = [SingletonIce valueNSString:helpInfo rowForHelp:2 KeyForHelp:"review_content"];
+        
+    }
+}
+
 - (void)queryReview
 {
     BRIDGE
@@ -38,33 +68,18 @@
     string sId = [bridge.nsReviewBR_BreakRuleIdSelected UTF8String];
     
     oneIce.g_db->selectCmd("", sqlcode, sId, helpInfo, strError);
-
-    if( helpInfo.size()== 0 )
-    {
-        [reviewContent1TextView setEditable:true];
+    
+    [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+    
+    bool bRerult = [oneIce downloadFile:bridge.nsReviewBR_PicNameSelected];
+    NSString *nsDesPathName = [SingletonIce getFullTempPathName:bridge.nsReviewBR_PicNameSelected];
+    
+    //获取保存得图片
+    if (bRerult) {
+        UIImage *img = [UIImage imageWithContentsOfFile:nsDesPathName];
+        imageView.image = img;
     }
     
-    if( helpInfo.size()== 1 )
-    {
-        reviewContent1TextView.text = [SingletonIce valueNSString:helpInfo rowForHelp:0 KeyForHelp:"review_content"];
-        [reviewContent2TextView setEditable:true];
-    }
-    
-    if( helpInfo.size()== 2 )
-    {
-        reviewContent2TextView.text = [SingletonIce valueNSString:helpInfo rowForHelp:1 KeyForHelp:"review_content"];
-        [reviewContent3TextView setEditable:true];
-    }
-    
-    if( helpInfo.size()== 3 )
-    {
-        reviewContent3TextView.text = [SingletonIce valueNSString:helpInfo rowForHelp:2 KeyForHelp:"review_content"];
-        [reviewContent4TextView setEditable:true];
-    }
-    
-    //下载图片？
-    {
-    }
 
 }
 

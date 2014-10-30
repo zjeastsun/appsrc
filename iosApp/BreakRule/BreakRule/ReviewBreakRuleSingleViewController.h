@@ -27,6 +27,8 @@
     IBOutlet UITextView *reviewContent3TextView;
     IBOutlet UITextView *reviewContent4TextView;
     
+    IBOutlet UIImageView *imageView;
+    
     CSelectHelp	helpInfo;
     string sCurFlowNode;
     string sReview_grade;

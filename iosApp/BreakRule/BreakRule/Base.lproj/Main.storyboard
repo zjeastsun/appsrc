@@ -826,7 +826,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="www.myxui.com" borderStyle="roundedRect" minimumFontSize="17" id="E2k-yx-La7">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="192.168.3.109" borderStyle="roundedRect" minimumFontSize="17" id="E2k-yx-La7">
                                 <rect key="frame" x="126" y="417" width="139" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1515,6 +1515,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </navigationItem>
                     <connections>
                         <outlet property="breakRuleContentTextField" destination="6sd-5J-iPC" id="YXR-o6-r1O"/>
+                        <outlet property="imageView" destination="Yx8-cB-p40" id="7BP-k8-rYL"/>
                         <outlet property="orgNameTextField" destination="NRt-Bj-Nbh" id="elV-uG-3F6"/>
                         <outlet property="reviewContent1TextView" destination="npY-lU-Aca" id="gI4-kW-iM4"/>
                         <outlet property="reviewContent2TextView" destination="Qdu-kq-SAC" id="pQM-3A-GoX"/>
@@ -1616,6 +1617,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="1tR-PN-Y3K"/>
+        <segue reference="4oh-eE-9JT"/>
     </inferredMetricsTieBreakers>
 </document>

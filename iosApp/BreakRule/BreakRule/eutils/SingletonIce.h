@@ -4,6 +4,8 @@
 
 #define ONEICE SingletonIce *oneIce; oneIce = [SingletonIce sharedInstance];
 
+const string DATA_FILE_FOLDER = "test";
+
 @interface SingletonIce : NSObject
 
 @property (nonatomic) CICEDBUtil *g_db;
@@ -13,5 +15,8 @@
 
 + (NSString *)valueNSString:(CSelectHelp)help rowForHelp:(int)row KeyForHelp:(std::string)key;
 + (string)NSStringToGBstring:(NSString *)nsString;
++ (NSString *)getFullTempPathName:(NSString *)nsFileName;//获取temp目录全路径文件名
+
+- (bool)downloadFile:(NSString *)nsFileName;
 
 @end
