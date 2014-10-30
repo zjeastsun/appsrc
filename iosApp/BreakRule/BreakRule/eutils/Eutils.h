@@ -149,7 +149,6 @@ public:
 	static string& toString(string& out,double fv);
 	static string& toString(string& out,int fv);
     
-    
 	static int encodeBase64(const unsigned char* pSrc, char* pDst, int nSrcLen, int nMaxLineLen=8000);
 	static int decodeBase64(const char* pSrc, unsigned char* pDst, int nSrcLen);
     

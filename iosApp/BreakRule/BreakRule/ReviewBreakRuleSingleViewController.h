@@ -23,8 +23,13 @@
     IBOutlet UITextView *breakRuleContentTextField;
     
     IBOutlet UITextView *reviewContent1TextView;
+    IBOutlet UITextView *reviewContent2TextView;
+    IBOutlet UITextView *reviewContent3TextView;
+    IBOutlet UITextView *reviewContent4TextView;
     
     CSelectHelp	helpInfo;
+    string sCurFlowNode;
+    string sReview_grade;
     
 }
 - (IBAction)back:(id)sender;

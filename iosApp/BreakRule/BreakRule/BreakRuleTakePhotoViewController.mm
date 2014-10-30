@@ -374,13 +374,12 @@
     string sBreakRuleId = "";
     oneIce.g_db->command("get_sequence", "break_rule_id", sBreakRuleId);
     
-    string sNodeId = "1";
+    string sNodeId;
+    util::string_format(sNodeId, "%d", FLOW_NODE_BR_REVIEW_1);
     string sOrgId = [bridge.nsOrgIdSelected UTF8String];
     string sUserId = [bridge.nsUserId UTF8String];
     
-    NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
-    NSString *nsContent = contentTextView.text;
-    string sBreakRuleContent = [nsContent cStringUsingEncoding: enc];
+    string sBreakRuleContent = [SingletonIce NSStringToGBstring:contentTextView.text];
     
 //    string sPicName = "pic.jpg";
     string sPicTime = [nsTime UTF8String];//[nsPhotoData UTF8String];//时间不能正确获取？？

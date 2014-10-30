@@ -1,3 +1,4 @@
+//ice访问单例
 #import <Foundation/Foundation.h>
 #import"Eutils.h"
 
@@ -9,5 +10,8 @@
 
 + (SingletonIce *)sharedInstance;
 - (void)unInit;
+
++ (NSString *)valueNSString:(CSelectHelp)help rowForHelp:(int)row KeyForHelp:(std::string)key;
++ (string)NSStringToGBstring:(NSString *)nsString;
 
 @end

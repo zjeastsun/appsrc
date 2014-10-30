@@ -112,16 +112,12 @@
     UIImage *ima = [UIImage imageNamed:@"share_this_icon.png"];
     cell.imageView.image =ima;
     
-    string sProject = helpProject.valueString( indexPath.row, "org_name" );
-    char *temp =const_cast<char*>(sProject.c_str());
-    
-    NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
     if (helpProject.size() == 0) {
 //        cell.textLabel.text = @"目前没有项目";
     }
     else
     {
-        cell.textLabel.text = [NSString stringWithCString:temp encoding:enc];
+        cell.textLabel.text = [SingletonIce valueNSString:helpProject rowForHelp:static_cast<int>(indexPath.row) KeyForHelp:"org_name"];
     }
 
     return cell;

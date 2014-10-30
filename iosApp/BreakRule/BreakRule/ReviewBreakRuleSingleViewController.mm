@@ -38,12 +38,28 @@
     string sId = [bridge.nsReviewBR_BreakRuleIdSelected UTF8String];
     
     oneIce.g_db->selectCmd("", sqlcode, sId, helpInfo, strError);
-    
-    NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
-    if( helpInfo.size()>0 )
+
+    if( helpInfo.size()== 0 )
     {
-        string sReviewContent = helpInfo.valueString(0, "review_content");
-        reviewContent1TextView.text = [NSString stringWithCString:const_cast<char*>(sReviewContent.c_str()) encoding:enc];
+        [reviewContent1TextView setEditable:true];
+    }
+    
+    if( helpInfo.size()== 1 )
+    {
+        reviewContent1TextView.text = [SingletonIce valueNSString:helpInfo rowForHelp:0 KeyForHelp:"review_content"];
+        [reviewContent2TextView setEditable:true];
+    }
+    
+    if( helpInfo.size()== 2 )
+    {
+        reviewContent2TextView.text = [SingletonIce valueNSString:helpInfo rowForHelp:1 KeyForHelp:"review_content"];
+        [reviewContent3TextView setEditable:true];
+    }
+    
+    if( helpInfo.size()== 3 )
+    {
+        reviewContent3TextView.text = [SingletonIce valueNSString:helpInfo rowForHelp:2 KeyForHelp:"review_content"];
+        [reviewContent4TextView setEditable:true];
     }
     
     //下载图片？
@@ -52,9 +68,18 @@
 
 }
 
+-(void)viewTapped:(UITapGestureRecognizer*)tapGr{
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UITapGestureRecognizer *tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+    tapGr.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapGr];
+    
     title = [[NSMutableArray alloc]initWithObjects:@"审核状态", nil];
     subTitle = [[NSMutableArray alloc]initWithObjects:@"审核通过", nil];
     
@@ -110,7 +135,58 @@
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)insertInfoToDb:(NSString *)param
+- (string)getNextNodeId
+{
+    string sNextNodeId;
+    
+    BRIDGE
+    string sCurId = [bridge.nsReviewBR_CurFlowNodeIdSelected UTF8String];
+    int iCurId = atoi(sCurId.c_str());
+    
+    if ([bridge.nsReviewState isEqualToString:@"审核通过"]) {
+        util::string_format(sNextNodeId, "%d", FLOW_NODE_RECTIFY_TAKEPHOTO);
+    }
+    else if ([bridge.nsReviewState isEqualToString:@"无法判定"])
+    {
+        switch (iCurId) {
+            case FLOW_NODE_BR_REVIEW_1:
+            {
+                util::string_format(sNextNodeId, "%d", FLOW_NODE_BR_REVIEW_2);
+                sReview_grade = "1";
+                break;
+            }
+            case FLOW_NODE_BR_REVIEW_2:
+            {
+                util::string_format(sNextNodeId, "%d", FLOW_NODE_BR_REVIEW_3);
+                sReview_grade = "2";
+                break;
+            }
+            case FLOW_NODE_BR_REVIEW_3:
+            {
+                util::string_format(sNextNodeId, "%d", FLOW_NODE_BR_REVIEW_4);
+                sReview_grade = "3";
+                break;
+            }
+            case FLOW_NODE_BR_REVIEW_4:
+            {
+                //最高级不能选择“无法判定”
+                sReview_grade = "4";
+                break;
+            }
+                
+            default:
+                break;
+        }
+    }
+    else
+    {
+        util::string_format(sNextNodeId, "%d", FLOW_NODE_FINISH);
+    }
+
+    return sNextNodeId;
+}
+
+- (void)insertInfoToDb:(NSString *)param
 {
     ONEICE
     BRIDGE
@@ -122,16 +198,12 @@
     string sReviewId = "";
     oneIce.g_db->command("get_sequence", "review_id", sReviewId);
     
-    string sNodeId = "2";
+    string sNodeId = [self getNextNodeId];
     string sBreakRuleId = [bridge.nsReviewBR_BreakRuleIdSelected UTF8String];
     string sUserId = [bridge.nsUserId UTF8String];
     string sRectifyId = "0";
-    string sReview_grade = "?";
-    //审核状态？
     
-    NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
-    NSString *nsContent = reviewContent1TextView.text;
-    string sReviewContent = [nsContent cStringUsingEncoding: enc];
+    string sReviewContent = [SingletonIce NSStringToGBstring:reviewContent1TextView.text];
     
     SelectHelpParam helpParam;
     helpParam.add(sReviewId);
@@ -144,7 +216,7 @@
     
     CSelectHelp	help;
     oneIce.g_db->execCmd("", sqlcode, strParam, help, strError);
-    
+
 }
 
 - (IBAction)save:(id)sender {
@@ -204,5 +276,12 @@
     [self presentViewController:viewController animated:YES completion:nil];
     
 }
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+   
+}
+
+
 
 @end

@@ -1,3 +1,4 @@
+//本地数据库访问单例
 #import <Foundation/Foundation.h>
 #import"eutils.h"
 
