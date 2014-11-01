@@ -51,6 +51,7 @@ BreakRuleTakePhotoViewController *pBR;
     [self registerObserverForKeyboard];
     
     pBR = self;
+    [progressView setHidden:YES];
     [progressView setProgressViewStyle:UIProgressViewStyleDefault]; //设置进度条类型
 }
 
@@ -398,8 +399,8 @@ void Process(string path, double iProgress)
     }
     
     //获取保存得图片
-    UIImage *img = [UIImage imageWithContentsOfFile:nsDesPathName];
-    imageView.image = img;
+//    UIImage *img = [UIImage imageWithContentsOfFile:nsDesPathName];
+//    imageView.image = img;
     
     string sDesPathName = [nsDesPathName UTF8String];
   

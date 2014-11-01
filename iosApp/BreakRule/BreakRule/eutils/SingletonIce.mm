@@ -19,7 +19,7 @@
     
     if (self = [super init]) {
         _g_db = new CICEDBUtil();
-        _g_db->setFileCache(40960);
+        _g_db->setFileCache(409600);
 
     }
     
@@ -71,6 +71,18 @@
     NSString *nsFullPathName = [filePath stringByAppendingPathComponent:nsFileName];
     
     return nsFullPathName;
+}
+
++ (bool)fileExistsInTemp:(NSString *)nsFileName
+{
+    NSString *nsFullPathName;
+    nsFullPathName = [SingletonIce getFullTempPathName:nsFileName];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:nsFullPathName])
+    {
+        return true;
+    }
+    return false;
 }
 
 - (bool)downloadFile:(NSString *)nsFileName

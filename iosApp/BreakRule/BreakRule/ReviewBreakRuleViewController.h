@@ -17,6 +17,7 @@
     NSString *nsReviewEndTimeOld;
     
     IBOutlet UITableView *reviewTableView;
+    IBOutlet UIActivityIndicatorView *actView;
 }
 
 - (IBAction)back:(id)sender;

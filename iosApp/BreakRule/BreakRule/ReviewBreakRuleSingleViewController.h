@@ -28,6 +28,7 @@
     IBOutlet UITextView *reviewContent4TextView;
     
     IBOutlet UIImageView *imageView;
+    IBOutlet UIActivityIndicatorView *actView;
     
     CSelectHelp	helpInfo;
     string sCurFlowNode;

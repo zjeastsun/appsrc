@@ -34,7 +34,7 @@
     [self addTapGuestureOnView];
     // 注册通知，当键盘将要弹出时执行keyboardWillShow方法。
     [self registerObserverForKeyboard];
-    
+    [actView setHidden:YES];
     // Do any additional setup after loading the view.
 }
 
@@ -151,6 +151,8 @@ string getIPWithHostName(string hostName)
         bridge.helpRight.copy(helpRight);
     }
     
+    [actView stopAnimating];
+    
     UIViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
     [self presentViewController:projectView animated:YES completion:nil];
 }
@@ -161,6 +163,8 @@ string getIPWithHostName(string hostName)
 //    [self presentViewController:view animated:YES completion:nil];
 //    
 //    return;
+    [actView setHidden:NO];
+    [actView startAnimating];
     
     NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(dbHandleThread:) object:nil];
     [thread start];

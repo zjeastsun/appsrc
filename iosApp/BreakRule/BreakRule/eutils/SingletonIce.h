@@ -16,6 +16,7 @@ const string DATA_FILE_FOLDER = "test";//服务器保存照片的相对路径文
 + (NSString *)valueNSString:(CSelectHelp)help rowForHelp:(int)row KeyForHelp:(std::string)key;
 + (string)NSStringToGBstring:(NSString *)nsString;
 + (NSString *)getFullTempPathName:(NSString *)nsFileName;//获取temp目录全路径文件名
++ (bool)fileExistsInTemp:(NSString *)nsFileName;
 
 - (bool)downloadFile:(NSString *)nsFileName;
 

@@ -155,14 +155,22 @@
     strParam = helpParam.get();
     
     oneIce.g_db->selectCmd("", sqlcode, strParam, helpInfo, strError);
+    [actView stopAnimating];
+    [actView setHidden:YES];
+    
     [reviewTableView reloadData];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    
+    
     BRIDGE
     if (![nsReviewStartTimeOld isEqualToString:bridge.nsReviewStartTime] || ![nsReviewEndTimeOld isEqualToString:bridge.nsReviewEndTime] || ![nsRuleTypeOld isEqualToString:bridge.nsRuleTypeForCondition]) {
 
+        [actView setHidden:NO];
+        [actView startAnimating];
+        
         NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(queryDb) object:nil];
         [thread start];
     }

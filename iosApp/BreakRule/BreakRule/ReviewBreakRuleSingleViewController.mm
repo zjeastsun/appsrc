@@ -75,15 +75,29 @@
     
     [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
     
-    bool bRerult = [oneIce downloadFile:bridge.nsReviewBR_PicNameSelected];
-    NSString *nsDesPathName = [SingletonIce getFullTempPathName:bridge.nsReviewBR_PicNameSelected];
+    bool bFileExits = [SingletonIce fileExistsInTemp:bridge.nsReviewBR_PicNameSelected];
     
-    //获取保存得图片
-    if (bRerult) {
-        UIImage *img = [UIImage imageWithContentsOfFile:nsDesPathName];
-        imageView.image = img;
+    bool bRerult;
+    if ( !bFileExits ) {
+        bRerult = [oneIce downloadFile:bridge.nsReviewBR_PicNameSelected];
+        
+        [actView stopAnimating];
+        [actView setHidden:YES];
+        
+        if (!bRerult) {
+            [SingletonBridge MessageBox:@"图片下载失败！"];
+            return;
+        }
     }
     
+    NSString *nsDesPathName = [SingletonIce getFullTempPathName:bridge.nsReviewBR_PicNameSelected];
+    //获取保存得图片
+    
+    UIImage *img = [UIImage imageWithContentsOfFile:nsDesPathName];
+    imageView.image = img;
+    
+    [actView stopAnimating];
+    [actView setHidden:YES];
 
 }
 
@@ -129,6 +143,9 @@
     
     timeTextField.text = bridge.nsReviewBR_TimeSelected;
     breakRuleContentTextField.text = bridge.nsReviewBR_BreakRuleContentSelected;
+    
+    [actView setHidden:NO];
+    [actView startAnimating];
     
     NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(queryReview) object:nil];
     [thread start];

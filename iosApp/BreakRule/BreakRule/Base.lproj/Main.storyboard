@@ -97,8 +97,8 @@
                                             <action selector="fromPhotosAlbum:" destination="b5M-9j-dQ7" eventType="touchUpInside" id="Fa1-II-ot7"/>
                                         </connections>
                                     </button>
-                                    <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="4sc-9S-qba">
-                                        <rect key="frame" x="12" y="436" width="291" height="2"/>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="4sc-9S-qba">
+                                        <rect key="frame" x="12" y="431" width="291" height="2"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </progressView>
                                 </subviews>
@@ -928,6 +928,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <segue destination="Sa8-vG-teg" kind="modal" id="4oh-eE-9JT"/>
                                         </connections>
                                     </button>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="zMj-He-4WJ">
+                                        <rect key="frame" x="142" y="206" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <connections>
                                     <outlet property="delegate" destination="B0J-9n-Uhr" id="i1g-Oi-SNE"/>
@@ -937,6 +941,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="actView" destination="zMj-He-4WJ" id="rap-Fc-MKd"/>
                         <outlet property="pwdField" destination="UsJ-PL-ZL7" id="VVg-zq-EB3"/>
                         <outlet property="scrollView" destination="D2u-C1-cJ7" id="Iyr-5f-hVk"/>
                         <outlet property="serverIpField" destination="E2k-yx-La7" id="Fz9-Aq-D0h"/>
@@ -1101,6 +1106,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <outlet property="delegate" destination="970-ul-ylB" id="o8e-OK-l7G"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="c8b-uG-8tq">
+                                <rect key="frame" x="150" y="86" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -1117,6 +1126,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="actView" destination="c8b-uG-8tq" id="6D5-71-aSD"/>
                         <outlet property="reviewTableView" destination="rho-Oh-sRt" id="v9C-4E-r5q"/>
                     </connections>
                 </viewController>
@@ -1520,6 +1530,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <outlet property="delegate" destination="qVl-Or-5Fn" id="79h-jP-yU5"/>
                                         </connections>
                                     </textView>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="uaU-lU-f4b">
+                                        <rect key="frame" x="142" y="293" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <connections>
                                     <outlet property="delegate" destination="qVl-Or-5Fn" id="HGA-1k-1GZ"/>
@@ -1541,6 +1555,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="actView" destination="uaU-lU-f4b" id="YBJ-dn-LkW"/>
                         <outlet property="breakRuleContentTextField" destination="6sd-5J-iPC" id="YXR-o6-r1O"/>
                         <outlet property="imageView" destination="Yx8-cB-p40" id="7BP-k8-rYL"/>
                         <outlet property="orgNameTextField" destination="NRt-Bj-Nbh" id="elV-uG-3F6"/>
