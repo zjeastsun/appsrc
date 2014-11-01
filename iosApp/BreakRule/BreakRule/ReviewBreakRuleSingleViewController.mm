@@ -140,8 +140,8 @@
 - (void)viewDidAppear:(BOOL)animated
 {
 //    [superview DidAppear:animated];
-    scrollView.frame = CGRectMake(0, 0, 320, 480);
-    [scrollView setContentSize:CGSizeMake(320, 700)];
+    scrollView.frame = CGRectMake(0, 0, kWidthOfMainScreen, kHeightOfMainScreen);
+    [scrollView setContentSize:CGSizeMake(kWidthOfMainScreen, kHeightOfMainScreen + 220)];
     
     //重新载入所有数据
     [stateTableView reloadData];

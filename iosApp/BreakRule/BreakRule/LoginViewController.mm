@@ -306,7 +306,7 @@ string getIPWithHostName(string hostName)
 - (void)viewDidAppear:(BOOL)animated
 {
     //    [superview DidAppear:animated];
-    scrollView.frame = CGRectMake(0, 0, 320, kHeightOfMainScreen);
+    scrollView.frame = CGRectMake(0, 0, kWidthOfMainScreen, kHeightOfMainScreen);
 //    [scrollView setContentSize:CGSizeMake(320, 700)];
 
 }

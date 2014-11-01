@@ -19,6 +19,11 @@
     
     __block NSString *nsPhotoData;
     NSString *nsBreakRuleType;
+    
+    UITextView *textViewSelected;
+    /** 弹出键盘fame */
+    CGRect keyboardRect;
+    IBOutlet UIScrollView *scrollView;
 }
 - (IBAction)back:(id)sender;
 - (IBAction)fromPhotosAlbum:(id)sender;
