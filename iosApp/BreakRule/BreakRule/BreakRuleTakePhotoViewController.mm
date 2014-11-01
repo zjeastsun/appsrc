@@ -309,14 +309,9 @@
 
 -(void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
-    UIAlertView *alert;
     if(error)
     {
-        alert = [[UIAlertView alloc] initWithTitle:@"错误"
-                                           message:@"不能保存照片到相册"
-                                          delegate:self
-                                 cancelButtonTitle:@"OK"
-                                 otherButtonTitles:nil];
+        [SingletonBridge MessageBox:@"不能保存照片到相册"];
     }
     else
     {
@@ -326,23 +321,15 @@
 //                                 cancelButtonTitle:@"OK"
 //                                 otherButtonTitles:nil];
     }
-    [alert show];
     
 }
 
 -(void)video:(UIImage *)video didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
-    UIAlertView *alert;
     if(error)
     {
-        alert = [[UIAlertView alloc] initWithTitle:@"错误"
-                                           message:@"不能保存视频到相册"
-                                          delegate:self
-                                 cancelButtonTitle:@"OK"
-                                 otherButtonTitles:nil];
+        [SingletonBridge MessageBox:@"不能保存视频到相册"];
     }
-    [alert show];
-    
 }
 
 - (void)saveVideo:(NSURL *)mediaURL
@@ -359,13 +346,21 @@
     ONEICE
     BRIDGE
     
+    int iResult = 0;
+    
     //获取temp目录
     NSString *filePath = NSTemporaryDirectory();
     
     //    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     //    NSString *filePath = [paths objectAtIndex:0];
     string sPicName;
-    oneIce.g_db->command("get_sequence", "pic_id", sPicName);
+    iResult = oneIce.g_db->command("get_sequence", "pic_id", sPicName);
+    if( iResult<0 )
+    {
+        [SingletonBridge MessageBox:"获取照片ID错误" withTitle:"数据库错误"];
+        return;
+    }
+    
     sPicName += ".jpg";
     NSString *nsPicName = [NSString stringWithFormat:@"%s", sPicName.c_str()];
     
@@ -383,7 +378,12 @@
     
     string sDesPathName = [nsDesPathName UTF8String];
   
-    oneIce.g_db->upload(sDesPathName, "test");
+    iResult = oneIce.g_db->upload(sDesPathName, "test");
+    if( iResult<0 )
+    {
+        [SingletonBridge MessageBox:"上传照片错误" withTitle:"传输错误"];
+        return;
+    }
     
     NSDate *  senddate=[NSDate date];
     NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
@@ -395,7 +395,12 @@
     const string sqlcode="put_break_law_info";
 
     string sBreakRuleId = "";
-    oneIce.g_db->command("get_sequence", "break_rule_id", sBreakRuleId);
+    iResult = oneIce.g_db->command("get_sequence", "break_rule_id", sBreakRuleId);
+    if( iResult<0 )
+    {
+        [SingletonBridge MessageBox:"获取违规ID错误" withTitle:"数据库错误"];
+        return;
+    }
     
     string sNodeId;
     util::string_format(sNodeId, "%d", FLOW_NODE_BR_REVIEW_1);
@@ -427,7 +432,13 @@
     
     CSelectHelp	help;
     oneIce.g_db->execCmd("", sqlcode, strParam, help, strError);
+    if( iResult<0 )
+    {
+        [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
+        return;
+    }
 
+    [self back:nil];
 }
 
 - (IBAction)commit:(id)sender {
@@ -435,23 +446,13 @@
 //    || nsPhotoData.length == 0//为什么这个判断会出错呢？
     if (nsPhotoData == nil )
     {
-        [self MessageBox:@"您还没有拍照或者导入照片！"];
+        [SingletonBridge MessageBox:@"您还没有拍照或者导入照片！"];
         return;
     }
     
     NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(insertInfoToDb:) object:nil];
     [thread start];
 
-}
-
--(void)MessageBox:(NSString *)msg
-{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误"
-                                                    message:msg
-                                                   delegate:self
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView

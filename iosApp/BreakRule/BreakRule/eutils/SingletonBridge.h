@@ -96,4 +96,7 @@ const int REVIEW_NO_PASS = 3;// 审核不通过
 + (NSString *)getReviewTypeName:(int)iType;
 + (int)getReviewTypeId:(NSString *)nsName;
 
++ (void)MessageBox:(NSString *)msg;
++ (void)MessageBox:(string)msgs withTitle:(string)sTitle;
+
 @end

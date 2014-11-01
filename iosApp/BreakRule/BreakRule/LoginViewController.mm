@@ -76,12 +76,12 @@ string getIPWithHostName(string hostName)
     
     if( sServer.empty() )
     {
-        [self MessageBox:@"请输入服务器域名或IP地址"];
+        [SingletonBridge MessageBox:@"请输入服务器域名或IP地址"];
         return;
     }
     if( sUser.empty() || sPwd.empty() )
     {
-        [self MessageBox:@"请输入用户名和密码"];
+        [SingletonBridge MessageBox:@"请输入用户名和密码"];
         return;
     }
     
@@ -105,7 +105,7 @@ string getIPWithHostName(string hostName)
         if( !oneIce.g_db->login() )
         {
             //        NSLog(@"数据库连接失败！");
-            [self MessageBox:@"服务器连接失败"];
+            [SingletonBridge MessageBox:@"服务器连接失败"];
             return;
         }
         NSLog(@"数据库连接成功！");
@@ -125,7 +125,7 @@ string getIPWithHostName(string hostName)
     
     if( helpUser.size() <= 0 )
     {
-        [self MessageBox:@"用户名或者密码错误"];
+        [SingletonBridge MessageBox:@"用户名或者密码错误"];
         return;
     }
     NSLog(@"用户登录成功！");
@@ -281,17 +281,6 @@ string getIPWithHostName(string hostName)
 
     }
 */
-}
-
-
--(void)MessageBox:(NSString *)msg
-{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误"
-                                                    message:msg
-                                                   delegate:self
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
 }
 
 - (void)performSegueWithIdentifier:(NSString *)identifier sender:(id)sender

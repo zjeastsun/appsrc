@@ -32,6 +32,8 @@
     CSelectHelp	helpInfo;
     string sCurFlowNode;
     string sReview_grade;
+    string sReviewContent;
+    string sNextNodeId;
     
     UITextView *textViewSelected;
     /** 弹出键盘fame */

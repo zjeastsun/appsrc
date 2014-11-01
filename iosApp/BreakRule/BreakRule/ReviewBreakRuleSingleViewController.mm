@@ -42,6 +42,7 @@
     if( helpInfo.size()== 2 )
     {
         [reviewContent3TextView setEditable:true];
+        reviewContent1TextView.text = [SingletonIce valueNSString:helpInfo rowForHelp:0 KeyForHelp:"review_content"];
         reviewContent2TextView.text = [SingletonIce valueNSString:helpInfo rowForHelp:1 KeyForHelp:"review_content"];
         
     }
@@ -49,6 +50,8 @@
     if( helpInfo.size()== 3 )
     {
         [reviewContent4TextView setEditable:true];
+        reviewContent1TextView.text = [SingletonIce valueNSString:helpInfo rowForHelp:0 KeyForHelp:"review_content"];
+        reviewContent2TextView.text = [SingletonIce valueNSString:helpInfo rowForHelp:1 KeyForHelp:"review_content"];
         reviewContent3TextView.text = [SingletonIce valueNSString:helpInfo rowForHelp:2 KeyForHelp:"review_content"];
         
     }
@@ -106,10 +109,12 @@
     // 注册通知，当键盘将要弹出时执行keyboardWillShow方法。
     [self registerObserverForKeyboard];
     
+    BRIDGE
+    
     title = [[NSMutableArray alloc]initWithObjects:@"审核状态", nil];
     subTitle = [[NSMutableArray alloc]initWithObjects:@"审核通过", nil];
+    bridge.nsReviewState = @"审核通过";
     
-    BRIDGE
     orgNameTextField.text = bridge.nsReviewBR_OrgNameSelected;
     
     if ([bridge.nsReviewBR_BreakRuleTypeSelected isEqualToString:@"0"]) {
@@ -161,55 +166,74 @@
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (string)getNextNodeId
+- (void)getReviewInfo
 {
-    string sNextNodeId;
-    
     BRIDGE
-    string sCurId = [bridge.nsReviewBR_CurFlowNodeIdSelected UTF8String];
-    int iCurId = atoi(sCurId.c_str());
+    string sCurNodeId = [bridge.nsReviewBR_CurFlowNodeIdSelected UTF8String];
+    int iCurNodeId = atoi(sCurNodeId.c_str());
     
     if ([bridge.nsReviewState isEqualToString:@"审核通过"]) {
         util::string_format(sNextNodeId, "%d", FLOW_NODE_RECTIFY_TAKEPHOTO);
     }
     else if ([bridge.nsReviewState isEqualToString:@"无法判定"])
     {
-        switch (iCurId) {
+        switch (iCurNodeId) {
             case FLOW_NODE_BR_REVIEW_1:
             {
                 util::string_format(sNextNodeId, "%d", FLOW_NODE_BR_REVIEW_2);
-                sReview_grade = "1";
                 break;
             }
             case FLOW_NODE_BR_REVIEW_2:
             {
                 util::string_format(sNextNodeId, "%d", FLOW_NODE_BR_REVIEW_3);
-                sReview_grade = "2";
                 break;
             }
             case FLOW_NODE_BR_REVIEW_3:
             {
                 util::string_format(sNextNodeId, "%d", FLOW_NODE_BR_REVIEW_4);
-                sReview_grade = "3";
                 break;
             }
-            case FLOW_NODE_BR_REVIEW_4:
-            {
-                //最高级不能选择“无法判定”
-                sReview_grade = "4";
-                break;
-            }
+
                 
             default:
                 break;
         }
     }
-    else
+    else//无需整改结束流程
     {
         util::string_format(sNextNodeId, "%d", FLOW_NODE_FINISH);
     }
 
-    return sNextNodeId;
+    switch (iCurNodeId) {
+        case FLOW_NODE_BR_REVIEW_1:
+        {
+            sReview_grade = "1";
+            sReviewContent = [SingletonIce NSStringToGBstring:reviewContent1TextView.text];
+            break;
+        }
+        case FLOW_NODE_BR_REVIEW_2:
+        {
+            sReview_grade = "2";
+            sReviewContent = [SingletonIce NSStringToGBstring:reviewContent2TextView.text];
+            break;
+        }
+        case FLOW_NODE_BR_REVIEW_3:
+        {
+            sReview_grade = "3";
+            sReviewContent = [SingletonIce NSStringToGBstring:reviewContent3TextView.text];
+            break;
+        }
+        case FLOW_NODE_BR_REVIEW_4:
+        {
+            sReview_grade = "4";
+            sReviewContent = [SingletonIce NSStringToGBstring:reviewContent4TextView.text];
+            break;
+        }
+            
+        default:
+            break;
+    }
+    
 }
 
 - (void)insertInfoToDb:(NSString *)param
@@ -219,17 +243,16 @@
     
     string strError;
     string strParam="";
-    const string sqlcode="put_br_review";
+    string sqlcode="put_br_review";
     
     string sReviewId = "";
     oneIce.g_db->command("get_sequence", "review_id", sReviewId);
     
-    string sNodeId = [self getNextNodeId];
+    [self getReviewInfo];
+    
     string sBreakRuleId = [bridge.nsReviewBR_BreakRuleIdSelected UTF8String];
     string sUserId = [bridge.nsUserId UTF8String];
     string sRectifyId = "0";
-    
-    string sReviewContent = [SingletonIce NSStringToGBstring:reviewContent1TextView.text];
     
     SelectHelpParam helpParam;
     helpParam.add(sReviewId);
@@ -240,12 +263,38 @@
     helpParam.add(sRectifyId);
     strParam = helpParam.get();
     
+    int iResult = 0;
     CSelectHelp	help;
-    oneIce.g_db->execCmd("", sqlcode, strParam, help, strError);
-
+    iResult = oneIce.g_db->execCmd("", sqlcode, strParam, help, strError);
+    if( iResult<0 )
+    {
+        [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
+        return;
+    }
+    
+    sqlcode = "update_break_law_node";
+    SelectHelpParam helpParamNode;
+    helpParamNode.add(sNextNodeId);
+    helpParamNode.add(sBreakRuleId);
+    strParam = helpParamNode.get();
+    iResult = oneIce.g_db->execCmd("", sqlcode, strParam, help, strError);
+    if( iResult<0 )
+    {
+        [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
+        return;
+    }
+    
+    [self back:nil];
 }
 
 - (IBAction)save:(id)sender {
+    
+    string ss = "错误";
+    if ( sReviewContent == "") {
+        [SingletonBridge MessageBox:"请输入批阅内容！" withTitle:ss];
+        return;
+    }
+    
     NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(insertInfoToDb:) object:nil];
     [thread start];
 }
@@ -297,6 +346,8 @@
 //选择、响应
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    BRIDGE
+    bridge.nsWhoUseReviewStateViewController = @"ReviewBreakRuleSingleViewController";
     UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReviewStateView"];
     
     [self presentViewController:viewController animated:YES completion:nil];
