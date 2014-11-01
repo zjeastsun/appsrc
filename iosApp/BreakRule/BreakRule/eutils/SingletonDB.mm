@@ -17,13 +17,18 @@
 
 + (void)moveDbToSandBox
 {
+    string sDbName = LOCALDBNAME;
+    string sDbNameFull = sDbName + ".db";
+    NSString *nsDbName = [NSString stringWithFormat:@"%s", sDbName.c_str()];
+    NSString *nsDbNameFull = [NSString stringWithFormat:@"%s", sDbNameFull.c_str()];
+    
     //1、获得数据库文件在工程中的路径——源路径。
-    NSString *sourcesPath = [[NSBundle mainBundle] pathForResource:@"break_law_init" ofType:@"db"];
+    NSString *sourcesPath = [[NSBundle mainBundle] pathForResource:nsDbName ofType:@"db"];
     
     //2、获得沙盒中Document文件夹的路径——目的路径
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentPath = [paths objectAtIndex:0];
-    NSString *desPath = [documentPath stringByAppendingPathComponent:@"break_law_init.db"];
+    NSString *desPath = [documentPath stringByAppendingPathComponent:nsDbNameFull];
     
     if (sourcesPath == nil ) {
         return;
@@ -48,10 +53,13 @@
 
 - (void)loginDb
 {
+    string sDbNameFull = LOCALDBNAME;
+    sDbNameFull += ".db";
+    NSString *nsDbNameFull = [NSString stringWithFormat:@"%s", sDbNameFull.c_str()];
+    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *dbFileName = @"break_law_init.db";
-    NSString *dataFilePath = [documentsDirectory stringByAppendingPathComponent:dbFileName];
+    NSString *dataFilePath = [documentsDirectory stringByAppendingPathComponent:nsDbNameFull];
     
     string sDataFilePath = [dataFilePath UTF8String];
     if (!_g_localDB->isLogin()) {

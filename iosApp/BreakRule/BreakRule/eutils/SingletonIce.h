@@ -4,7 +4,7 @@
 
 #define ONEICE SingletonIce *oneIce; oneIce = [SingletonIce sharedInstance];
 
-const string DATA_FILE_FOLDER = "test";
+const string DATA_FILE_FOLDER = "test";//服务器保存照片的相对路径文件夹
 
 @interface SingletonIce : NSObject
 

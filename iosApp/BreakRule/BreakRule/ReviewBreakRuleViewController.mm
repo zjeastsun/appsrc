@@ -88,9 +88,9 @@
     }
 
     //定制单元格
-    cell.titleLabel.text = [SingletonIce valueNSString:helpInfo rowForHelp:indexPath.row KeyForHelp:"org_name"];
-    cell.descLabel.text = [SingletonIce valueNSString:helpInfo rowForHelp:indexPath.row KeyForHelp:"break_rule_content"];
-    cell.timeLabel.text = [SingletonIce valueNSString:helpInfo rowForHelp:indexPath.row KeyForHelp:"update_time"];
+    cell.titleLabel.text = [SingletonIce valueNSString:helpInfo rowForHelp:static_cast<int>(indexPath.row) KeyForHelp:"org_name"];
+    cell.descLabel.text = [SingletonIce valueNSString:helpInfo rowForHelp:static_cast<int>(indexPath.row) KeyForHelp:"break_rule_content"];
+    cell.timeLabel.text = [SingletonIce valueNSString:helpInfo rowForHelp:static_cast<int>(indexPath.row) KeyForHelp:"update_time"];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;

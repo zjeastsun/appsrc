@@ -3,6 +3,7 @@
 #import"eutils.h"
 
 #define LOCALDB SingletonDB *localDB; localDB = [SingletonDB sharedInstance];
+#define LOCALDBNAME "break_law_init";//本地数据库文件名
 
 @interface SingletonDB : NSObject
 

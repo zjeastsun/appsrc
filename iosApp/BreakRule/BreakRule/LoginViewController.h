@@ -15,9 +15,13 @@
     IBOutlet UITextField *serverIpField;
     IBOutlet UITextField *userField;
     IBOutlet UITextField *pwdField;
+    IBOutlet UIScrollView *scrollView;
+    
+    UITextField *textFieldSelected;
+    /** 弹出键盘fame */
+    CGRect keyboardRect;
 }
 - (IBAction)login:(id)sender;
-- (IBAction)backGround:(id)sender;
 
 
 @end

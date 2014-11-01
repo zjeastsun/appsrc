@@ -2856,7 +2856,7 @@ bool CICEBaseDBUtil::downloadFile(const string& sFile, const string& sDestPath, 
     
 	if (help._count <= 0) return false;
     
-	int iSize = help.valueInt(0, "size");
+	int iSize = static_cast<int>(help.valueInt(0, "size"));
     
 	string sNewSaveFile = sDestPath + "/" + util::getFileName(sFile, sTmp);
 	string sNewSaveFileTmp = sNewSaveFile + ".tmp";

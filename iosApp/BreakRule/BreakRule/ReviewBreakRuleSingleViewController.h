@@ -33,6 +33,10 @@
     string sCurFlowNode;
     string sReview_grade;
     
+    UITextView *textViewSelected;
+    /** 弹出键盘fame */
+    CGRect keyboardRect;
+    
 }
 - (IBAction)back:(id)sender;
 - (IBAction)save:(id)sender;

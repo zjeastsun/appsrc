@@ -29,6 +29,7 @@
     if( helpInfo.size()== 0 )
     {
         [reviewContent1TextView setEditable:true];
+//        reviewContent1TextView.backgroundColor = [UIColor whiteColor];//设置它的背景颜色
     }
     
     if( helpInfo.size()== 1 )
@@ -83,17 +84,27 @@
 
 }
 
+// 当通过键盘在输入完毕后，点击屏幕空白区域关闭键盘的操作。
 -(void)viewTapped:(UITapGestureRecognizer*)tapGr{
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+}
+
+// 在view上添加一个UITapGestureRecognizer，实现点击键盘以外空白区域隐藏键盘。
+- (void)addTapGuestureOnView
+{
+    UITapGestureRecognizer *tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+    // 是否取消手势识别
+    tapGr.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapGr];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    UITapGestureRecognizer *tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
-    tapGr.cancelsTouchesInView = NO;
-    [self.view addGestureRecognizer:tapGr];
+    [self addTapGuestureOnView];
+    // 注册通知，当键盘将要弹出时执行keyboardWillShow方法。
+    [self registerObserverForKeyboard];
     
     title = [[NSMutableArray alloc]initWithObjects:@"审核状态", nil];
     subTitle = [[NSMutableArray alloc]initWithObjects:@"审核通过", nil];
@@ -297,6 +308,83 @@
    
 }
 
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    textViewSelected = textView;
+    [self adjustViewForKeyboardReveal:YES textView:textViewSelected];
+    
+}
+/**
+ * 键盘展开/收起时，动态调整当前scrollView高度，避免键盘挡住当前textView。
+ * @param  showKeyboard    键盘是否弹出
+ * @param  textView       当前textView
+ */
+- (void)adjustViewForKeyboardReveal:(BOOL)showKeyboard textView:(UITextView *)textView
+{
+    // 获取当前scrollView frame，当键盘弹出时，当前scrollView frame上移一定高度。
+    CGRect scrollFrame = scrollView.frame;
+    // 如果用户通过点击空白区域收起键盘，视图坐标恢复正常。
+    if (!textView) {
+        scrollFrame.origin.y = 0;
+        [self viewChangeOriginYAnimation:scrollFrame];
+        return;
+    }
+    // 键盘弹出，重新计算scrollView y轴。
+    if (showKeyboard) {
+        float offsetTop = ABS(scrollView.contentOffset.y) + ABS(scrollView.frame.origin.y);
+        // 计算当前textField底部空间高度，如果当前textField下部的空间足以容纳弹出键盘，则不改变当前view高度。
+        float bottomHeight = kHeightOfMainScreen + offsetTop - textView.frame.origin.y - textView.frame.size.height;
+        
+        if (bottomHeight >= keyboardRect.size.height) {
+            return;
+        }
+        // 计算view Y轴位移量，使得弹出键盘和当前textField的距离等于指定值。
+        scrollFrame.origin.y -= keyboardRect.size.height + kTextViewPadding - bottomHeight;
+    }
+    // 当键盘收起时，当前视图frame Y轴置为0。
+    else {
+        scrollFrame.origin.y = 0;
+    }
+    [self viewChangeOriginYAnimation:scrollFrame];
+}
+
+/**
+ * view改变y坐标时，增加动画效果。
+ * @param viewFrame view视图的新frame
+ */
+- (void)viewChangeOriginYAnimation:(CGRect)viewFrame
+{
+    // 视图上移/下移动画
+    [UIView beginAnimations:kAnimationResizeForKeyboard context:nil];
+    [UIView setAnimationDuration:kAnimationDuration];
+
+    scrollView.frame = viewFrame;
+    [UIView commitAnimations];
+}
+
+/** 注册通知，当键盘将要弹出/收起时执行keyboardWillShow/keyboardWillHide方法。 */
+- (void)registerObserverForKeyboard
+{
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+/** 键盘弹出通知方法，设置全局弹出键盘fame属性，并动态调整当前scrollView高度。 */
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    // 返回通知关联的用户信息字典，从中取出弹出键盘尺寸信息。
+    NSDictionary *userInfo = [notification userInfo];
+    // 取键盘frame的value值，从而获取键盘frame。
+    NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    keyboardRect = [value CGRectValue];
+}
+
+/** 键盘收起通知方法，动态调整当前scrollView高度。 */
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    [self adjustViewForKeyboardReveal:NO textView:textViewSelected];
+}
 
 
 @end
