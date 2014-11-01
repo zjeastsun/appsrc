@@ -14,6 +14,8 @@
 #import "SingletonBridge.h"
 #import "SingletonIce.h"
 
+BreakRuleTakePhotoViewController *pBR;
+
 @interface BreakRuleTakePhotoViewController ()
 
 @end
@@ -26,6 +28,7 @@
     if (self) {
         // Custom initialization
     }
+    
     return self;
 }
 
@@ -46,6 +49,9 @@
     [self addTapGuestureOnView];
     // 注册通知，当键盘将要弹出时执行keyboardWillShow方法。
     [self registerObserverForKeyboard];
+    
+    pBR = self;
+    [progressView setProgressViewStyle:UIProgressViewStyleDefault]; //设置进度条类型
 }
 
 // 当通过键盘在输入完毕后，点击屏幕空白区域关闭键盘的操作。
@@ -341,6 +347,25 @@
     }
 }
 
+- (void)updateUI
+{
+    [pBR->progressView setProgress:fProgress/100];
+}
+
+void ProcessFinished(string path, int iResult, const string &sError)
+{
+	printf("finished %s--%d,%s", path.c_str(), iResult, sError.c_str());
+    [pBR->progressView setHidden:YES];
+}
+
+void Process(string path, double iProgress)
+{
+	printf("  %s--%0.2f ", path.c_str(), iProgress );
+    pBR->fProgress = iProgress;
+    [pBR performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+   
+}
+ 
 -(void)insertInfoToDb:(NSString *)param
 {
     ONEICE
@@ -378,7 +403,7 @@
     
     string sDesPathName = [nsDesPathName UTF8String];
   
-    iResult = oneIce.g_db->upload(sDesPathName, "test");
+    iResult = oneIce.g_db->upload(sDesPathName, "test", Process, ProcessFinished);
     if( iResult<0 )
     {
         [SingletonBridge MessageBox:"上传照片错误" withTitle:"传输错误"];
@@ -442,13 +467,15 @@
 }
 
 - (IBAction)commit:(id)sender {
-
+    
 //    || nsPhotoData.length == 0//为什么这个判断会出错呢？
     if (nsPhotoData == nil )
     {
         [SingletonBridge MessageBox:@"您还没有拍照或者导入照片！"];
         return;
     }
+    [progressView setProgress:0];
+    [progressView setHidden:NO];
     
     NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(insertInfoToDb:) object:nil];
     [thread start];

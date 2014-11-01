@@ -347,7 +347,17 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BRIDGE
-    bridge.nsWhoUseReviewStateViewController = @"ReviewBreakRuleSingleViewController";
+    
+    string sCurNodeId = [bridge.nsReviewBR_CurFlowNodeIdSelected UTF8String];
+    int iCurNodeId = atoi(sCurNodeId.c_str());
+    if (FLOW_NODE_BR_REVIEW_4 == iCurNodeId) {
+        bridge.nsWhoUseReviewStateViewController = @"ReviewBreakRuleSingleViewControllerForHighest";//最高级批阅
+    }
+    else
+    {
+        bridge.nsWhoUseReviewStateViewController = @"ReviewBreakRuleSingleViewController";
+    }
+    
     UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReviewStateView"];
     
     [self presentViewController:viewController animated:YES completion:nil];

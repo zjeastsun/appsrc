@@ -24,6 +24,9 @@
     /** 弹出键盘fame */
     CGRect keyboardRect;
     IBOutlet UIScrollView *scrollView;
+    
+    IBOutlet UIProgressView *progressView;
+    double fProgress;
 }
 - (IBAction)back:(id)sender;
 - (IBAction)fromPhotosAlbum:(id)sender;

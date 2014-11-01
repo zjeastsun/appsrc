@@ -97,6 +97,10 @@
                                             <action selector="fromPhotosAlbum:" destination="b5M-9j-dQ7" eventType="touchUpInside" id="Fa1-II-ot7"/>
                                         </connections>
                                     </button>
+                                    <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="4sc-9S-qba">
+                                        <rect key="frame" x="12" y="436" width="291" height="2"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </progressView>
                                 </subviews>
                                 <connections>
                                     <outlet property="delegate" destination="b5M-9j-dQ7" id="xL2-gN-EaY"/>
@@ -120,6 +124,7 @@
                     <connections>
                         <outlet property="contentTextView" destination="lpU-mm-Zz1" id="Meg-Ay-3tb"/>
                         <outlet property="imageView" destination="Sh7-IR-P9j" id="tzc-e3-1OR"/>
+                        <outlet property="progressView" destination="4sc-9S-qba" id="uyg-HM-RCr"/>
                         <outlet property="ruleTableView" destination="zXM-fP-IkZ" id="aHK-F8-RxS"/>
                         <outlet property="scrollView" destination="j5a-wF-r9A" id="7dT-sV-IyX"/>
                     </connections>

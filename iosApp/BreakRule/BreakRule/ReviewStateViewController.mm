@@ -32,11 +32,23 @@
     bridge.nsReviewState = @"审核通过";
     if( [bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewBreakRuleSingleViewController"] )
     {
+        //违规批阅
         title = [[NSMutableArray alloc]initWithObjects:@"审核通过", @"无需整改", @"无法判定", nil];
     }
-    else
+    else if( [bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewBreakRuleSingleViewControllerForHighest"])
     {
+        //违规批阅－最高级
+        title = [[NSMutableArray alloc]initWithObjects:@"审核通过", @"无需整改", nil];
+    }
+    else if([bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewRectifySingleViewController"])
+    {
+        //整改批阅
         title = [[NSMutableArray alloc]initWithObjects:@"审核通过", @"审核不通过", @"无法判定", nil];
+    }
+    else if( [bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewRectifySingleViewControllerForHighest"])
+    {
+        //整改批阅-最高级
+        title = [[NSMutableArray alloc]initWithObjects:@"审核通过", @"审核不通过", nil];
     }
 }
 

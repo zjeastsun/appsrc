@@ -4,8 +4,6 @@
 
 #define BRIDGE SingletonBridge *bridge; bridge = [SingletonBridge sharedInstance];
 
-
-
 /////////////////////////////////////////////////////////////
 const int FLOW_NODE_FINISH = 0;// 流程结束
 const int FLOW_NODE_BR_TAKEPHOTO = 1;// 违规视频抓拍
