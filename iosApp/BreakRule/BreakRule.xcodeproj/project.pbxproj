@@ -289,8 +289,7 @@
 				0490BE1719E0969500C83D82 /* BreakRuleTakePhoto */,
 				049B740A19EBCC90000BE808 /* RectifyTakePhoto */,
 				0477AE5619F01C770088E875 /* Review */,
-				0478B47319D4BCC40077EDBA /* QueryViewController.h */,
-				0478B47419D4BCC40077EDBA /* QueryViewController.mm */,
+				047786A71A0683390033C8B4 /* Query */,
 				0448782719CC70FB0086CE1B /* Images.xcassets */,
 				0448781319CC70FB0086CE1B /* Supporting Files */,
 			);
@@ -384,6 +383,15 @@
 				047786A51A0645600033C8B4 /* LoadView.m */,
 			);
 			name = LoadView;
+			sourceTree = "<group>";
+		};
+		047786A71A0683390033C8B4 /* Query */ = {
+			isa = PBXGroup;
+			children = (
+				0478B47319D4BCC40077EDBA /* QueryViewController.h */,
+				0478B47419D4BCC40077EDBA /* QueryViewController.mm */,
+			);
+			name = Query;
 			sourceTree = "<group>";
 		};
 		0477AE5619F01C770088E875 /* Review */ = {

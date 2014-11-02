@@ -9,6 +9,7 @@
 #import "LoadView.h"
 
 @implementation LoadView
+@synthesize tipLabel;
 
 - (id)initWithFrame:(CGRect)frame
 {

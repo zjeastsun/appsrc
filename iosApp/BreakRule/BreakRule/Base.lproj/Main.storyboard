@@ -4,20 +4,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="CNX-KA-gAh">
-            <objects>
-                <viewController id="ywF-Zw-dUk" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="OCM-TD-tEv">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GVF-FM-Wts" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3050" y="-1846"/>
-        </scene>
         <!--Break Rule Take Photo View Controller - 违规抓拍-->
         <scene sceneID="uHN-wE-H31">
             <objects>
@@ -64,12 +50,12 @@
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Sh7-IR-P9j">
                                         <rect key="frame" x="12" y="305" width="291" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" red="0.744140625" green="0.744140625" blue="0.744140625" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gHl-mP-GBw">
                                         <rect key="frame" x="148" y="446" width="30" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <state key="normal" title="拍照">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -77,9 +63,9 @@
                                             <action selector="fromCamera:" destination="b5M-9j-dQ7" eventType="touchUpInside" id="LDW-TH-3kG"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lnj-00-0nw">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lnj-00-0nw">
                                         <rect key="frame" x="228" y="446" width="30" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <state key="normal" title="视频">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -89,7 +75,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0TF-Fr-CIZ">
                                         <rect key="frame" x="67" y="446" width="30" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <state key="normal" title="照片">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -99,7 +85,7 @@
                                     </button>
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="4sc-9S-qba">
                                         <rect key="frame" x="12" y="431" width="291" height="2"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                     </progressView>
                                 </subviews>
                                 <connections>
@@ -131,7 +117,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FWn-6W-0ZY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2620" y="-1214"/>
+            <point key="canvasLocation" x="-3389" y="-1166"/>
         </scene>
         <!--Rule Type View Controller - 判定性质-->
         <scene sceneID="nn5-Ge-Eq1">
@@ -163,7 +149,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QRk-jx-gOp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1411" y="-1846"/>
+            <point key="canvasLocation" x="-2180" y="-1798"/>
         </scene>
         <!--Rule Option View Controller - 违规选项-->
         <scene sceneID="IXY-8d-NvI">
@@ -195,7 +181,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Rp-pR-fZa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1411" y="-1234"/>
+            <point key="canvasLocation" x="-2180" y="-1186"/>
         </scene>
         <!--Hazard Item View Controller - 危险源辨识库-->
         <scene sceneID="5lX-uQ-6wL">
@@ -216,7 +202,7 @@
                             </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="2lR-TC-yaA">
                                 <rect key="frame" x="0.0" y="66" width="320" height="45"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="xJx-Tw-Kbl" id="TnZ-vh-UfM"/>
@@ -252,7 +238,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c7m-wO-kVv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-395" y="-949"/>
+            <point key="canvasLocation" x="-1164" y="-901"/>
         </scene>
         <!--Hazard Type View Controller - 危险源类别-->
         <scene sceneID="Wom-W3-2D9">
@@ -284,7 +270,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YJQ-Av-U3T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="571" y="-949"/>
+            <point key="canvasLocation" x="-198" y="-901"/>
         </scene>
         <!--Safety Item View Controller - 违规行为辨识库-->
         <scene sceneID="gYm-73-m55">
@@ -311,7 +297,7 @@
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bJf-9x-TFb">
                                 <rect key="frame" x="0.0" y="66" width="320" height="137"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="o9l-rI-sdF" id="nOk-BC-osm"/>
@@ -340,7 +326,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j2V-Ru-V5i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-395" y="-1533"/>
+            <point key="canvasLocation" x="-1164" y="-1485"/>
         </scene>
         <!--Project Type View Controller - 项目类别-->
         <scene sceneID="8jE-zt-9Fj">
@@ -372,7 +358,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vwR-sH-D0H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="45" y="-2134"/>
+            <point key="canvasLocation" x="-724" y="-2086"/>
         </scene>
         <!--Check Item View Controller - 检查项目-->
         <scene sceneID="hxu-cy-NFq">
@@ -404,7 +390,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y1l-Ii-oMk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="571" y="-1533"/>
+            <point key="canvasLocation" x="-198" y="-1485"/>
         </scene>
         <!--Safety Sub Item View Controller - 安全分项-->
         <scene sceneID="hm4-qC-WVa">
@@ -436,7 +422,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gjd-2q-GtQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="45" y="-2735"/>
+            <point key="canvasLocation" x="-724" y="-2687"/>
         </scene>
         <!--Rectify View Controller - Second-->
         <scene sceneID="ot8-2e-RuS">
@@ -446,27 +432,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Second View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="29h-N2-YGT">
-                                <rect key="frame" x="20" y="114" width="280" height="42"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" editable="NO" text="Loaded by the second view controller — an instance of SecondViewController — specified in the app delegate." textAlignment="center" id="DcM-Fx-MKR">
-                                <rect key="frame" x="20" y="196" width="280" height="88"/>
-                                <fontDescription key="fontDescription" type="system" size="system"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="So3-er-Oyz">
-                                <rect key="frame" x="0.0" y="258" width="320" height="173"/>
+                                <rect key="frame" x="0.0" y="15" width="320" height="465"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="整改抓拍" id="pnU-Ye-56e">
+                    <navigationItem key="navigationItem" title="待整改拍照列表" id="pnU-Ye-56e">
                         <barButtonItem key="leftBarButtonItem" title="返回" id="aAX-lT-Ynp">
                             <connections>
                                 <action selector="back:" destination="QUy-BD-bpt" id="oNo-o2-5PT"/>
@@ -481,7 +455,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qq-4t-Ow8" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2853" y="1506"/>
+            <point key="canvasLocation" x="-3389" y="1268"/>
         </scene>
         <!--Condition View Controller - 查询条件-->
         <scene sceneID="Elm-bC-itZ">
@@ -493,7 +467,7 @@
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" id="aVV-GK-eRd">
                                 <rect key="frame" x="0.0" y="191" width="320" height="229"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.8531759511" green="0.8531759511" blue="0.8531759511" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -592,7 +566,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="UWY-wb-sNY">
                                 <rect key="frame" x="0.0" y="65" width="320" height="43"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="O9P-HJ-kRg" id="gD9-zi-Tqd"/>
@@ -837,11 +811,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="D2u-C1-cJ7">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mobile_bg.jpg" id="fTy-3b-PFa">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eastsun.ico" id="Kp9-9Y-RFb">
                                         <rect key="frame" x="110" y="53" width="100" height="69"/>
@@ -991,11 +965,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_background.jpg" id="W39-gq-DLT">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" alpha="0.79999999999999982" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" id="CI6-9U-OYr">
                                 <rect key="frame" x="0.0" y="378" width="160" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="    违规抓拍"/>
@@ -1005,7 +979,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </button>
                             <button opaque="NO" alpha="0.79999999999999982" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="izF-lE-7L9">
                                 <rect key="frame" x="0.0" y="412" width="160" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="    整改抓拍"/>
@@ -1015,7 +989,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </button>
                             <button opaque="NO" alpha="0.79999999999999982" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="K73-l0-6Jl">
                                 <rect key="frame" x="160" y="412" width="160" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="    批阅整改"/>
@@ -1025,7 +999,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </button>
                             <button opaque="NO" alpha="0.79999999999999982" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xir-JN-wXz">
                                 <rect key="frame" x="0.0" y="446" width="160" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="查询信息" image="second"/>
@@ -1035,7 +1009,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </button>
                             <button opaque="NO" alpha="0.79999999999999982" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hMS-w4-i6k">
                                 <rect key="frame" x="160" y="446" width="160" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="设置信息" image="first"/>
@@ -1045,7 +1019,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </button>
                             <button opaque="NO" alpha="0.79999999999999982" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ry5-Ma-gBd">
                                 <rect key="frame" x="160" y="380" width="160" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="    批阅违规"/>
@@ -1055,28 +1029,28 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5ai-9L-oMg">
                                 <rect key="frame" x="0.0" y="382" width="29" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" image="catch_photo_sel.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Wyx-rX-CQV">
                                 <rect key="frame" x="159" y="382" width="30" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <state key="normal" image="func_read_pic_sel.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hMM-O9-I3N">
                                 <rect key="frame" x="0.0" y="415" width="29" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" image="btn_start_time.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yRO-UN-tKQ">
                                 <rect key="frame" x="155" y="414" width="34" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <state key="normal" title="Button" image="func_query_pic_sel.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1151,7 +1125,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s8O-x1-f5F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3331" y="1506"/>
+            <point key="canvasLocation" x="-3915" y="1268"/>
         </scene>
         <!--Navigation Controller - 批阅信息-->
         <scene sceneID="yWN-5F-BQq">
@@ -1207,7 +1181,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hrf-Xu-UX7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1937" y="-1846"/>
+            <point key="canvasLocation" x="-2706" y="-1798"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="10I-L6-6hm">
@@ -1225,7 +1199,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tsO-of-vAX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1937" y="-1234"/>
+            <point key="canvasLocation" x="-2706" y="-1186"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cxF-YZ-YPM">
@@ -1243,7 +1217,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tx5-n6-2JL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-921" y="-1533"/>
+            <point key="canvasLocation" x="-1690" y="-1485"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YQU-av-7Aw">
@@ -1261,7 +1235,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Sm-x6-clS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-921" y="-949"/>
+            <point key="canvasLocation" x="-1690" y="-901"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PeW-3B-lec">
@@ -1279,7 +1253,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="prz-Qf-HSv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-481" y="-2735"/>
+            <point key="canvasLocation" x="-1250" y="-2687"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="28A-Cs-4qS">
@@ -1297,7 +1271,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hfh-iW-57a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-481" y="-2134"/>
+            <point key="canvasLocation" x="-1250" y="-2086"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ovv-xH-SI1">
@@ -1315,7 +1289,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VIk-8D-mWB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="45" y="-1533"/>
+            <point key="canvasLocation" x="-724" y="-1485"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Jwa-TU-pv8">
@@ -1333,7 +1307,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cm0-G3-7cZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="45" y="-949"/>
+            <point key="canvasLocation" x="-724" y="-901"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kPs-48-QPx">
@@ -1657,7 +1631,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bh5-Ai-ORw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3146" y="-1214"/>
+            <point key="canvasLocation" x="-3915" y="-1166"/>
         </scene>
     </scenes>
     <resources>

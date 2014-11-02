@@ -93,7 +93,10 @@ BreakRuleTakePhotoViewController *pBR;
 - (void)magnifyImage
 {
     NSLog(@"局部放大");
-    [SJAvatarBrowser showImage:imageView];//调用方法
+    if (imageView.image != nil) {
+        [SJAvatarBrowser showImage:imageView];//调用方法
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning
