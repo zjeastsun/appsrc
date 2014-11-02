@@ -20,6 +20,7 @@
     UITextField *textFieldSelected;
     /** 弹出键盘fame */
     CGRect keyboardRect;
+    IBOutlet UIActivityIndicatorView *actView;
 }
 - (IBAction)login:(id)sender;
 

@@ -26,9 +26,18 @@
     return self;
 }
 
+-(void)addTableHeaderView
+{
+    NSArray* viewArray = [[NSBundle mainBundle] loadNibNamed:@"LoadView" owner:nil options:nil];
+    loadView = [viewArray objectAtIndex:0];
+    reviewTableView.tableHeaderView = loadView;
+    loadView.tipLabel.text = [[NSString alloc] initWithString:MORE_STRING];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self addTableHeaderView];
     // Do any additional setup after loading the view.
 }
 
@@ -96,6 +105,12 @@
     return cell;
 }
 
+
+- (void)updateUI
+{
+    [reviewTableView reloadData];
+}
+
 - (void)queryDb//sql语句不对，没有根据项目过滤，还要调整，时间也没有？
 {
     BRIDGE
@@ -154,11 +169,20 @@
     helpParam.add(sEndTime);
     strParam = helpParam.get();
     
-    oneIce.g_db->selectCmd("", sqlcode, strParam, helpInfo, strError);
+    int iResult = oneIce.g_db->selectCmd("", sqlcode, strParam, helpInfo, strError);
+    
     [actView stopAnimating];
     [actView setHidden:YES];
+    [loadView stopLoading];
     
-    [reviewTableView reloadData];
+    if( iResult<0 )
+    {
+        [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
+        return;
+    }
+    
+    [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -190,7 +214,7 @@
 {
     BRIDGE
 
-    int iRow = indexPath.row;
+    int iRow = static_cast<int>(indexPath.row);
     bridge.nsReviewBR_BreakRuleIdSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"break_rule_id"];
     bridge.nsReviewBR_OrgNameSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"org_name"];
     bridge.nsReviewBR_BreakRuleTypeSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"break_rule_type"];
@@ -204,6 +228,24 @@
     [self presentViewController:viewController animated:YES completion:nil];
     
     
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (loadView.isLoading)
+    {
+		return ;
+	}
+//    CGSize contentSize = scrollView.contentSize;
+//    CGRect frame = scrollView.frame;
+    CGPoint contentPos = scrollView.contentOffset;
+    //	if (contentPos.y > contentSize.height - frame.size.height)
+    if (contentPos.y < -5)
+    {
+        [loadView startLoading];
+        //刷新请求更多数据
+        [self performSelector:@selector(queryDb) withObject:nil afterDelay:2];
+    }
 }
 
 @end

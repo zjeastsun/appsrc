@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SingletonIce.h"
+#import "LoadView.h"
 
 @interface ReviewBreakRuleViewController : UIViewController
 {
@@ -18,6 +19,8 @@
     
     IBOutlet UITableView *reviewTableView;
     IBOutlet UIActivityIndicatorView *actView;
+    
+    LoadView* loadView;
 }
 
 - (IBAction)back:(id)sender;

@@ -73,8 +73,6 @@
     
     oneIce.g_db->selectCmd("", sqlcode, sId, helpInfo, strError);
     
-    [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
-    
     bool bFileExits = [SingletonIce fileExistsInTemp:bridge.nsReviewBR_PicNameSelected];
     
     bool bRerult;
@@ -89,6 +87,8 @@
             return;
         }
     }
+    
+    [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
     
     NSString *nsDesPathName = [SingletonIce getFullTempPathName:bridge.nsReviewBR_PicNameSelected];
     //获取保存得图片
