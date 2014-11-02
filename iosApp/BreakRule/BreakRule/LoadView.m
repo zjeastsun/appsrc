@@ -32,6 +32,7 @@
 - (void)stopLoading
 {
     [activeView stopAnimating];
+    tipLabel.text = [[NSString alloc] initWithString:MORE_STRING];
 }
 - (BOOL)isLoading
 {

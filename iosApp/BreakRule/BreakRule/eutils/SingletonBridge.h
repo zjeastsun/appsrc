@@ -23,6 +23,11 @@ const int REVIEW_NOT_NEED_RECTIFY = 1;// 无需整改
 const int REVIEW_CANNOT_JUDGE = 2;// 无法判定
 const int REVIEW_NO_PASS = 3;// 审核不通过
 
+// SEQUENCE值
+const string SEQ_break_rule_id = "break_rule_id";
+const string SEQ_rectify_id = "rectify_id";
+const string SEQ_review_id = "review_id";
+const string SEQ_pic_id = "pic_id";
 //---------------------------------------------------------------------
 // 视图上移/下移动画名称
 #define kAnimationResizeForKeyboard @"ResizeForKeyboard"

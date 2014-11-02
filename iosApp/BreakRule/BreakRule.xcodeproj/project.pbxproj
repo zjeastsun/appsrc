@@ -36,6 +36,7 @@
 		0471680219CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0471680119CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm */; };
 		047786A31A06450C0033C8B4 /* LoadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047786A21A06450C0033C8B4 /* LoadView.xib */; };
 		047786A61A0645600033C8B4 /* LoadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047786A51A0645600033C8B4 /* LoadView.m */; };
+		047786AB1A06BEA30033C8B4 /* RectifyTakePhotoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047786AA1A06BEA30033C8B4 /* RectifyTakePhotoViewController.mm */; };
 		0477AE5519F01C4B0088E875 /* ReviewBreakRuleViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0477AE5419F01C4B0088E875 /* ReviewBreakRuleViewController.mm */; };
 		0478794419D9F7EA00555F0D /* SingletonBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0478794319D9F7EA00555F0D /* SingletonBridge.mm */; };
 		0478794919DA176D00555F0D /* SafetyItemViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0478794819DA176D00555F0D /* SafetyItemViewController.mm */; };
@@ -129,6 +130,8 @@
 		047786A21A06450C0033C8B4 /* LoadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadView.xib; sourceTree = "<group>"; };
 		047786A41A0645600033C8B4 /* LoadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadView.h; sourceTree = "<group>"; };
 		047786A51A0645600033C8B4 /* LoadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadView.m; sourceTree = "<group>"; };
+		047786A91A06BEA30033C8B4 /* RectifyTakePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectifyTakePhotoViewController.h; sourceTree = "<group>"; };
+		047786AA1A06BEA30033C8B4 /* RectifyTakePhotoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RectifyTakePhotoViewController.mm; sourceTree = "<group>"; };
 		0477AE5319F01C4B0088E875 /* ReviewBreakRuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewBreakRuleViewController.h; sourceTree = "<group>"; };
 		0477AE5419F01C4B0088E875 /* ReviewBreakRuleViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ReviewBreakRuleViewController.mm; sourceTree = "<group>"; };
 		0478794319D9F7EA00555F0D /* SingletonBridge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SingletonBridge.mm; path = BreakRule/eutils/SingletonBridge.mm; sourceTree = "<group>"; };
@@ -458,6 +461,8 @@
 			children = (
 				04998F7519D3812300CECB16 /* RectifyViewController.h */,
 				04998F7619D3812300CECB16 /* RectifyViewController.mm */,
+				047786A91A06BEA30033C8B4 /* RectifyTakePhotoViewController.h */,
+				047786AA1A06BEA30033C8B4 /* RectifyTakePhotoViewController.mm */,
 			);
 			name = RectifyTakePhoto;
 			sourceTree = "<group>";
@@ -608,6 +613,7 @@
 				047786A61A0645600033C8B4 /* LoadView.m in Sources */,
 				0448781919CC70FB0086CE1B /* main.mm in Sources */,
 				049104B519D8AD74004E052B /* SJAvatarBrowser.mm in Sources */,
+				047786AB1A06BEA30033C8B4 /* RectifyTakePhotoViewController.mm in Sources */,
 				049CD04019DB56360079D3E2 /* SingletonDB.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -263,7 +263,7 @@
     string sqlcode="put_br_review";
     
     string sReviewId = "";
-    oneIce.g_db->command("get_sequence", "review_id", sReviewId);
+    oneIce.g_db->command("get_sequence", SEQ_review_id, sReviewId);
     
     string sBreakRuleId = [bridge.nsReviewBR_BreakRuleIdSelected UTF8String];
     string sUserId = [bridge.nsUserId UTF8String];
