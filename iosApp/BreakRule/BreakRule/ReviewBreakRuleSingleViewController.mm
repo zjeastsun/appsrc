@@ -265,8 +265,6 @@
     string sReviewId = "";
     oneIce.g_db->command("get_sequence", "review_id", sReviewId);
     
-    [self getReviewInfo];
-    
     string sBreakRuleId = [bridge.nsReviewBR_BreakRuleIdSelected UTF8String];
     string sUserId = [bridge.nsUserId UTF8String];
     string sRectifyId = "0";
@@ -306,9 +304,10 @@
 
 - (IBAction)save:(id)sender {
     
-    string ss = "错误";
+     [self getReviewInfo];
+    
     if ( sReviewContent == "") {
-        [SingletonBridge MessageBox:"请输入批阅内容！" withTitle:ss];
+        [SingletonBridge MessageBox:"请输入批阅内容！" withTitle:"错误"];
         return;
     }
     

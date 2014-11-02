@@ -32,9 +32,20 @@
     subTitle = [[NSMutableArray alloc]initWithObjects:@"全部", nil];
     
     BRIDGE
-    startTimeText.text = bridge.nsReviewStartTime;
-    endTimeText.text = bridge.nsReviewEndTime;
-    nsRuleTypeOld = bridge.nsRuleTypeForCondition;
+    if( [bridge.nsWhoUseConditionViewController isEqualToString:@"RectifyViewController"] )
+    {
+        startTimeText.text = bridge.nsRectifyStartTime;
+        endTimeText.text = bridge.nsRectifyEndTime;
+        nsRuleTypeOld = bridge.nsRuleTypeForRectify;
+    }
+    else if ([bridge.nsWhoUseConditionViewController isEqualToString:@"ReviewBreakRuleViewController"] )
+    {
+        startTimeText.text = bridge.nsReviewStartTime;
+        endTimeText.text = bridge.nsReviewEndTime;
+        nsRuleTypeOld = bridge.nsRuleTypeForReviewBR;
+    }
+    
+    
     // Do any additional setup after loading the view.
 }
 
@@ -57,7 +68,15 @@
 
 - (IBAction)back:(id)sender {
     BRIDGE
-    bridge.nsRuleTypeForCondition = nsRuleTypeOld;
+    if( [bridge.nsWhoUseConditionViewController isEqualToString:@"RectifyViewController"] )
+    {
+        bridge.nsRuleTypeForRectify = nsRuleTypeOld;
+    }
+    else if ([bridge.nsWhoUseConditionViewController isEqualToString:@"ReviewBreakRuleViewController"] )
+    {
+        bridge.nsRuleTypeForReviewBR = nsRuleTypeOld;
+    }
+    
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -104,8 +123,17 @@
 
 - (IBAction)save:(id)sender {
     BRIDGE
-    bridge.nsReviewStartTime = startTimeText.text;
-    bridge.nsReviewEndTime = endTimeText.text;
+    if( [bridge.nsWhoUseConditionViewController isEqualToString:@"RectifyViewController"] )
+    {
+        bridge.nsRectifyStartTime = startTimeText.text;
+        bridge.nsRectifyEndTime = endTimeText.text;
+    }
+    else if ([bridge.nsWhoUseConditionViewController isEqualToString:@"ReviewBreakRuleViewController"] )
+    {
+        bridge.nsReviewStartTime = startTimeText.text;
+        bridge.nsReviewEndTime = endTimeText.text;
+    }
+    
     
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 
@@ -150,14 +178,29 @@
     cell.textLabel.text = [title objectAtIndex:indexPath.row];
     
     BRIDGE
-    if (bridge.nsRuleTypeForCondition == nil || [bridge.nsRuleTypeForCondition length] == 0)
+    if( [bridge.nsWhoUseConditionViewController isEqualToString:@"RectifyViewController"] )
     {
-        cell.detailTextLabel.text = [subTitle objectAtIndex:indexPath.row];
+        if (bridge.nsRuleTypeForRectify == nil || [bridge.nsRuleTypeForRectify length] == 0)
+        {
+            cell.detailTextLabel.text = [subTitle objectAtIndex:indexPath.row];
+        }
+        else
+        {
+            cell.detailTextLabel.text = bridge.nsRuleTypeForRectify;
+        }
     }
-    else
+    else if ([bridge.nsWhoUseConditionViewController isEqualToString:@"ReviewBreakRuleViewController"] )
     {
-        cell.detailTextLabel.text = bridge.nsRuleTypeForCondition;
+        if (bridge.nsRuleTypeForReviewBR == nil || [bridge.nsRuleTypeForReviewBR length] == 0)
+        {
+            cell.detailTextLabel.text = [subTitle objectAtIndex:indexPath.row];
+        }
+        else
+        {
+            cell.detailTextLabel.text = bridge.nsRuleTypeForReviewBR;
+        }
     }
+    
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
@@ -168,12 +211,21 @@
 //选择、响应
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    BRIDGE
+    if( [bridge.nsWhoUseConditionViewController isEqualToString:@"RectifyViewController"] )
+    {
+        bridge.nsWhoUseRuleTypeViewController = @"RectifyViewController";
+    }
+    else if ([bridge.nsWhoUseConditionViewController isEqualToString:@"ReviewBreakRuleViewController"] )
+    {
+        bridge.nsWhoUseRuleTypeViewController = @"ReviewBreakRuleViewController";
+    }
+    
     UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RuleTypeView"];
     
     [self presentViewController:viewController animated:YES completion:nil];
     
-    BRIDGE
-    bridge.nsWhoUseRuleTypeViewController = @"ConditionViewController";
+    
 
 //    [self back:nil];
     

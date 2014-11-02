@@ -288,7 +288,8 @@
 				0490BE1819E096F300C83D82 /* main */,
 				0490BE1719E0969500C83D82 /* BreakRuleTakePhoto */,
 				049B740A19EBCC90000BE808 /* RectifyTakePhoto */,
-				0477AE5619F01C770088E875 /* Review */,
+				0477AE5619F01C770088E875 /* ReviewBreakRule */,
+				047786A81A06902C0033C8B4 /* ReviewRectify */,
 				047786A71A0683390033C8B4 /* Query */,
 				0448782719CC70FB0086CE1B /* Images.xcassets */,
 				0448781319CC70FB0086CE1B /* Supporting Files */,
@@ -394,7 +395,14 @@
 			name = Query;
 			sourceTree = "<group>";
 		};
-		0477AE5619F01C770088E875 /* Review */ = {
+		047786A81A06902C0033C8B4 /* ReviewRectify */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ReviewRectify;
+			sourceTree = "<group>";
+		};
+		0477AE5619F01C770088E875 /* ReviewBreakRule */ = {
 			isa = PBXGroup;
 			children = (
 				0477AE5319F01C4B0088E875 /* ReviewBreakRuleViewController.h */,
@@ -402,7 +410,7 @@
 				046C338419FC45F200B99A92 /* ReviewBreakRuleSingleViewController.h */,
 				046C338519FC45F200B99A92 /* ReviewBreakRuleSingleViewController.mm */,
 			);
-			name = Review;
+			name = ReviewBreakRule;
 			sourceTree = "<group>";
 		};
 		0490BE1719E0969500C83D82 /* BreakRuleTakePhoto */ = {

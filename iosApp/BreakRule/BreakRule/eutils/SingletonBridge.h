@@ -4,7 +4,7 @@
 
 #define BRIDGE SingletonBridge *bridge; bridge = [SingletonBridge sharedInstance];
 
-/////////////////////////////////////////////////////////////
+//-----------------------------------------------------------
 const int FLOW_NODE_FINISH = 0;// 流程结束
 const int FLOW_NODE_BR_TAKEPHOTO = 1;// 违规视频抓拍
 const int FLOW_NODE_BR_REVIEW_1 = 2;// 违规初级批阅
@@ -23,7 +23,7 @@ const int REVIEW_NOT_NEED_RECTIFY = 1;// 无需整改
 const int REVIEW_CANNOT_JUDGE = 2;// 无法判定
 const int REVIEW_NO_PASS = 3;// 审核不通过
 
-//////////////////////////////////////////////////////////
+//---------------------------------------------------------------------
 // 视图上移/下移动画名称
 #define kAnimationResizeForKeyboard @"ResizeForKeyboard"
 // 键盘展开/收起动画时间
@@ -39,7 +39,7 @@ const int REVIEW_NO_PASS = 3;// 审核不通过
 // TextView控件之间的垂直间距
 #define kTextViewPadding           10
 
-//////////////////////////////////////////////////////////////
+//------------------------------------------------------------------------
 
 @interface SingletonBridge: NSObject
 
@@ -50,8 +50,10 @@ const int REVIEW_NO_PASS = 3;// 审核不通过
 @property (strong, nonatomic) NSString *nsOrgIdSelected;
 @property (strong, nonatomic) NSString *nsOrgNameSelected;
 
+//权限信息------------------------------------------------------------------------------
 @property (nonatomic) CSelectHelp helpRight;
 
+//违规抓拍--------------------------------------------------------------------------------
 @property (strong, nonatomic) NSString *nsRuleType;
 @property (strong, nonatomic) NSString *nsRuleOption;
 @property (strong, nonatomic) NSString *nsContent;//违规内容、整改内容、批阅内容等
@@ -68,15 +70,12 @@ const int REVIEW_NO_PASS = 3;// 审核不通过
 @property (strong, nonatomic) NSString *nsHazardTypeId;
 @property (strong, nonatomic) NSString *nsHazardTypeName;
 
-@property (strong, nonatomic) NSString *nsReviewStartTime;//批阅违规查询时间
-@property (strong, nonatomic) NSString *nsReviewEndTime;
-
-@property (strong, nonatomic) NSString *nsRuleTypeForCondition;//条件选择中的判定性质
-
+//谁在使用选择页--------------------------------------------------------------------------------
 @property (strong, nonatomic) NSString *nsWhoUseRuleTypeViewController;//谁在使用判定性质选择页
 @property (strong, nonatomic) NSString *nsWhoUseReviewStateViewController;//谁在使用审核状态选择页
+@property (strong, nonatomic) NSString *nsWhoUseConditionViewController;//谁在使用条件选择页
 
-//当前选中的违规信息
+//当前选中的批阅违规信息--------------------------------------------------------------------------
 @property (strong, nonatomic) NSString *nsReviewBR_BreakRuleIdSelected;//id号
 @property (strong, nonatomic) NSString *nsReviewBR_OrgNameSelected;
 @property (strong, nonatomic) NSString *nsReviewBR_BreakRuleTypeSelected;
@@ -85,9 +84,25 @@ const int REVIEW_NO_PASS = 3;// 审核不通过
 @property (strong, nonatomic) NSString *nsReviewBR_CurFlowNodeIdSelected;
 @property (strong, nonatomic) NSString *nsReviewBR_PicNameSelected;
 
-
 @property (strong, nonatomic) NSString *nsReviewState;//审核状态
 
+@property (strong, nonatomic) NSString *nsRuleTypeForReviewBR;//条件选择中的判定性质
+@property (strong, nonatomic) NSString *nsReviewStartTime;//批阅违规查询时间
+@property (strong, nonatomic) NSString *nsReviewEndTime;
+
+//当前选中的待整改拍照信息-------------------------------------------------------------------------
+@property (strong, nonatomic) NSString *nsRectify_BreakRuleIdSelected;//id号
+@property (strong, nonatomic) NSString *nsRectify_OrgNameSelected;
+@property (strong, nonatomic) NSString *nsRectify_BreakRuleTypeSelected;
+@property (strong, nonatomic) NSString *nsRectify_TimeSelected;
+@property (strong, nonatomic) NSString *nsRectify_BreakRuleContentSelected;
+@property (strong, nonatomic) NSString *nsRectify_PicNameSelected;
+
+@property (strong, nonatomic) NSString *nsRuleTypeForRectify;//条件选择中的判定性质
+@property (strong, nonatomic) NSString *nsRectifyStartTime;//待整改拍照查询时间
+@property (strong, nonatomic) NSString *nsRectifyEndTime;
+
+//---------------------------------------------------------------------------------------------
 + (SingletonBridge *)sharedInstance;
 - (void)unInit;
 

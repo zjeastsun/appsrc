@@ -63,8 +63,11 @@
 }
 
 - (IBAction)condition:(id)sender {
-    UIViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"conditionView"];
-    [self presentViewController:projectView animated:YES completion:nil];
+    BRIDGE
+    bridge.nsWhoUseConditionViewController = @"ReviewBreakRuleViewController";
+    
+    UIViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"conditionView"];
+    [self presentViewController:view animated:YES completion:nil];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -99,7 +102,10 @@
     //定制单元格
     cell.titleLabel.text = [SingletonIce valueNSString:helpInfo rowForHelp:static_cast<int>(indexPath.row) KeyForHelp:"org_name"];
     cell.descLabel.text = [SingletonIce valueNSString:helpInfo rowForHelp:static_cast<int>(indexPath.row) KeyForHelp:"break_rule_content"];
-    cell.timeLabel.text = [SingletonIce valueNSString:helpInfo rowForHelp:static_cast<int>(indexPath.row) KeyForHelp:"update_time"];
+    
+    NSString *nsTime = [SingletonIce valueNSString:helpInfo rowForHelp:static_cast<int>(indexPath.row) KeyForHelp:"update_time"];
+    NSString *nsSubTime = [nsTime substringWithRange:NSMakeRange(2, 14)];
+    cell.timeLabel.text = nsSubTime;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
@@ -111,7 +117,7 @@
     [reviewTableView reloadData];
 }
 
-- (void)queryDb//sql语句不对，没有根据项目过滤，还要调整，时间也没有？
+- (void)queryDb
 {
     BRIDGE
     ONEICE
@@ -121,21 +127,21 @@
     string sqlcode="get_break_last_view_review";
     SelectHelpParam helpParam;
     
-    if ([bridge.nsRuleTypeForCondition isEqualToString:@"全部"])
+    if ([bridge.nsRuleTypeForReviewBR isEqualToString:@"全部"])
     {
         sqlcode = "get_break_last_view_all_review";
     }
     else
     {
         NSString *nsBreakRuleType;
-        if ([bridge.nsRuleTypeForCondition isEqualToString:@"一般违规"]) {
+        if ([bridge.nsRuleTypeForReviewBR isEqualToString:@"一般违规"]) {
             nsBreakRuleType = @"0";
         }
-        else if ([bridge.nsRuleTypeForCondition isEqualToString:@"严重违规"])
+        else if ([bridge.nsRuleTypeForReviewBR isEqualToString:@"严重违规"])
         {
             nsBreakRuleType = @"1";
         }
-        else if ([bridge.nsRuleTypeForCondition isEqualToString:@"重大违规"])
+        else if ([bridge.nsRuleTypeForReviewBR isEqualToString:@"重大违规"])
         {
             nsBreakRuleType = @"2";
         }
@@ -190,7 +196,7 @@
     
     
     BRIDGE
-    if (![nsReviewStartTimeOld isEqualToString:bridge.nsReviewStartTime] || ![nsReviewEndTimeOld isEqualToString:bridge.nsReviewEndTime] || ![nsRuleTypeOld isEqualToString:bridge.nsRuleTypeForCondition]) {
+    if (![nsReviewStartTimeOld isEqualToString:bridge.nsReviewStartTime] || ![nsReviewEndTimeOld isEqualToString:bridge.nsReviewEndTime] || ![nsRuleTypeOld isEqualToString:bridge.nsRuleTypeForReviewBR]) {
 
         [actView setHidden:NO];
         [actView startAnimating];
@@ -205,7 +211,7 @@
     
     nsReviewStartTimeOld = bridge.nsReviewStartTime;
     nsReviewEndTimeOld = bridge.nsReviewEndTime;
-    nsRuleTypeOld = bridge.nsRuleTypeForCondition;
+    nsRuleTypeOld = bridge.nsRuleTypeForReviewBR;
     
 }
 

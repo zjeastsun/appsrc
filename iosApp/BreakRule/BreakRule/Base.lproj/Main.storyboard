@@ -436,6 +436,14 @@
                                 <rect key="frame" x="0.0" y="15" width="320" height="465"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <activityIndicatorView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="V1F-Ff-pEK">
+                                    <rect key="frame" x="0.0" y="64" width="320" height="20"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </activityIndicatorView>
+                                <connections>
+                                    <outlet property="dataSource" destination="QUy-BD-bpt" id="YfS-5s-ZQs"/>
+                                    <outlet property="delegate" destination="QUy-BD-bpt" id="BpJ-uk-IBW"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -452,6 +460,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="actView" destination="V1F-Ff-pEK" id="fHk-p3-iAR"/>
+                        <outlet property="rectifyTableView" destination="So3-er-Oyz" id="MjZ-mR-YBF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qq-4t-Ow8" sceneMemberID="firstResponder"/>
             </objects>

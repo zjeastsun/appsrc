@@ -29,7 +29,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     BRIDGE
-    if( [bridge.nsWhoUseRuleTypeViewController isEqualToString:@"ConditionViewController"] )
+    if( [bridge.nsWhoUseRuleTypeViewController isEqualToString:@"ReviewBreakRuleViewController"] )
+    {
+        title = [[NSMutableArray alloc]initWithObjects:@"一般违规", @"严重违规", @"重大违规", @"全部", nil];
+    }
+    else if( [bridge.nsWhoUseRuleTypeViewController isEqualToString:@"RectifyViewController"] )
     {
         title = [[NSMutableArray alloc]initWithObjects:@"一般违规", @"严重违规", @"重大违规", @"全部", nil];
     }
@@ -90,9 +94,13 @@
     
     NSString *nsRuleType;
     BRIDGE
-    if( [bridge.nsWhoUseRuleTypeViewController isEqualToString:@"ConditionViewController"] )
+    if( [bridge.nsWhoUseRuleTypeViewController isEqualToString:@"ReviewBreakRuleViewController"] )
     {
-        nsRuleType = bridge.nsRuleTypeForCondition;
+        nsRuleType = bridge.nsRuleTypeForReviewBR;
+    }
+    else if( [bridge.nsWhoUseRuleTypeViewController isEqualToString:@"RectifyViewController"] )
+    {
+        nsRuleType = bridge.nsRuleTypeForRectify;
     }
     else
     {
@@ -107,7 +115,6 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     
-    
     return cell;
     
 }
@@ -119,7 +126,6 @@
     if(cellView.accessoryType == UITableViewCellAccessoryNone)
     {
         cellView.accessoryType =UITableViewCellAccessoryCheckmark;
-        
     }
     else
     {
@@ -128,14 +134,19 @@
     }
     
     BRIDGE
-    if( [bridge.nsWhoUseRuleTypeViewController isEqualToString:@"ConditionViewController"] )
+    if( [bridge.nsWhoUseRuleTypeViewController isEqualToString:@"ReviewBreakRuleViewController"] )
     {
-        bridge.nsRuleTypeForCondition = [title objectAtIndex:indexPath.row];
+        bridge.nsRuleTypeForReviewBR = [title objectAtIndex:indexPath.row];
+    }
+    else if( [bridge.nsWhoUseRuleTypeViewController isEqualToString:@"RectifyViewController"] )
+    {
+        bridge.nsRuleTypeForRectify = [title objectAtIndex:indexPath.row];
     }
     else
     {
         bridge.nsRuleType = [title objectAtIndex:indexPath.row];
     }
+    
     [self back:nil];
     
 
