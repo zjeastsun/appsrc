@@ -29,6 +29,37 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
     return self;
 }
 
+- (void)downloadPic
+{
+    BRIDGE
+    ONEICE
+    
+    bool bFileExits = [SingletonIce fileExistsInTemp:bridge.nsRectify_PicNameSelected];
+    
+    bool bRerult;
+    if ( !bFileExits ) {
+        bRerult = [oneIce downloadFile:bridge.nsRectify_PicNameSelected];
+        
+        [actView stopAnimating];
+        [actView setHidden:YES];
+        
+        if (!bRerult) {
+            [SingletonBridge MessageBox:@"图片下载失败！"];
+            return;
+        }
+    }
+    
+    NSString *nsDesPathName = [SingletonIce getFullTempPathName:bridge.nsRectify_PicNameSelected];
+    //获取保存得图片
+    
+    UIImage *img = [UIImage imageWithContentsOfFile:nsDesPathName];
+    breakRuleImageView.image = img;
+    
+    [actView stopAnimating];
+    [actView setHidden:YES];
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -49,6 +80,15 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
     pRectifyTakePhotoView = self;
     [progressView setHidden:YES];
     [progressView setProgressViewStyle:UIProgressViewStyleDefault]; //设置进度条类型
+    
+    BRIDGE
+    breakRuleTextView.text = bridge.nsRectify_BreakRuleContentSelected;
+    
+    [actView setHidden:NO];
+    [actView startAnimating];
+    NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(downloadPic) object:nil];
+    [thread start];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -103,6 +143,13 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
 }
 
 - (IBAction)save:(id)sender {
+    
+    if (rectifyTextView.text == nil || [rectifyTextView.text length] == 0)
+    {
+        [SingletonBridge MessageBox:@"您还没有输入整改内容！"];
+        return;
+    }
+    
     if (nsPhotoData == nil )
     {
         [SingletonBridge MessageBox:@"您还没有拍照或者导入照片！"];

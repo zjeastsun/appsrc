@@ -12,7 +12,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView autoresizesSubviews="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" id="j5a-wF-r9A">
+                            <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" id="j5a-wF-r9A">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -50,7 +50,7 @@
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Sh7-IR-P9j">
                                         <rect key="frame" x="12" y="305" width="291" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" red="0.744140625" green="0.744140625" blue="0.744140625" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gHl-mP-GBw">
@@ -472,12 +472,12 @@
         <!--Rectify Take Photo View Controller - 整改抓拍-->
         <scene sceneID="Z8a-Mz-Foa">
             <objects>
-                <viewController id="r0F-0R-d7L" customClass="RectifyTakePhotoViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="hZa-OF-wer">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="r0F-0R-d7L" customClass="RectifyTakePhotoViewController" sceneMemberID="viewController">
+                    <view key="view" autoresizesSubviews="NO" contentMode="scaleToFill" id="hZa-OF-wer">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="bPl-Jp-nSp">
+                            <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" id="bPl-Jp-nSp">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -530,14 +530,17 @@
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Amp-Ft-Zqw">
                                         <rect key="frame" x="5" y="356" width="310" height="75"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" red="0.6897927989" green="0.6897927989" blue="0.6897927989" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="r0F-0R-d7L" id="NNh-Rk-Bvq"/>
+                                        </connections>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2jy-RJ-cSz">
                                         <rect key="frame" x="53" y="439" width="30" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <state key="normal" title="照片">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -547,7 +550,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ifn-sU-FS8">
                                         <rect key="frame" x="145" y="439" width="30" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <state key="normal" title="拍照">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -560,6 +563,9 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </progressView>
                                 </subviews>
+                                <connections>
+                                    <outlet property="delegate" destination="r0F-0R-d7L" id="DCu-Ca-boe"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -577,6 +583,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="actView" destination="30C-Uc-ObD" id="dw4-4E-zNn"/>
                         <outlet property="breakRuleImageView" destination="qPu-Bb-4pk" id="bhK-dg-f5L"/>
                         <outlet property="breakRuleTextView" destination="iiN-KQ-XlF" id="s28-27-PjB"/>
                         <outlet property="progressView" destination="YAW-qe-emV" id="VcG-4Q-UWJ"/>

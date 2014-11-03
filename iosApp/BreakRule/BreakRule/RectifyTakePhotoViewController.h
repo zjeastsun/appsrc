@@ -25,6 +25,8 @@
     
     IBOutlet UIProgressView *progressView;
     double fProgress;
+    
+    IBOutlet UIActivityIndicatorView *actView;
 }
 - (IBAction)back:(id)sender;
 - (IBAction)save:(id)sender;
