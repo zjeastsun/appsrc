@@ -80,7 +80,8 @@ const string SEQ_pic_id = "pic_id";
 @property (strong, nonatomic) NSString *nsWhoUseReviewStateViewController;//谁在使用审核状态选择页
 @property (strong, nonatomic) NSString *nsWhoUseConditionViewController;//谁在使用条件选择页
 
-//当前选中的批阅违规信息--------------------------------------------------------------------------
+//批阅违规信息--------------------------------------------------------------------------
+//当前选中的批阅违规信息
 @property (strong, nonatomic) NSString *nsReviewBR_BreakRuleIdSelected;//id号
 @property (strong, nonatomic) NSString *nsReviewBR_OrgNameSelected;
 @property (strong, nonatomic) NSString *nsReviewBR_BreakRuleTypeSelected;
@@ -88,24 +89,41 @@ const string SEQ_pic_id = "pic_id";
 @property (strong, nonatomic) NSString *nsReviewBR_BreakRuleContentSelected;
 @property (strong, nonatomic) NSString *nsReviewBR_CurFlowNodeIdSelected;
 @property (strong, nonatomic) NSString *nsReviewBR_PicNameSelected;
-
-@property (strong, nonatomic) NSString *nsReviewState;//审核状态
-
+//条件
+@property (strong, nonatomic) NSString *nsReviewStateBR;//审核状态
+//查询条件
 @property (strong, nonatomic) NSString *nsRuleTypeForReviewBR;//条件选择中的判定性质
 @property (strong, nonatomic) NSString *nsReviewStartTime;//批阅违规查询时间
 @property (strong, nonatomic) NSString *nsReviewEndTime;
 
-//当前选中的待整改拍照信息-------------------------------------------------------------------------
+//待整改拍照信息-------------------------------------------------------------------------
+//当前选中的待整改拍照信息
 @property (strong, nonatomic) NSString *nsRectify_BreakRuleIdSelected;//id号
 @property (strong, nonatomic) NSString *nsRectify_OrgNameSelected;
 @property (strong, nonatomic) NSString *nsRectify_BreakRuleTypeSelected;
 @property (strong, nonatomic) NSString *nsRectify_TimeSelected;
 @property (strong, nonatomic) NSString *nsRectify_BreakRuleContentSelected;
 @property (strong, nonatomic) NSString *nsRectify_PicNameSelected;
-
+//查询条件
 @property (strong, nonatomic) NSString *nsRuleTypeForRectify;//条件选择中的判定性质
 @property (strong, nonatomic) NSString *nsRectifyStartTime;//待整改拍照查询时间
 @property (strong, nonatomic) NSString *nsRectifyEndTime;
+
+//批阅整改信息--------------------------------------------------------------------------
+//当前选中的批阅整改信息
+@property (strong, nonatomic) NSString *nsReviewRectify_BreakRuleIdSelected;//id号
+@property (strong, nonatomic) NSString *nsReviewRectify_OrgNameSelected;
+@property (strong, nonatomic) NSString *nsReviewRectify_BreakRuleTypeSelected;
+@property (strong, nonatomic) NSString *nsReviewRectify_TimeSelected;
+@property (strong, nonatomic) NSString *nsReviewRectify_BreakRuleContentSelected;
+@property (strong, nonatomic) NSString *nsReviewRectify_CurFlowNodeIdSelected;
+@property (strong, nonatomic) NSString *nsReviewRectify_PicNameSelected;
+//条件
+@property (strong, nonatomic) NSString *nsReviewStateRectify;//审核状态
+//查询条件
+@property (strong, nonatomic) NSString *nsRuleTypeForReviewRectify;//条件选择中的判定性质
+@property (strong, nonatomic) NSString *nsReviewRectifyStartTime;//批阅违规查询时间
+@property (strong, nonatomic) NSString *nsReviewRectifyEndTime;
 
 //---------------------------------------------------------------------------------------------
 + (SingletonBridge *)sharedInstance;

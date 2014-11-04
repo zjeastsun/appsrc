@@ -61,15 +61,13 @@
     [self presentViewController:viewController animated:YES completion:nil];
 }
 
-
-
 - (IBAction)toRectifyView:(id)sender {
     UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RectifyView"];
     [self presentViewController:viewController animated:YES completion:nil];
 }
 
 - (IBAction)toReviewRectifyView:(id)sender {
-    UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReviewView"];
+    UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReviewRectifyView"];
     [self presentViewController:viewController animated:YES completion:nil];
 }
 @end

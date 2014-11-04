@@ -37,6 +37,10 @@
     {
         title = [[NSMutableArray alloc]initWithObjects:@"一般违规", @"严重违规", @"重大违规", @"全部", nil];
     }
+    else if( [bridge.nsWhoUseRuleTypeViewController isEqualToString:@"ReviewRectifyViewController"] )
+    {
+        title = [[NSMutableArray alloc]initWithObjects:@"一般违规", @"严重违规", @"重大违规", @"全部", nil];
+    }
     else
     {
         title = [[NSMutableArray alloc]initWithObjects:@"一般违规", @"严重违规", @"重大违规", nil];
@@ -102,6 +106,10 @@
     {
         nsRuleType = bridge.nsRuleTypeForRectify;
     }
+    else if( [bridge.nsWhoUseRuleTypeViewController isEqualToString:@"ReviewRectifyViewController"] )
+    {
+        nsRuleType = bridge.nsRuleTypeForReviewRectify;
+    }
     else
     {
         nsRuleType = bridge.nsRuleType;
@@ -141,6 +149,10 @@
     else if( [bridge.nsWhoUseRuleTypeViewController isEqualToString:@"RectifyViewController"] )
     {
         bridge.nsRuleTypeForRectify = [title objectAtIndex:indexPath.row];
+    }
+    else if( [bridge.nsWhoUseRuleTypeViewController isEqualToString:@"ReviewRectifyViewController"] )
+    {
+        bridge.nsRuleTypeForReviewRectify = [title objectAtIndex:indexPath.row];
     }
     else
     {

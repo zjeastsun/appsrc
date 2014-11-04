@@ -29,26 +29,30 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     BRIDGE
-    bridge.nsReviewState = @"审核通过";
+    
     if( [bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewBreakRuleSingleViewController"] )
     {
         //违规批阅
         title = [[NSMutableArray alloc]initWithObjects:@"审核通过", @"无需整改", @"无法判定", nil];
+        bridge.nsReviewStateBR = @"审核通过";
     }
     else if( [bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewBreakRuleSingleViewControllerForHighest"])
     {
         //违规批阅－最高级
         title = [[NSMutableArray alloc]initWithObjects:@"审核通过", @"无需整改", nil];
+        bridge.nsReviewStateBR = @"审核通过";
     }
     else if([bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewRectifySingleViewController"])
     {
         //整改批阅
         title = [[NSMutableArray alloc]initWithObjects:@"审核通过", @"审核不通过", @"无法判定", nil];
+        bridge.nsReviewStateRectify = @"审核通过";
     }
     else if( [bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewRectifySingleViewControllerForHighest"])
     {
         //整改批阅-最高级
         title = [[NSMutableArray alloc]initWithObjects:@"审核通过", @"审核不通过", nil];
+        bridge.nsReviewStateRectify = @"审核通过";
     }
 }
 
@@ -87,13 +91,29 @@
     cell.textLabel.text = [title objectAtIndex:indexPath.row];
 
     BRIDGE
-    if ([cell.textLabel.text isEqualToString:bridge.nsReviewState]) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    }
-    else
+    
+    if( [bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewBreakRuleSingleViewController"] )
     {
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        if ([cell.textLabel.text isEqualToString:bridge.nsReviewStateBR]) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+        else
+        {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
     }
+    else if([bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewRectifySingleViewController"])
+    {
+        if ([cell.textLabel.text isEqualToString:bridge.nsReviewStateRectify]) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+        else
+        {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+    }
+    
+    
     
     
     return cell;
@@ -116,7 +136,16 @@
     }
     
     BRIDGE
-    bridge.nsReviewState = [title objectAtIndex:indexPath.row];
+    if( [bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewBreakRuleSingleViewController"] )
+    {
+        bridge.nsReviewStateBR = [title objectAtIndex:indexPath.row];
+    }
+    else if([bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewRectifySingleViewController"])
+    {
+        bridge.nsReviewStateRectify = [title objectAtIndex:indexPath.row];
+    }
+    
+    
     [self back:nil];
     
     

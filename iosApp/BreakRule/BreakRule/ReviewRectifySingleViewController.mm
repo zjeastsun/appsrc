@@ -1,19 +1,19 @@
 //
-//  ReviewBreakRuleSingleViewController.m
+//  ReviewRectifySingleViewController.m
 //  BreakRule
 //
-//  Created by mac on 14-10-25.
+//  Created by mac on 14-11-4.
 //  Copyright (c) 2014年 mac. All rights reserved.
 //
 
-#import "ReviewBreakRuleSingleViewController.h"
+#import "ReviewRectifySingleViewController.h"
 #import "SingletonBridge.h"
 
-@interface ReviewBreakRuleSingleViewController ()
+@interface ReviewRectifySingleViewController ()
 
 @end
 
-@implementation ReviewBreakRuleSingleViewController
+@implementation ReviewRectifySingleViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,7 +29,7 @@
     if( helpInfo.size()== 0 )
     {
         [reviewContent1TextView setEditable:true];
-//        reviewContent1TextView.backgroundColor = [UIColor whiteColor];//设置它的背景颜色
+        //        reviewContent1TextView.backgroundColor = [UIColor whiteColor];//设置它的背景颜色
     }
     
     if( helpInfo.size()== 1 )
@@ -61,36 +61,36 @@
 {
     BRIDGE
     ONEICE
-
-    orgNameTextField.text = bridge.nsReviewBR_OrgNameSelected;
+    
+    orgNameTextField.text = bridge.nsReviewRectify_OrgNameSelected;
     
     string strError;
     string strParam="";
-    string sqlcode="get_br_review";
+    string sqlcode="get_br_review_reform";
     SelectHelpParam helpParam;
     
-    string sId = [bridge.nsReviewBR_BreakRuleIdSelected UTF8String];
+    string sId = [bridge.nsReviewRectify_BreakRuleIdSelected UTF8String];
     
     oneIce.g_db->selectCmd("", sqlcode, sId, helpInfo, strError);
     
-    bool bFileExits = [SingletonIce fileExistsInTemp:bridge.nsReviewBR_PicNameSelected];
+    bool bFileExits = [SingletonIce fileExistsInTemp:bridge.nsReviewRectify_PicNameSelected];
     
     bool bRerult;
     if ( !bFileExits ) {
-        bRerult = [oneIce downloadFile:bridge.nsReviewBR_PicNameSelected];
+        bRerult = [oneIce downloadFile:bridge.nsReviewRectify_PicNameSelected];
         
         [actView stopAnimating];
         [actView setHidden:YES];
         
         if (!bRerult) {
-            [SingletonBridge MessageBox:@"图片下载失败！"];
+            [SingletonBridge MessageBox:@"违规图片下载失败！"];
             return;
         }
     }
     
     [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
     
-    NSString *nsDesPathName = [SingletonIce getFullTempPathName:bridge.nsReviewBR_PicNameSelected];
+    NSString *nsDesPathName = [SingletonIce getFullTempPathName:bridge.nsReviewRectify_PicNameSelected];
     //获取保存得图片
     
     UIImage *img = [UIImage imageWithContentsOfFile:nsDesPathName];
@@ -98,7 +98,7 @@
     
     [actView stopAnimating];
     [actView setHidden:YES];
-
+    
 }
 
 // 当通过键盘在输入完毕后，点击屏幕空白区域关闭键盘的操作。
@@ -118,7 +118,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     [self addTapGuestureOnView];
     // 注册通知，当键盘将要弹出时执行keyboardWillShow方法。
     [self registerObserverForKeyboard];
@@ -127,7 +126,7 @@
     
     title = [[NSMutableArray alloc]initWithObjects:@"审核状态", nil];
     subTitle = [[NSMutableArray alloc]initWithObjects:@"审核通过", nil];
-    bridge.nsReviewStateBR = @"审核通过";
+    bridge.nsReviewStateRectify = @"审核通过";
     
     orgNameTextField.text = bridge.nsReviewBR_OrgNameSelected;
     
@@ -149,6 +148,7 @@
     
     NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(queryReview) object:nil];
     [thread start];
+
     
     // Do any additional setup after loading the view.
 }
@@ -161,7 +161,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-//    [superview DidAppear:animated];
+    //    [superview DidAppear:animated];
     scrollView.frame = CGRectMake(0, 0, kWidthOfMainScreen, kHeightOfMainScreen);
     [scrollView setContentSize:CGSizeMake(kWidthOfMainScreen, kHeightOfMainScreen + 220)];
     
@@ -186,61 +186,61 @@
 - (void)getReviewInfo
 {
     BRIDGE
-    string sCurNodeId = [bridge.nsReviewBR_CurFlowNodeIdSelected UTF8String];
+    string sCurNodeId = [bridge.nsReviewRectify_CurFlowNodeIdSelected UTF8String];
     int iCurNodeId = atoi(sCurNodeId.c_str());
     
-    if ([bridge.nsReviewStateBR isEqualToString:@"审核通过"]) {
+    if ([bridge.nsReviewStateRectify isEqualToString:@"审核不通过"]) {
         util::string_format(sNextNodeId, "%d", FLOW_NODE_RECTIFY_TAKEPHOTO);
     }
-    else if ([bridge.nsReviewStateBR isEqualToString:@"无法判定"])
+    else if ([bridge.nsReviewStateRectify isEqualToString:@"无法判定"])
     {
         switch (iCurNodeId) {
-            case FLOW_NODE_BR_REVIEW_1:
+            case FLOW_NODE_RECTIFY_REVIEW_1:
             {
-                util::string_format(sNextNodeId, "%d", FLOW_NODE_BR_REVIEW_2);
+                util::string_format(sNextNodeId, "%d", FLOW_NODE_RECTIFY_REVIEW_2);
                 break;
             }
-            case FLOW_NODE_BR_REVIEW_2:
+            case FLOW_NODE_RECTIFY_REVIEW_2:
             {
-                util::string_format(sNextNodeId, "%d", FLOW_NODE_BR_REVIEW_3);
+                util::string_format(sNextNodeId, "%d", FLOW_NODE_RECTIFY_REVIEW_3);
                 break;
             }
-            case FLOW_NODE_BR_REVIEW_3:
+            case FLOW_NODE_RECTIFY_REVIEW_3:
             {
-                util::string_format(sNextNodeId, "%d", FLOW_NODE_BR_REVIEW_4);
+                util::string_format(sNextNodeId, "%d", FLOW_NODE_RECTIFY_REVIEW_4);
                 break;
             }
-
+                
                 
             default:
                 break;
         }
     }
-    else//无需整改结束流程
+    else//审核通过结束流程
     {
         util::string_format(sNextNodeId, "%d", FLOW_NODE_FINISH);
     }
-
+    
     switch (iCurNodeId) {
-        case FLOW_NODE_BR_REVIEW_1:
+        case FLOW_NODE_RECTIFY_REVIEW_1:
         {
             sReview_grade = "1";
             sReviewContent = [SingletonIce NSStringToGBstring:reviewContent1TextView.text];
             break;
         }
-        case FLOW_NODE_BR_REVIEW_2:
+        case FLOW_NODE_RECTIFY_REVIEW_2:
         {
             sReview_grade = "2";
             sReviewContent = [SingletonIce NSStringToGBstring:reviewContent2TextView.text];
             break;
         }
-        case FLOW_NODE_BR_REVIEW_3:
+        case FLOW_NODE_RECTIFY_REVIEW_3:
         {
             sReview_grade = "3";
             sReviewContent = [SingletonIce NSStringToGBstring:reviewContent3TextView.text];
             break;
         }
-        case FLOW_NODE_BR_REVIEW_4:
+        case FLOW_NODE_RECTIFY_REVIEW_4:
         {
             sReview_grade = "4";
             sReviewContent = [SingletonIce NSStringToGBstring:reviewContent4TextView.text];
@@ -304,7 +304,7 @@
 
 - (IBAction)save:(id)sender {
     
-     [self getReviewInfo];
+    [self getReviewInfo];
     
     if ( sReviewContent == "") {
         [SingletonBridge MessageBox:"请输入批阅内容！" withTitle:"错误"];
@@ -344,13 +344,13 @@
     cell.textLabel.text = [title objectAtIndex:indexPath.row];
     
     BRIDGE
-    if (bridge.nsReviewStateBR == nil || [bridge.nsReviewStateBR length] == 0)
+    if (bridge.nsReviewStateRectify == nil || [bridge.nsReviewStateRectify length] == 0)
     {
         cell.detailTextLabel.text = [subTitle objectAtIndex:indexPath.row];
     }
     else
     {
-        cell.detailTextLabel.text = bridge.nsReviewStateBR;
+        cell.detailTextLabel.text = bridge.nsReviewStateRectify;
     }
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -367,11 +367,11 @@
     string sCurNodeId = [bridge.nsReviewBR_CurFlowNodeIdSelected UTF8String];
     int iCurNodeId = atoi(sCurNodeId.c_str());
     if (FLOW_NODE_BR_REVIEW_4 == iCurNodeId) {
-        bridge.nsWhoUseReviewStateViewController = @"ReviewBreakRuleSingleViewControllerForHighest";//最高级批阅
+        bridge.nsWhoUseReviewStateViewController = @"ReviewRectifySingleViewControllerForHighest";//最高级批阅
     }
     else
     {
-        bridge.nsWhoUseReviewStateViewController = @"ReviewBreakRuleSingleViewController";
+        bridge.nsWhoUseReviewStateViewController = @"ReviewRectifySingleViewController";
     }
     
     UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReviewStateView"];
@@ -382,7 +382,7 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-   
+    
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
@@ -434,7 +434,7 @@
     // 视图上移/下移动画
     [UIView beginAnimations:kAnimationResizeForKeyboard context:nil];
     [UIView setAnimationDuration:kAnimationDuration];
-
+    
     scrollView.frame = viewFrame;
     [UIView commitAnimations];
 }
@@ -442,7 +442,7 @@
 /** 注册通知，当键盘将要弹出/收起时执行keyboardWillShow/keyboardWillHide方法。 */
 - (void)registerObserverForKeyboard
 {
-
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
@@ -462,6 +462,5 @@
 {
     [self adjustViewForKeyboardReveal:NO textView:textViewSelected];
 }
-
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04034A811A08D04A00D8B634 /* ReviewRectifyViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04034A801A08D04A00D8B634 /* ReviewRectifyViewController.mm */; };
 		040B0A6819D23A5A00D83461 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 040B0A6719D23A5A00D83461 /* AppDelegate.mm */; };
 		0410892819D738D100BB3D66 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0410892719D738D100BB3D66 /* AssetsLibrary.framework */; };
 		0431F19D19CC759D00F1718A /* mq_interface.ice in Sources */ = {isa = PBXBuildFile; fileRef = 0431F19B19CC759D00F1718A /* mq_interface.ice */; };
@@ -50,6 +51,7 @@
 		047F5A1619D9B53A00E4DA2D /* eastsun.ico in Resources */ = {isa = PBXBuildFile; fileRef = 047F5A1319D9B53A00E4DA2D /* eastsun.ico */; };
 		047F5A1719D9B53A00E4DA2D /* righticon.png in Resources */ = {isa = PBXBuildFile; fileRef = 047F5A1419D9B53A00E4DA2D /* righticon.png */; };
 		047F5A1819D9B53A00E4DA2D /* share_this_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 047F5A1519D9B53A00E4DA2D /* share_this_icon.png */; };
+		048BC7F21A092E2800168F1A /* ReviewRectifySingleViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 048BC7F11A092E2800168F1A /* ReviewRectifySingleViewController.mm */; };
 		048E0BE419E8278C004CAF24 /* HazardTypeViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 048E0BE319E8278C004CAF24 /* HazardTypeViewController.mm */; };
 		048F599519D6298B009BA27B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048F599419D6298B009BA27B /* MobileCoreServices.framework */; };
 		048F599719D62E4C009BA27B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048F599619D62E4C009BA27B /* ImageIO.framework */; };
@@ -89,6 +91,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04034A7F1A08D04A00D8B634 /* ReviewRectifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewRectifyViewController.h; sourceTree = "<group>"; };
+		04034A801A08D04A00D8B634 /* ReviewRectifyViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ReviewRectifyViewController.mm; sourceTree = "<group>"; };
 		04090E2119CDF5D300B8366D /* libiconv.2.4.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.4.0.dylib; path = usr/lib/libiconv.2.4.0.dylib; sourceTree = SDKROOT; };
 		040B0A6719D23A5A00D83461 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		040B0A6919D23B2B00D83461 /* SingletonIce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingletonIce.h; path = BreakRule/eutils/SingletonIce.h; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 		047F5A1319D9B53A00E4DA2D /* eastsun.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; name = eastsun.ico; path = res/eastsun.ico; sourceTree = SOURCE_ROOT; };
 		047F5A1419D9B53A00E4DA2D /* righticon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = righticon.png; path = res/righticon.png; sourceTree = SOURCE_ROOT; };
 		047F5A1519D9B53A00E4DA2D /* share_this_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share_this_icon.png; path = res/share_this_icon.png; sourceTree = SOURCE_ROOT; };
+		048BC7F01A092E2800168F1A /* ReviewRectifySingleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewRectifySingleViewController.h; sourceTree = "<group>"; };
+		048BC7F11A092E2800168F1A /* ReviewRectifySingleViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ReviewRectifySingleViewController.mm; sourceTree = "<group>"; };
 		048E0BE219E8278C004CAF24 /* HazardTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HazardTypeViewController.h; sourceTree = "<group>"; };
 		048E0BE319E8278C004CAF24 /* HazardTypeViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HazardTypeViewController.mm; sourceTree = "<group>"; };
 		048F599419D6298B009BA27B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -290,8 +296,8 @@
 				046C338319FC0CA500B99A92 /* Common */,
 				0490BE1819E096F300C83D82 /* main */,
 				0490BE1719E0969500C83D82 /* BreakRuleTakePhoto */,
-				049B740A19EBCC90000BE808 /* RectifyTakePhoto */,
 				0477AE5619F01C770088E875 /* ReviewBreakRule */,
+				049B740A19EBCC90000BE808 /* RectifyTakePhoto */,
 				047786A81A06902C0033C8B4 /* ReviewRectify */,
 				047786A71A0683390033C8B4 /* Query */,
 				0448782719CC70FB0086CE1B /* Images.xcassets */,
@@ -401,6 +407,10 @@
 		047786A81A06902C0033C8B4 /* ReviewRectify */ = {
 			isa = PBXGroup;
 			children = (
+				04034A7F1A08D04A00D8B634 /* ReviewRectifyViewController.h */,
+				04034A801A08D04A00D8B634 /* ReviewRectifyViewController.mm */,
+				048BC7F01A092E2800168F1A /* ReviewRectifySingleViewController.h */,
+				048BC7F11A092E2800168F1A /* ReviewRectifySingleViewController.mm */,
 			);
 			name = ReviewRectify;
 			sourceTree = "<group>";
@@ -596,6 +606,7 @@
 				049D6F921A018382006CA8D7 /* ReviewStateViewController.mm in Sources */,
 				0490BE1B19E0984E00C83D82 /* ProjectTypeViewController.mm in Sources */,
 				0471680219CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm in Sources */,
+				048BC7F21A092E2800168F1A /* ReviewRectifySingleViewController.mm in Sources */,
 				04998F7719D3812300CECB16 /* RectifyViewController.mm in Sources */,
 				04998F7A19D38DF200CECB16 /* MainViewController.m in Sources */,
 				040B0A6819D23A5A00D83461 /* AppDelegate.mm in Sources */,
@@ -604,6 +615,7 @@
 				047CBA7F19DC75CD00F85937 /* sqlite_utils.mm in Sources */,
 				048E0BE419E8278C004CAF24 /* HazardTypeViewController.mm in Sources */,
 				049104BB19D8CAF8004E052B /* RuleOptionViewController.mm in Sources */,
+				04034A811A08D04A00D8B634 /* ReviewRectifyViewController.mm in Sources */,
 				0478794C19DA179B00555F0D /* HazardItemViewController.mm in Sources */,
 				0431F19D19CC759D00F1718A /* mq_interface.ice in Sources */,
 				049104B819D8C829004E052B /* RuleTypeViewController.mm in Sources */,
