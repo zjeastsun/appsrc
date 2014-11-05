@@ -61,6 +61,7 @@
 		049104B519D8AD74004E052B /* SJAvatarBrowser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049104B419D8AD74004E052B /* SJAvatarBrowser.mm */; };
 		049104B819D8C829004E052B /* RuleTypeViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049104B719D8C829004E052B /* RuleTypeViewController.mm */; };
 		049104BB19D8CAF8004E052B /* RuleOptionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049104BA19D8CAF8004E052B /* RuleOptionViewController.mm */; };
+		04937A5F1A0ABC8400CE080D /* QuerySingleViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04937A5E1A0ABC8400CE080D /* QuerySingleViewController.mm */; };
 		04998F7719D3812300CECB16 /* RectifyViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04998F7619D3812300CECB16 /* RectifyViewController.mm */; };
 		04998F7A19D38DF200CECB16 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04998F7919D38DF200CECB16 /* MainViewController.m */; };
 		049CD04019DB56360079D3E2 /* SingletonDB.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049CD03F19DB56360079D3E2 /* SingletonDB.mm */; };
@@ -175,6 +176,8 @@
 		049104B719D8C829004E052B /* RuleTypeViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RuleTypeViewController.mm; sourceTree = "<group>"; };
 		049104B919D8CAF8004E052B /* RuleOptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuleOptionViewController.h; sourceTree = "<group>"; };
 		049104BA19D8CAF8004E052B /* RuleOptionViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RuleOptionViewController.mm; sourceTree = "<group>"; };
+		04937A5D1A0ABC8400CE080D /* QuerySingleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuerySingleViewController.h; sourceTree = "<group>"; };
+		04937A5E1A0ABC8400CE080D /* QuerySingleViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = QuerySingleViewController.mm; sourceTree = "<group>"; };
 		04998F7519D3812300CECB16 /* RectifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectifyViewController.h; sourceTree = "<group>"; };
 		04998F7619D3812300CECB16 /* RectifyViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RectifyViewController.mm; sourceTree = "<group>"; };
 		04998F7819D38DF200CECB16 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -400,6 +403,8 @@
 			children = (
 				0478B47319D4BCC40077EDBA /* QueryViewController.h */,
 				0478B47419D4BCC40077EDBA /* QueryViewController.mm */,
+				04937A5D1A0ABC8400CE080D /* QuerySingleViewController.h */,
+				04937A5E1A0ABC8400CE080D /* QuerySingleViewController.mm */,
 			);
 			name = Query;
 			sourceTree = "<group>";
@@ -604,6 +609,7 @@
 				047E878F19FBA5A400F7D452 /* CustomViewCell.m in Sources */,
 				0431F1A019CC76C300F1718A /* LoginViewController.mm in Sources */,
 				049D6F921A018382006CA8D7 /* ReviewStateViewController.mm in Sources */,
+				04937A5F1A0ABC8400CE080D /* QuerySingleViewController.mm in Sources */,
 				0490BE1B19E0984E00C83D82 /* ProjectTypeViewController.mm in Sources */,
 				0471680219CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm in Sources */,
 				048BC7F21A092E2800168F1A /* ReviewRectifySingleViewController.mm in Sources */,

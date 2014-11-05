@@ -218,6 +218,7 @@
     bridge.nsQuery_TimeSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"update_time"];
     bridge.nsQuery_BreakRuleContentSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"break_rule_content"];
     bridge.nsQuery_CurFlowNodeIdSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"node_id"];
+    bridge.nsQuery_CurFlowNodeNameSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"node_name"];
     bridge.nsQuery_PicNameSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"pic_name"];
     
     UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"QuerySingleView"];

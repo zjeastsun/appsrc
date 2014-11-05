@@ -177,18 +177,9 @@ BreakRuleTakePhotoViewController *pBR;
             cell.detailTextLabel.text = bridge.nsRuleType;
         }
         
-        if ([cell.detailTextLabel.text isEqualToString:@"一般违规"]) {
-            nsBreakRuleType = @"0";
-        }
-        else if ([cell.detailTextLabel.text isEqualToString:@"严重违规"])
-        {
-            nsBreakRuleType = @"1";
-        }
-        else if ([cell.detailTextLabel.text isEqualToString:@"重大违规"])
-        {
-            nsBreakRuleType = @"2";
-        }
-
+        string sRuleType = [SingletonBridge getBreakRuleTypeByName:cell.detailTextLabel.text];
+        nsBreakRuleType = [NSString stringWithFormat:@"%s", sRuleType.c_str()];
+ 
     }
     else
     {

@@ -133,6 +133,7 @@ const string SEQ_pic_id = "pic_id";
 @property (strong, nonatomic) NSString *nsQuery_TimeSelected;
 @property (strong, nonatomic) NSString *nsQuery_BreakRuleContentSelected;
 @property (strong, nonatomic) NSString *nsQuery_CurFlowNodeIdSelected;
+@property (strong, nonatomic) NSString *nsQuery_CurFlowNodeNameSelected;
 @property (strong, nonatomic) NSString *nsQuery_PicNameSelected;
 
 //查询条件

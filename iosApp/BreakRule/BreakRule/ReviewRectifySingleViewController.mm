@@ -58,7 +58,6 @@
         
     }
     
-    orgNameTextField.text = bridge.nsReviewRectify_OrgNameSelected;
     rectifyContentTextField.text = [SingletonIce valueNSString:helpRectifyInfo rowForHelp:0 KeyForHelp:"rectify_content"];
     
 }
