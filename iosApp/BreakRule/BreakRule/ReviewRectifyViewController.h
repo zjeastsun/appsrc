@@ -21,6 +21,8 @@
     IBOutlet UIActivityIndicatorView *actView;
     
     LoadView* loadView;
+    
+    NSLock *theLock;
 }
 - (IBAction)back:(id)sender;
 - (IBAction)condition:(id)sender;

@@ -14,6 +14,8 @@
     CSelectHelp	helpProject;
     
     IBOutlet UITableView *projectTableView;
+    
+    NSLock *theLock;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *projectTable;

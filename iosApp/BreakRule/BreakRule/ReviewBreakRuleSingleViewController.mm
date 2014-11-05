@@ -26,6 +26,8 @@
 
 - (void)updateUI
 {
+    BRIDGE
+    
     if( helpInfo.size()== 0 )
     {
         [reviewContent1TextView setEditable:true];
@@ -55,6 +57,8 @@
         reviewContent3TextView.text = [SingletonIce valueNSString:helpInfo rowForHelp:2 KeyForHelp:"review_content"];
         
     }
+    orgNameTextField.text = bridge.nsReviewBR_OrgNameSelected;
+    
 }
 
 - (void)queryReview
@@ -62,8 +66,6 @@
     BRIDGE
     ONEICE
 
-    orgNameTextField.text = bridge.nsReviewBR_OrgNameSelected;
-    
     string strError;
     string strParam="";
     string sqlcode="get_br_review";
@@ -71,18 +73,23 @@
     
     string sId = [bridge.nsReviewBR_BreakRuleIdSelected UTF8String];
     
-    oneIce.g_db->selectCmd("", sqlcode, sId, helpInfo, strError);
+    int iResult = oneIce.g_db->selectCmd("", sqlcode, sId, helpInfo, strError);
+    if( iResult<0 )
+    {
+        [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
+        return;
+    }
     
     bool bFileExits = [SingletonIce fileExistsInTemp:bridge.nsReviewBR_PicNameSelected];
     
-    bool bRerult;
+    bool bResult;
     if ( !bFileExits ) {
-        bRerult = [oneIce downloadFile:bridge.nsReviewBR_PicNameSelected];
+        bResult = [oneIce downloadFile:bridge.nsReviewBR_PicNameSelected];
         
         [actView stopAnimating];
         [actView setHidden:YES];
         
-        if (!bRerult) {
+        if (!bResult) {
             [SingletonBridge MessageBox:@"图片下载失败！"];
             return;
         }

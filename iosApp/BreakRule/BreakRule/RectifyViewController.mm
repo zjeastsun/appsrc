@@ -36,6 +36,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    theLock = [[NSLock alloc] init];
     [self addTableHeaderView];
     // Do any additional setup after loading the view.
 }
@@ -115,7 +116,16 @@
 
 - (void)updateUI
 {
-    [rectifyTableView reloadData];
+    [actView stopAnimating];
+    [actView setHidden:YES];
+    [loadView stopLoading];
+    
+    [theLock lock];
+    if (rectifyTableView) {
+        [rectifyTableView reloadData];
+    }
+    [theLock unlock];
+
 }
 
 - (void)queryDb
@@ -176,16 +186,16 @@
     helpParam.add(sEndTime);
     strParam = helpParam.get();
     
+    [theLock lock];
     int iResult = oneIce.g_db->selectCmd("", sqlcode, strParam, helpInfo, strError);
+    [theLock unlock];
     
-    [actView stopAnimating];
-    [actView setHidden:YES];
-    [loadView stopLoading];
+    
     
     if( iResult<0 )
     {
         [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
-        return;
+//        return;
     }
     
     [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
@@ -234,21 +244,26 @@
     
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    loadView.tipLabel.text = @"下拉可以刷新";
+}
+
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     if (loadView.isLoading)
     {
 		return ;
 	}
-    //    CGSize contentSize = scrollView.contentSize;
-    //    CGRect frame = scrollView.frame;
+    
     CGPoint contentPos = scrollView.contentOffset;
-    //	if (contentPos.y > contentSize.height - frame.size.height)
-    if (contentPos.y < -5)
+    
+    if (contentPos.y < -30)
     {
         [loadView startLoading];
         //刷新请求更多数据
-        [self performSelector:@selector(queryDb) withObject:nil afterDelay:2];
+        NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(queryDb) object:nil];
+        [thread start];
     }
 }
 

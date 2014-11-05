@@ -106,6 +106,7 @@ string getIPWithHostName(string hostName)
         {
             //        NSLog(@"数据库连接失败！");
             [SingletonBridge MessageBox:@"服务器连接失败"];
+            [actView stopAnimating];
             return;
         }
         NSLog(@"数据库连接成功！");
@@ -120,18 +121,33 @@ string getIPWithHostName(string hostName)
     helpParam.add(sPwd);
     strParam = helpParam.get();
     
+    int iResult;
     CSelectHelp	helpUser;
-    oneIce.g_db->selectCmd("", sqlcode, strParam, helpUser, strError);
+    iResult = oneIce.g_db->selectCmd("", sqlcode, strParam, helpUser, strError);
+    if( iResult<0 )
+    {
+        [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
+        [actView stopAnimating];
+        return;
+    }
     
     if( helpUser.size() <= 0 )
     {
         [SingletonBridge MessageBox:@"用户名或者密码错误"];
+        [actView stopAnimating];
         return;
     }
     NSLog(@"用户登录成功！");
     
     BRIDGE
-    oneIce.g_db->selectCmd("", "get_user_info", sUser, helpUser, strError);
+    iResult = oneIce.g_db->selectCmd("", "get_user_info", sUser, helpUser, strError);
+    if( iResult<0 )
+    {
+        [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
+        [actView stopAnimating];
+        return;
+    }
+    
     if (helpUser.size()>0) {
         string sOrgId = helpUser.valueString( 0, "org_id" );
         char *temp =const_cast<char*>(sOrgId.c_str());
@@ -146,7 +162,14 @@ string getIPWithHostName(string hostName)
     }
     
     CSelectHelp	helpRight;
-    oneIce.g_db->selectCmd("", "get_right", sUser, helpRight, strError);
+    iResult = oneIce.g_db->selectCmd("", "get_right", sUser, helpRight, strError);
+    if( iResult<0 )
+    {
+        [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
+        [actView stopAnimating];
+        return;
+    }
+    
     if (helpRight.size()>0) {
         bridge.helpRight.copy(helpRight);
     }

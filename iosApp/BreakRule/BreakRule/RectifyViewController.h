@@ -20,6 +20,8 @@
     LoadView* loadView;
     IBOutlet UITableView *rectifyTableView;
     IBOutlet UIActivityIndicatorView *actView;
+    
+    NSLock *theLock;
 }
 - (IBAction)back:(id)sender;
 - (IBAction)condition:(id)sender;

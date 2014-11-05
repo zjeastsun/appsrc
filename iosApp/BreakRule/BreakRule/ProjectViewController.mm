@@ -24,6 +24,14 @@
     return self;
 }
 
+- (void)updateUI
+{
+    //重新载入所有数据
+    [theLock lock];
+    [projectTableView reloadData];
+    [theLock unlock];
+}
+
 - (void)queryProject
 {
     BRIDGE
@@ -42,15 +50,19 @@
     sql += sLoginName;
     sql += "') ) and a.org_type_id=b.org_type_id and b.org_type='3'";
 
+    [theLock lock];
     oneIce.g_db->select(sql, helpProject, strError);
-    //重新载入所有数据
-    [projectTableView reloadData];
+    [theLock unlock];
+    
+    [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+    
     
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    theLock = [[NSLock alloc] init];
     
     NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(queryProject) object:nil];
     [thread start];

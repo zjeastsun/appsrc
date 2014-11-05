@@ -11,26 +11,31 @@
 
 @interface ReviewRectifySingleViewController : UIViewController
 {
-    IBOutlet UIScrollView *scrollView;
-    IBOutlet UITableView *stateTableView;
-    
     NSMutableArray *title;
     NSMutableArray *subTitle;
     
-    IBOutlet UITextField *orgNameTextField;
-    IBOutlet UITextField *typeTextField;
-    IBOutlet UITextField *timeTextField;
-    IBOutlet UITextView *breakRuleContentTextField;
+    IBOutlet UIScrollView *scrollView;
+    IBOutlet UITableView *stateTableView;
+    
+    IBOutlet UIImageView *imageView;
+    IBOutlet UIImageView *imageViewRectify;
+    IBOutlet UIActivityIndicatorView *actView;
+    IBOutlet UIActivityIndicatorView *rectifyActView;
     
     IBOutlet UITextView *reviewContent1TextView;
     IBOutlet UITextView *reviewContent2TextView;
     IBOutlet UITextView *reviewContent3TextView;
     IBOutlet UITextView *reviewContent4TextView;
-    
-    IBOutlet UIImageView *imageView;
-    IBOutlet UIActivityIndicatorView *actView;
+
+    IBOutlet UITextField *orgNameTextField;
+    IBOutlet UITextField *typeTextField;
+    IBOutlet UITextField *timeTextField;
+    IBOutlet UITextView *breakRuleContentTextField;
+    IBOutlet UITextView *rectifyContentTextField;
     
     CSelectHelp	helpInfo;
+    CSelectHelp helpRectifyInfo;
+    
     string sCurFlowNode;
     string sReview_grade;
     string sReviewContent;

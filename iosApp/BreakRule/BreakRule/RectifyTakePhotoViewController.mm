@@ -36,14 +36,14 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
     
     bool bFileExits = [SingletonIce fileExistsInTemp:bridge.nsRectify_PicNameSelected];
     
-    bool bRerult;
+    bool bResult;
     if ( !bFileExits ) {
-        bRerult = [oneIce downloadFile:bridge.nsRectify_PicNameSelected];
+        bResult = [oneIce downloadFile:bridge.nsRectify_PicNameSelected];
         
         [actView stopAnimating];
         [actView setHidden:YES];
         
-        if (!bRerult) {
+        if (!bResult) {
             [SingletonBridge MessageBox:@"图片下载失败！"];
             return;
         }

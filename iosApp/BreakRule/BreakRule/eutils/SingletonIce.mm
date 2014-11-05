@@ -97,9 +97,9 @@
     string sFileName = DATA_FILE_FOLDER + "/";
     sFileName += [nsFileName UTF8String];
     
-    bool bRerult = _g_db->downloadFile(sFileName, sDesPathName);
+    bool bResult = _g_db->downloadFile(sFileName, sDesPathName);
     
-    return bRerult;
+    return bResult;
 }
 
 @end

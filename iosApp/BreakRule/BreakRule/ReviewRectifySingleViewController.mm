@@ -26,6 +26,8 @@
 
 - (void)updateUI
 {
+    BRIDGE
+    
     if( helpInfo.size()== 0 )
     {
         [reviewContent1TextView setEditable:true];
@@ -55,14 +57,16 @@
         reviewContent3TextView.text = [SingletonIce valueNSString:helpInfo rowForHelp:2 KeyForHelp:"review_content"];
         
     }
+    
+    orgNameTextField.text = bridge.nsReviewRectify_OrgNameSelected;
+    rectifyContentTextField.text = [SingletonIce valueNSString:helpRectifyInfo rowForHelp:0 KeyForHelp:"rectify_content"];
+    
 }
 
 - (void)queryReview
 {
     BRIDGE
     ONEICE
-    
-    orgNameTextField.text = bridge.nsReviewRectify_OrgNameSelected;
     
     string strError;
     string strParam="";
@@ -71,24 +75,30 @@
     
     string sId = [bridge.nsReviewRectify_BreakRuleIdSelected UTF8String];
     
-    oneIce.g_db->selectCmd("", sqlcode, sId, helpInfo, strError);
+    int iResult;
+    iResult = oneIce.g_db->selectCmd("", sqlcode, sId, helpInfo, strError);
+    if( iResult<0 )
+    {
+        [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
+        return;
+    }
     
     bool bFileExits = [SingletonIce fileExistsInTemp:bridge.nsReviewRectify_PicNameSelected];
     
-    bool bRerult;
+    bool bResult;
     if ( !bFileExits ) {
-        bRerult = [oneIce downloadFile:bridge.nsReviewRectify_PicNameSelected];
+        bResult = [oneIce downloadFile:bridge.nsReviewRectify_PicNameSelected];
         
         [actView stopAnimating];
         [actView setHidden:YES];
         
-        if (!bRerult) {
+        if (!bResult) {
             [SingletonBridge MessageBox:@"违规图片下载失败！"];
             return;
         }
     }
-    
     [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+
     
     NSString *nsDesPathName = [SingletonIce getFullTempPathName:bridge.nsReviewRectify_PicNameSelected];
     //获取保存得图片
@@ -96,8 +106,62 @@
     UIImage *img = [UIImage imageWithContentsOfFile:nsDesPathName];
     imageView.image = img;
     
+
     [actView stopAnimating];
     [actView setHidden:YES];
+
+    
+}
+
+- (void)queryRectifyInfo
+{
+    BRIDGE
+    ONEICE
+    
+    string strError;
+    string strParam="";
+    string sqlcode="get_br_rectify_info";
+    SelectHelpParam helpParam;
+    
+    string sId = [bridge.nsReviewRectify_BreakRuleIdSelected UTF8String];
+    
+    int iResult;
+    bool bResult;
+    
+    iResult = oneIce.g_db->selectCmd("", sqlcode, sId, helpRectifyInfo, strError);
+    if( iResult<0 )
+    {
+        [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
+        return;
+    }
+    
+    
+    
+    NSString *nsRectifyPicName = [SingletonIce valueNSString:helpRectifyInfo rowForHelp:0 KeyForHelp:"pic_name"];
+    bool bFileExits = [SingletonIce fileExistsInTemp:nsRectifyPicName];
+    
+    if ( !bFileExits ) {
+        bResult = [oneIce downloadFile:nsRectifyPicName];
+        
+        [rectifyActView stopAnimating];
+        [rectifyActView setHidden:YES];
+        
+        if (!bResult) {
+            [SingletonBridge MessageBox:@"整改图片下载失败！"];
+            return;
+        }
+    }
+    
+    [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+    
+    NSString *nsDesPathNameRectify = [SingletonIce getFullTempPathName:nsRectifyPicName];
+    //获取保存得图片
+    
+    UIImage *imgRectify = [UIImage imageWithContentsOfFile:nsDesPathNameRectify];
+    imageViewRectify.image = imgRectify;
+    
+    [rectifyActView stopAnimating];
+    [rectifyActView setHidden:YES];
     
 }
 
@@ -128,26 +192,32 @@
     subTitle = [[NSMutableArray alloc]initWithObjects:@"审核通过", nil];
     bridge.nsReviewStateRectify = @"审核通过";
     
-    orgNameTextField.text = bridge.nsReviewBR_OrgNameSelected;
+    orgNameTextField.text = bridge.nsReviewRectify_OrgNameSelected;
     
-    if ([bridge.nsReviewBR_BreakRuleTypeSelected isEqualToString:@"0"]) {
+    if ([bridge.nsReviewRectify_BreakRuleTypeSelected isEqualToString:@"0"]) {
         typeTextField.text = @"一般违规";
     }
-    else if ([bridge.nsReviewBR_BreakRuleTypeSelected isEqualToString:@"1"]) {
+    else if ([bridge.nsReviewRectify_BreakRuleTypeSelected isEqualToString:@"1"]) {
         typeTextField.text = @"严重违规";
     }
-    else if ([bridge.nsReviewBR_BreakRuleTypeSelected isEqualToString:@"2"]) {
+    else if ([bridge.nsReviewRectify_BreakRuleTypeSelected isEqualToString:@"2"]) {
         typeTextField.text = @"重大违规";
     }
     
-    timeTextField.text = bridge.nsReviewBR_TimeSelected;
-    breakRuleContentTextField.text = bridge.nsReviewBR_BreakRuleContentSelected;
+    timeTextField.text = bridge.nsReviewRectify_TimeSelected;
+    breakRuleContentTextField.text = bridge.nsReviewRectify_BreakRuleContentSelected;
     
     [actView setHidden:NO];
     [actView startAnimating];
     
+    [rectifyActView setHidden:NO];
+    [rectifyActView startAnimating];
+    
     NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(queryReview) object:nil];
     [thread start];
+    
+    NSThread *thread1 = [[NSThread alloc]initWithTarget:self selector:@selector(queryRectifyInfo) object:nil];
+    [thread1 start];
 
     
     // Do any additional setup after loading the view.
@@ -265,9 +335,9 @@
     string sReviewId = "";
     oneIce.g_db->command("get_sequence", SEQ_review_id, sReviewId);
     
-    string sBreakRuleId = [bridge.nsReviewBR_BreakRuleIdSelected UTF8String];
+    string sBreakRuleId = [bridge.nsReviewRectify_BreakRuleIdSelected UTF8String];
     string sUserId = [bridge.nsUserId UTF8String];
-    string sRectifyId = "0";
+    string sRectifyId = helpRectifyInfo.valueString( 0, "rectify_id" );;
     
     SelectHelpParam helpParam;
     helpParam.add(sReviewId);
@@ -364,7 +434,7 @@
 {
     BRIDGE
     
-    string sCurNodeId = [bridge.nsReviewBR_CurFlowNodeIdSelected UTF8String];
+    string sCurNodeId = [bridge.nsReviewRectify_CurFlowNodeIdSelected UTF8String];
     int iCurNodeId = atoi(sCurNodeId.c_str());
     if (FLOW_NODE_BR_REVIEW_4 == iCurNodeId) {
         bridge.nsWhoUseReviewStateViewController = @"ReviewRectifySingleViewControllerForHighest";//最高级批阅
