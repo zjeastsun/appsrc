@@ -50,6 +50,12 @@
         endTimeText.text = bridge.nsReviewRectifyEndTime;
         nsRuleTypeOld = bridge.nsRuleTypeForReviewRectify;
     }
+    else if ([bridge.nsWhoUseConditionViewController isEqualToString:@"QueryViewController"] )
+    {
+        startTimeText.text = bridge.nsQueryStartTime;
+        endTimeText.text = bridge.nsQueryEndTime;
+        nsRuleTypeOld = bridge.nsRuleTypeForQuery;
+    }
     
     
     
@@ -86,6 +92,10 @@
     else if ([bridge.nsWhoUseConditionViewController isEqualToString:@"ReviewRectifyViewController"] )
     {
         bridge.nsRuleTypeForReviewRectify = nsRuleTypeOld;
+    }
+    else if ([bridge.nsWhoUseConditionViewController isEqualToString:@"QueryViewController"] )
+    {
+        bridge.nsRuleTypeForQuery = nsRuleTypeOld;
     }
     
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
@@ -148,6 +158,11 @@
     {
         bridge.nsReviewRectifyStartTime = startTimeText.text;
         bridge.nsReviewRectifyEndTime = endTimeText.text;
+    }
+    else if ([bridge.nsWhoUseConditionViewController isEqualToString:@"QueryViewController"] )
+    {
+        bridge.nsQueryStartTime = startTimeText.text;
+        bridge.nsQueryEndTime = endTimeText.text;
     }
     
     
@@ -227,6 +242,17 @@
             cell.detailTextLabel.text = bridge.nsRuleTypeForReviewRectify;
         }
     }
+    else if ([bridge.nsWhoUseConditionViewController isEqualToString:@"QueryViewController"] )
+    {
+        if (bridge.nsRuleTypeForQuery == nil || [bridge.nsRuleTypeForQuery length] == 0)
+        {
+            cell.detailTextLabel.text = [subTitle objectAtIndex:indexPath.row];
+        }
+        else
+        {
+            cell.detailTextLabel.text = bridge.nsRuleTypeForQuery;
+        }
+    }
     
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -250,6 +276,10 @@
     else if ([bridge.nsWhoUseConditionViewController isEqualToString:@"ReviewRectifyViewController"] )
     {
         bridge.nsWhoUseRuleTypeViewController = @"ReviewRectifyViewController";
+    }
+    else if ([bridge.nsWhoUseConditionViewController isEqualToString:@"QueryViewController"] )
+    {
+        bridge.nsWhoUseRuleTypeViewController = @"QueryViewController";
     }
     
     UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RuleTypeView"];

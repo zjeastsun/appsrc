@@ -69,6 +69,27 @@
     return 0;
 }
 
++ (string)getBreakRuleTypeByName:(NSString *)nsName
+{
+    string sRuleType;
+    if ([nsName isEqualToString:@"一般违规"]) {
+        sRuleType = "0";
+    }
+    else if ([nsName isEqualToString:@"严重违规"])
+    {
+        sRuleType = "1";
+    }
+    else if ([nsName isEqualToString:@"重大违规"])
+    {
+        sRuleType = "2";
+    }
+    else
+    {
+        sRuleType = "0";
+    }
+    return sRuleType;
+}
+
 + (void)MessageBox:(NSString *)msg
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误"

@@ -122,8 +122,23 @@ const string SEQ_pic_id = "pic_id";
 @property (strong, nonatomic) NSString *nsReviewStateRectify;//审核状态
 //查询条件
 @property (strong, nonatomic) NSString *nsRuleTypeForReviewRectify;//条件选择中的判定性质
-@property (strong, nonatomic) NSString *nsReviewRectifyStartTime;//批阅违规查询时间
+@property (strong, nonatomic) NSString *nsReviewRectifyStartTime;//查询时间
 @property (strong, nonatomic) NSString *nsReviewRectifyEndTime;
+
+//综合查询--------------------------------------------------------------------------
+//当前选中信息
+@property (strong, nonatomic) NSString *nsQuery_BreakRuleIdSelected;//id号
+@property (strong, nonatomic) NSString *nsQuery_OrgNameSelected;
+@property (strong, nonatomic) NSString *nsQuery_BreakRuleTypeSelected;
+@property (strong, nonatomic) NSString *nsQuery_TimeSelected;
+@property (strong, nonatomic) NSString *nsQuery_BreakRuleContentSelected;
+@property (strong, nonatomic) NSString *nsQuery_CurFlowNodeIdSelected;
+@property (strong, nonatomic) NSString *nsQuery_PicNameSelected;
+
+//查询条件
+@property (strong, nonatomic) NSString *nsRuleTypeForQuery;//条件选择中的判定性质
+@property (strong, nonatomic) NSString *nsQueryStartTime;//查询时间
+@property (strong, nonatomic) NSString *nsQueryEndTime;
 
 //---------------------------------------------------------------------------------------------
 + (SingletonBridge *)sharedInstance;
@@ -131,8 +146,11 @@ const string SEQ_pic_id = "pic_id";
 
 + (NSString *)getReviewTypeName:(int)iType;
 + (int)getReviewTypeId:(NSString *)nsName;
++ (string)getBreakRuleTypeByName:(NSString *)name;
 
 + (void)MessageBox:(NSString *)msg;
 + (void)MessageBox:(string)msgs withTitle:(string)sTitle;
+
+
 
 @end
