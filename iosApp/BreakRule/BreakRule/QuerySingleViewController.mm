@@ -30,17 +30,7 @@
     BRIDGE
     
     orgNameTextField.text = bridge.nsQuery_OrgNameSelected;
-    
-    if ([bridge.nsQuery_BreakRuleTypeSelected isEqualToString:@"0"]) {
-        typeTextField.text = @"一般违规";
-    }
-    else if ([bridge.nsQuery_BreakRuleTypeSelected isEqualToString:@"1"]) {
-        typeTextField.text = @"严重违规";
-    }
-    else if ([bridge.nsQuery_BreakRuleTypeSelected isEqualToString:@"2"]) {
-        typeTextField.text = @"重大违规";
-    }
-    
+    typeTextField.text = [SingletonBridge getBreakRuleTypeNameById:bridge.nsQuery_BreakRuleTypeSelected];
     timeTextField.text = bridge.nsQuery_TimeSelected;
     breakRuleContentTextField.text = bridge.nsQuery_BreakRuleContentSelected;
     

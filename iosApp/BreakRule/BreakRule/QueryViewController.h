@@ -26,5 +26,4 @@
 }
 - (IBAction)back:(id)sender;
 - (IBAction)condition:(id)sender;
-
 @end

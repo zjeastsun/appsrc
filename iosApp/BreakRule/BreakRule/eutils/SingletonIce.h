@@ -4,7 +4,8 @@
 
 #define ONEICE SingletonIce *oneIce; oneIce = [SingletonIce sharedInstance];
 
-const string DATA_FILE_FOLDER = "test";//服务器保存照片的相对路径文件夹
+const string REMOTE_PIC_PATH = "/upfile/upload/";//服务器保存照片的相对路径文件夹
+const int CENT_PORT = 8840;
 
 @interface SingletonIce : NSObject
 
@@ -19,5 +20,8 @@ const string DATA_FILE_FOLDER = "test";//服务器保存照片的相对路径文
 + (bool)fileExistsInTemp:(NSString *)nsFileName;
 
 - (bool)downloadFile:(NSString *)nsFileName;
+
+//数据库查询函数---------------------------------------------------
+-(int)getProject:(CSelectHelp &)help loginName:(NSString *)nsLoginName;
 
 @end

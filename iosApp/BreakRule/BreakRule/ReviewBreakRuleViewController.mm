@@ -143,22 +143,6 @@
     }
     else
     {
-//        NSString *nsBreakRuleType;
-//        if ([bridge.nsRuleTypeForReviewBR isEqualToString:@"一般违规"]) {
-//            nsBreakRuleType = @"0";
-//        }
-//        else if ([bridge.nsRuleTypeForReviewBR isEqualToString:@"严重违规"])
-//        {
-//            nsBreakRuleType = @"1";
-//        }
-//        else if ([bridge.nsRuleTypeForReviewBR isEqualToString:@"重大违规"])
-//        {
-//            nsBreakRuleType = @"2";
-//        }
-//        else
-//        {
-//            nsBreakRuleType = @"0";
-//        }
         string sRuleType = [SingletonBridge getBreakRuleTypeByName:bridge.nsRuleTypeForReviewBR];
         helpParam.add(sRuleType);
     }

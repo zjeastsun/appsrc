@@ -42,16 +42,16 @@
         return;
     }
     
-    string sLoginName = [bridge.nsLoginName UTF8String];
-    
-    string strError;
-    string strParam="";
-    string sql="select * from T_ORGANIZATION a,T_ORG_TYPE b where org_id in ( select org_id FROM func_query_project( '";
-    sql += sLoginName;
-    sql += "') ) and a.org_type_id=b.org_type_id and b.org_type='3'";
+//    string sLoginName = [bridge.nsLoginName UTF8String];
+//    
+//    string strError;
+//    string strParam="";
+//    string sql="select * from T_ORGANIZATION a,T_ORG_TYPE b where org_id in ( select org_id FROM func_query_project( '";
+//    sql += sLoginName;
+//    sql += "') ) and a.org_type_id=b.org_type_id and b.org_type='3'";
 
     [theLock lock];
-    oneIce.g_db->select(sql, helpProject, strError);
+    [oneIce getProject:helpProject loginName:bridge.nsLoginName];
     [theLock unlock];
     
     [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];

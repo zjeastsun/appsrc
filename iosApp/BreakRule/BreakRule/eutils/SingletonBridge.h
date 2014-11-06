@@ -1,4 +1,7 @@
 //全局共享数据单例
+//包含部分重复使用的函数
+//部分全局定义
+
 #import <Foundation/Foundation.h>
 #import"eutils.h"
 
@@ -145,9 +148,11 @@ const string SEQ_pic_id = "pic_id";
 + (SingletonBridge *)sharedInstance;
 - (void)unInit;
 
-+ (NSString *)getReviewTypeName:(int)iType;
++ (NSString *)getReviewTypeName:(int)iType;//批阅类型互查
 + (int)getReviewTypeId:(NSString *)nsName;
-+ (string)getBreakRuleTypeByName:(NSString *)name;
+
++ (string)getBreakRuleTypeByName:(NSString *)name;//违规类型互查
++(NSString *)getBreakRuleTypeNameById:(NSString *)nsId;
 
 + (void)MessageBox:(NSString *)msg;
 + (void)MessageBox:(string)msgs withTitle:(string)sTitle;

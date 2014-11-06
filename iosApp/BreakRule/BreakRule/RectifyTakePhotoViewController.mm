@@ -314,7 +314,7 @@ void ProcessForRectify(string path, double iProgress)
     
     string sDesPathName = [nsDesPathName UTF8String];
     
-    iResult = oneIce.g_db->upload(sDesPathName, "test", ProcessForRectify, ProcessFinishedForRectify);
+    iResult = oneIce.g_db->upload(sDesPathName, "", ProcessForRectify, ProcessFinishedForRectify);
     if( iResult<0 )
     {
         [SingletonBridge MessageBox:"上传照片错误" withTitle:"传输错误"];

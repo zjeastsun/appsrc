@@ -30,7 +30,7 @@
     NSArray* viewArray = [[NSBundle mainBundle] loadNibNamed:@"LoadView" owner:nil options:nil];
     loadView = [viewArray objectAtIndex:0];
     reviewTableView.tableHeaderView = loadView;
-    loadView.tipLabel.text = [[NSString alloc] initWithString:MORE_STRING];
+//    loadView.tipLabel.text = [[NSString alloc] initWithString:MORE_STRING];
 }
 
 - (void)viewDidLoad

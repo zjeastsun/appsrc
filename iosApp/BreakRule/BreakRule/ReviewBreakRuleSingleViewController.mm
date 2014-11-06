@@ -137,17 +137,7 @@
     bridge.nsReviewStateBR = @"审核通过";
     
     orgNameTextField.text = bridge.nsReviewBR_OrgNameSelected;
-    
-    if ([bridge.nsReviewBR_BreakRuleTypeSelected isEqualToString:@"0"]) {
-        typeTextField.text = @"一般违规";
-    }
-    else if ([bridge.nsReviewBR_BreakRuleTypeSelected isEqualToString:@"1"]) {
-        typeTextField.text = @"严重违规";
-    }
-    else if ([bridge.nsReviewBR_BreakRuleTypeSelected isEqualToString:@"2"]) {
-        typeTextField.text = @"重大违规";
-    }
-    
+    typeTextField.text = [SingletonBridge getBreakRuleTypeNameById:bridge.nsReviewBR_BreakRuleTypeSelected];
     timeTextField.text = bridge.nsReviewBR_TimeSelected;
     breakRuleContentTextField.text = bridge.nsReviewBR_BreakRuleContentSelected;
     

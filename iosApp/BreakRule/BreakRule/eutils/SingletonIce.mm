@@ -94,12 +94,30 @@
     NSString *nsDesPathName = NSTemporaryDirectory();
     
     string sDesPathName = [nsDesPathName UTF8String];
-    string sFileName = DATA_FILE_FOLDER + "/";
+    string sFileName = REMOTE_PIC_PATH;
     sFileName += [nsFileName UTF8String];
     
     bool bResult = _g_db->downloadFile(sFileName, sDesPathName);
     
     return bResult;
 }
+
+//数据库查询函数------------------------------------------------
+//获取项目信息
+-(int)getProject:(CSelectHelp &)help loginName:(NSString *)nsLoginName;
+{
+    string sLoginName = [nsLoginName UTF8String];
+    
+    string strError;
+    string strParam="";
+    string sql="select * from T_ORGANIZATION a,T_ORG_TYPE b where org_id in ( select org_id FROM func_query_project( '";
+    sql += sLoginName;
+    sql += "') ) and a.org_type_id=b.org_type_id and b.org_type='3'";
+    
+    int iResult = _g_db->select(sql, help, strError);
+
+    return iResult;
+}
+
 
 @end

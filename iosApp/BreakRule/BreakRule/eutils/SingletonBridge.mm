@@ -23,7 +23,11 @@
         _nsRuleOption = @"用户自定义";
         _nsProjectType = @"0";
         _nsProjectTypeName = @"全部项目";
+        
         _nsRuleTypeForReviewBR = @"全部";
+        _nsRuleTypeForQuery = @"全部";
+        _nsRuleTypeForReviewRectify = @"全部";
+        _nsRuleTypeForRectify = @"全部";
     }
     
     return self;
@@ -88,6 +92,22 @@
         sRuleType = "0";
     }
     return sRuleType;
+}
+
++(NSString *)getBreakRuleTypeNameById:(NSString *)nsId
+{
+    NSString *nsBreakRuleType;
+    
+    if ([nsId isEqualToString:@"0"]) {
+        nsBreakRuleType = @"一般违规";
+    }
+    else if ([nsId isEqualToString:@"1"]) {
+        nsBreakRuleType = @"严重违规";
+    }
+    else if ([nsId isEqualToString:@"2"]) {
+        nsBreakRuleType = @"重大违规";
+    }
+    return nsBreakRuleType;
 }
 
 + (void)MessageBox:(NSString *)msg
