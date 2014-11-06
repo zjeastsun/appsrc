@@ -86,7 +86,7 @@
     
     bool bResult;
     if ( !bFileExits ) {
-        bResult = [oneIce downloadFile:bridge.nsReviewRectify_PicNameSelected];
+        bResult = [oneIce downloadFile:bridge.nsReviewRectify_PicNameSelected Callback:nil DoneCallback:nil];
         
         [actView stopAnimating];
         [actView setHidden:YES];
@@ -140,7 +140,7 @@
     bool bFileExits = [SingletonIce fileExistsInTemp:nsRectifyPicName];
     
     if ( !bFileExits ) {
-        bResult = [oneIce downloadFile:nsRectifyPicName];
+        bResult = [oneIce downloadFile:nsRectifyPicName Callback:nil DoneCallback:nil];
         
         [rectifyActView stopAnimating];
         [rectifyActView setHidden:YES];

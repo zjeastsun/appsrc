@@ -1,5 +1,6 @@
 #import "SingletonIce.h"
 
+
 @implementation SingletonIce
 
 
@@ -36,11 +37,11 @@
 
 }
 
-+ (NSString *)valueNSString:(CSelectHelp)help rowForHelp:(int)row KeyForHelp:(std::string)key
++ (NSString *)valueNSString:(CSelectHelp)help rowForHelp:(NSInteger)row KeyForHelp:(std::string)key
 {
     NSString *nsReturn;
     
-    string sTemp = help.valueString( row, key );
+    string sTemp = help.valueString( static_cast<int>(row), key );
     char *temp =const_cast<char*>(sTemp.c_str());
     
     NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
@@ -85,7 +86,7 @@
     return false;
 }
 
-- (bool)downloadFile:(NSString *)nsFileName
+- (bool)downloadFile:(NSString *)nsFileName Callback:(ProgressFileCallback)pF DoneCallback:(ProgressFileDoneCallback)pFinished
 {
     if (nsFileName == nil) {
         return false;
@@ -97,21 +98,70 @@
     string sFileName = REMOTE_PIC_PATH;
     sFileName += [nsFileName UTF8String];
     
-    bool bResult = _g_db->downloadFile(sFileName, sDesPathName);
+    bool bResult = _g_db->downloadFile(sFileName, sDesPathName, pF, pFinished);
     
     return bResult;
 }
 
 //数据库查询函数------------------------------------------------
-//获取项目信息
--(int)getProject:(CSelectHelp &)help loginName:(NSString *)nsLoginName;
+- (bool)loginCheck:(NSString *)nsUser passWord:(NSString *)nsPwd error:(string &)strError
 {
-    string sLoginName = [nsLoginName UTF8String];
+    string strParam="";
+    const string sqlcode="login_check";
     
-    string strError;
+    string sUser = [nsUser UTF8String];
+    string sPwd = [nsPwd UTF8String];
+    
+    SelectHelpParam helpParam;
+    helpParam.add(sUser);
+    helpParam.add(sPwd);
+    strParam = helpParam.get();
+    
+    int iResult;
+    CSelectHelp	helpUser;
+    iResult = _g_db->selectCmd("", sqlcode, strParam, helpUser, strError);
+    if( iResult<0 )
+    {
+        return false;
+    }
+    
+    if( helpUser.size() <= 0 )
+    {
+        strError = "用户名或者密码错误";
+        return false;
+    }
+    return true;
+}
+
+- (bool)getUserInfo:(CSelectHelp &)help user:(NSString *)nsUser error:(string &)strError
+{
+    string sUser = [nsUser UTF8String];
+    int iResult = _g_db->selectCmd("", "get_user_info", sUser, help, strError);
+    if( iResult<0 )
+    {
+        return false;
+    }
+    return true;
+}
+
+- (bool)getRight:(CSelectHelp &)help user:(NSString *)nsUser error:(string &)strError
+{
+    string sUser = [nsUser UTF8String];
+    int iResult = _g_db->selectCmd("", "get_right", sUser, help, strError);
+    if( iResult<0 )
+    {
+        return false;
+    }
+    return true;
+}
+
+- (int)getProject:(CSelectHelp &)help user:(NSString *)nsUser error:(string &)strError
+{
+    string sUser = [nsUser UTF8String];
+    
     string strParam="";
     string sql="select * from T_ORGANIZATION a,T_ORG_TYPE b where org_id in ( select org_id FROM func_query_project( '";
-    sql += sLoginName;
+    sql += sUser;
     sql += "') ) and a.org_type_id=b.org_type_id and b.org_type='3'";
     
     int iResult = _g_db->select(sql, help, strError);
@@ -119,5 +169,277 @@
     return iResult;
 }
 
+- (string)getId:(string)sIdSeq
+{
+    string sId;
+    int iResult = _g_db->command("get_sequence", sIdSeq, sId);
+    if( iResult<0 )
+    {
+        return "";
+    }
+    
+    return sId;
+}
+
+- (bool)putBreakRuleInfo:(NSString *)nsContent picName:(string)sPicName picTime:(NSString *)nsPicTime error:(string &)strError
+{
+    BRIDGE
+
+    string strParam="";
+    const string sqlcode="put_break_law_info";
+    
+    string sBreakRuleId = "";
+    sBreakRuleId = [self getId:SEQ_break_rule_id];
+    if( sBreakRuleId == "" )
+    {
+        strError = "获取违规ID失败";
+        return false;
+    }
+    
+    string sNodeId;
+    util::string_format(sNodeId, "%d", FLOW_NODE_BR_REVIEW_1);
+    string sOrgId = [bridge.nsOrgIdSelected UTF8String];
+    string sUserId = [bridge.nsUserId UTF8String];
+    
+    string sBreakRuleContent = [SingletonIce NSStringToGBstring:nsContent];
+    string sBreakRuleType = [SingletonBridge getBreakRuleTypeByName:bridge.nsRuleType];
+    
+    string sPicTime = [nsPicTime UTF8String];
+    string sLongitude = "0";
+    string sLatitude = "0";
+    
+    SelectHelpParam helpParam;
+    helpParam.add(sBreakRuleId);
+    helpParam.add(sNodeId);
+    helpParam.add(sOrgId);
+    helpParam.add(sUserId);
+    helpParam.add(sBreakRuleContent);
+    helpParam.add(sPicName);
+    helpParam.add(sPicTime);
+    helpParam.add(sBreakRuleType);
+    helpParam.add(sPicTime);//UpdateTime
+    helpParam.add(sLongitude);
+    helpParam.add(sLatitude);
+    strParam = helpParam.get();
+    
+    CSelectHelp	help;
+    int iResult = _g_db->execCmd("", sqlcode, strParam, help, strError);
+    if( iResult<0 )
+    {
+        return false;
+    }
+
+    return true;
+}
+
+- (int)getReviewBreakRule:(CSelectHelp &)help error:(string &)strError
+{
+    BRIDGE
+    
+    string strParam="";
+    string sqlcode="get_break_last_view_review";
+    SelectHelpParam helpParam;
+    
+    if ([bridge.nsRuleTypeForReviewBR isEqualToString:@"全部"])
+    {
+        sqlcode = "get_break_last_view_all_review";
+    }
+    else
+    {
+        string sRuleType = [SingletonBridge getBreakRuleTypeByName:bridge.nsRuleTypeForReviewBR];
+        helpParam.add(sRuleType);
+    }
+    
+    if (bridge.nsReviewStartTime == nil || bridge.nsReviewEndTime == nil)
+    {
+        NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+        [dateformatter setDateFormat:@"YYYY-MM-dd"];
+        
+        NSDate *  endDate=[NSDate date];
+        bridge.nsReviewEndTime=[dateformatter stringFromDate:endDate];
+        
+        NSDate* startDate = [[NSDate alloc] init];
+        startDate = [endDate dateByAddingTimeInterval:-60*3600*24];
+        bridge.nsReviewStartTime =[dateformatter stringFromDate:startDate];
+    }
+    
+    string sStartTime, sEndTime;
+    sStartTime = [bridge.nsReviewStartTime UTF8String];
+    sEndTime = [bridge.nsReviewEndTime UTF8String];
+    sEndTime += " 23:59:59";
+    
+    helpParam.add(sStartTime);
+    helpParam.add(sEndTime);
+    strParam = helpParam.get();
+
+    int iResult = _g_db->selectCmd("", sqlcode, strParam, help, strError);
+
+    return iResult;
+}
+
+- (int)getBreakRule:(CSelectHelp &)help error:(string &)strError
+{
+    BRIDGE
+    string strParam="";
+    string sqlcode="get_br_review";
+    SelectHelpParam helpParam;
+    
+    string sId = [bridge.nsReviewBR_BreakRuleIdSelected UTF8String];
+    
+    int iResult = _g_db->selectCmd("", sqlcode, sId, help, strError);
+    return iResult;
+}
+
+- (int)updateFlowNode:(string)sNodeId breakRuleId:(string)sBreakRuleId error:(string &)strError
+{
+    string strParam="";
+    string sqlcode = "update_break_law_node";
+    SelectHelpParam helpParamNode;
+    helpParamNode.add(sNodeId);
+    helpParamNode.add(sBreakRuleId);
+    strParam = helpParamNode.get();
+    
+    CSelectHelp	help;
+    int iResult = _g_db->execCmd("", sqlcode, strParam, help, strError);
+
+    return iResult;
+
+}
+
+- (bool)putBRReview:(NSString *)nsContent grade:(string)sGrade nextNodeId:(string)sNextNodeId error:(string &)strError
+{
+    BRIDGE
+    
+    string strParam="";
+    string sqlcode="put_br_review";
+    
+    string sReviewId = [self getId:SEQ_review_id];
+    
+    string sBreakRuleId = [bridge.nsReviewBR_BreakRuleIdSelected UTF8String];
+    string sUserId = [bridge.nsUserId UTF8String];
+    string sContent = [SingletonIce NSStringToGBstring:nsContent];
+    string sRectifyId = "0";
+    
+    SelectHelpParam helpParam;
+    helpParam.add(sReviewId);
+    helpParam.add(sBreakRuleId);
+    helpParam.add(sUserId);
+    helpParam.add(sContent);
+    helpParam.add(sGrade);
+    helpParam.add(sRectifyId);
+    strParam = helpParam.get();
+    
+    int iResult = 0;
+    CSelectHelp	help;
+    iResult = _g_db->execCmd("", sqlcode, strParam, help, strError);
+    if( iResult<0 )
+    {
+        return false;
+    }
+    
+    iResult = [self updateFlowNode:sNextNodeId breakRuleId:sBreakRuleId error:strError];
+    if( iResult<0 )
+    {
+        return false;
+    }
+    return true;
+}
+
+- (int)getRectify:(CSelectHelp &)help error:(string &)strError
+{
+    BRIDGE
+    string strParam="";
+    string sqlcode="get_break_main_reform_notfull";
+    SelectHelpParam helpParam;
+    
+    if ([bridge.nsRuleTypeForRectify isEqualToString:@"全部"])
+    {
+        sqlcode = "get_break_main_reform";
+    }
+    else
+    {
+        string sRuleType = [SingletonBridge getBreakRuleTypeByName:bridge.nsRuleTypeForRectify];
+        helpParam.add(sRuleType);
+    }
+    
+    if (bridge.nsRectifyStartTime == nil || bridge.nsRectifyEndTime == nil)
+    {
+        NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+        [dateformatter setDateFormat:@"YYYY-MM-dd"];
+        
+        NSDate *  endDate=[NSDate date];
+        bridge.nsRectifyEndTime=[dateformatter stringFromDate:endDate];
+        
+        NSDate* startDate = [[NSDate alloc] init];
+        startDate = [endDate dateByAddingTimeInterval:-60*3600*24];
+        bridge.nsRectifyStartTime =[dateformatter stringFromDate:startDate];
+    }
+    
+    string sStartTime, sEndTime;
+    sStartTime = [bridge.nsRectifyStartTime UTF8String];
+    sEndTime = [bridge.nsRectifyEndTime UTF8String];
+    sEndTime += " 23:59:59";
+    
+    helpParam.add(sStartTime);
+    helpParam.add(sEndTime);
+    strParam = helpParam.get();
+
+    int iResult = _g_db->selectCmd("", sqlcode, strParam, help, strError);
+    return iResult;
+}
+
+- (bool)putRectifyInfo:(NSString *)nsContent picName:(string)sPicName picTime:(NSString *)nsPicTime error:(string &)strError
+{
+    BRIDGE
+    
+    string strParam="";
+    string sqlcode="put_br_recify_info";
+    
+    string sRectifyId = [self getId:SEQ_rectify_id];
+    if( sRectifyId == "" )
+    {
+        strError = "获取整改ID失败";
+        return false;
+    }
+    
+    string sOrgId = [bridge.nsOrgIdSelected UTF8String];
+    string sUserId = [bridge.nsUserId UTF8String];
+    string sBreakRuleId = [bridge.nsRectify_BreakRuleIdSelected UTF8String];
+    string sRectifyContent = [SingletonIce NSStringToGBstring:nsContent];
+    
+    string sPicTime = [nsPicTime UTF8String];
+    string sLongitude = "0";
+    string sLatitude = "0";
+    
+    SelectHelpParam helpParam;
+    helpParam.add(sRectifyId);
+    helpParam.add(sBreakRuleId);
+    helpParam.add(sUserId);
+    helpParam.add(sRectifyContent);
+    helpParam.add(sPicName);
+    helpParam.add(sPicTime);
+    helpParam.add(sPicTime);//UpdateTime
+    helpParam.add(sLongitude);
+    helpParam.add(sLatitude);
+    strParam = helpParam.get();
+    
+    CSelectHelp	help;
+    int iResult = _g_db->execCmd("", sqlcode, strParam, help, strError);
+    if( iResult<0 )
+    {
+        return false;
+    }
+    
+    string sNodeId;
+    util::string_format(sNodeId, "%d", FLOW_NODE_RECTIFY_REVIEW_1);
+    iResult = [self updateFlowNode:sNodeId breakRuleId:sBreakRuleId error:strError];
+    if( iResult<0 )
+    {
+        return false;
+    }
+    
+    return true;
+
+}
 
 @end

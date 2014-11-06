@@ -41,22 +41,19 @@
     {
         return;
     }
-    
-//    string sLoginName = [bridge.nsLoginName UTF8String];
-//    
-//    string strError;
-//    string strParam="";
-//    string sql="select * from T_ORGANIZATION a,T_ORG_TYPE b where org_id in ( select org_id FROM func_query_project( '";
-//    sql += sLoginName;
-//    sql += "') ) and a.org_type_id=b.org_type_id and b.org_type='3'";
 
+    string strError;
     [theLock lock];
-    [oneIce getProject:helpProject loginName:bridge.nsLoginName];
+    int iResult = [oneIce getProject:helpProject user:bridge.nsLoginName error:strError];
     [theLock unlock];
     
+    if( iResult<0 )
+    {
+        [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
+        //        return;
+    }
+    
     [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
-    
-    
 }
 
 - (void)viewDidLoad
@@ -94,10 +91,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     int iRows = helpProject.size();
-    if (iRows == 0) {
-        return 1;
-    }
-    return helpProject.size();
+    return iRows;
 }
 
 //表段头
@@ -113,7 +107,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-//    NSInteger row = [indexPath row];
+    NSInteger row = [indexPath row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
@@ -129,7 +123,7 @@
     }
     else
     {
-        cell.textLabel.text = [SingletonIce valueNSString:helpProject rowForHelp:static_cast<int>(indexPath.row) KeyForHelp:"org_name"];
+        cell.textLabel.text = [SingletonIce valueNSString:helpProject rowForHelp:row KeyForHelp:"org_name"];
     }
 
     return cell;
@@ -141,11 +135,10 @@
     if(row == 0)
     {
     }
+    
     BRIDGE
-    string sContent = helpProject.valueString(static_cast<int>(indexPath.row), "org_id");
-    bridge.nsOrgIdSelected = [NSString stringWithCString:(char*)sContent.c_str() encoding:NSUTF8StringEncoding];
-    sContent = helpProject.valueString(static_cast<int>(indexPath.row), "org_name");
-    bridge.nsOrgNameSelected = [NSString stringWithCString:(char*)sContent.c_str() encoding:NSUTF8StringEncoding];
+    bridge.nsOrgIdSelected = [SingletonIce valueNSString:helpProject rowForHelp:row KeyForHelp:"org_id"];
+    bridge.nsOrgNameSelected = [SingletonIce valueNSString:helpProject rowForHelp:row KeyForHelp:"org_name"];
     
     UIViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MainView"];
 

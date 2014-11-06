@@ -2970,7 +2970,7 @@ int CICEBaseDBUtil::upload(const string& sSrcFile,const string& sRemotePath, Pro
 	}
     
     
-	int iRead = 0;
+	size_t iRead = 0;
     
 	int iCurPos = 0;
     
@@ -2983,7 +2983,7 @@ int CICEBaseDBUtil::upload(const string& sSrcFile,const string& sRemotePath, Pro
 	int iCurRetry = 0;
 	while ((iRead = fread(&bytes[0], 1, iCacheSize, fp)) > 0)
 	{
-		int iWrite = IC_GET_DB->UploadFile(sRemotePath + "/" + sFileName, iCurPos,bytes.size(), bytes);
+		int iWrite = IC_GET_DB->UploadFile(sRemotePath + "/" + sFileName, iCurPos, static_cast<int>(bytes.size()), bytes);
         
 		if (iWrite <= 0)
 		{

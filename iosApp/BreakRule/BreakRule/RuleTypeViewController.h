@@ -1,4 +1,4 @@
-//
+//违规类型选择页
 //  RuleTypeViewController.h
 //  BreakRule
 //

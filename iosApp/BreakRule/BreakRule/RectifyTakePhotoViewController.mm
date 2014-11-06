@@ -38,7 +38,7 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
     
     bool bResult;
     if ( !bFileExits ) {
-        bResult = [oneIce downloadFile:bridge.nsRectify_PicNameSelected];
+        bResult = [oneIce downloadFile:bridge.nsRectify_PicNameSelected Callback:nil DoneCallback:nil];
         
         [actView stopAnimating];
         [actView setHidden:YES];
@@ -195,6 +195,9 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
         NSDictionary *exifData;
         //        __block NSString *nsPhotoData;
         
+        NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+        [dateformatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+        
         //如果是从摄像头拍照来的保存照片到相册
         if(picker.sourceType == UIImagePickerControllerSourceTypeCamera)
         {
@@ -202,7 +205,9 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
             metaData = [info objectForKey:UIImagePickerControllerMediaMetadata];
             exifData = [metaData objectForKey:@"{Exif}"];
             //获取照片时间
-            nsPhotoData = [exifData objectForKey:@"DateTimeOriginal"];
+            NSString* picDate = [exifData objectForKey:@"DateTimeOriginal"];
+            picDate = [picDate stringByReplacingCharactersInRange:NSMakeRange(4, 1) withString:@"-"];
+            nsPhotoData = [picDate stringByReplacingCharactersInRange:NSMakeRange(7, 1) withString:@"-"];
             NSLog(@"相册照片拍照时间=%@", nsPhotoData);
             
             UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
@@ -214,7 +219,9 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
             [library assetForURL:assetURL
                      resultBlock:^(ALAsset *asset) {
                          //                         metaData = [[NSMutableDictionary alloc] initWithDictionary:asset.defaultRepresentation.metadata];
-                         nsPhotoData = [ asset valueForProperty:ALAssetPropertyDate ] ;
+                         NSDate* picDate = [ asset valueForProperty:ALAssetPropertyDate ] ;
+                         nsPhotoData=[dateformatter stringFromDate:picDate];
+                         
                          NSLog(@"拍照时间=%@", nsPhotoData);
                      }
                     failureBlock:^(NSError *error) {
@@ -294,8 +301,8 @@ void ProcessForRectify(string path, double iProgress)
     NSString *filePath = NSTemporaryDirectory();
     
     string sPicName;
-    iResult = oneIce.g_db->command("get_sequence", SEQ_pic_id, sPicName);
-    if( iResult<0 )
+    sPicName = [oneIce getId:SEQ_pic_id];
+    if( sPicName == "" )
     {
         [SingletonBridge MessageBox:"获取照片ID错误" withTitle:"数据库错误"];
         return;
@@ -307,76 +314,23 @@ void ProcessForRectify(string path, double iProgress)
     NSString *nsDesPathName = [filePath stringByAppendingPathComponent:nsPicName];
     
     //保存图片
-    BOOL result = [UIImagePNGRepresentation(rectifyImageView.image)writeToFile: nsDesPathName    atomically:YES];
-    if (result) {
+    BOOL bResult = [UIImagePNGRepresentation(rectifyImageView.image)writeToFile: nsDesPathName    atomically:YES];
+    if (bResult) {
         NSLog(@"success");
     }
     
     string sDesPathName = [nsDesPathName UTF8String];
     
-    iResult = oneIce.g_db->upload(sDesPathName, "", ProcessForRectify, ProcessFinishedForRectify);
+    iResult = oneIce.g_db->upload(sDesPathName, REMOTE_PIC_PATH, ProcessForRectify, ProcessFinishedForRectify);
     if( iResult<0 )
     {
         [SingletonBridge MessageBox:"上传照片错误" withTitle:"传输错误"];
         return;
     }
     
-    NSDate *  senddate=[NSDate date];
-    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
-    [dateformatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
-    NSString *  nsTime=[dateformatter stringFromDate:senddate];
-    
     string strError;
-    string strParam="";
-    string sqlcode="put_br_recify_info";
-    
-    string sRectifyId = "";
-    iResult = oneIce.g_db->command("get_sequence", SEQ_rectify_id, sRectifyId);
-    if( iResult<0 )
-    {
-        [SingletonBridge MessageBox:"获取整改ID错误" withTitle:"数据库错误"];
-        return;
-    }
-    
-    string sOrgId = [bridge.nsOrgIdSelected UTF8String];
-    string sUserId = [bridge.nsUserId UTF8String];
-    string sBreakRuleId = [bridge.nsRectify_BreakRuleIdSelected UTF8String];
-    string sRectifyContent = [SingletonIce NSStringToGBstring:rectifyTextView.text];
-    
-    string sPicTime = [nsTime UTF8String];//[nsPhotoData UTF8String];//时间不能正确获取？？
-    string sUpdateTime = [nsTime UTF8String];
-    string sLongitude = "0";
-    string sLatitude = "0";
-    
-    SelectHelpParam helpParam;
-    helpParam.add(sRectifyId);
-    helpParam.add(sBreakRuleId);
-    helpParam.add(sUserId);
-    helpParam.add(sRectifyContent);
-    helpParam.add(sPicName);
-    helpParam.add(sPicTime);
-    helpParam.add(sUpdateTime);
-    helpParam.add(sLongitude);
-    helpParam.add(sLatitude);
-    strParam = helpParam.get();
-    
-    CSelectHelp	help;
-    oneIce.g_db->execCmd("", sqlcode, strParam, help, strError);
-    if( iResult<0 )
-    {
-        [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
-        return;
-    }
-    
-    string sNodeId;
-    sqlcode = "update_break_law_node";
-    SelectHelpParam helpParamNode;
-    util::string_format(sNodeId, "%d", FLOW_NODE_RECTIFY_REVIEW_1);
-    helpParamNode.add(sNodeId);
-    helpParamNode.add(sBreakRuleId);
-    strParam = helpParamNode.get();
-    iResult = oneIce.g_db->execCmd("", sqlcode, strParam, help, strError);
-    if( iResult<0 )
+    bResult = [oneIce putRectifyInfo:rectifyTextView.text picName:sPicName picTime:nsPhotoData error:strError];
+    if( !bResult )
     {
         [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
         return;

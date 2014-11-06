@@ -30,6 +30,7 @@
     IBOutlet UIProgressView *progressView;
     double fProgress;
 }
+
 - (IBAction)back:(id)sender;
 - (IBAction)fromPhotosAlbum:(id)sender;
 - (IBAction)fromCamera:(id)sender;

@@ -88,6 +88,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
+    NSInteger row = [indexPath row];
     
     CustomViewCell *cell = (CustomViewCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
@@ -101,10 +102,10 @@
     }
     
     //定制单元格
-    cell.titleLabel.text = [SingletonIce valueNSString:helpInfo rowForHelp:static_cast<int>(indexPath.row) KeyForHelp:"org_name"];
-    cell.descLabel.text = [SingletonIce valueNSString:helpInfo rowForHelp:static_cast<int>(indexPath.row) KeyForHelp:"break_rule_content"];
+    cell.titleLabel.text = [SingletonIce valueNSString:helpInfo rowForHelp:row KeyForHelp:"org_name"];
+    cell.descLabel.text = [SingletonIce valueNSString:helpInfo rowForHelp:row KeyForHelp:"break_rule_content"];
     
-    NSString *nsTime = [SingletonIce valueNSString:helpInfo rowForHelp:static_cast<int>(indexPath.row) KeyForHelp:"update_time"];
+    NSString *nsTime = [SingletonIce valueNSString:helpInfo rowForHelp:row KeyForHelp:"update_time"];
     NSString *nsSubTime = [nsTime substringWithRange:NSMakeRange(2, 14)];
     cell.timeLabel.text = nsSubTime;
 
@@ -130,51 +131,12 @@
 
 - (void)queryDb
 {
-    BRIDGE
     ONEICE
     
     string strError;
-    string strParam="";
-    string sqlcode="get_break_main_reform_notfull";
-    SelectHelpParam helpParam;
-    
-    if ([bridge.nsRuleTypeForRectify isEqualToString:@"全部"])
-    {
-        sqlcode = "get_break_main_reform";
-    }
-    else
-    {
-        string sRuleType = [SingletonBridge getBreakRuleTypeByName:bridge.nsRuleTypeForRectify];
-        helpParam.add(sRuleType);
-    }
-    
-    if (bridge.nsRectifyStartTime == nil || bridge.nsRectifyEndTime == nil)
-    {
-        NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
-        [dateformatter setDateFormat:@"YYYY-MM-dd"];
-        
-        NSDate *  endDate=[NSDate date];
-        bridge.nsRectifyEndTime=[dateformatter stringFromDate:endDate];
-        
-        NSDate* startDate = [[NSDate alloc] init];
-        startDate = [endDate dateByAddingTimeInterval:-60*3600*24];
-        bridge.nsRectifyStartTime =[dateformatter stringFromDate:startDate];
-    }
-    
-    string sStartTime, sEndTime;
-    sStartTime = [bridge.nsRectifyStartTime UTF8String];
-    sEndTime = [bridge.nsRectifyEndTime UTF8String];
-    sEndTime += " 23:59:59";
-    
-    helpParam.add(sStartTime);
-    helpParam.add(sEndTime);
-    strParam = helpParam.get();
-    
     [theLock lock];
-    int iResult = oneIce.g_db->selectCmd("", sqlcode, strParam, helpInfo, strError);
+    int iResult = [oneIce getRectify:helpInfo error:strError];
     [theLock unlock];
-    
-    
     
     if( iResult<0 )
     {

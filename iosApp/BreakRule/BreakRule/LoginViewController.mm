@@ -65,27 +65,23 @@ string getIPWithHostName(string hostName)
 
 - (void)dbHandleThread:(NSString *) param
 {
-    NSString *server = serverIpField.text;
-    string sServer = [server UTF8String];
+    NSString *nsServer = serverIpField.text;
+    NSString *nsUser = userField.text;
+    NSString *nsPwd = pwdField.text;
     
-    NSString *user = userField.text;
-    string sUser = [user UTF8String];
-    
-    NSString *pwd = pwdField.text;
-    string sPwd = [pwd UTF8String];
-    
-    if( sServer.empty() )
+    if( [nsServer length] == 0 )
     {
         [SingletonBridge MessageBox:@"请输入服务器域名或IP地址"];
         return;
     }
-    if( sUser.empty() || sPwd.empty() )
+    if( [nsUser length] == 0 || [nsPwd length] == 0 )
     {
         [SingletonBridge MessageBox:@"请输入用户名和密码"];
         return;
     }
     
     string sIp;
+    string sServer = [nsServer UTF8String];
     if ( !util::isIp( sServer.c_str() ) )
     {
         sIp = getIPWithHostName(sServer);
@@ -95,10 +91,8 @@ string getIPWithHostName(string hostName)
         sIp = sServer;
     }
     
-    //    sIp = "192.168.3.109";
-    
     ONEICE
-    oneIce.g_db->setServer(sIp.c_str(), 8840);
+    oneIce.g_db->setServer(sIp.c_str(), CENT_PORT);
     
     if( !oneIce.g_db->isLogin() )
     {
@@ -112,49 +106,32 @@ string getIPWithHostName(string hostName)
         NSLog(@"数据库连接成功！");
     }
     
-	string strError;
-    string strParam="";
-    const string sqlcode="login_check";
+    string sError;
+    bool bResult = [oneIce loginCheck:nsUser passWord:nsPwd error:sError];
     
-    SelectHelpParam helpParam;
-    helpParam.add(sUser);
-    helpParam.add(sPwd);
-    strParam = helpParam.get();
-    
-    int iResult;
-    CSelectHelp	helpUser;
-    iResult = oneIce.g_db->selectCmd("", sqlcode, strParam, helpUser, strError);
-    if( iResult<0 )
+    if( !bResult )
     {
-        [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
+        [SingletonBridge MessageBox:sError withTitle:"登录错误"];
         [actView stopAnimating];
         return;
     }
-    
-    if( helpUser.size() <= 0 )
-    {
-        [SingletonBridge MessageBox:@"用户名或者密码错误"];
-        [actView stopAnimating];
-        return;
-    }
+
     NSLog(@"用户登录成功！");
     
-    BRIDGE
-    iResult = oneIce.g_db->selectCmd("", "get_user_info", sUser, helpUser, strError);
-    if( iResult<0 )
+    CSelectHelp helpUser;
+    bResult = [oneIce getUserInfo:helpUser user:nsUser error:sError];
+    if( !bResult )
     {
-        [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
+        [SingletonBridge MessageBox:sError withTitle:"错误"];
         [actView stopAnimating];
         return;
     }
     
+    BRIDGE
+    
     if (helpUser.size()>0) {
-        string sOrgId = helpUser.valueString( 0, "org_id" );
-        char *temp =const_cast<char*>(sOrgId.c_str());
-        
-        bridge.nsOrgId = [NSString stringWithCString:temp encoding:NSASCIIStringEncoding];
-        
-        bridge.nsUserId = [NSString stringWithCString:const_cast<char*>(helpUser.valueString( 0, "user_id" ).c_str()) encoding:NSASCIIStringEncoding];
+        bridge.nsOrgId = [SingletonIce valueNSString:helpUser rowForHelp:0 KeyForHelp:"org_id"];
+        bridge.nsUserId = [SingletonIce valueNSString:helpUser rowForHelp:0 KeyForHelp:"user_id"];
         bridge.nsLoginName = userField.text;
         
         NSLog(@"组织ID：%@", bridge.nsOrgId);
@@ -162,10 +139,10 @@ string getIPWithHostName(string hostName)
     }
     
     CSelectHelp	helpRight;
-    iResult = oneIce.g_db->selectCmd("", "get_right", sUser, helpRight, strError);
-    if( iResult<0 )
+    bResult = [oneIce getUserInfo:helpRight user:nsUser error:sError];
+    if( !bResult )
     {
-        [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
+        [SingletonBridge MessageBox:sError withTitle:"错误"];
         [actView stopAnimating];
         return;
     }
@@ -312,11 +289,6 @@ string getIPWithHostName(string hostName)
 
 - (void)performSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
-}
-
--(void)changeViewController
-{
-    [self performSegueWithIdentifier:@"ToFirstViewController" sender:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated

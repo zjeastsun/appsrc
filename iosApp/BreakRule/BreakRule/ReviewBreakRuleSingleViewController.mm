@@ -67,13 +67,7 @@
     ONEICE
 
     string strError;
-    string strParam="";
-    string sqlcode="get_br_review";
-    SelectHelpParam helpParam;
-    
-    string sId = [bridge.nsReviewBR_BreakRuleIdSelected UTF8String];
-    
-    int iResult = oneIce.g_db->selectCmd("", sqlcode, sId, helpInfo, strError);
+    int iResult = [oneIce getBreakRule:helpInfo error:strError];
     if( iResult<0 )
     {
         [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
@@ -84,7 +78,7 @@
     
     bool bResult;
     if ( !bFileExits ) {
-        bResult = [oneIce downloadFile:bridge.nsReviewBR_PicNameSelected];
+        bResult = [oneIce downloadFile:bridge.nsReviewBR_PicNameSelected Callback:nil DoneCallback:nil];
         
         [actView stopAnimating];
         [actView setHidden:YES];
@@ -222,25 +216,25 @@
         case FLOW_NODE_BR_REVIEW_1:
         {
             sReview_grade = "1";
-            sReviewContent = [SingletonIce NSStringToGBstring:reviewContent1TextView.text];
+            nsReviewContent = reviewContent1TextView.text;
             break;
         }
         case FLOW_NODE_BR_REVIEW_2:
         {
             sReview_grade = "2";
-            sReviewContent = [SingletonIce NSStringToGBstring:reviewContent2TextView.text];
+            nsReviewContent = reviewContent2TextView.text;
             break;
         }
         case FLOW_NODE_BR_REVIEW_3:
         {
             sReview_grade = "3";
-            sReviewContent = [SingletonIce NSStringToGBstring:reviewContent3TextView.text];
+            nsReviewContent = reviewContent3TextView.text;
             break;
         }
         case FLOW_NODE_BR_REVIEW_4:
         {
             sReview_grade = "4";
-            sReviewContent = [SingletonIce NSStringToGBstring:reviewContent4TextView.text];
+            nsReviewContent = reviewContent4TextView.text;
             break;
         }
             
@@ -256,41 +250,9 @@
     BRIDGE
     
     string strError;
-    string strParam="";
-    string sqlcode="put_br_review";
-    
-    string sReviewId = "";
-    oneIce.g_db->command("get_sequence", SEQ_review_id, sReviewId);
-    
-    string sBreakRuleId = [bridge.nsReviewBR_BreakRuleIdSelected UTF8String];
-    string sUserId = [bridge.nsUserId UTF8String];
-    string sRectifyId = "0";
-    
-    SelectHelpParam helpParam;
-    helpParam.add(sReviewId);
-    helpParam.add(sBreakRuleId);
-    helpParam.add(sUserId);
-    helpParam.add(sReviewContent);
-    helpParam.add(sReview_grade);
-    helpParam.add(sRectifyId);
-    strParam = helpParam.get();
-    
-    int iResult = 0;
-    CSelectHelp	help;
-    iResult = oneIce.g_db->execCmd("", sqlcode, strParam, help, strError);
-    if( iResult<0 )
-    {
-        [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
-        return;
-    }
-    
-    sqlcode = "update_break_law_node";
-    SelectHelpParam helpParamNode;
-    helpParamNode.add(sNextNodeId);
-    helpParamNode.add(sBreakRuleId);
-    strParam = helpParamNode.get();
-    iResult = oneIce.g_db->execCmd("", sqlcode, strParam, help, strError);
-    if( iResult<0 )
+   
+    bool bResult = [oneIce putBRReview:nsReviewContent grade:sReview_grade nextNodeId:sNextNodeId error:strError];
+    if( !bResult )
     {
         [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
         return;
@@ -303,7 +265,7 @@
     
      [self getReviewInfo];
     
-    if ( sReviewContent == "") {
+    if ( [nsReviewContent length] == 0) {
         [SingletonBridge MessageBox:"请输入批阅内容！" withTitle:"错误"];
         return;
     }

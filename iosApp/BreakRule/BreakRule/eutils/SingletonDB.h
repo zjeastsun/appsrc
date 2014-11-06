@@ -11,7 +11,10 @@
 
 + (SingletonDB *)sharedInstance;
 - (void)unInit;
+
+/**将工程中的数据库文件复制到沙盒中,只在程序第一次运行时执行*/
 + (void)moveDbToSandBox;
+
 - (void)loginDb;
 
 @end

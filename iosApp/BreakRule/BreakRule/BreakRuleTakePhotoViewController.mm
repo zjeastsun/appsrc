@@ -176,9 +176,6 @@ BreakRuleTakePhotoViewController *pBR;
         {
             cell.detailTextLabel.text = bridge.nsRuleType;
         }
-        
-        string sRuleType = [SingletonBridge getBreakRuleTypeByName:cell.detailTextLabel.text];
-        nsBreakRuleType = [NSString stringWithFormat:@"%s", sRuleType.c_str()];
  
     }
     else
@@ -273,6 +270,9 @@ BreakRuleTakePhotoViewController *pBR;
         NSDictionary *exifData;
 //        __block NSString *nsPhotoData;
         
+        NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+        [dateformatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+        
         //如果是从摄像头拍照来的保存照片到相册
         if(picker.sourceType == UIImagePickerControllerSourceTypeCamera)
         {
@@ -280,7 +280,9 @@ BreakRuleTakePhotoViewController *pBR;
             metaData = [info objectForKey:UIImagePickerControllerMediaMetadata];
             exifData = [metaData objectForKey:@"{Exif}"];
             //获取照片时间
-            nsPhotoData = [exifData objectForKey:@"DateTimeOriginal"];
+            NSString* picDate = [exifData objectForKey:@"DateTimeOriginal"];
+            picDate = [picDate stringByReplacingCharactersInRange:NSMakeRange(4, 1) withString:@"-"];
+            nsPhotoData=[picDate stringByReplacingCharactersInRange:NSMakeRange(7, 1) withString:@"-"];
             NSLog(@"相册照片拍照时间=%@", nsPhotoData);
             
             UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
@@ -292,7 +294,8 @@ BreakRuleTakePhotoViewController *pBR;
             [library assetForURL:assetURL
                      resultBlock:^(ALAsset *asset) {
 //                         metaData = [[NSMutableDictionary alloc] initWithDictionary:asset.defaultRepresentation.metadata];
-                         nsPhotoData = [ asset valueForProperty:ALAssetPropertyDate ] ;
+                         NSDate* picDate = [ asset valueForProperty:ALAssetPropertyDate ] ;
+                         nsPhotoData=[dateformatter stringFromDate:picDate];
                          NSLog(@"拍照时间=%@", nsPhotoData);
                      }
                     failureBlock:^(NSError *error) {
@@ -374,10 +377,10 @@ void Process(string path, double iProgress)
     //    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     //    NSString *filePath = [paths objectAtIndex:0];
     string sPicName;
-    iResult = oneIce.g_db->command("get_sequence", SEQ_pic_id, sPicName);
-    if( iResult<0 )
+    sPicName = [oneIce getId:SEQ_pic_id];
+    if( sPicName == "" )
     {
-        [SingletonBridge MessageBox:"获取照片ID错误" withTitle:"数据库错误"];
+        [SingletonBridge MessageBox:"获取照片ID失败" withTitle:"数据库错误"];
         return;
     }
     
@@ -387,8 +390,8 @@ void Process(string path, double iProgress)
     NSString *nsDesPathName = [filePath stringByAppendingPathComponent:nsPicName];
     
     //保存图片
-    BOOL result = [UIImagePNGRepresentation(imageView.image)writeToFile: nsDesPathName    atomically:YES];
-    if (result) {
+    BOOL bResult = [UIImagePNGRepresentation(imageView.image)writeToFile: nsDesPathName    atomically:YES];
+    if (bResult) {
         NSLog(@"success");
     }
     
@@ -396,68 +399,28 @@ void Process(string path, double iProgress)
 //    UIImage *img = [UIImage imageWithContentsOfFile:nsDesPathName];
 //    imageView.image = img;
     
-    string sDesPathName = [nsDesPathName UTF8String];
-  
-    iResult = oneIce.g_db->upload(sDesPathName, "", Process, ProcessFinished);
-    if( iResult<0 )
-    {
-        [SingletonBridge MessageBox:"上传照片错误" withTitle:"传输错误"];
-        return;
-    }
-    
-    NSDate *  senddate=[NSDate date];
-    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
-    [dateformatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
-    NSString *  nsTime=[dateformatter stringFromDate:senddate];
+//    NSDate *  senddate=[NSDate date];
+//    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+//    [dateformatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+//    NSString *  nsTime=[dateformatter stringFromDate:senddate];
     
     string strError;
-    string strParam="";
-    const string sqlcode="put_break_law_info";
-
-    string sBreakRuleId = "";
-    iResult = oneIce.g_db->command("get_sequence", SEQ_break_rule_id, sBreakRuleId);
-    if( iResult<0 )
-    {
-        [SingletonBridge MessageBox:"获取违规ID错误" withTitle:"数据库错误"];
-        return;
-    }
-    
-    string sNodeId;
-    util::string_format(sNodeId, "%d", FLOW_NODE_BR_REVIEW_1);
-    string sOrgId = [bridge.nsOrgIdSelected UTF8String];
-    string sUserId = [bridge.nsUserId UTF8String];
-    
-    string sBreakRuleContent = [SingletonIce NSStringToGBstring:contentTextView.text];
-    
-//    string sPicName = "pic.jpg";
-    string sPicTime = [nsTime UTF8String];//[nsPhotoData UTF8String];//时间不能正确获取？？
-    string sBreakRuleType = [nsBreakRuleType UTF8String];
-    string sUpdateTime = [nsTime UTF8String];
-    string sLongitude = "0";
-    string sLatitude = "0";
-    
-    SelectHelpParam helpParam;
-    helpParam.add(sBreakRuleId);
-    helpParam.add(sNodeId);
-    helpParam.add(sOrgId);
-    helpParam.add(sUserId);
-    helpParam.add(sBreakRuleContent);
-    helpParam.add(sPicName);
-    helpParam.add(sPicTime);
-    helpParam.add(sBreakRuleType);
-    helpParam.add(sUpdateTime);
-    helpParam.add(sLongitude);
-    helpParam.add(sLatitude);
-    strParam = helpParam.get();
-    
-    CSelectHelp	help;
-    oneIce.g_db->execCmd("", sqlcode, strParam, help, strError);
-    if( iResult<0 )
+    bResult = [oneIce putBreakRuleInfo:contentTextView.text picName:sPicName picTime:nsPhotoData error:strError];
+    if( !bResult )
     {
         [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
         return;
     }
-
+    
+    string sDesPathName = [nsDesPathName UTF8String];
+    
+    iResult = oneIce.g_db->upload(sDesPathName, REMOTE_PIC_PATH, Process, ProcessFinished);
+    if( iResult<0 )
+    {
+        [SingletonBridge MessageBox:"上传照片失败" withTitle:"传输错误"];
+        return;
+    }
+    
     [self back:nil];
 }
 
