@@ -128,51 +128,12 @@
 
 - (void)queryDb
 {
-    BRIDGE
     ONEICE
     
     string strError;
-    string strParam="";
-    string sqlcode="get_break_last_view_reform";
-    SelectHelpParam helpParam;
-    
-    if ([bridge.nsRuleTypeForReviewRectify isEqualToString:@"全部"])
-    {
-        sqlcode = "get_break_last_view_all_reform";
-    }
-    else
-    {
-        string sRuleType = [SingletonBridge getBreakRuleTypeByName:bridge.nsRuleTypeForReviewRectify];
-        helpParam.add(sRuleType);
-    }
-    
-    if (bridge.nsReviewRectifyStartTime == nil || bridge.nsReviewRectifyEndTime == nil)
-    {
-        NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
-        [dateformatter setDateFormat:@"YYYY-MM-dd"];
-        
-        NSDate *  endDate=[NSDate date];
-        bridge.nsReviewRectifyEndTime=[dateformatter stringFromDate:endDate];
-        
-        NSDate* startDate = [[NSDate alloc] init];
-        startDate = [endDate dateByAddingTimeInterval:-60*3600*24];
-        bridge.nsReviewRectifyStartTime =[dateformatter stringFromDate:startDate];
-    }
-    
-    string sStartTime, sEndTime;
-    sStartTime = [bridge.nsReviewRectifyStartTime UTF8String];
-    sEndTime = [bridge.nsReviewRectifyEndTime UTF8String];
-    sEndTime += " 23:59:59";
-    
-    helpParam.add(sStartTime);
-    helpParam.add(sEndTime);
-    strParam = helpParam.get();
-    
     [theLock lock];
-    int iResult = oneIce.g_db->selectCmd("", sqlcode, strParam, helpInfo, strError);
+    int iResult = [oneIce getPreReviewRectify:helpInfo error:strError];
     [theLock unlock];
-    
-
     
     if( iResult<0 )
     {

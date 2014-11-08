@@ -67,7 +67,7 @@
     ONEICE
 
     string strError;
-    int iResult = [oneIce getBreakRule:helpInfo error:strError];
+    int iResult = [oneIce getReviewBreakRuleSingle:helpInfo error:strError];
     if( iResult<0 )
     {
         [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
@@ -75,10 +75,9 @@
     }
     
     bool bFileExits = [SingletonIce fileExistsInTemp:bridge.nsReviewBR_PicNameSelected];
-    
-    bool bResult;
+
     if ( !bFileExits ) {
-        bResult = [oneIce downloadFile:bridge.nsReviewBR_PicNameSelected Callback:nil DoneCallback:nil];
+        bool bResult = [oneIce downloadFile:bridge.nsReviewBR_PicNameSelected Callback:nil DoneCallback:nil];
         
         [actView stopAnimating];
         [actView setHidden:YES];
@@ -247,7 +246,6 @@
 - (void)insertInfoToDb:(NSString *)param
 {
     ONEICE
-    BRIDGE
     
     string strError;
    
@@ -263,7 +261,7 @@
 
 - (IBAction)save:(id)sender {
     
-     [self getReviewInfo];
+    [self getReviewInfo];
     
     if ( [nsReviewContent length] == 0) {
         [SingletonBridge MessageBox:"请输入批阅内容！" withTitle:"错误"];

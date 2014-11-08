@@ -68,14 +68,9 @@
     ONEICE
     
     string strError;
-    string strParam="";
-    string sqlcode="get_br_review_reform";
-    SelectHelpParam helpParam;
-    
-    string sId = [bridge.nsReviewRectify_BreakRuleIdSelected UTF8String];
     
     int iResult;
-    iResult = oneIce.g_db->selectCmd("", sqlcode, sId, helpInfo, strError);
+    iResult = [oneIce getReviewRectifySingle:helpInfo error:strError];
     if( iResult<0 )
     {
         [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
@@ -118,29 +113,19 @@
     ONEICE
     
     string strError;
-    string strParam="";
-    string sqlcode="get_br_rectify_info";
-    SelectHelpParam helpParam;
     
-    string sId = [bridge.nsReviewRectify_BreakRuleIdSelected UTF8String];
-    
-    int iResult;
-    bool bResult;
-    
-    iResult = oneIce.g_db->selectCmd("", sqlcode, sId, helpRectifyInfo, strError);
+    int iResult = [oneIce getRectifySingle:helpRectifyInfo breakRuleId:bridge.nsReviewRectify_BreakRuleIdSelected error:strError];
     if( iResult<0 )
     {
         [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
         return;
     }
     
-    
-    
     NSString *nsRectifyPicName = [SingletonIce valueNSString:helpRectifyInfo rowForHelp:0 KeyForHelp:"pic_name"];
     bool bFileExits = [SingletonIce fileExistsInTemp:nsRectifyPicName];
     
     if ( !bFileExits ) {
-        bResult = [oneIce downloadFile:nsRectifyPicName Callback:nil DoneCallback:nil];
+        bool bResult = [oneIce downloadFile:nsRectifyPicName Callback:nil DoneCallback:nil];
         
         [rectifyActView stopAnimating];
         [rectifyActView setHidden:YES];
@@ -284,25 +269,25 @@
         case FLOW_NODE_RECTIFY_REVIEW_1:
         {
             sReview_grade = "1";
-            sReviewContent = [SingletonIce NSStringToGBstring:reviewContent1TextView.text];
+            nsReviewContent = reviewContent1TextView.text;
             break;
         }
         case FLOW_NODE_RECTIFY_REVIEW_2:
         {
             sReview_grade = "2";
-            sReviewContent = [SingletonIce NSStringToGBstring:reviewContent2TextView.text];
+            nsReviewContent = reviewContent2TextView.text;
             break;
         }
         case FLOW_NODE_RECTIFY_REVIEW_3:
         {
             sReview_grade = "3";
-            sReviewContent = [SingletonIce NSStringToGBstring:reviewContent3TextView.text];
+            nsReviewContent = reviewContent3TextView.text;
             break;
         }
         case FLOW_NODE_RECTIFY_REVIEW_4:
         {
             sReview_grade = "4";
-            sReviewContent = [SingletonIce NSStringToGBstring:reviewContent4TextView.text];
+            nsReviewContent = reviewContent4TextView.text;
             break;
         }
             
@@ -315,44 +300,13 @@
 - (void)insertInfoToDb:(NSString *)param
 {
     ONEICE
-    BRIDGE
     
     string strError;
-    string strParam="";
-    string sqlcode="put_br_review";
     
-    string sReviewId = "";
-    oneIce.g_db->command("get_sequence", SEQ_review_id, sReviewId);
+    string sRectifyId = helpRectifyInfo.valueString( 0, "rectify_id" );
+    bool bResult = [oneIce putRectifyReview:nsReviewContent grade:sReview_grade nextNodeId:sNextNodeId rectifyId:sRectifyId error:strError];
     
-    string sBreakRuleId = [bridge.nsReviewRectify_BreakRuleIdSelected UTF8String];
-    string sUserId = [bridge.nsUserId UTF8String];
-    string sRectifyId = helpRectifyInfo.valueString( 0, "rectify_id" );;
-    
-    SelectHelpParam helpParam;
-    helpParam.add(sReviewId);
-    helpParam.add(sBreakRuleId);
-    helpParam.add(sUserId);
-    helpParam.add(sReviewContent);
-    helpParam.add(sReview_grade);
-    helpParam.add(sRectifyId);
-    strParam = helpParam.get();
-    
-    int iResult = 0;
-    CSelectHelp	help;
-    iResult = oneIce.g_db->execCmd("", sqlcode, strParam, help, strError);
-    if( iResult<0 )
-    {
-        [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
-        return;
-    }
-    
-    sqlcode = "update_break_law_node";
-    SelectHelpParam helpParamNode;
-    helpParamNode.add(sNextNodeId);
-    helpParamNode.add(sBreakRuleId);
-    strParam = helpParamNode.get();
-    iResult = oneIce.g_db->execCmd("", sqlcode, strParam, help, strError);
-    if( iResult<0 )
+    if( !bResult )
     {
         [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
         return;
@@ -365,7 +319,7 @@
     
     [self getReviewInfo];
     
-    if ( sReviewContent == "") {
+    if ( [nsReviewContent length] == 0) {
         [SingletonBridge MessageBox:"请输入批阅内容！" withTitle:"错误"];
         return;
     }

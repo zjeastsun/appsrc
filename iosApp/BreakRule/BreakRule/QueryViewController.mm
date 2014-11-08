@@ -87,6 +87,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
+    NSInteger row = [indexPath row];
     
     CustomViewCell *cell = (CustomViewCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
@@ -100,10 +101,10 @@
     }
     
     //定制单元格
-    cell.titleLabel.text = [SingletonIce valueNSString:helpInfo rowForHelp:static_cast<int>(indexPath.row) KeyForHelp:"org_name"];
-    cell.descLabel.text = [SingletonIce valueNSString:helpInfo rowForHelp:static_cast<int>(indexPath.row) KeyForHelp:"break_rule_content"];
+    cell.titleLabel.text = [SingletonIce valueNSString:helpInfo rowForHelp:row KeyForHelp:"org_name"];
+    cell.descLabel.text = [SingletonIce valueNSString:helpInfo rowForHelp:row KeyForHelp:"break_rule_content"];
     
-    NSString *nsTime = [SingletonIce valueNSString:helpInfo rowForHelp:static_cast<int>(indexPath.row) KeyForHelp:"update_time"];
+    NSString *nsTime = [SingletonIce valueNSString:helpInfo rowForHelp:row KeyForHelp:"update_time"];
     NSString *nsSubTime = [nsTime substringWithRange:NSMakeRange(2, 14)];
     cell.timeLabel.text = nsSubTime;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -128,51 +129,12 @@
 
 - (void)queryDb
 {
-    BRIDGE
     ONEICE
     
     string strError;
-    string strParam="";
-    string sqlcode="get_all_break_view";
-    SelectHelpParam helpParam;
-    
-    if ([bridge.nsRuleTypeForQuery isEqualToString:@"全部"])
-    {
-        sqlcode = "get_all_break_view_all";
-    }
-    else
-    {
-        string sRuleType = [SingletonBridge getBreakRuleTypeByName:bridge.nsRuleTypeForQuery];
-        helpParam.add(sRuleType);
-    }
-    
-    if (bridge.nsQueryStartTime == nil || bridge.nsQueryEndTime == nil)
-    {
-        NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
-        [dateformatter setDateFormat:@"YYYY-MM-dd"];
-        
-        NSDate *  endDate=[NSDate date];
-        bridge.nsQueryEndTime=[dateformatter stringFromDate:endDate];
-        
-        NSDate* startDate = [[NSDate alloc] init];
-        startDate = [endDate dateByAddingTimeInterval:-60*3600*24];
-        bridge.nsQueryStartTime =[dateformatter stringFromDate:startDate];
-    }
-    
-    string sStartTime, sEndTime;
-    sStartTime = [bridge.nsQueryStartTime UTF8String];
-    sEndTime = [bridge.nsQueryEndTime UTF8String];
-    sEndTime += " 23:59:59";
-    
-    helpParam.add(sStartTime);
-    helpParam.add(sEndTime);
-    strParam = helpParam.get();
-    
     [theLock lock];
-    int iResult = oneIce.g_db->selectCmd("", sqlcode, strParam, helpInfo, strError);
+    int iResult = [oneIce getAllBR:helpInfo error:strError];
     [theLock unlock];
-    
-    
     
     if( iResult<0 )
     {

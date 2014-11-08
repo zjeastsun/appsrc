@@ -1,4 +1,4 @@
-//
+//违规选项选择：自定义、违规行为辨识库、危险源辨识库
 //  RuleOptionViewController.h
 //  BreakRule
 //

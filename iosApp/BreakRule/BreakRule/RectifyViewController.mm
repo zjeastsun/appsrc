@@ -135,7 +135,7 @@
     
     string strError;
     [theLock lock];
-    int iResult = [oneIce getRectify:helpInfo error:strError];
+    int iResult = [oneIce getPreRectify:helpInfo error:strError];
     [theLock unlock];
     
     if( iResult<0 )

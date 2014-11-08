@@ -29,16 +29,25 @@ const string SEQ_review_id = "review_id";
 const string SEQ_pic_id = "pic_id";
 
 @interface SingletonIce : NSObject
+{
+    SingletonBridge *bridge;
+}
 
 @property (nonatomic) CICEDBUtil *g_db;
 
 + (SingletonIce *)sharedInstance;
 - (void)unInit;
 
+#pragma mark -
+#pragma mark 字符串转换
+
 /**从help中获取本地可使用字串，GB_18030_2000－>utf8*/
 + (NSString *)valueNSString:(CSelectHelp)help rowForHelp:(NSInteger)row KeyForHelp:(std::string)key;
 /**utf8->GB_18030_2000string*/
 + (string)NSStringToGBstring:(NSString *)nsString;
+
+#pragma mark -
+#pragma mark 文件处理
 
 /**获取temp目录全路径文件名*/
 + (NSString *)getFullTempPathName:(NSString *)nsFileName;
@@ -47,6 +56,9 @@ const string SEQ_pic_id = "pic_id";
 
 /**从服务器下载文件*/
 - (bool)downloadFile:(NSString *)nsFileName Callback:(ProgressFileCallback)pF DoneCallback:(ProgressFileDoneCallback)pFinished;
+
+#pragma mark -
+#pragma mark 数据库查询函数
 
 //数据库查询函数---------------------------------------------------
 /**登录检查*/
@@ -62,16 +74,25 @@ const string SEQ_pic_id = "pic_id";
 /**增加违规抓拍信息*/
 - (bool)putBreakRuleInfo:(NSString *)nsContent picName:(string)sPicName picTime:(NSString *)nsPicTime error:(string &)strError;
 /**获取待批阅违规信息列表*/
-- (int)getReviewBreakRule:(CSelectHelp &)help error:(string &)strError;
-/**获取单条违规信息*/
-- (int)getBreakRule:(CSelectHelp &)help error:(string &)strError;
+- (int)getPreReviewBreakRule:(CSelectHelp &)help error:(string &)strError;
+/**获取单条违规批阅信息*/
+- (int)getReviewBreakRuleSingle:(CSelectHelp &)help error:(string &)strError;
 /**增加批阅违规*/
 - (bool)putBRReview:(NSString *)nsContent grade:(string)sGrade nextNodeId:(string)sNextNodeId error:(string &)strError;
 /**更新违规表中的流程id*/
 - (int)updateFlowNode:(string)sNodeId breakRuleId:(string)sBreakRuleId error:(string &)strError;
 /**获取待整改抓拍信息列表*/
-- (int)getRectify:(CSelectHelp &)help error:(string &)strError;
+- (int)getPreRectify:(CSelectHelp &)help error:(string &)strError;
 /**增加整改抓拍信息*/
 - (bool)putRectifyInfo:(NSString *)nsContent picName:(string)sPicName picTime:(NSString *)nsPicTime error:(string &)strError;
-
+/**获取待批阅整改信息列表*/
+- (int)getPreReviewRectify:(CSelectHelp &)help error:(string &)strError;
+/**获取单条整改批阅信息*/
+- (int)getReviewRectifySingle:(CSelectHelp &)help error:(string &)strError;
+/**获取单条整改信息*/
+- (int)getRectifySingle:(CSelectHelp &)help breakRuleId:(NSString *)nsId error:(string &)strError;
+/**增加批阅整改*/
+- (bool)putRectifyReview:(NSString *)nsContent grade:(string)sGrade nextNodeId:(string)sNextNodeId rectifyId:(string)sRectifyId error:(string &)strError;
+/**获取综合查询列表*/
+- (int)getAllBR:(CSelectHelp &)help error:(string &)strError;
 @end

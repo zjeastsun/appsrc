@@ -21,6 +21,7 @@
     if (self = [super init]) {
         _g_db = new CICEDBUtil();
         _g_db->setFileCache(409600);
+        bridge = [SingletonBridge sharedInstance];
 
     }
     
@@ -36,6 +37,9 @@
     }
 
 }
+
+#pragma mark -
+#pragma mark 字符串转换
 
 + (NSString *)valueNSString:(CSelectHelp)help rowForHelp:(NSInteger)row KeyForHelp:(std::string)key
 {
@@ -59,6 +63,9 @@
     string sReturn = [nsString cStringUsingEncoding: enc];
     return sReturn;
 }
+
+#pragma mark -
+#pragma mark 文件处理
 
 + (NSString *)getFullTempPathName:(NSString *)nsFileName
 {
@@ -102,6 +109,9 @@
     
     return bResult;
 }
+
+#pragma mark -
+#pragma mark 数据库查询函数
 
 //数据库查询函数------------------------------------------------
 - (bool)loginCheck:(NSString *)nsUser passWord:(NSString *)nsPwd error:(string &)strError
@@ -183,8 +193,6 @@
 
 - (bool)putBreakRuleInfo:(NSString *)nsContent picName:(string)sPicName picTime:(NSString *)nsPicTime error:(string &)strError
 {
-    BRIDGE
-
     string strParam="";
     const string sqlcode="put_break_law_info";
     
@@ -232,10 +240,8 @@
     return true;
 }
 
-- (int)getReviewBreakRule:(CSelectHelp &)help error:(string &)strError
+- (int)getPreReviewBreakRule:(CSelectHelp &)help error:(string &)strError
 {
-    BRIDGE
-    
     string strParam="";
     string sqlcode="get_break_last_view_review";
     SelectHelpParam helpParam;
@@ -277,9 +283,8 @@
     return iResult;
 }
 
-- (int)getBreakRule:(CSelectHelp &)help error:(string &)strError
+- (int)getReviewBreakRuleSingle:(CSelectHelp &)help error:(string &)strError
 {
-    BRIDGE
     string strParam="";
     string sqlcode="get_br_review";
     SelectHelpParam helpParam;
@@ -308,8 +313,6 @@
 
 - (bool)putBRReview:(NSString *)nsContent grade:(string)sGrade nextNodeId:(string)sNextNodeId error:(string &)strError
 {
-    BRIDGE
-    
     string strParam="";
     string sqlcode="put_br_review";
     
@@ -345,9 +348,8 @@
     return true;
 }
 
-- (int)getRectify:(CSelectHelp &)help error:(string &)strError
+- (int)getPreRectify:(CSelectHelp &)help error:(string &)strError
 {
-    BRIDGE
     string strParam="";
     string sqlcode="get_break_main_reform_notfull";
     SelectHelpParam helpParam;
@@ -390,8 +392,6 @@
 
 - (bool)putRectifyInfo:(NSString *)nsContent picName:(string)sPicName picTime:(NSString *)nsPicTime error:(string &)strError
 {
-    BRIDGE
-    
     string strParam="";
     string sqlcode="put_br_recify_info";
     
@@ -440,6 +440,153 @@
     
     return true;
 
+}
+
+- (int)getPreReviewRectify:(CSelectHelp &)help error:(string &)strError
+{
+    string strParam="";
+    string sqlcode="get_break_last_view_reform";
+    SelectHelpParam helpParam;
+    
+    if ([bridge.nsRuleTypeForReviewRectify isEqualToString:@"全部"])
+    {
+        sqlcode = "get_break_last_view_all_reform";
+    }
+    else
+    {
+        string sRuleType = [SingletonBridge getBreakRuleTypeByName:bridge.nsRuleTypeForReviewRectify];
+        helpParam.add(sRuleType);
+    }
+    
+    if (bridge.nsReviewRectifyStartTime == nil || bridge.nsReviewRectifyEndTime == nil)
+    {
+        NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+        [dateformatter setDateFormat:@"YYYY-MM-dd"];
+        
+        NSDate *  endDate=[NSDate date];
+        bridge.nsReviewRectifyEndTime=[dateformatter stringFromDate:endDate];
+        
+        NSDate* startDate = [[NSDate alloc] init];
+        startDate = [endDate dateByAddingTimeInterval:-60*3600*24];
+        bridge.nsReviewRectifyStartTime =[dateformatter stringFromDate:startDate];
+    }
+    
+    string sStartTime, sEndTime;
+    sStartTime = [bridge.nsReviewRectifyStartTime UTF8String];
+    sEndTime = [bridge.nsReviewRectifyEndTime UTF8String];
+    sEndTime += " 23:59:59";
+    
+    helpParam.add(sStartTime);
+    helpParam.add(sEndTime);
+    strParam = helpParam.get();
+    
+    int iResult = _g_db->selectCmd("", sqlcode, strParam, help, strError);
+
+    return iResult;
+}
+
+- (int)getReviewRectifySingle:(CSelectHelp &)help error:(string &)strError
+{
+    string strParam="";
+    string sqlcode="get_br_review_reform";
+    SelectHelpParam helpParam;
+    
+    string sId = [bridge.nsReviewRectify_BreakRuleIdSelected UTF8String];
+    
+    int iResult;
+    iResult = _g_db->selectCmd("", sqlcode, sId, help, strError);
+    return iResult;
+}
+
+- (int)getRectifySingle:(CSelectHelp &)help breakRuleId:(NSString *)nsId error:(string &)strError
+{
+    string strParam="";
+    string sqlcode="get_br_rectify_info";
+    SelectHelpParam helpParam;
+    
+    string sId = [nsId UTF8String];
+    
+    int iResult;
+    
+    iResult = _g_db->selectCmd("", sqlcode, sId, help, strError);
+    return iResult;
+}
+
+- (bool)putRectifyReview:(NSString *)nsContent grade:(string)sGrade nextNodeId:(string)sNextNodeId rectifyId:(string)sRectifyId error:(string &)strError
+{
+    string strParam="";
+    string sqlcode="put_br_review";
+    
+    string sReviewId = [self getId:SEQ_review_id];
+    
+    string sBreakRuleId = [bridge.nsReviewRectify_BreakRuleIdSelected UTF8String];
+    string sUserId = [bridge.nsUserId UTF8String];
+    string sContent = [SingletonIce NSStringToGBstring:nsContent];
+    
+    SelectHelpParam helpParam;
+    helpParam.add(sReviewId);
+    helpParam.add(sBreakRuleId);
+    helpParam.add(sUserId);
+    helpParam.add(sContent);
+    helpParam.add(sGrade);
+    helpParam.add(sRectifyId);
+    strParam = helpParam.get();
+    
+    int iResult = 0;
+    CSelectHelp	help;
+    iResult = _g_db->execCmd("", sqlcode, strParam, help, strError);
+    if( iResult<0 )
+    {
+        return false;
+    }
+    
+    iResult = [self updateFlowNode:sNextNodeId breakRuleId:sBreakRuleId error:strError];
+    if( iResult<0 )
+    {
+        return false;
+    }
+    return true;
+}
+- (int)getAllBR:(CSelectHelp &)help error:(string &)strError
+{
+    string strParam="";
+    string sqlcode="get_all_break_view";
+    SelectHelpParam helpParam;
+    
+    if ([bridge.nsRuleTypeForQuery isEqualToString:@"全部"])
+    {
+        sqlcode = "get_all_break_view_all";
+    }
+    else
+    {
+        string sRuleType = [SingletonBridge getBreakRuleTypeByName:bridge.nsRuleTypeForQuery];
+        helpParam.add(sRuleType);
+    }
+    
+    if (bridge.nsQueryStartTime == nil || bridge.nsQueryEndTime == nil)
+    {
+        NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+        [dateformatter setDateFormat:@"YYYY-MM-dd"];
+        
+        NSDate *  endDate=[NSDate date];
+        bridge.nsQueryEndTime=[dateformatter stringFromDate:endDate];
+        
+        NSDate* startDate = [[NSDate alloc] init];
+        startDate = [endDate dateByAddingTimeInterval:-60*3600*24];
+        bridge.nsQueryStartTime =[dateformatter stringFromDate:startDate];
+    }
+    
+    string sStartTime, sEndTime;
+    sStartTime = [bridge.nsQueryStartTime UTF8String];
+    sEndTime = [bridge.nsQueryEndTime UTF8String];
+    sEndTime += " 23:59:59";
+    
+    helpParam.add(sStartTime);
+    helpParam.add(sEndTime);
+    strParam = helpParam.get();
+
+    int iResult = _g_db->selectCmd("", sqlcode, strParam, help, strError);
+    return iResult;
 }
 
 @end

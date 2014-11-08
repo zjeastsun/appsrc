@@ -1,4 +1,4 @@
-//
+//检查项目选择
 //  CheckItemViewController.h
 //  BreakRule
 //

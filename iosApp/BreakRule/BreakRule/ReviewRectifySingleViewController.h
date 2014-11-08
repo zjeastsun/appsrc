@@ -38,7 +38,7 @@
     
     string sCurFlowNode;
     string sReview_grade;
-    string sReviewContent;
+    NSString *nsReviewContent;
     string sNextNodeId;
     
     UITextView *textViewSelected;

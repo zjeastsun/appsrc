@@ -92,7 +92,7 @@
 
     BRIDGE
     
-    if( [bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewBreakRuleSingleViewController"] )
+    if( [bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewBreakRuleSingleViewController"] || [bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewBreakRuleSingleViewControllerForHighest"])
     {
         if ([cell.textLabel.text isEqualToString:bridge.nsReviewStateBR]) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -102,7 +102,7 @@
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
     }
-    else if([bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewRectifySingleViewController"])
+    else if([bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewRectifySingleViewController"] || [bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewRectifySingleViewControllerForHighest"])
     {
         if ([cell.textLabel.text isEqualToString:bridge.nsReviewStateRectify]) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -136,11 +136,11 @@
     }
     
     BRIDGE
-    if( [bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewBreakRuleSingleViewController"] )
+    if( [bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewBreakRuleSingleViewController"] || [bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewBreakRuleSingleViewControllerForHighest"])
     {
         bridge.nsReviewStateBR = [title objectAtIndex:indexPath.row];
     }
-    else if([bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewRectifySingleViewController"])
+    else if([bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewRectifySingleViewController"] || [bridge.nsWhoUseReviewStateViewController isEqualToString:@"ReviewRectifySingleViewControllerForHighest"])
     {
         bridge.nsReviewStateRectify = [title objectAtIndex:indexPath.row];
     }

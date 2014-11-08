@@ -135,7 +135,7 @@
     string strError;
     
     [theLock lock];
-    int iResult = [oneIce getReviewBreakRule:helpInfo error:strError];
+    int iResult = [oneIce getPreReviewBreakRule:helpInfo error:strError];
     [theLock unlock];
     
     if( iResult<0 )

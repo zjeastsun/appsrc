@@ -114,16 +114,8 @@
     ONEICE
     
     string strError;
-    string strParam="";
-    string sqlcode="get_br_rectify_info";
-    SelectHelpParam helpParam;
     
-    string sId = [bridge.nsQuery_BreakRuleIdSelected UTF8String];
-    
-    int iResult;
-    bool bResult;
-    
-    iResult = oneIce.g_db->selectCmd("", sqlcode, sId, helpRectifyInfo, strError);
+    int iResult = [oneIce getRectifySingle:helpRectifyInfo breakRuleId:bridge.nsQuery_BreakRuleIdSelected error:strError];
     if( iResult<0 )
     {
         [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
@@ -134,7 +126,7 @@
     bool bFileExits = [SingletonIce fileExistsInTemp:nsRectifyPicName];
     
     if ( !bFileExits ) {
-        bResult = [oneIce downloadFile:nsRectifyPicName Callback:nil DoneCallback:nil];
+        bool bResult = [oneIce downloadFile:nsRectifyPicName Callback:nil DoneCallback:nil];
         
         [rectifyActView stopAnimating];
         [rectifyActView setHidden:YES];

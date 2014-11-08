@@ -28,7 +28,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    title = [[NSMutableArray alloc]initWithObjects:@"全部项目", @"一般项目", @"其他项目", @"保护项目", nil];
+    title = [[NSMutableArray alloc]initWithObjects:@"全部项目", @"一般项目", @"保证项目", @"其他项目",  nil];
 }
 
 - (void)didReceiveMemoryWarning
