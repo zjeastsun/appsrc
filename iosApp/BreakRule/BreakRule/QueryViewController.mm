@@ -9,6 +9,7 @@
 #import "QueryViewController.h"
 #import "CustomViewCell.h"
 #import "SingletonBridge.h"
+#import "IosUtils.h"
 
 @interface QueryViewController ()
 
@@ -138,7 +139,7 @@
     
     if( iResult<0 )
     {
-        [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
+        [IosUtils MessageBox:strError withTitle:"数据库错误"];
         //        return;
     }
     

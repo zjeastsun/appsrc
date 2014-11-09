@@ -29,12 +29,15 @@
 		0448783B19CC70FB0086CE1B /* BreakRuleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0448783A19CC70FB0086CE1B /* BreakRuleTests.m */; };
 		0458F3B319EC93F00022BC96 /* Eutils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0458F3B219EC93F00022BC96 /* Eutils.mm */; };
 		045D8A9F19CF899B00D8C6DA /* ProjectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 045D8A9E19CF899B00D8C6DA /* ProjectViewController.mm */; };
+		04625FCC1A0E8AD2000F71D9 /* Location.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04625FCB1A0E8AD2000F71D9 /* Location.mm */; };
+		04625FCE1A0E9EA5000F71D9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04625FCD1A0E9EA5000F71D9 /* CoreLocation.framework */; };
 		04635CD519CE50490084822D /* StringConverterI.mm in Sources */ = {isa = PBXBuildFile; fileRef = 046C937F19CDE54A008221FD /* StringConverterI.mm */; };
 		0463A73F19DD6B5D003D966B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0463A73E19DD6B5D003D966B /* libsqlite3.dylib */; };
 		046C338619FC45F200B99A92 /* ReviewBreakRuleSingleViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 046C338519FC45F200B99A92 /* ReviewBreakRuleSingleViewController.mm */; };
 		046C938019CDE54A008221FD /* StringConverterI.mm in Resources */ = {isa = PBXBuildFile; fileRef = 046C937F19CDE54A008221FD /* StringConverterI.mm */; };
 		047167FF19CF3D9500A81F9B /* SetViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047167FE19CF3D9500A81F9B /* SetViewController.mm */; };
 		0471680219CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0471680119CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm */; };
+		0472C4E11A0F66F6000C0508 /* IosUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0472C4E01A0F66F6000C0508 /* IosUtils.mm */; };
 		047786A31A06450C0033C8B4 /* LoadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047786A21A06450C0033C8B4 /* LoadView.xib */; };
 		047786A61A0645600033C8B4 /* LoadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047786A51A0645600033C8B4 /* LoadView.m */; };
 		047786AB1A06BEA30033C8B4 /* RectifyTakePhotoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047786AA1A06BEA30033C8B4 /* RectifyTakePhotoViewController.mm */; };
@@ -123,6 +126,9 @@
 		0458F3B119EC93F00022BC96 /* Eutils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Eutils.h; path = BreakRule/eutils/Eutils.h; sourceTree = "<group>"; };
 		0458F3B219EC93F00022BC96 /* Eutils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Eutils.mm; path = BreakRule/eutils/Eutils.mm; sourceTree = "<group>"; };
 		045D8A9E19CF899B00D8C6DA /* ProjectViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ProjectViewController.mm; sourceTree = "<group>"; };
+		04625FCA1A0E8AC5000F71D9 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		04625FCB1A0E8AD2000F71D9 /* Location.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Location.mm; sourceTree = "<group>"; };
+		04625FCD1A0E9EA5000F71D9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0463A73E19DD6B5D003D966B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		046C338419FC45F200B99A92 /* ReviewBreakRuleSingleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewBreakRuleSingleViewController.h; sourceTree = "<group>"; };
 		046C338519FC45F200B99A92 /* ReviewBreakRuleSingleViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ReviewBreakRuleSingleViewController.mm; sourceTree = "<group>"; };
@@ -132,6 +138,9 @@
 		047167FE19CF3D9500A81F9B /* SetViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SetViewController.mm; sourceTree = "<group>"; };
 		0471680019CF678B00A81F9B /* BreakRuleTakePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BreakRuleTakePhotoViewController.h; sourceTree = "<group>"; };
 		0471680119CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BreakRuleTakePhotoViewController.mm; sourceTree = "<group>"; };
+		0472C4DE1A0F6497000C0508 /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
+		0472C4DF1A0F667C000C0508 /* IosUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IosUtils.h; sourceTree = "<group>"; };
+		0472C4E01A0F66F6000C0508 /* IosUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IosUtils.mm; sourceTree = "<group>"; };
 		047786A21A06450C0033C8B4 /* LoadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadView.xib; sourceTree = "<group>"; };
 		047786A41A0645600033C8B4 /* LoadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadView.h; sourceTree = "<group>"; };
 		047786A51A0645600033C8B4 /* LoadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadView.m; sourceTree = "<group>"; };
@@ -206,6 +215,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04625FCE1A0E9EA5000F71D9 /* CoreLocation.framework in Frameworks */,
 				0463A73F19DD6B5D003D966B /* libsqlite3.dylib in Frameworks */,
 				0410892819D738D100BB3D66 /* AssetsLibrary.framework in Frameworks */,
 				048F599719D62E4C009BA27B /* ImageIO.framework in Frameworks */,
@@ -249,6 +259,11 @@
 				046C937F19CDE54A008221FD /* StringConverterI.mm */,
 				049104B319D8AD3E004E052B /* SJAvatarBrowser.h */,
 				049104B419D8AD74004E052B /* SJAvatarBrowser.mm */,
+				04625FCA1A0E8AC5000F71D9 /* Location.h */,
+				04625FCB1A0E8AD2000F71D9 /* Location.mm */,
+				0472C4DE1A0F6497000C0508 /* Global.h */,
+				0472C4DF1A0F667C000C0508 /* IosUtils.h */,
+				0472C4E01A0F66F6000C0508 /* IosUtils.mm */,
 			);
 			name = eutils;
 			sourceTree = "<group>";
@@ -277,6 +292,7 @@
 		0448780B19CC70FB0086CE1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04625FCD1A0E9EA5000F71D9 /* CoreLocation.framework */,
 				0463A73E19DD6B5D003D966B /* libsqlite3.dylib */,
 				0410892719D738D100BB3D66 /* AssetsLibrary.framework */,
 				048F599619D62E4C009BA27B /* ImageIO.framework */,
@@ -615,6 +631,7 @@
 				048BC7F21A092E2800168F1A /* ReviewRectifySingleViewController.mm in Sources */,
 				04998F7719D3812300CECB16 /* RectifyViewController.mm in Sources */,
 				04998F7A19D38DF200CECB16 /* MainViewController.m in Sources */,
+				0472C4E11A0F66F6000C0508 /* IosUtils.mm in Sources */,
 				040B0A6819D23A5A00D83461 /* AppDelegate.mm in Sources */,
 				0477AE5519F01C4B0088E875 /* ReviewBreakRuleViewController.mm in Sources */,
 				0478B47519D4BCC40077EDBA /* QueryViewController.mm in Sources */,
@@ -622,6 +639,7 @@
 				048E0BE419E8278C004CAF24 /* HazardTypeViewController.mm in Sources */,
 				049104BB19D8CAF8004E052B /* RuleOptionViewController.mm in Sources */,
 				04034A811A08D04A00D8B634 /* ReviewRectifyViewController.mm in Sources */,
+				04625FCC1A0E8AD2000F71D9 /* Location.mm in Sources */,
 				0478794C19DA179B00555F0D /* HazardItemViewController.mm in Sources */,
 				0431F19D19CC759D00F1718A /* mq_interface.ice in Sources */,
 				049104B819D8C829004E052B /* RuleTypeViewController.mm in Sources */,

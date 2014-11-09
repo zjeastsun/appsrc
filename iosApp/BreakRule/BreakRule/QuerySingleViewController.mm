@@ -8,6 +8,7 @@
 
 #import "QuerySingleViewController.h"
 #import "SingletonBridge.h"
+#import "IosUtils.h"
 
 @interface QuerySingleViewController ()
 
@@ -91,7 +92,7 @@
         [actView setHidden:YES];
         
         if (!bResult) {
-            [SingletonBridge MessageBox:@"违规图片下载失败！"];
+            [IosUtils MessageBox:@"违规图片下载失败！"];
             return;
         }
     }
@@ -118,7 +119,7 @@
     int iResult = [oneIce getRectifySingle:helpRectifyInfo breakRuleId:bridge.nsQuery_BreakRuleIdSelected error:strError];
     if( iResult<0 )
     {
-        [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
+        [IosUtils MessageBox:strError withTitle:"数据库错误"];
         return;
     }
     
@@ -132,7 +133,7 @@
         [rectifyActView setHidden:YES];
         
         if (!bResult) {
-            [SingletonBridge MessageBox:@"整改图片下载失败！"];
+            [IosUtils MessageBox:@"整改图片下载失败！"];
             return;
         }
     }

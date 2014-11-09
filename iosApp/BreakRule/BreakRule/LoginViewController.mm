@@ -10,7 +10,7 @@
 
 #import <netdb.h>
 #include <arpa/inet.h>
-
+#import "IosUtils.h"
 #import "SingletonBridge.h"
 
 @interface LoginViewController ()
@@ -31,7 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self addTapGuestureOnView];
+    [IosUtils addTapGuestureOnView:self.view];
     // 注册通知，当键盘将要弹出时执行keyboardWillShow方法。
     [self registerObserverForKeyboard];
     [actView setHidden:YES];
@@ -71,12 +71,12 @@ string getIPWithHostName(string hostName)
     
     if( [nsServer length] == 0 )
     {
-        [SingletonBridge MessageBox:@"请输入服务器域名或IP地址"];
+        [IosUtils MessageBox:@"请输入服务器域名或IP地址"];
         return;
     }
     if( [nsUser length] == 0 || [nsPwd length] == 0 )
     {
-        [SingletonBridge MessageBox:@"请输入用户名和密码"];
+        [IosUtils MessageBox:@"请输入用户名和密码"];
         return;
     }
     
@@ -99,7 +99,7 @@ string getIPWithHostName(string hostName)
         if( !oneIce.g_db->login() )
         {
             //        NSLog(@"数据库连接失败！");
-            [SingletonBridge MessageBox:@"服务器连接失败"];
+            [IosUtils MessageBox:@"服务器连接失败"];
             [actView stopAnimating];
             return;
         }
@@ -111,7 +111,7 @@ string getIPWithHostName(string hostName)
     
     if( !bResult )
     {
-        [SingletonBridge MessageBox:sError withTitle:"登录错误"];
+        [IosUtils MessageBox:sError withTitle:"登录错误"];
         [actView stopAnimating];
         return;
     }
@@ -122,7 +122,7 @@ string getIPWithHostName(string hostName)
     bResult = [oneIce getUserInfo:helpUser user:nsUser error:sError];
     if( !bResult )
     {
-        [SingletonBridge MessageBox:sError withTitle:"错误"];
+        [IosUtils MessageBox:sError withTitle:"错误"];
         [actView stopAnimating];
         return;
     }
@@ -142,7 +142,7 @@ string getIPWithHostName(string hostName)
     bResult = [oneIce getUserInfo:helpRight user:nsUser error:sError];
     if( !bResult )
     {
-        [SingletonBridge MessageBox:sError withTitle:"错误"];
+        [IosUtils MessageBox:sError withTitle:"错误"];
         [actView stopAnimating];
         return;
     }
@@ -384,18 +384,5 @@ string getIPWithHostName(string hostName)
     [self adjustViewForKeyboardReveal:NO textField:textFieldSelected];
 }
 
-// 当通过键盘在输入完毕后，点击屏幕空白区域关闭键盘的操作。
--(void)viewTapped:(UITapGestureRecognizer*)tapGr{
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-}
-
-// 在view上添加一个UITapGestureRecognizer，实现点击键盘以外空白区域隐藏键盘。
-- (void)addTapGuestureOnView
-{
-    UITapGestureRecognizer *tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
-    // 是否取消手势识别
-    tapGr.cancelsTouchesInView = NO;
-    [self.view addGestureRecognizer:tapGr];
-}
 
 @end

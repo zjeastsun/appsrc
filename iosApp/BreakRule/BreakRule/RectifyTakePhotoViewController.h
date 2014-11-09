@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Location.h"
+#import "SingletonBridge.h"
 
 @interface RectifyTakePhotoViewController : UIViewController
 {
@@ -17,7 +19,6 @@
     IBOutlet UIImageView *rectifyImageView;
     IBOutlet UIScrollView *scrollView;
     
-    __block NSString *nsPhotoData;
     
     /** 弹出键盘fame */
     CGRect keyboardRect;
@@ -27,6 +28,15 @@
     double fProgress;
     
     IBOutlet UIActivityIndicatorView *actView;
+    
+    CLLocationManager* locationManager;
+    
+    NSDictionary* curMediaInfo;//当前照片的mediaInfo
+    UIImage* curImage;//当前照片
+    
+    bool bFromPhotosAlbum;//照片是否来自照片库
+    
+    PHOTOINFO stPhotoInfo;
 }
 - (IBAction)back:(id)sender;
 - (IBAction)save:(id)sender;

@@ -8,6 +8,7 @@
 
 #import "ProjectViewController.h"
 #import "SingletonBridge.h"
+#import "IosUtils.h"
 
 @interface ProjectViewController ()
 
@@ -49,7 +50,7 @@
     
     if( iResult<0 )
     {
-        [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
+        [IosUtils MessageBox:strError withTitle:"数据库错误"];
         //        return;
     }
     

@@ -1,32 +1,10 @@
 //ice访问单例
+
 #import <Foundation/Foundation.h>
 #import"Eutils.h"
 #import "SingletonBridge.h"
 
 #define ONEICE SingletonIce *oneIce; oneIce = [SingletonIce sharedInstance];
-
-const string REMOTE_PIC_PATH = "";//服务器保存照片的相对路径文件夹
-const int CENT_PORT = 8840;//iec服务器端口
-
-//流程定义-----------------------------------------------------------
-const int FLOW_NODE_FINISH = 0;// 流程结束
-const int FLOW_NODE_BR_TAKEPHOTO = 1;// 违规视频抓拍
-const int FLOW_NODE_BR_REVIEW_1 = 2;// 违规初级批阅
-const int FLOW_NODE_BR_REVIEW_2 = 3;// 违规中级批阅
-const int FLOW_NODE_BR_REVIEW_3 = 4;// 违规高级批阅
-const int FLOW_NODE_BR_REVIEW_4 = 5;// 违规最高级批阅
-
-const int FLOW_NODE_RECTIFY_TAKEPHOTO = 6;// 整改视频抓拍
-const int FLOW_NODE_RECTIFY_REVIEW_1 = 7;// 整改初级批阅
-const int FLOW_NODE_RECTIFY_REVIEW_2 = 8;// 整改中级批阅
-const int FLOW_NODE_RECTIFY_REVIEW_3 = 9;// 整改高级批阅
-const int FLOW_NODE_RECTIFY_REVIEW_4 = 10;// 整改最高级批阅
-
-// SEQUENCE值
-const string SEQ_break_rule_id = "break_rule_id";
-const string SEQ_rectify_id = "rectify_id";
-const string SEQ_review_id = "review_id";
-const string SEQ_pic_id = "pic_id";
 
 @interface SingletonIce : NSObject
 {
@@ -72,7 +50,7 @@ const string SEQ_pic_id = "pic_id";
 /**获取唯一id号，用于违规ID、整改id、批阅id、照片名称的获取*/
 - (string)getId:(string)sIdSeq;
 /**增加违规抓拍信息*/
-- (bool)putBreakRuleInfo:(NSString *)nsContent picName:(string)sPicName picTime:(NSString *)nsPicTime error:(string &)strError;
+- (bool)putBreakRuleInfo:(NSString *)nsContent picName:(string)sPicName picInfo:(PHOTOINFO )stInfo error:(string &)strError;
 /**获取待批阅违规信息列表*/
 - (int)getPreReviewBreakRule:(CSelectHelp &)help error:(string &)strError;
 /**获取单条违规批阅信息*/
@@ -84,7 +62,7 @@ const string SEQ_pic_id = "pic_id";
 /**获取待整改抓拍信息列表*/
 - (int)getPreRectify:(CSelectHelp &)help error:(string &)strError;
 /**增加整改抓拍信息*/
-- (bool)putRectifyInfo:(NSString *)nsContent picName:(string)sPicName picTime:(NSString *)nsPicTime error:(string &)strError;
+- (bool)putRectifyInfo:(NSString *)nsContent picName:(string)sPicName picInfo:(PHOTOINFO )stInfo error:(string &)strError;
 /**获取待批阅整改信息列表*/
 - (int)getPreReviewRectify:(CSelectHelp &)help error:(string &)strError;
 /**获取单条整改批阅信息*/

@@ -9,8 +9,8 @@
 #import "RectifyTakePhotoViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "SJAvatarBrowser.h"
-#import "SingletonBridge.h"
 #import "SingletonIce.h"
+#import "IosUtils.h"
 
 RectifyTakePhotoViewController *pRectifyTakePhotoView;
 
@@ -44,7 +44,7 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
         [actView setHidden:YES];
         
         if (!bResult) {
-            [SingletonBridge MessageBox:@"图片下载失败！"];
+            [IosUtils MessageBox:@"图片下载失败！"];
             return;
         }
     }
@@ -73,7 +73,7 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
     [breakRuleImageView addGestureRecognizer:tap];
     [rectifyImageView addGestureRecognizer:tap];
     
-    [self addTapGuestureOnView];
+    [IosUtils addTapGuestureOnView:self.view];
     // 注册通知，当键盘将要弹出时执行keyboardWillShow方法。
     [self registerObserverForKeyboard];
     
@@ -90,20 +90,6 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
     [thread start];
     
     // Do any additional setup after loading the view.
-}
-
-// 当通过键盘在输入完毕后，点击屏幕空白区域关闭键盘的操作。
--(void)viewTapped:(UITapGestureRecognizer*)tapGr{
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-}
-
-// 在view上添加一个UITapGestureRecognizer，实现点击键盘以外空白区域隐藏键盘。
-- (void)addTapGuestureOnView
-{
-    UITapGestureRecognizer *tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
-    // 是否取消手势识别
-    tapGr.cancelsTouchesInView = NO;
-    [self.view addGestureRecognizer:tapGr];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -146,13 +132,13 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
     
     if (rectifyTextView.text == nil || [rectifyTextView.text length] == 0)
     {
-        [SingletonBridge MessageBox:@"您还没有输入整改内容！"];
+        [IosUtils MessageBox:@"您还没有输入整改内容！"];
         return;
     }
     
-    if (nsPhotoData == nil )
+    if (stPhotoInfo.sTime == "" )
     {
-        [SingletonBridge MessageBox:@"您还没有拍照或者导入照片！"];
+        [IosUtils MessageBox:@"您还没有拍照或者导入照片！"];
         return;
     }
     [progressView setProgress:0];
@@ -191,38 +177,52 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
         //    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];//裁剪的照片
         UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];//原始照片
         
-        __block NSDictionary *metaData;
-        NSDictionary *exifData;
-        //        __block NSString *nsPhotoData;
-        
-        NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
-        [dateformatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
-        
         //如果是从摄像头拍照来的保存照片到相册
         if(picker.sourceType == UIImagePickerControllerSourceTypeCamera)
         {
-            //获取新拍照片的元数据
-            metaData = [info objectForKey:UIImagePickerControllerMediaMetadata];
-            exifData = [metaData objectForKey:@"{Exif}"];
-            //获取照片时间
-            NSString* picDate = [exifData objectForKey:@"DateTimeOriginal"];
-            picDate = [picDate stringByReplacingCharactersInRange:NSMakeRange(4, 1) withString:@"-"];
-            nsPhotoData = [picDate stringByReplacingCharactersInRange:NSMakeRange(7, 1) withString:@"-"];
-            NSLog(@"相册照片拍照时间=%@", nsPhotoData);
+            bFromPhotosAlbum = false;
+            [locationManager startUpdatingLocation];
             
-            UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+            //照片mediaInfo
+            curMediaInfo=[NSDictionary dictionaryWithDictionary:info];
+            stPhotoInfo = [IosUtils getPhotoInfo:info fromAlbum:bFromPhotosAlbum];
         }
         else
         {
+            bFromPhotosAlbum = true;
+            /*
+             stPhotoInfo = [IosUtils getPhotoInfo:info fromAlbum:bFromPhotosAlbum];
+             if (stPhotoInfo.sLatitude == "") {
+             [locationManager startUpdatingLocation];
+             }
+             */
+            NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+            [dateformatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+            
+            stPhotoInfo = [IosUtils getPhotoInfo:info fromAlbum:bFromPhotosAlbum];
             NSURL *assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
             ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
             [library assetForURL:assetURL
                      resultBlock:^(ALAsset *asset) {
-                         //                         metaData = [[NSMutableDictionary alloc] initWithDictionary:asset.defaultRepresentation.metadata];
-                         NSDate* picDate = [ asset valueForProperty:ALAssetPropertyDate ] ;
-                         nsPhotoData=[dateformatter stringFromDate:picDate];
+                         NSDate* picDate = [ asset valueForProperty:ALAssetPropertyDate ];
+                         NSString* nsPicDate = [dateformatter stringFromDate:picDate];
+                         stPhotoInfo.sTime = [nsPicDate UTF8String];
                          
-                         NSLog(@"拍照时间=%@", nsPhotoData);
+                         NSDictionary *metaData = [[NSMutableDictionary alloc] initWithDictionary:asset.defaultRepresentation.metadata];
+                         NSDictionary *GPSDict = [metaData objectForKey:( NSString*)CFBridgingRelease(kCGImagePropertyGPSDictionary)];
+                         if (GPSDict != nil) {
+                             CLLocation *loc = [GPSDict DictionaryToLocation];
+                             
+                             NSString *nsLatitude = [NSString stringWithFormat:@"%f", loc.coordinate.latitude ];
+                             stPhotoInfo.sLatitude = [nsLatitude UTF8String];
+                             NSString *nsLongitude = [NSString stringWithFormat:@"%f", loc.coordinate.longitude];
+                             stPhotoInfo.sLongitude = [nsLongitude UTF8String];
+                         }
+                         else
+                         {//没有定位信息重新获取定位
+                             [locationManager startUpdatingLocation];
+                         }
+                         //                     NSLog(@"%@",GPSDict);
                      }
                     failureBlock:^(NSError *error) {
                     }];
@@ -241,7 +241,7 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
 {
     if(error)
     {
-        [SingletonBridge MessageBox:@"不能保存照片到相册"];
+        [IosUtils MessageBox:@"不能保存照片到相册"];
     }
     else
     {
@@ -258,7 +258,7 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
 {
     if(error)
     {
-        [SingletonBridge MessageBox:@"不能保存视频到相册"];
+        [IosUtils MessageBox:@"不能保存视频到相册"];
     }
 }
 
@@ -269,6 +269,23 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
     {
         UISaveVideoAtPathToSavedPhotosAlbum(mediaURL.path, self, @selector(video:didFinishSavingWithError:contextInfo:), NULL);
     }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
+    NSLog(@"定位成功！");
+    [manager stopUpdatingLocation];
+    
+    NSString *nsLatitude = [NSString stringWithFormat:@"%f", newLocation.coordinate.latitude ];
+    stPhotoInfo.sLatitude = [nsLatitude UTF8String];
+    
+    NSString *nsLongitude = [NSString stringWithFormat:@"%f", newLocation.coordinate.longitude];
+    stPhotoInfo.sLongitude = [nsLongitude UTF8String];
+    
+    if (!bFromPhotosAlbum) {
+        NSDictionary *metadata = [IosUtils writeGpsToPhoto:curMediaInfo location:newLocation];
+        [IosUtils writeCGImage:curImage metadata:metadata];
+    }
+    
 }
 
 - (void)updateUI
@@ -304,7 +321,7 @@ void ProcessForRectify(string path, double iProgress)
     sPicName = [oneIce getId:SEQ_pic_id];
     if( sPicName == "" )
     {
-        [SingletonBridge MessageBox:"获取照片ID错误" withTitle:"数据库错误"];
+        [IosUtils MessageBox:"获取照片ID错误" withTitle:"数据库错误"];
         return;
     }
     
@@ -324,15 +341,15 @@ void ProcessForRectify(string path, double iProgress)
     iResult = oneIce.g_db->upload(sDesPathName, REMOTE_PIC_PATH, ProcessForRectify, ProcessFinishedForRectify);
     if( iResult<0 )
     {
-        [SingletonBridge MessageBox:"上传照片错误" withTitle:"传输错误"];
+        [IosUtils MessageBox:"上传照片错误" withTitle:"传输错误"];
         return;
     }
     
     string strError;
-    bResult = [oneIce putRectifyInfo:rectifyTextView.text picName:sPicName picTime:nsPhotoData error:strError];
+    bResult = [oneIce putRectifyInfo:rectifyTextView.text picName:sPicName picInfo:stPhotoInfo error:strError];
     if( !bResult )
     {
-        [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
+        [IosUtils MessageBox:strError withTitle:"数据库错误"];
         return;
     }
     

@@ -4,34 +4,9 @@
 
 #import <Foundation/Foundation.h>
 #import"eutils.h"
+#import"Global.h"
 
 #define BRIDGE SingletonBridge *bridge; bridge = [SingletonBridge sharedInstance];
-
-
-
-const int REVIEW_PASS = 0;// 审核通过
-const int REVIEW_NOT_NEED_RECTIFY = 1;// 无需整改
-const int REVIEW_CANNOT_JUDGE = 2;// 无法判定
-const int REVIEW_NO_PASS = 3;// 审核不通过
-
-
-//---------------------------------------------------------------------
-// 视图上移/下移动画名称
-#define kAnimationResizeForKeyboard @"ResizeForKeyboard"
-// 键盘展开/收起动画时间
-#define kAnimationDuration          0.3
-// 主屏幕Bounds
-#define kBoundsOfMainScreen         [[UIScreen mainScreen] bounds]
-// 主屏幕Size
-#define kSizeOfMainScreen           [[UIScreen mainScreen] bounds].size
-// 主屏幕宽度
-#define kWidthOfMainScreen          [[UIScreen mainScreen] bounds].size.width
-// 主屏幕高度
-#define kHeightOfMainScreen         [[UIScreen mainScreen] bounds].size.height
-// TextView控件之间的垂直间距
-#define kTextViewPadding           10
-
-//------------------------------------------------------------------------
 
 @interface SingletonBridge: NSObject
 
@@ -140,8 +115,7 @@ const int REVIEW_NO_PASS = 3;// 审核不通过
 + (string)getBreakRuleTypeByName:(NSString *)name;
 +(NSString *)getBreakRuleTypeNameById:(NSString *)nsId;
 
-+ (void)MessageBox:(NSString *)msg;
-+ (void)MessageBox:(string)msgs withTitle:(string)sTitle;
+
 
 
 

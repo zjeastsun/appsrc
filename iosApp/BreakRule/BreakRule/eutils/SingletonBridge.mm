@@ -110,33 +110,4 @@
     return nsBreakRuleType;
 }
 
-+ (void)MessageBox:(NSString *)msg
-{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误"
-                                                    message:msg
-                                                   delegate:self
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-}
-
-+ (void)MessageBox:(string)sMsg withTitle:(string)sTitle
-{
-    NSString *nsMsg;
-    NSString *nsTitle;
-    nsMsg = [NSString stringWithCString:const_cast<char*>(sMsg.c_str()) encoding:NSUTF8StringEncoding];
-    nsTitle = [NSString stringWithCString:const_cast<char*>(sTitle.c_str()) encoding:NSUTF8StringEncoding];
-    
-    if( sTitle == "" )
-    {
-        nsTitle = @"提示";
-    }
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nsTitle
-                                                    message:nsMsg
-                                                   delegate:self
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-}
 @end

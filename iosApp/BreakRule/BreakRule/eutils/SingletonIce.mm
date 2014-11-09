@@ -191,7 +191,7 @@
     return sId;
 }
 
-- (bool)putBreakRuleInfo:(NSString *)nsContent picName:(string)sPicName picTime:(NSString *)nsPicTime error:(string &)strError
+- (bool)putBreakRuleInfo:(NSString *)nsContent picName:(string)sPicName picInfo:(PHOTOINFO )stInfo error:(string &)strError
 {
     string strParam="";
     const string sqlcode="put_break_law_info";
@@ -212,9 +212,9 @@
     string sBreakRuleContent = [SingletonIce NSStringToGBstring:nsContent];
     string sBreakRuleType = [SingletonBridge getBreakRuleTypeByName:bridge.nsRuleType];
     
-    string sPicTime = [nsPicTime UTF8String];
-    string sLongitude = "0";
-    string sLatitude = "0";
+    string sPicTime = stInfo.sTime;
+    string sLongitude = stInfo.sLongitude;
+    string sLatitude = stInfo.sLatitude;
     
     SelectHelpParam helpParam;
     helpParam.add(sBreakRuleId);
@@ -390,7 +390,7 @@
     return iResult;
 }
 
-- (bool)putRectifyInfo:(NSString *)nsContent picName:(string)sPicName picTime:(NSString *)nsPicTime error:(string &)strError
+- (bool)putRectifyInfo:(NSString *)nsContent picName:(string)sPicName picInfo:(PHOTOINFO )stInfo error:(string &)strError
 {
     string strParam="";
     string sqlcode="put_br_recify_info";
@@ -407,9 +407,9 @@
     string sBreakRuleId = [bridge.nsRectify_BreakRuleIdSelected UTF8String];
     string sRectifyContent = [SingletonIce NSStringToGBstring:nsContent];
     
-    string sPicTime = [nsPicTime UTF8String];
-    string sLongitude = "0";
-    string sLatitude = "0";
+    string sPicTime = stInfo.sTime;
+    string sLongitude = stInfo.sLongitude;
+    string sLatitude = stInfo.sLatitude;
     
     SelectHelpParam helpParam;
     helpParam.add(sRectifyId);

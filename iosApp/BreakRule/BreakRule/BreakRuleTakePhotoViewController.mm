@@ -8,11 +8,11 @@
 
 #import "BreakRuleTakePhotoViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
-#import <ImageIO/ImageIO.h>
 #import <AssetsLibrary/AssetsLibrary.h>
+
 #import "SJAvatarBrowser.h"
-#import "SingletonBridge.h"
 #import "SingletonIce.h"
+#import "IosUtils.h"
 
 BreakRuleTakePhotoViewController *pBR;
 
@@ -45,8 +45,7 @@ BreakRuleTakePhotoViewController *pBR;
     
     [imageView addGestureRecognizer:tap];
     
-    
-    [self addTapGuestureOnView];
+    [IosUtils addTapGuestureOnView:self.view];
     // 注册通知，当键盘将要弹出时执行keyboardWillShow方法。
     [self registerObserverForKeyboard];
     
@@ -55,19 +54,7 @@ BreakRuleTakePhotoViewController *pBR;
     [progressView setProgressViewStyle:UIProgressViewStyleDefault]; //设置进度条类型
 }
 
-// 当通过键盘在输入完毕后，点击屏幕空白区域关闭键盘的操作。
--(void)viewTapped:(UITapGestureRecognizer*)tapGr{
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-}
 
-// 在view上添加一个UITapGestureRecognizer，实现点击键盘以外空白区域隐藏键盘。
-- (void)addTapGuestureOnView
-{
-    UITapGestureRecognizer *tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
-    // 是否取消手势识别
-    tapGr.cancelsTouchesInView = NO;
-    [self.view addGestureRecognizer:tapGr];
-}
 
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -88,6 +75,8 @@ BreakRuleTakePhotoViewController *pBR;
     }
     
     scrollView.frame = CGRectMake(0, 0, kWidthOfMainScreen, kHeightOfMainScreen);
+    
+    [self lacationInit];
 }
 
 - (void)magnifyImage
@@ -217,6 +206,16 @@ BreakRuleTakePhotoViewController *pBR;
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)lacationInit
+{
+    if (!locationManager) {
+        locationManager = [[CLLocationManager alloc]init];
+        [locationManager setDelegate:self];
+        [locationManager setDistanceFilter:kCLDistanceFilterNone];
+        [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    }
+}
+
 - (IBAction)fromPhotosAlbum:(id)sender {
     imagePicker = [[UIImagePickerController alloc]init];
 //    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;//图片库
@@ -231,7 +230,7 @@ BreakRuleTakePhotoViewController *pBR;
     if( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] )
     {
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        imagePicker.delegate = (id<UINavigationControllerDelegate,UIImagePickerControllerDelegate>)self;
+        imagePicker.delegate = (id<UINavigationControllerDelegate,UIImagePickerControllerDelegate>)self;//有导航栏的代理
 //        imagePicker.allowsEditing =YES;
         [self presentViewController:imagePicker animated:YES completion:nil];
     }
@@ -261,47 +260,70 @@ BreakRuleTakePhotoViewController *pBR;
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
     
+    //图片质量处理，大小控制？
+    
     if( picker.sourceType == UIImagePickerControllerSourceTypeSavedPhotosAlbum || picker.cameraCaptureMode == UIImagePickerControllerCameraCaptureModePhoto )//照片
     {
         //    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];//裁剪的照片
-        UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];//原始照片
-        
-        __block NSDictionary *metaData;
-        NSDictionary *exifData;
-//        __block NSString *nsPhotoData;
-        
-        NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
-        [dateformatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+        UIImage *ima = [info objectForKey:UIImagePickerControllerOriginalImage];//原始照片
         
         //如果是从摄像头拍照来的保存照片到相册
         if(picker.sourceType == UIImagePickerControllerSourceTypeCamera)
         {
-            //获取新拍照片的元数据
-            metaData = [info objectForKey:UIImagePickerControllerMediaMetadata];
-            exifData = [metaData objectForKey:@"{Exif}"];
-            //获取照片时间
-            NSString* picDate = [exifData objectForKey:@"DateTimeOriginal"];
-            picDate = [picDate stringByReplacingCharactersInRange:NSMakeRange(4, 1) withString:@"-"];
-            nsPhotoData=[picDate stringByReplacingCharactersInRange:NSMakeRange(7, 1) withString:@"-"];
-            NSLog(@"相册照片拍照时间=%@", nsPhotoData);
+            bFromPhotosAlbum = false;
+            [locationManager startUpdatingLocation];
             
-            UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+            //照片mediaInfo
+            curMediaInfo=[NSDictionary dictionaryWithDictionary:info];
+            stPhotoInfo = [IosUtils getPhotoInfo:info fromAlbum:bFromPhotosAlbum];
+//            UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
         }
-        else
+        else//相片库照片
         {
-            NSURL *assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
-            ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-            [library assetForURL:assetURL
-                     resultBlock:^(ALAsset *asset) {
-//                         metaData = [[NSMutableDictionary alloc] initWithDictionary:asset.defaultRepresentation.metadata];
-                         NSDate* picDate = [ asset valueForProperty:ALAssetPropertyDate ] ;
-                         nsPhotoData=[dateformatter stringFromDate:picDate];
-                         NSLog(@"拍照时间=%@", nsPhotoData);
-                     }
-                    failureBlock:^(NSError *error) {
-                    }];
+            bFromPhotosAlbum = true;
+            /*
+            stPhotoInfo = [IosUtils getPhotoInfo:info fromAlbum:bFromPhotosAlbum];
+            if (stPhotoInfo.sLatitude == "") {
+                [locationManager startUpdatingLocation];
+            }
+            */
+            NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+            [dateformatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+            
+            stPhotoInfo = [IosUtils getPhotoInfo:info fromAlbum:bFromPhotosAlbum];
+                    NSURL *assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
+                    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+                    [library assetForURL:assetURL
+                             resultBlock:^(ALAsset *asset) {
+                                 NSDate* picDate = [ asset valueForProperty:ALAssetPropertyDate ];
+                                 NSString* nsPicDate = [dateformatter stringFromDate:picDate];
+                                 stPhotoInfo.sTime = [nsPicDate UTF8String];
+            
+                                 NSDictionary *metaData = [[NSMutableDictionary alloc] initWithDictionary:asset.defaultRepresentation.metadata];
+                                 NSDictionary *GPSDict = [metaData objectForKey:( NSString*)CFBridgingRelease(kCGImagePropertyGPSDictionary)];
+                                 if (GPSDict != nil) {
+                                     CLLocation *loc = [GPSDict DictionaryToLocation];
+            
+                                     NSString *nsLatitude = [NSString stringWithFormat:@"%f", loc.coordinate.latitude ];
+                                     stPhotoInfo.sLatitude = [nsLatitude UTF8String];
+                                     NSString *nsLongitude = [NSString stringWithFormat:@"%f", loc.coordinate.longitude];
+                                     stPhotoInfo.sLongitude = [nsLongitude UTF8String];
+                                 }
+                                 else
+                                 {//没有定位信息重新获取定位
+                                     [locationManager startUpdatingLocation];
+                                 }
+            //                     NSLog(@"%@",GPSDict);
+                             }
+                            failureBlock:^(NSError *error) {
+                            }];
+            
+           
         }
-        imageView.image = image;
+        
+        
+        imageView.image = ima;
+        curImage = ima;
     }
     else//视频
     {
@@ -315,7 +337,7 @@ BreakRuleTakePhotoViewController *pBR;
 {
     if(error)
     {
-        [SingletonBridge MessageBox:@"不能保存照片到相册"];
+        [IosUtils MessageBox:@"不能保存照片到相册"];
     }
     else
     {
@@ -332,7 +354,7 @@ BreakRuleTakePhotoViewController *pBR;
 {
     if(error)
     {
-        [SingletonBridge MessageBox:@"不能保存视频到相册"];
+        [IosUtils MessageBox:@"不能保存视频到相册"];
     }
 }
 
@@ -343,6 +365,23 @@ BreakRuleTakePhotoViewController *pBR;
     {
         UISaveVideoAtPathToSavedPhotosAlbum(mediaURL.path, self, @selector(video:didFinishSavingWithError:contextInfo:), NULL);
     }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
+    NSLog(@"定位成功！");
+    [manager stopUpdatingLocation];
+
+    NSString *nsLatitude = [NSString stringWithFormat:@"%f", newLocation.coordinate.latitude ];
+    stPhotoInfo.sLatitude = [nsLatitude UTF8String];
+    
+    NSString *nsLongitude = [NSString stringWithFormat:@"%f", newLocation.coordinate.longitude];
+    stPhotoInfo.sLongitude = [nsLongitude UTF8String];
+    
+    if (!bFromPhotosAlbum) {
+        NSDictionary *metadata = [IosUtils writeGpsToPhoto:curMediaInfo location:newLocation];
+        [IosUtils writeCGImage:curImage metadata:metadata];
+    }
+    
 }
 
 - (void)updateUI
@@ -380,7 +419,7 @@ void Process(string path, double iProgress)
     sPicName = [oneIce getId:SEQ_pic_id];
     if( sPicName == "" )
     {
-        [SingletonBridge MessageBox:"获取照片ID失败" withTitle:"数据库错误"];
+        [IosUtils MessageBox:"获取照片ID失败" withTitle:"数据库错误"];
         return;
     }
     
@@ -405,10 +444,10 @@ void Process(string path, double iProgress)
 //    NSString *  nsTime=[dateformatter stringFromDate:senddate];
     
     string strError;
-    bResult = [oneIce putBreakRuleInfo:contentTextView.text picName:sPicName picTime:nsPhotoData error:strError];
+    bResult = [oneIce putBreakRuleInfo:contentTextView.text picName:sPicName picInfo:stPhotoInfo error:strError];
     if( !bResult )
     {
-        [SingletonBridge MessageBox:strError withTitle:"数据库错误"];
+        [IosUtils MessageBox:strError withTitle:"数据库错误"];
         return;
     }
     
@@ -417,7 +456,7 @@ void Process(string path, double iProgress)
     iResult = oneIce.g_db->upload(sDesPathName, REMOTE_PIC_PATH, Process, ProcessFinished);
     if( iResult<0 )
     {
-        [SingletonBridge MessageBox:"上传照片失败" withTitle:"传输错误"];
+        [IosUtils MessageBox:"上传照片失败" withTitle:"传输错误"];
         return;
     }
     
@@ -426,10 +465,10 @@ void Process(string path, double iProgress)
 
 - (IBAction)commit:(id)sender {
     
-//    || nsPhotoData.length == 0//为什么这个判断会出错呢？
-    if (nsPhotoData == nil )
+//    || nsPhotoDate.length == 0//为什么这个判断会出错呢？
+    if (stPhotoInfo.sTime == "" )
     {
-        [SingletonBridge MessageBox:@"您还没有拍照或者导入照片！"];
+        [IosUtils MessageBox:@"您还没有拍照或者导入照片！"];
         return;
     }
     [progressView setProgress:0];
@@ -451,6 +490,7 @@ void Process(string path, double iProgress)
  * @param  showKeyboard    键盘是否弹出
  * @param  textView       当前textView
  */
+
 - (void)adjustViewForKeyboardReveal:(BOOL)showKeyboard textView:(UITextView *)textView
 {
     // 获取当前scrollView frame，当键盘弹出时，当前scrollView frame上移一定高度。
