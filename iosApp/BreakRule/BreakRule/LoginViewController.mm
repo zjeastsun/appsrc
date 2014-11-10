@@ -30,6 +30,8 @@
 
 -(void)getNSUserDafaults
 {
+    BRIDGE
+    
     NSUserDefaults * def =[NSUserDefaults standardUserDefaults];
 
     NSString *nsServerAddress;
@@ -41,6 +43,10 @@
     {
         serverIpField.text = nsServerAddress;
     }
+    
+    NSString *nsOrgIdSelected;
+    nsOrgIdSelected = [def valueForKey:@"project id"];
+    bridge.nsOrgIdSelected = nsOrgIdSelected;
     
 }
 
@@ -171,8 +177,15 @@ string getIPWithHostName(string hostName)
     
     [actView stopAnimating];
     
-    UIViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
-    [self presentViewController:projectView animated:YES completion:nil];
+    if ([bridge.nsOrgIdSelected length] == 0) {
+        UIViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
+        [self presentViewController:projectView animated:YES completion:nil];
+    }
+    else
+    {
+        UIViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"MainView"];
+        [self presentViewController:projectView animated:YES completion:nil];
+    }
 }
 
 - (IBAction)login:(id)sender {

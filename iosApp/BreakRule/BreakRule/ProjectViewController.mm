@@ -133,12 +133,26 @@
     }
     
     BRIDGE
+    
+    bool bIsFirstTime = false;
+    if ([bridge.nsOrgIdSelected length] == 0)
+    {
+        bIsFirstTime = true;
+    }
+    
     bridge.nsOrgIdSelected = [SingletonIce valueNSString:helpProject rowForHelp:row KeyForHelp:"org_id"];
     bridge.nsOrgNameSelected = [SingletonIce valueNSString:helpProject rowForHelp:row KeyForHelp:"org_name"];
     
-    UIViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MainView"];
-
-    [self presentViewController:mainViewController animated:YES completion:nil];
+    if (bIsFirstTime)
+    {
+        UIViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MainView"];
+        
+        [self presentViewController:mainViewController animated:YES completion:nil];
+    }
+    else
+    {
+        [self back:nil];
+    }
     
 }
 - (IBAction)back:(id)sender {
