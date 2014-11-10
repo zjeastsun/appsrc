@@ -18,6 +18,7 @@
     IBOutlet UIImageView *breakRuleImageView;
     IBOutlet UIImageView *rectifyImageView;
     IBOutlet UIScrollView *scrollView;
+    IBOutlet UILabel *progressLabel;
     
     
     /** 弹出键盘fame */
@@ -37,6 +38,8 @@
     bool bFromPhotosAlbum;//照片是否来自照片库
     
     PHOTOINFO stPhotoInfo;
+    
+    bool bTransmit;//是否正在传输图片
 }
 - (IBAction)back:(id)sender;
 - (IBAction)save:(id)sender;

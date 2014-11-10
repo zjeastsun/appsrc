@@ -23,6 +23,7 @@
     IBOutlet UIActivityIndicatorView *actView;
 }
 - (IBAction)login:(id)sender;
+//- (IBAction)set:(id)sender;
 
 
 @end

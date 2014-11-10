@@ -12,10 +12,16 @@
 {
     IBOutlet UITextField *serverAddressTextField;
     IBOutlet UITextField *projectNameTextField;
+    
+    IBOutlet UISwitch *Transmit3gSwitchButton;
+    
+    bool bTransmit3g;
 }
 - (IBAction)back:(id)sender;
 - (IBAction)save:(id)sender;
 - (IBAction)project:(id)sender;
 
 - (IBAction)UpdateDb:(id)sender;
+
+- (IBAction)transmit3g:(id)sender;
 @end

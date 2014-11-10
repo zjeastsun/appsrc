@@ -17,7 +17,8 @@
     IBOutlet UIImageView *imageView;
     IBOutlet UITableView *ruleTableView;
     IBOutlet UITextView *contentTextView;
-
+    IBOutlet UILabel *progressLabel;
+    
     NSString *nsBreakRuleType;
     
     
@@ -26,8 +27,8 @@
     UITextView *textViewSelected;
     
     IBOutlet UIScrollView *scrollView;
-    
     IBOutlet UIProgressView *progressView;
+    
     double fProgress;
     
     CLLocationManager* locationManager;
@@ -38,6 +39,8 @@
     bool bFromPhotosAlbum;//照片是否来自照片库
     
     PHOTOINFO stPhotoInfo;
+    
+    bool bTransmit;//是否正在传输图片
 }
 
 - (IBAction)back:(id)sender;

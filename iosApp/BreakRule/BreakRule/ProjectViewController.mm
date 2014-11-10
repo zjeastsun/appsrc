@@ -145,6 +145,10 @@
     
     if (bIsFirstTime)
     {
+        NSUserDefaults * def =[NSUserDefaults standardUserDefaults];
+        [def setObject:bridge.nsOrgIdSelected forKey:@"project id"];
+        [def setObject:bridge.nsOrgNameSelected forKey:@"project name"];
+        
         UIViewController *mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MainView"];
         
         [self presentViewController:mainViewController animated:YES completion:nil];

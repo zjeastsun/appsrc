@@ -35,6 +35,7 @@ BreakRuleTakePhotoViewController *pBR;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    bTransmit = false;
     // Do any additional setup after loading the view.
     title = [[NSMutableArray alloc]initWithObjects:@"判定性质", @"违规选项",nil];
     subTitle = [[NSMutableArray alloc]initWithObjects:@"一般违规", @"自定义",nil];
@@ -52,6 +53,8 @@ BreakRuleTakePhotoViewController *pBR;
     pBR = self;
     [progressView setHidden:YES];
     [progressView setProgressViewStyle:UIProgressViewStyleDefault]; //设置进度条类型
+    
+    [progressLabel setHidden:YES];
 }
 
 
@@ -203,6 +206,9 @@ BreakRuleTakePhotoViewController *pBR;
 }
 
 - (IBAction)back:(id)sender {
+    if (bTransmit) {
+        return;
+    }
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -386,13 +392,15 @@ BreakRuleTakePhotoViewController *pBR;
 
 - (void)updateUI
 {
-    [pBR->progressView setProgress:fProgress/100];
+    [progressView setProgress:fProgress/100];
+    progressLabel.text = [NSString stringWithFormat:@"已上传:%0.0f%%", fProgress ];
 }
 
 void ProcessFinished(string path, int iResult, const string &sError)
 {
 	printf("finished %s--%d,%s", path.c_str(), iResult, sError.c_str());
     [pBR->progressView setHidden:YES];
+    [pBR->progressLabel setHidden:YES];
 }
 
 void Process(string path, double iProgress)
@@ -457,14 +465,19 @@ void Process(string path, double iProgress)
     if( iResult<0 )
     {
         [IosUtils MessageBox:"上传照片失败" withTitle:"传输错误"];
+        bTransmit = false;
         return;
     }
     
+    bTransmit = false;
     [self back:nil];
 }
 
 - (IBAction)commit:(id)sender {
     
+    if (bTransmit) {
+        return;
+    }
 //    || nsPhotoDate.length == 0//为什么这个判断会出错呢？
     if (stPhotoInfo.sTime == "" )
     {
@@ -473,6 +486,10 @@ void Process(string path, double iProgress)
     }
     [progressView setProgress:0];
     [progressView setHidden:NO];
+    
+    bTransmit = true;
+    [progressLabel setHidden:NO];
+    progressLabel.text = @"正在上传...";
     
     NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(insertInfoToDb:) object:nil];
     [thread start];

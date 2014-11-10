@@ -63,6 +63,8 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    bTransmit = false;
+    [progressLabel setHidden:YES];
     
     breakRuleImageView.userInteractionEnabled = YES;
     rectifyImageView.userInteractionEnabled = YES;
@@ -125,10 +127,17 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
 */
 
 - (IBAction)back:(id)sender {
+    if (bTransmit) {
+        return;
+    }
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)save:(id)sender {
+    
+    if (bTransmit) {
+        return;
+    }
     
     if (rectifyTextView.text == nil || [rectifyTextView.text length] == 0)
     {
@@ -143,7 +152,10 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
     }
     [progressView setProgress:0];
     [progressView setHidden:NO];
+    [progressLabel setHidden:NO];
+    progressLabel.text = @"正在上传...";
     
+    bTransmit = true;
     NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(insertInfoToDb:) object:nil];
     [thread start];
 }
@@ -291,12 +303,14 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
 - (void)updateUI
 {
     [pRectifyTakePhotoView->progressView setProgress:fProgress/100];
+    progressLabel.text = [NSString stringWithFormat:@"已上传:%0.0f%%", fProgress ];
 }
 
 void ProcessFinishedForRectify(string path, int iResult, const string &sError)
 {
 	printf("finished %s--%d,%s", path.c_str(), iResult, sError.c_str());
     [pRectifyTakePhotoView->progressView setHidden:YES];
+    [pRectifyTakePhotoView->progressLabel setHidden:YES];
 }
 
 void ProcessForRectify(string path, double iProgress)
@@ -350,9 +364,11 @@ void ProcessForRectify(string path, double iProgress)
     if( !bResult )
     {
         [IosUtils MessageBox:strError withTitle:"数据库错误"];
+        bTransmit = false;
         return;
     }
     
+    bTransmit = false;
     [self back:nil];
 }
 

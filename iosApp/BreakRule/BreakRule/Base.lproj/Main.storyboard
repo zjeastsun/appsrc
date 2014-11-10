@@ -87,6 +87,14 @@
                                         <rect key="frame" x="12" y="431" width="291" height="2"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                     </progressView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.29999999999999966" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已上传:10%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qX6-rb-AIp">
+                                        <rect key="frame" x="50" y="345" width="215" height="48"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <connections>
                                     <outlet property="delegate" destination="b5M-9j-dQ7" id="xL2-gN-EaY"/>
@@ -110,6 +118,7 @@
                     <connections>
                         <outlet property="contentTextView" destination="lpU-mm-Zz1" id="Meg-Ay-3tb"/>
                         <outlet property="imageView" destination="Sh7-IR-P9j" id="tzc-e3-1OR"/>
+                        <outlet property="progressLabel" destination="qX6-rb-AIp" id="i55-lY-shV"/>
                         <outlet property="progressView" destination="4sc-9S-qba" id="uyg-HM-RCr"/>
                         <outlet property="ruleTableView" destination="zXM-fP-IkZ" id="aHK-F8-RxS"/>
                         <outlet property="scrollView" destination="j5a-wF-r9A" id="7dT-sV-IyX"/>
@@ -563,6 +572,14 @@
                                         <rect key="frame" x="165" y="324" width="150" height="2"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </progressView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.29999999999999966" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已上传:10%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SwI-jC-rgz">
+                                        <rect key="frame" x="194" y="255" width="92" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <connections>
                                     <outlet property="delegate" destination="r0F-0R-d7L" id="DCu-Ca-boe"/>
@@ -587,6 +604,7 @@
                         <outlet property="actView" destination="30C-Uc-ObD" id="dw4-4E-zNn"/>
                         <outlet property="breakRuleImageView" destination="qPu-Bb-4pk" id="bhK-dg-f5L"/>
                         <outlet property="breakRuleTextView" destination="iiN-KQ-XlF" id="s28-27-PjB"/>
+                        <outlet property="progressLabel" destination="SwI-jC-rgz" id="MRX-dg-CgY"/>
                         <outlet property="progressView" destination="YAW-qe-emV" id="VcG-4Q-UWJ"/>
                         <outlet property="rectifyImageView" destination="E2L-OO-1zi" id="gbF-qy-FJy"/>
                         <outlet property="rectifyTextView" destination="Amp-Ft-Zqw" id="1l8-6h-6c7"/>
@@ -863,9 +881,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gvn-TG-Cz2">
-                                <rect key="frame" x="9" y="276" width="232" height="21"/>
+                                <rect key="frame" x="9" y="276" width="181" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">2G/3G/4G下传输图片或视频：
+                                <string key="text">2G/3G/4G下传输图片：
 输图片或视频？</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
@@ -873,6 +891,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="gVq-Ta-sky">
                                 <rect key="frame" x="251" y="271" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="transmit3g:" destination="Sa8-vG-teg" eventType="valueChanged" id="EEy-2T-Fcu"/>
+                                </connections>
                             </switch>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="消息提示:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="s9u-U4-UHI">
                                 <rect key="frame" x="9" y="241" width="73" height="21"/>
@@ -978,12 +999,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <rect key="frame" x="251" y="305" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </switch>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QU6-T7-Clu">
-                                <rect key="frame" x="236" y="394" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dZI-A2-3sZ">
                                 <rect key="frame" x="84" y="97" width="223" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1010,13 +1025,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="Transmit3gSwitchButton" destination="gVq-Ta-sky" id="cBa-jl-ghC"/>
                         <outlet property="projectNameTextField" destination="nPM-Mj-oaI" id="oLL-4P-RaB"/>
                         <outlet property="serverAddressTextField" destination="DhC-yv-TVC" id="ybp-Ir-6PK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="diN-6e-k7i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4309" y="-557"/>
+            <point key="canvasLocation" x="-4709" y="-557"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="Uhb-qH-jpd">
@@ -1116,7 +1132,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="dOw-kK-XuN" kind="modal" id="4oh-eE-9JT"/>
+                                            <segue destination="dOw-kK-XuN" kind="modal" id="0rJ-PQ-BXI"/>
                                         </connections>
                                     </button>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="zMj-He-4WJ">
@@ -1141,7 +1157,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A6k-s9-HjW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5858" y="128"/>
+            <point key="canvasLocation" x="-6258" y="128"/>
         </scene>
         <!--Project View Controller - 请选择项目-->
         <scene sceneID="3sd-u3-975">
@@ -1177,7 +1193,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jS1-Tx-UcE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4835" y="128"/>
+            <point key="canvasLocation" x="-5235" y="128"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="euf-m2-ZUx">
@@ -1198,7 +1214,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="    违规抓拍"/>
                                 <connections>
-                                    <action selector="toBreakRuleView:" destination="ayi-31-HLA" eventType="touchUpInside" id="viY-A4-oIG"/>
+                                    <segue destination="srs-vh-NRD" kind="modal" id="8dB-kf-ABF"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.79999999999999982" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="izF-lE-7L9">
@@ -1208,7 +1224,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="    整改抓拍"/>
                                 <connections>
-                                    <action selector="toRectifyView:" destination="ayi-31-HLA" eventType="touchUpInside" id="Vc8-DH-3qS"/>
+                                    <segue destination="Vqv-Au-FR6" kind="modal" id="Tbm-bX-vBt"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.79999999999999982" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="K73-l0-6Jl">
@@ -1218,7 +1234,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="    批阅整改"/>
                                 <connections>
-                                    <action selector="toReviewRectifyView:" destination="ayi-31-HLA" eventType="touchUpInside" id="J3U-nw-tgW"/>
+                                    <segue destination="MO8-X9-PYo" kind="modal" id="hcf-2O-kvo"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.79999999999999982" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xir-JN-wXz">
@@ -1228,7 +1244,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="查询信息" image="second"/>
                                 <connections>
-                                    <action selector="toQueryView:" destination="ayi-31-HLA" eventType="touchUpInside" id="JTl-lU-6Kh"/>
+                                    <segue destination="vXR-rK-6yx" kind="modal" id="GYI-Se-ZDx"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.79999999999999982" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hMS-w4-i6k">
@@ -1238,7 +1254,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="设置信息" image="first"/>
                                 <connections>
-                                    <action selector="set:" destination="ayi-31-HLA" eventType="touchUpInside" id="Wdc-iy-tEo"/>
+                                    <segue destination="dOw-kK-XuN" kind="modal" id="Fa3-la-gKq"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.79999999999999982" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ry5-Ma-gBd">
@@ -1248,7 +1264,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="    批阅违规"/>
                                 <connections>
-                                    <action selector="toReviewBreakRule:" destination="ayi-31-HLA" eventType="touchUpInside" id="lEm-qw-suS"/>
+                                    <segue destination="sMv-eD-fTd" kind="modal" id="1lc-mL-BWE"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5ai-9L-oMg">
@@ -1285,7 +1301,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bsq-kS-qeb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4309" y="128"/>
+            <point key="canvasLocation" x="-4709" y="128"/>
         </scene>
         <!--Review Break Rule View Controller - 批阅违规-->
         <scene sceneID="0iR-FO-Ek3">
@@ -2298,7 +2314,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yKf-Wz-jSG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4835" y="-557"/>
+            <point key="canvasLocation" x="-5235" y="-557"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jHI-6b-Qvc">
@@ -2316,7 +2332,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tu1-7z-lwT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5361" y="128"/>
+            <point key="canvasLocation" x="-5761" y="128"/>
         </scene>
     </scenes>
     <resources>
@@ -2335,4 +2351,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="0rJ-PQ-BXI"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -45,8 +45,13 @@
     }
     
     NSString *nsOrgIdSelected;
+    NSString *nsOrgNameSelected;
+    
     nsOrgIdSelected = [def valueForKey:@"project id"];
     bridge.nsOrgIdSelected = nsOrgIdSelected;
+    
+    nsOrgNameSelected = [def valueForKey:@"project name"];
+    bridge.nsOrgNameSelected = nsOrgNameSelected;
     
 }
 
@@ -183,8 +188,8 @@ string getIPWithHostName(string hostName)
     }
     else
     {
-        UIViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"MainView"];
-        [self presentViewController:projectView animated:YES completion:nil];
+        UIViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@"MainView"];
+        [self presentViewController:view animated:YES completion:nil];
     }
 }
 
@@ -317,6 +322,11 @@ string getIPWithHostName(string hostName)
     }
 */
 }
+
+//- (IBAction)set:(id)sender {
+//    UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SetView"];
+//    [self presentViewController:viewController animated:YES completion:nil];
+//}
 
 - (void)performSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {

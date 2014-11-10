@@ -29,6 +29,8 @@
 {
     [super viewDidLoad];
     [IosUtils addTapGuestureOnView:self.view];
+    BRIDGE
+    projectNameTextField.text = bridge.nsOrgNameSelected;
     // Do any additional setup after loading the view.
 }
 
@@ -66,6 +68,7 @@
     [def setObject:projectNameTextField.text forKey:@"project name"];
     [def setObject:bridge.nsOrgIdSelected forKey:@"project id"];
 
+    [self back:nil];
 }
 
 - (IBAction)project:(id)sender {
@@ -75,5 +78,14 @@
 
 - (IBAction)UpdateDb:(id)sender {
 
+}
+
+- (IBAction)transmit3g:(id)sender {
+    BOOL isButtonOn = [Transmit3gSwitchButton isOn];
+    if (isButtonOn) {
+        bTransmit3g = true;
+    }else {
+        bTransmit3g = false;
+    }
 }
 @end
