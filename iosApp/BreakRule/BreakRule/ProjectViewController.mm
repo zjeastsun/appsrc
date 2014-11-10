@@ -91,18 +91,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    int iRows = helpProject.size();
-    return iRows;
+    return helpProject.size();
 }
 
-//表段头
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 50)];
-    label.text =@"项目选择";
-    label.textColor = [UIColor redColor];
-//    label.backgroundColor = [UIColor greenColor];
-    return label;
+    tableView.contentInset = UIEdgeInsetsMake( 0, 0, 0, 0);//有导航条的时候调整表头位置
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -145,5 +140,8 @@
 
     [self presentViewController:mainViewController animated:YES completion:nil];
     
+}
+- (IBAction)back:(id)sender {
+    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 @end

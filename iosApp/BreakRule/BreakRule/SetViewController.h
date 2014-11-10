@@ -9,7 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface SetViewController : UIViewController
+{
+    IBOutlet UITextField *serverAddressTextField;
+    IBOutlet UITextField *projectNameTextField;
+}
 - (IBAction)back:(id)sender;
+- (IBAction)save:(id)sender;
+- (IBAction)project:(id)sender;
 
 - (IBAction)UpdateDb:(id)sender;
 @end

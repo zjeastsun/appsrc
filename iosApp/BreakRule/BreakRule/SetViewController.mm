@@ -7,6 +7,8 @@
 //
 
 #import "SetViewController.h"
+#import "SingletonBridge.h"
+#import "IosUtils.h"
 
 @interface SetViewController ()
 
@@ -26,6 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [IosUtils addTapGuestureOnView:self.view];
     // Do any additional setup after loading the view.
 }
 
@@ -45,9 +48,29 @@
     // Pass the selected object to the new view controller.
 }
 */
+-(void)viewDidAppear:(BOOL)animated
+{
+    BRIDGE
+    projectNameTextField.text = bridge.nsOrgNameSelected;
+}
 
 - (IBAction)back:(id)sender {
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)save:(id)sender {
+    BRIDGE
+    
+    NSUserDefaults * def =[NSUserDefaults standardUserDefaults];
+    [def setObject:serverAddressTextField.text forKey:@"server address"];
+    [def setObject:projectNameTextField.text forKey:@"project name"];
+    [def setObject:bridge.nsOrgIdSelected forKey:@"project id"];
+
+}
+
+- (IBAction)project:(id)sender {
+    UIViewController *projectView = [self.storyboard instantiateViewControllerWithIdentifier:@"projectView"];
+    [self presentViewController:projectView animated:YES completion:nil];
 }
 
 - (IBAction)UpdateDb:(id)sender {

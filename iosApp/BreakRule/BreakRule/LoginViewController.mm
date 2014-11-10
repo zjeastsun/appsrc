@@ -28,6 +28,22 @@
     return self;
 }
 
+-(void)getNSUserDafaults
+{
+    NSUserDefaults * def =[NSUserDefaults standardUserDefaults];
+
+    NSString *nsServerAddress;
+    nsServerAddress = [def valueForKey:@"server address"];
+    if ([nsServerAddress length] == 0) {
+        serverIpField.text = [NSString stringWithFormat:@"%s", CENT_ADDRESS.c_str()];
+    }
+    else
+    {
+        serverIpField.text = nsServerAddress;
+    }
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -35,6 +51,8 @@
     // 注册通知，当键盘将要弹出时执行keyboardWillShow方法。
     [self registerObserverForKeyboard];
     [actView setHidden:YES];
+    
+    [self getNSUserDafaults];
     // Do any additional setup after loading the view.
 }
 

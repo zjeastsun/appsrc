@@ -13,9 +13,9 @@
 @property (strong, nonatomic) NSString *nsUserId;
 @property (strong, nonatomic) NSString *nsLoginName;
 
-@property (strong, nonatomic) NSString *nsOrgId;
-@property (strong, nonatomic) NSString *nsOrgIdSelected;
-@property (strong, nonatomic) NSString *nsOrgNameSelected;
+@property (strong, nonatomic) NSString *nsOrgId;//用户所在部门id
+@property (strong, nonatomic) NSString *nsOrgIdSelected;//当前选择的项目id
+@property (strong, nonatomic) NSString *nsOrgNameSelected;//当前选择的项目名称
 
 //权限信息------------------------------------------------------------------------------
 @property (nonatomic) CSelectHelp helpRight;

@@ -19,5 +19,6 @@
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *projectTable;
+- (IBAction)back:(id)sender;
 
 @end

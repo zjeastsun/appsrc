@@ -15,6 +15,7 @@
 - (IBAction)toRectifyView:(id)sender;
 - (IBAction)toReviewRectifyView:(id)sender;
 - (IBAction)toQueryView:(id)sender;
+- (IBAction)set:(id)sender;
 
 
 
