@@ -54,6 +54,7 @@
 		046BD6421A1368BA0054BF22 /* photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 046BD6401A1368BA0054BF22 /* photo.png */; };
 		046BD6431A1368BA0054BF22 /* takephoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 046BD6411A1368BA0054BF22 /* takephoto.png */; };
 		046BD6451A1379450054BF22 /* about.png in Resources */ = {isa = PBXBuildFile; fileRef = 046BD6441A1379450054BF22 /* about.png */; };
+		046BD6481A13938E0054BF22 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046BD6471A13938E0054BF22 /* AboutViewController.m */; };
 		046C338619FC45F200B99A92 /* ReviewBreakRuleSingleViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 046C338519FC45F200B99A92 /* ReviewBreakRuleSingleViewController.mm */; };
 		046C938019CDE54A008221FD /* StringConverterI.mm in Resources */ = {isa = PBXBuildFile; fileRef = 046C937F19CDE54A008221FD /* StringConverterI.mm */; };
 		047167FF19CF3D9500A81F9B /* SetViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 047167FE19CF3D9500A81F9B /* SetViewController.mm */; };
@@ -164,6 +165,8 @@
 		046BD6401A1368BA0054BF22 /* photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = photo.png; path = res/images/photo.png; sourceTree = SOURCE_ROOT; };
 		046BD6411A1368BA0054BF22 /* takephoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = takephoto.png; path = res/images/takephoto.png; sourceTree = SOURCE_ROOT; };
 		046BD6441A1379450054BF22 /* about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = about.png; path = res/images/about.png; sourceTree = SOURCE_ROOT; };
+		046BD6461A13938E0054BF22 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		046BD6471A13938E0054BF22 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		046C338419FC45F200B99A92 /* ReviewBreakRuleSingleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewBreakRuleSingleViewController.h; sourceTree = "<group>"; };
 		046C338519FC45F200B99A92 /* ReviewBreakRuleSingleViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ReviewBreakRuleSingleViewController.mm; sourceTree = "<group>"; };
 		046C937E19CDE536008221FD /* StringConverterI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringConverterI.h; path = BreakRule/eutils/StringConverterI.h; sourceTree = "<group>"; };
@@ -524,6 +527,8 @@
 				04998F7919D38DF200CECB16 /* MainViewController.m */,
 				047167FD19CF3D9500A81F9B /* SetViewController.h */,
 				047167FE19CF3D9500A81F9B /* SetViewController.mm */,
+				046BD6461A13938E0054BF22 /* AboutViewController.h */,
+				046BD6471A13938E0054BF22 /* AboutViewController.m */,
 			);
 			name = main;
 			sourceTree = "<group>";
@@ -698,6 +703,7 @@
 				0478794919DA176D00555F0D /* SafetyItemViewController.mm in Sources */,
 				0458F3B319EC93F00022BC96 /* Eutils.mm in Sources */,
 				0490BE2119E0A28600C83D82 /* CheckItemViewController.mm in Sources */,
+				046BD6481A13938E0054BF22 /* AboutViewController.m in Sources */,
 				047786A61A0645600033C8B4 /* LoadView.m in Sources */,
 				0448781919CC70FB0086CE1B /* main.mm in Sources */,
 				049104B519D8AD74004E052B /* SJAvatarBrowser.mm in Sources */,
@@ -862,6 +868,7 @@
 				INFOPLIST_FILE = "BreakRule/BreakRule-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = "/Library/Developer/IceTouch-1.3/SDKs/ObjC/$(PLATFORM_NAME).sdk/usr/local/lib";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "违规行为";
 				WRAPPER_EXTENSION = app;
 			};
