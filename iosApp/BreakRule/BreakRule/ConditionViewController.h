@@ -14,8 +14,8 @@
     IBOutlet UITextField *endTimeText;
     IBOutlet UIDatePicker *datePicker;
     IBOutlet UIButton *setButton;
-    IBOutlet UITextView *dateBackground;
     IBOutlet UIButton *cancelButton;
+    IBOutlet UIView *dateBackground;
     bool bStartTime;
     
     NSMutableArray *title;
