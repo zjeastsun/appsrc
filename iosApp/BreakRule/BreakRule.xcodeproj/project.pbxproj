@@ -151,8 +151,8 @@
 		0458F3B119EC93F00022BC96 /* Eutils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Eutils.h; path = BreakRule/eutils/Eutils.h; sourceTree = "<group>"; };
 		0458F3B219EC93F00022BC96 /* Eutils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Eutils.mm; path = BreakRule/eutils/Eutils.mm; sourceTree = "<group>"; };
 		045D8A9E19CF899B00D8C6DA /* ProjectViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ProjectViewController.mm; sourceTree = "<group>"; };
-		04625FCA1A0E8AC5000F71D9 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
-		04625FCB1A0E8AD2000F71D9 /* Location.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Location.mm; sourceTree = "<group>"; };
+		04625FCA1A0E8AC5000F71D9 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Location.h; path = BreakRule/eutils/Location.h; sourceTree = "<group>"; };
+		04625FCB1A0E8AD2000F71D9 /* Location.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Location.mm; path = BreakRule/eutils/Location.mm; sourceTree = "<group>"; };
 		04625FCD1A0E9EA5000F71D9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0463A73E19DD6B5D003D966B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		046C338419FC45F200B99A92 /* ReviewBreakRuleSingleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewBreakRuleSingleViewController.h; sourceTree = "<group>"; };
@@ -163,9 +163,9 @@
 		047167FE19CF3D9500A81F9B /* SetViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SetViewController.mm; sourceTree = "<group>"; };
 		0471680019CF678B00A81F9B /* BreakRuleTakePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BreakRuleTakePhotoViewController.h; sourceTree = "<group>"; };
 		0471680119CF678B00A81F9B /* BreakRuleTakePhotoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BreakRuleTakePhotoViewController.mm; sourceTree = "<group>"; };
-		0472C4DE1A0F6497000C0508 /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
-		0472C4DF1A0F667C000C0508 /* IosUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IosUtils.h; sourceTree = "<group>"; };
-		0472C4E01A0F66F6000C0508 /* IosUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IosUtils.mm; sourceTree = "<group>"; };
+		0472C4DE1A0F6497000C0508 /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Global.h; path = BreakRule/eutils/Global.h; sourceTree = "<group>"; };
+		0472C4DF1A0F667C000C0508 /* IosUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IosUtils.h; path = BreakRule/eutils/IosUtils.h; sourceTree = "<group>"; };
+		0472C4E01A0F66F6000C0508 /* IosUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = IosUtils.mm; path = BreakRule/eutils/IosUtils.mm; sourceTree = "<group>"; };
 		047786A21A06450C0033C8B4 /* LoadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadView.xib; sourceTree = "<group>"; };
 		047786A41A0645600033C8B4 /* LoadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadView.h; sourceTree = "<group>"; };
 		047786A51A0645600033C8B4 /* LoadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadView.m; sourceTree = "<group>"; };
