@@ -25,12 +25,40 @@
     return self;
 }
 
+-(void)getNSUserDafaults
+{
+    NSUserDefaults * def =[NSUserDefaults standardUserDefaults];
+    
+    NSString *nsServerAddress;
+    nsServerAddress = [def valueForKey:@"server address"];
+    if ([nsServerAddress length] == 0) {
+        serverAddressTextField.text = [NSString stringWithFormat:@"%s", CENT_ADDRESS.c_str()];
+    }
+    else
+    {
+        serverAddressTextField.text = nsServerAddress;
+    }
+    
+    projectNameTextField.text = [def valueForKey:@"project name"];
+    
+}
+
+-(void)setNSUserDafaults
+{
+    BRIDGE
+    
+    NSUserDefaults * def =[NSUserDefaults standardUserDefaults];
+    [def setObject:serverAddressTextField.text forKey:@"server address"];
+    [def setObject:projectNameTextField.text forKey:@"project name"];
+    [def setObject:bridge.nsOrgIdSelected forKey:@"project id"];
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [IosUtils addTapGuestureOnView:self.view];
-    BRIDGE
-    projectNameTextField.text = bridge.nsOrgNameSelected;
+    [IosUtils addTapGuestureForKeyOnView:self.view];
+    [self getNSUserDafaults];
     // Do any additional setup after loading the view.
 }
 
@@ -53,7 +81,10 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     BRIDGE
-    projectNameTextField.text = bridge.nsOrgNameSelected;
+    if (bridge.nsOrgNameSelected != nil )
+    {
+        projectNameTextField.text= bridge.nsOrgNameSelected;
+    }
 }
 
 - (IBAction)back:(id)sender {
@@ -61,13 +92,7 @@
 }
 
 - (IBAction)save:(id)sender {
-    BRIDGE
-    
-    NSUserDefaults * def =[NSUserDefaults standardUserDefaults];
-    [def setObject:serverAddressTextField.text forKey:@"server address"];
-    [def setObject:projectNameTextField.text forKey:@"project name"];
-    [def setObject:bridge.nsOrgIdSelected forKey:@"project id"];
-
+    [self setNSUserDafaults];
     [self back:nil];
 }
 

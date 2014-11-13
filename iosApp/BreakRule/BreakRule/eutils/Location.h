@@ -15,6 +15,6 @@
 
 /**CLLocation对象转换为图片的GPSDictionary*/
 - (NSDictionary*)LocationToDictionary;
-+ (void)lacationInit:(id)id locationManager:(CLLocationManager*)manager;
+//+ (void)lacationInit:(id)id locationManager:(CLLocationManager*)manager;
 
 @end

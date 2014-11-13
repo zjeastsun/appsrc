@@ -38,6 +38,7 @@
 {
     [super viewDidLoad];
     theLock = [[NSLock alloc] init];
+    bQuerying = false;
     
     [self addTableHeaderView];
     // Do any additional setup after loading the view.
@@ -106,7 +107,7 @@
     cell.titleLabel.text = [SingletonIce valueNSString:helpInfo rowForHelp:row KeyForHelp:"org_name"];
     cell.descLabel.text = [SingletonIce valueNSString:helpInfo rowForHelp:row KeyForHelp:"break_rule_content"];
     
-    NSString *nsTime = [SingletonIce valueNSString:helpInfo rowForHelp:row KeyForHelp:"update_time"];
+    NSString *nsTime = [SingletonIce valueNSString:helpInfo rowForHelp:row KeyForHelp:"pic_time"];
     NSString *nsSubTime = [nsTime substringWithRange:NSMakeRange(2, 14)];
     cell.timeLabel.text = nsSubTime;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -138,9 +139,11 @@
     int iResult = [oneIce getPreReviewBreakRule:helpInfo error:strError];
     [theLock unlock];
     
+    bQuerying = false;
+    
     if( iResult<0 )
     {
-        [IosUtils MessageBox:strError withTitle:"数据库错误"];
+//        [IosUtils MessageBox:strError withTitle:"数据库错误"];
 //        return;
     }
 
@@ -150,14 +153,19 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    
     BRIDGE
     if (![nsReviewStartTimeOld isEqualToString:bridge.nsReviewStartTime] || ![nsReviewEndTimeOld isEqualToString:bridge.nsReviewEndTime] || ![nsRuleTypeOld isEqualToString:bridge.nsRuleTypeForReviewBR]) {
-
-        [actView setHidden:NO];
-        [actView startAnimating];
         
-        NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(queryDb) object:nil];
-        [thread start];
+        if (!bQuerying) {
+            bQuerying = true;
+            [actView setHidden:NO];
+            [actView startAnimating];
+            
+            NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(queryDb) object:nil];
+            [thread start];
+        }
+        
     }
     else
     {
@@ -179,7 +187,7 @@
     bridge.nsReviewBR_BreakRuleIdSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"break_rule_id"];
     bridge.nsReviewBR_OrgNameSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"org_name"];
     bridge.nsReviewBR_BreakRuleTypeSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"break_rule_type"];
-    bridge.nsReviewBR_TimeSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"update_time"];
+    bridge.nsReviewBR_TimeSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"pic_time"];
     bridge.nsReviewBR_BreakRuleContentSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"break_rule_content"];
     bridge.nsReviewBR_CurFlowNodeIdSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"node_id"];
     bridge.nsReviewBR_PicNameSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"pic_name"];
@@ -220,10 +228,13 @@
     //	if (contentPos.y > contentSize.height - frame.size.height)
     if (contentPos.y < -30)
     {
-        [loadView startLoading];
-        //刷新请求更多数据
-        NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(queryDb) object:nil];
-        [thread start];
+        if (!bQuerying) {
+            bQuerying = true;
+            [loadView startLoading];
+            //刷新请求
+            NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(queryDb) object:nil];
+            [thread start];
+        }
 //        [self performSelector:@selector(queryDb) withObject:nil afterDelay:2];
     }
 }

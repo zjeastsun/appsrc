@@ -74,7 +74,7 @@
     iResult = [oneIce getReviewRectifySingle:helpInfo error:strError];
     if( iResult<0 )
     {
-        [IosUtils MessageBox:strError withTitle:"数据库错误"];
+//        [IosUtils MessageBox:strError withTitle:"数据库错误"];
         return;
     }
     
@@ -88,7 +88,7 @@
         [actView setHidden:YES];
         
         if (!bResult) {
-            [IosUtils MessageBox:@"违规图片下载失败！"];
+//            [IosUtils MessageBox:@"违规图片下载失败！"];
             return;
         }
     }
@@ -99,6 +99,7 @@
     //获取保存得图片
     
     UIImage *img = [UIImage imageWithContentsOfFile:nsDesPathName];
+    [IosUtils fixOrientation:img];
     imageView.image = img;
     
 
@@ -118,7 +119,7 @@
     int iResult = [oneIce getRectifySingle:helpRectifyInfo breakRuleId:bridge.nsReviewRectify_BreakRuleIdSelected error:strError];
     if( iResult<0 )
     {
-        [IosUtils MessageBox:strError withTitle:"数据库错误"];
+//        [IosUtils MessageBox:strError withTitle:"数据库错误"];
         return;
     }
     
@@ -132,7 +133,7 @@
         [rectifyActView setHidden:YES];
         
         if (!bResult) {
-            [IosUtils MessageBox:@"整改图片下载失败！"];
+//            [IosUtils MessageBox:@"整改图片下载失败！"];
             return;
         }
     }
@@ -143,6 +144,7 @@
     //获取保存得图片
     
     UIImage *imgRectify = [UIImage imageWithContentsOfFile:nsDesPathNameRectify];
+    [IosUtils fixOrientation:imgRectify];
     imageViewRectify.image = imgRectify;
     
     [rectifyActView stopAnimating];
@@ -153,7 +155,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [IosUtils addTapGuestureOnView:self.view];
+    [IosUtils addTapGuestureForImageView:imageView];
+    [IosUtils addTapGuestureForImageView:imageViewRectify];
+    [IosUtils addTapGuestureForKeyOnView:self.view];
     // 注册通知，当键盘将要弹出时执行keyboardWillShow方法。
     [self registerObserverForKeyboard];
     
@@ -295,7 +299,7 @@
     
     if( !bResult )
     {
-        [IosUtils MessageBox:strError withTitle:"数据库错误"];
+//        [IosUtils MessageBox:strError withTitle:"数据库错误"];
         return;
     }
     

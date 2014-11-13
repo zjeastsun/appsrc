@@ -2,9 +2,10 @@
 
 
 //服务器相关-----------------------------------------------------------
-const string REMOTE_PIC_PATH = "";//服务器保存照片的相对路径文件夹
 const string CENT_ADDRESS = "www.myxui.com";//服务器地址
 const int CENT_PORT = 8840;//iec服务器端口
+const string REMOTE_PIC_PATH = "";//服务器保存照片的相对路径文件夹
+const int CACHE_SIZE = 409600;//文件下载和上传每次上传数据包大小
 
 //本地数据库-----------------------------------------------------------
 #define LOCALDBNAME "break_law_init";//本地数据库文件名
@@ -42,6 +43,10 @@ typedef struct tagPHOTOINFO
     string sLongitude;
     
 } PHOTOINFO;
+
+//摄像头相片拍摄像素
+const int PHOTO_WIDTH = 800;
+const int PHOTO_HEIGHT = 600;
 
 //ios定义---------------------------------------------------------------------
 // 视图上移/下移动画名称

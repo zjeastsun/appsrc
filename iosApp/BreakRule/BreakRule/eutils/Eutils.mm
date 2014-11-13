@@ -2895,9 +2895,8 @@ bool CICEBaseDBUtil::downloadFile(const string& sFile, const string& sDestPath, 
 				{
 					sError = "超过重试次数";
 					pFinished(sFile, -1, sError);
-                    
-//					CDiskObject obj;
-//					obj.RemoveFile(sNewSaveFileTmp);
+ 
+                    remove(sNewSaveFileTmp.c_str());
 				}
 				return false;
 			}
@@ -2932,9 +2931,7 @@ bool CICEBaseDBUtil::downloadFile(const string& sFile, const string& sDestPath, 
 	}
     
 	fclose(fp);
-//	CDiskObject obj;
 	::rename(sNewSaveFileTmp.c_str(), sNewSaveFile.c_str());
-	//obj.RenameFile(sNewSaveFileTmp, util::getFileName(sFile, sTmp));
     
     if (pFinished)
     {

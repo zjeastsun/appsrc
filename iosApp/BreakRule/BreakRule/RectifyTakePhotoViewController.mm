@@ -44,7 +44,7 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
         [actView setHidden:YES];
         
         if (!bResult) {
-            [IosUtils MessageBox:@"图片下载失败！"];
+//            [IosUtils MessageBox:@"图片下载失败！"];
             return;
         }
     }
@@ -66,16 +66,18 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
     bTransmit = false;
     [progressLabel setHidden:YES];
     
-    breakRuleImageView.userInteractionEnabled = YES;
-    rectifyImageView.userInteractionEnabled = YES;
+//    breakRuleImageView.userInteractionEnabled = YES;
+//    rectifyImageView.userInteractionEnabled = YES;
+//    
+//    //点击放大图片
+//    UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(magnifyImage)];
+//    
+//    [breakRuleImageView addGestureRecognizer:tap];
+//    [rectifyImageView addGestureRecognizer:tap];
+    [IosUtils addTapGuestureForImageView:breakRuleImageView];
+    [IosUtils addTapGuestureForImageView:rectifyImageView];
     
-    //点击放大图片
-    UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(magnifyImage)];
-    
-    [breakRuleImageView addGestureRecognizer:tap];
-    [rectifyImageView addGestureRecognizer:tap];
-    
-    [IosUtils addTapGuestureOnView:self.view];
+    [IosUtils addTapGuestureForKeyOnView:self.view];
     // 注册通知，当键盘将要弹出时执行keyboardWillShow方法。
     [self registerObserverForKeyboard];
     
@@ -99,14 +101,14 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
     scrollView.frame = CGRectMake(0, 0, kWidthOfMainScreen, kHeightOfMainScreen);
 }
 
-- (void)magnifyImage
-{
-    NSLog(@"局部放大");
-    if (breakRuleImageView.image != nil) {
-        [SJAvatarBrowser showImage:breakRuleImageView];//调用方法
-    }
-    
-}
+//- (void)magnifyImage
+//{
+//    NSLog(@"局部放大");
+//    if (breakRuleImageView.image != nil) {
+//        [SJAvatarBrowser showImage:breakRuleImageView];//调用方法
+//    }
+//    
+//}
 
 
 - (void)didReceiveMemoryWarning
@@ -344,8 +346,9 @@ void ProcessForRectify(string path, double iProgress)
     
     NSString *nsDesPathName = [filePath stringByAppendingPathComponent:nsPicName];
     
+    UIImage* ima = [IosUtils imageWithImageSimple:rectifyImageView.image scaledToSize:CGSizeMake(PHOTO_WIDTH, PHOTO_HEIGHT)];
     //保存图片
-    BOOL bResult = [UIImagePNGRepresentation(rectifyImageView.image)writeToFile: nsDesPathName    atomically:YES];
+    BOOL bResult = [UIImagePNGRepresentation(ima)writeToFile: nsDesPathName    atomically:YES];
     if (bResult) {
         NSLog(@"success");
     }
@@ -363,7 +366,7 @@ void ProcessForRectify(string path, double iProgress)
     bResult = [oneIce putRectifyInfo:rectifyTextView.text picName:sPicName picInfo:stPhotoInfo error:strError];
     if( !bResult )
     {
-        [IosUtils MessageBox:strError withTitle:"数据库错误"];
+//        [IosUtils MessageBox:strError withTitle:"数据库错误"];
         bTransmit = false;
         return;
     }

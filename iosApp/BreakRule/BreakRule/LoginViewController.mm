@@ -58,7 +58,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [IosUtils addTapGuestureOnView:self.view];
+    [IosUtils addTapGuestureForKeyOnView:self.view];
     // 注册通知，当键盘将要弹出时执行keyboardWillShow方法。
     [self registerObserverForKeyboard];
     [actView setHidden:YES];
@@ -151,7 +151,7 @@ string getIPWithHostName(string hostName)
     bResult = [oneIce getUserInfo:helpUser user:nsUser error:sError];
     if( !bResult )
     {
-        [IosUtils MessageBox:sError withTitle:"错误"];
+        [IosUtils MessageBox:sError withTitle:"获取用户信息错误"];
         [actView stopAnimating];
         return;
     }
@@ -171,7 +171,7 @@ string getIPWithHostName(string hostName)
     bResult = [oneIce getUserInfo:helpRight user:nsUser error:sError];
     if( !bResult )
     {
-        [IosUtils MessageBox:sError withTitle:"错误"];
+        [IosUtils MessageBox:sError withTitle:"获取用户权限错误"];
         [actView stopAnimating];
         return;
     }

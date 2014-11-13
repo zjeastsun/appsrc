@@ -1,5 +1,5 @@
 #import "SingletonIce.h"
-
+#import "IosUtils.h"
 
 @implementation SingletonIce
 
@@ -20,7 +20,7 @@
     
     if (self = [super init]) {
         _g_db = new CICEDBUtil();
-        _g_db->setFileCache(409600);
+        _g_db->setFileCache(CACHE_SIZE);
         bridge = [SingletonBridge sharedInstance];
 
     }
@@ -215,6 +215,8 @@
     string sPicTime = stInfo.sTime;
     string sLongitude = stInfo.sLongitude;
     string sLatitude = stInfo.sLatitude;
+
+    string sUpdateTime = [IosUtils getTime];
     
     SelectHelpParam helpParam;
     helpParam.add(sBreakRuleId);
@@ -225,7 +227,7 @@
     helpParam.add(sPicName);
     helpParam.add(sPicTime);
     helpParam.add(sBreakRuleType);
-    helpParam.add(sPicTime);//UpdateTime
+    helpParam.add(sUpdateTime);
     helpParam.add(sLongitude);
     helpParam.add(sLatitude);
     strParam = helpParam.get();
@@ -410,6 +412,7 @@
     string sPicTime = stInfo.sTime;
     string sLongitude = stInfo.sLongitude;
     string sLatitude = stInfo.sLatitude;
+    string sUpdateTime = [IosUtils getTime];
     
     SelectHelpParam helpParam;
     helpParam.add(sRectifyId);
@@ -418,7 +421,7 @@
     helpParam.add(sRectifyContent);
     helpParam.add(sPicName);
     helpParam.add(sPicTime);
-    helpParam.add(sPicTime);//UpdateTime
+    helpParam.add(sUpdateTime);
     helpParam.add(sLongitude);
     helpParam.add(sLatitude);
     strParam = helpParam.get();

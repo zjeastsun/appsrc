@@ -50,7 +50,7 @@
     
     if( iResult<0 )
     {
-        [IosUtils MessageBox:strError withTitle:"数据库错误"];
+//        [IosUtils MessageBox:strError withTitle:"数据库错误"];
         //        return;
     }
     

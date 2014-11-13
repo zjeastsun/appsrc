@@ -39,6 +39,7 @@
     [super viewDidLoad];
     theLock = [[NSLock alloc] init];
     [self addTableHeaderView];
+    bQuerying = false;
     // Do any additional setup after loading the view.
 }
 
@@ -136,10 +137,11 @@
     [theLock lock];
     int iResult = [oneIce getAllBR:helpInfo error:strError];
     [theLock unlock];
+    bQuerying = false;
     
     if( iResult<0 )
     {
-        [IosUtils MessageBox:strError withTitle:"数据库错误"];
+//        [IosUtils MessageBox:strError withTitle:"数据库错误"];
         //        return;
     }
     
@@ -152,11 +154,14 @@
     BRIDGE
     if (![nsQueryStartTimeOld isEqualToString:bridge.nsQueryStartTime] || ![nsQueryEndTimeOld isEqualToString:bridge.nsQueryEndTime] || ![nsRuleTypeOld isEqualToString:bridge.nsRuleTypeForQuery]) {
         
-        [actView setHidden:NO];
-        [actView startAnimating];
-        
-        NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(queryDb) object:nil];
-        [thread start];
+        if (!bQuerying) {
+            bQuerying = true;
+            [actView setHidden:NO];
+            [actView startAnimating];
+            
+            NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(queryDb) object:nil];
+            [thread start];
+        }
     }
     else
     {
@@ -178,7 +183,7 @@
     bridge.nsQuery_BreakRuleIdSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"break_rule_id"];
     bridge.nsQuery_OrgNameSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"org_name"];
     bridge.nsQuery_BreakRuleTypeSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"break_rule_type"];
-    bridge.nsQuery_TimeSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"update_time"];
+    bridge.nsQuery_TimeSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"pic_time"];
     bridge.nsQuery_BreakRuleContentSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"break_rule_content"];
     bridge.nsQuery_CurFlowNodeIdSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"node_id"];
     bridge.nsQuery_CurFlowNodeNameSelected = [SingletonIce valueNSString:helpInfo rowForHelp:iRow KeyForHelp:"node_name"];
@@ -206,10 +211,13 @@
     CGPoint contentPos = scrollView.contentOffset;
     if (contentPos.y < -30)
     {
-        [loadView startLoading];
-        //刷新请求更多数据
-        NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(queryDb) object:nil];
-        [thread start];
+        if (!bQuerying) {
+            bQuerying = true;
+            [loadView startLoading];
+            //
+            NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(queryDb) object:nil];
+            [thread start];
+        }
     }
 }
 

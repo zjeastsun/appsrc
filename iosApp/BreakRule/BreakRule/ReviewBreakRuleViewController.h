@@ -22,6 +22,8 @@
     
     LoadView* loadView;
     NSLock *theLock;
+    
+    bool bQuerying;//是否正在查询
 }
 
 - (IBAction)back:(id)sender;

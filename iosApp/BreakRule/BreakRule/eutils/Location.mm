@@ -42,15 +42,15 @@
     return gpsDict;
 }
 
-+ (void)lacationInit:(id)id locationManager:(CLLocationManager*)manager
-{
-    if (!manager) {
-        manager = [[CLLocationManager alloc]init];
-        [manager setDelegate:id];
-        [manager setDistanceFilter:kCLDistanceFilterNone];
-        [manager setDesiredAccuracy:kCLLocationAccuracyBest];
-    }
-}
+//+ (void)lacationInit:(id)id locationManager:(CLLocationManager*)manager
+//{
+//    if (!manager) {
+//        manager = [[CLLocationManager alloc]init];
+//        [manager setDelegate:id];
+//        [manager setDistanceFilter:kCLDistanceFilterNone];
+//        [manager setDesiredAccuracy:kCLLocationAccuracyBest];
+//    }
+//}
 
 
 @end

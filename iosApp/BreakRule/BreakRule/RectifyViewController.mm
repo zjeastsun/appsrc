@@ -39,6 +39,7 @@
     [super viewDidLoad];
     theLock = [[NSLock alloc] init];
     [self addTableHeaderView];
+    bQuerying = false;
     // Do any additional setup after loading the view.
 }
 
@@ -139,9 +140,11 @@
     int iResult = [oneIce getPreRectify:helpInfo error:strError];
     [theLock unlock];
     
+    bQuerying = false;
+    
     if( iResult<0 )
     {
-        [IosUtils MessageBox:strError withTitle:"数据库错误"];
+//        [IosUtils MessageBox:strError withTitle:"数据库错误"];
 //        return;
     }
     
@@ -154,11 +157,14 @@
     BRIDGE
     if (![nsRectifyStartTimeOld isEqualToString:bridge.nsRectifyStartTime] || ![nsRectifyEndTimeOld isEqualToString:bridge.nsRectifyEndTime] || ![nsRuleTypeOld isEqualToString:bridge.nsRuleTypeForRectify]) {
         
-        [actView setHidden:NO];
-        [actView startAnimating];
-        
-        NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(queryDb) object:nil];
-        [thread start];
+        if (!bQuerying) {
+            bQuerying = true;
+            [actView setHidden:NO];
+            [actView startAnimating];
+            
+            NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(queryDb) object:nil];
+            [thread start];
+        }
     }
     else
     {
@@ -207,10 +213,13 @@
     
     if (contentPos.y < -30)
     {
-        [loadView startLoading];
-        //刷新请求更多数据
-        NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(queryDb) object:nil];
-        [thread start];
+        if (!bQuerying) {
+            bQuerying = true;
+            [loadView startLoading];
+            //刷新
+            NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(queryDb) object:nil];
+            [thread start];
+        }
     }
 }
 

@@ -2,7 +2,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <ImageIO/ImageIO.h>
-
+#import "SJAvatarBrowser.h"
 
 @implementation IosUtils
 
@@ -47,7 +47,7 @@
 }
 
 // 在view上添加一个UITapGestureRecognizer，实现点击键盘以外空白区域隐藏键盘。
-+ (void)addTapGuestureOnView:(UIView *)view
++ (void)addTapGuestureForKeyOnView:(UIView *)view
 {
     UITapGestureRecognizer *tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
     // 是否取消手势识别
@@ -59,6 +59,26 @@
 
 #pragma mark -
 #pragma mark 照片处理函数
+//点击放大图片
++ (void)addTapGuestureForImageView:(UIImageView *)imageView 
+{
+    imageView.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(magnifyImage:)];
+    [imageView addGestureRecognizer:tap];
+}
+
++ (void)magnifyImage:(UITapGestureRecognizer*)tapGr
+{
+    UIImageView *imageView= (UIImageView*) tapGr.view;
+    NSLog(@"局部放大");
+    if (imageView.image != nil) {
+        [SJAvatarBrowser showImage:imageView];//调用方法
+    }
+    
+}
+
+//无法正常获取数据，如下代码还有问题？
 + (PHOTOINFO)getPhotoInfo:(NSDictionary *)info fromAlbum:(bool)bAlbum
 {
     __block PHOTOINFO stInfo;
@@ -112,6 +132,7 @@
     return stInfo;
 }
 
+/**照片中写入gps信息*/
 + (NSDictionary *)writeGpsToPhoto:(NSDictionary *)mediaInfo location:(CLLocation *)loc
 {
     //获取照片元数据
@@ -145,6 +166,119 @@
     [library writeImageToSavedPhotosAlbum:[image CGImage]
                                  metadata:metadata
                           completionBlock:imageWriteCompletionBlock];
+}
+
+//压缩图片质量
++(UIImage *)reduceImage:(UIImage *)image percent:(float)percent
+{
+    NSData *imageData = UIImageJPEGRepresentation(image, percent);
+    UIImage *newImage = [UIImage imageWithData:imageData];
+    return newImage;
+}
+
+//压缩图片尺寸
++ (UIImage*)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize
+{
+    // Create a graphics image context
+    UIGraphicsBeginImageContext(newSize);
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    // End the context
+    UIGraphicsEndImageContext();
+    // Return the new image.
+    return newImage;
+}
+
+//修正照片方向
++ (void)fixOrientation:(UIImage *)aImage {
+    if (aImage==nil || !aImage) {
+        return;
+    }
+    // No-op if the orientation is already correct
+    if (aImage.imageOrientation == UIImageOrientationUp) return;
+    
+    // We need to calculate the proper transformation to make the image upright.
+    // We do it in 2 steps: Rotate if Left/Right/Down, and then flip if Mirrored.
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    UIImageOrientation orientation=aImage.imageOrientation;
+    int orientation_=orientation;
+    switch (orientation_) {
+        case UIImageOrientationDown:
+        case UIImageOrientationDownMirrored:
+            transform = CGAffineTransformTranslate(transform, aImage.size.width, aImage.size.height);
+            transform = CGAffineTransformRotate(transform, M_PI);
+            break;
+            
+        case UIImageOrientationLeft:
+        case UIImageOrientationLeftMirrored:
+            transform = CGAffineTransformTranslate(transform, aImage.size.width, 0);
+            transform = CGAffineTransformRotate(transform, M_PI_2);
+            break;
+            
+        case UIImageOrientationRight:
+        case UIImageOrientationRightMirrored:
+            transform = CGAffineTransformTranslate(transform, 0, aImage.size.height);
+            transform = CGAffineTransformRotate(transform, -M_PI_2);
+            break;
+    }
+    
+    switch (orientation_) {
+        case UIImageOrientationUpMirrored:{
+            
+        }
+        case UIImageOrientationDownMirrored:
+            transform = CGAffineTransformTranslate(transform, aImage.size.width, 0);
+            transform = CGAffineTransformScale(transform, -1, 1);
+            break;
+            
+        case UIImageOrientationLeftMirrored:
+        case UIImageOrientationRightMirrored:
+            transform = CGAffineTransformTranslate(transform, aImage.size.height, 0);
+            transform = CGAffineTransformScale(transform, -1, 1);
+            break;
+    }
+    
+    // Now we draw the underlying CGImage into a new context, applying the transform
+    // calculated above.
+    CGContextRef ctx = CGBitmapContextCreate(NULL, aImage.size.width, aImage.size.height,
+                                             CGImageGetBitsPerComponent(aImage.CGImage), 0,
+                                             CGImageGetColorSpace(aImage.CGImage),
+                                             CGImageGetBitmapInfo(aImage.CGImage));
+    CGContextConcatCTM(ctx, transform);
+    switch (aImage.imageOrientation) {
+        case UIImageOrientationLeft:
+        case UIImageOrientationLeftMirrored:
+        case UIImageOrientationRight:
+        case UIImageOrientationRightMirrored:
+            // Grr...
+            CGContextDrawImage(ctx, CGRectMake(0,0,aImage.size.height,aImage.size.width), aImage.CGImage);
+            break;
+            
+        default:
+            CGContextDrawImage(ctx, CGRectMake(0,0,aImage.size.width,aImage.size.height), aImage.CGImage);
+            break;
+    }
+    
+    // And now we just create a new UIImage from the drawing context
+    CGImageRef cgimg = CGBitmapContextCreateImage(ctx);
+    UIImage *img = [UIImage imageWithCGImage:cgimg];
+    CGContextRelease(ctx);
+    CGImageRelease(cgimg);
+    aImage=img;
+    img=nil;
+}
+
++ (string)getTime
+{
+    NSDate *  date=[NSDate date];
+    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    NSString *  nsTime=[dateformatter stringFromDate:date];
+    string sTime = [nsTime UTF8String];
+    return sTime;
 }
 
 @end

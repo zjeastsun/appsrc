@@ -28,6 +28,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [IosUtils addTapGuestureForImageView:imageView];
+    [IosUtils addTapGuestureForImageView:imageViewRectify];
+    
     BRIDGE
     
     orgNameTextField.text = bridge.nsQuery_OrgNameSelected;
@@ -92,7 +96,7 @@
         [actView setHidden:YES];
         
         if (!bResult) {
-            [IosUtils MessageBox:@"违规图片下载失败！"];
+//            [IosUtils MessageBox:@"违规图片下载失败！"];
             return;
         }
     }
@@ -102,6 +106,7 @@
     //获取保存得图片
     
     UIImage *img = [UIImage imageWithContentsOfFile:nsDesPathName];
+    [IosUtils fixOrientation:img];
     imageView.image = img;
     
     [actView stopAnimating];
@@ -119,7 +124,7 @@
     int iResult = [oneIce getRectifySingle:helpRectifyInfo breakRuleId:bridge.nsQuery_BreakRuleIdSelected error:strError];
     if( iResult<0 )
     {
-        [IosUtils MessageBox:strError withTitle:"数据库错误"];
+//        [IosUtils MessageBox:strError withTitle:"数据库错误"];
         return;
     }
     
@@ -133,7 +138,7 @@
         [rectifyActView setHidden:YES];
         
         if (!bResult) {
-            [IosUtils MessageBox:@"整改图片下载失败！"];
+//            [IosUtils MessageBox:@"整改图片下载失败！"];
             return;
         }
     }
@@ -144,6 +149,7 @@
     //获取保存得图片
     
     UIImage *imgRectify = [UIImage imageWithContentsOfFile:nsDesPathNameRectify];
+    [IosUtils fixOrientation:imgRectify];
     imageViewRectify.image = imgRectify;
     
     [rectifyActView stopAnimating];

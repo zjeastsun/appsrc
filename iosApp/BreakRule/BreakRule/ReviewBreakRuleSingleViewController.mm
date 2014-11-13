@@ -62,6 +62,8 @@
     
 }
 
+
+
 - (void)queryReview
 {
     BRIDGE
@@ -71,7 +73,7 @@
     int iResult = [oneIce getReviewBreakRuleSingle:helpInfo error:strError];
     if( iResult<0 )
     {
-        [IosUtils MessageBox:strError withTitle:"数据库错误"];
+//        [IosUtils MessageBox:strError withTitle:"数据库错误"];
         return;
     }
     
@@ -84,7 +86,7 @@
         [actView setHidden:YES];
         
         if (!bResult) {
-            [IosUtils MessageBox:@"图片下载失败！"];
+//            [IosUtils MessageBox:@"图片下载失败！"];
             return;
         }
     }
@@ -95,6 +97,7 @@
     //获取保存得图片
     
     UIImage *img = [UIImage imageWithContentsOfFile:nsDesPathName];
+    [IosUtils fixOrientation:img];
     imageView.image = img;
     
     [actView stopAnimating];
@@ -106,7 +109,8 @@
 {
     [super viewDidLoad];
     
-    [IosUtils addTapGuestureOnView:self.view];
+    [IosUtils addTapGuestureForImageView:imageView];
+    [IosUtils addTapGuestureForKeyOnView:self.view];
     // 注册通知，当键盘将要弹出时执行keyboardWillShow方法。
     [self registerObserverForKeyboard];
     
@@ -239,7 +243,7 @@
     bool bResult = [oneIce putBRReview:nsReviewContent grade:sReview_grade nextNodeId:sNextNodeId error:strError];
     if( !bResult )
     {
-        [IosUtils MessageBox:strError withTitle:"数据库错误"];
+//        [IosUtils MessageBox:strError withTitle:"数据库错误"];
         return;
     }
     

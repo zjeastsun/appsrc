@@ -39,14 +39,10 @@ BreakRuleTakePhotoViewController *pBR;
     // Do any additional setup after loading the view.
     title = [[NSMutableArray alloc]initWithObjects:@"判定性质", @"违规选项",nil];
     subTitle = [[NSMutableArray alloc]initWithObjects:@"一般违规", @"自定义",nil];
+
+    [IosUtils addTapGuestureForImageView:imageView];
     
-    imageView.userInteractionEnabled = YES;
-    //点击放大图片
-    UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(magnifyImage)];
-    
-    [imageView addGestureRecognizer:tap];
-    
-    [IosUtils addTapGuestureOnView:self.view];
+    [IosUtils addTapGuestureForKeyOnView:self.view];
     // 注册通知，当键盘将要弹出时执行keyboardWillShow方法。
     [self registerObserverForKeyboard];
     
@@ -80,15 +76,6 @@ BreakRuleTakePhotoViewController *pBR;
     scrollView.frame = CGRectMake(0, 0, kWidthOfMainScreen, kHeightOfMainScreen);
     
     [self lacationInit];
-}
-
-- (void)magnifyImage
-{
-    NSLog(@"局部放大");
-    if (imageView.image != nil) {
-        [SJAvatarBrowser showImage:imageView];//调用方法
-    }
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -262,6 +249,8 @@ BreakRuleTakePhotoViewController *pBR;
     
 }
 
+
+
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
@@ -374,7 +363,7 @@ BreakRuleTakePhotoViewController *pBR;
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
-    NSLog(@"定位成功！");
+    NSLog(@"定位成功！");//会两次定位 ？有问题 
     [manager stopUpdatingLocation];
 
     NSString *nsLatitude = [NSString stringWithFormat:@"%f", newLocation.coordinate.latitude ];
@@ -436,10 +425,21 @@ void Process(string path, double iProgress)
     
     NSString *nsDesPathName = [filePath stringByAppendingPathComponent:nsPicName];
     
+    UIImage* ima = [IosUtils imageWithImageSimple:imageView.image scaledToSize:CGSizeMake(PHOTO_WIDTH, PHOTO_HEIGHT)];
     //保存图片
-    BOOL bResult = [UIImagePNGRepresentation(imageView.image)writeToFile: nsDesPathName    atomically:YES];
+    BOOL bResult = [UIImagePNGRepresentation(ima)writeToFile: nsDesPathName    atomically:YES];
     if (bResult) {
         NSLog(@"success");
+    }
+    
+    string sDesPathName = [nsDesPathName UTF8String];
+    
+    iResult = oneIce.g_db->upload(sDesPathName, REMOTE_PIC_PATH, Process, ProcessFinished);
+    if( iResult<0 )
+    {
+        [IosUtils MessageBox:"上传照片失败" withTitle:"传输错误"];
+        bTransmit = false;
+        return;
     }
     
     //获取保存得图片
@@ -459,15 +459,7 @@ void Process(string path, double iProgress)
         return;
     }
     
-    string sDesPathName = [nsDesPathName UTF8String];
-    
-    iResult = oneIce.g_db->upload(sDesPathName, REMOTE_PIC_PATH, Process, ProcessFinished);
-    if( iResult<0 )
-    {
-        [IosUtils MessageBox:"上传照片失败" withTitle:"传输错误"];
-        bTransmit = false;
-        return;
-    }
+    bridge.nsContent = @"";
     
     bTransmit = false;
     [self back:nil];
