@@ -39,6 +39,8 @@
     UITextView *textViewSelected;
     /** 弹出键盘fame */
     CGRect keyboardRect;
+    bool bHasRight;
+    NSString *nsRightMsg;
     
 }
 - (IBAction)back:(id)sender;

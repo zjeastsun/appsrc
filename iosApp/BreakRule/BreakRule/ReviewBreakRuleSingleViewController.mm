@@ -31,20 +31,33 @@
     
     if( helpInfo.size()== 0 )
     {
-        [reviewContent1TextView setEditable:true];
+        bHasRight = [bridge hasRight:RIGHT_BR_REVIEW_1];
+        nsRightMsg = @"您没有违规初级批阅权限！" ;
+        if (bHasRight) {
+            [reviewContent1TextView setEditable:true];
+        }
+        
 //        reviewContent1TextView.backgroundColor = [UIColor whiteColor];//设置它的背景颜色
     }
     
     if( helpInfo.size()== 1 )
     {
-        [reviewContent2TextView setEditable:true];
+        bHasRight = [bridge hasRight:RIGHT_BR_REVIEW_2];
+        nsRightMsg = @"您没有违规中级批阅权限！" ;
+        if (bHasRight) {
+            [reviewContent2TextView setEditable:true];
+        }
         reviewContent1TextView.text = [SingletonIce valueNSString:helpInfo rowForHelp:0 KeyForHelp:"review_content"];
         
     }
     
     if( helpInfo.size()== 2 )
     {
-        [reviewContent3TextView setEditable:true];
+        bHasRight = [bridge hasRight:RIGHT_BR_REVIEW_3];
+        nsRightMsg = @"您没有违规高级批阅权限！" ;
+        if (bHasRight) {
+            [reviewContent3TextView setEditable:true];
+        }
         reviewContent1TextView.text = [SingletonIce valueNSString:helpInfo rowForHelp:0 KeyForHelp:"review_content"];
         reviewContent2TextView.text = [SingletonIce valueNSString:helpInfo rowForHelp:1 KeyForHelp:"review_content"];
         
@@ -52,7 +65,11 @@
     
     if( helpInfo.size()== 3 )
     {
-        [reviewContent4TextView setEditable:true];
+        bHasRight = [bridge hasRight:RIGHT_BR_REVIEW_4];
+        nsRightMsg = @"您没有违规最高级批阅权限！" ;
+        if (bHasRight) {
+            [reviewContent4TextView setEditable:true];
+        }
         reviewContent1TextView.text = [SingletonIce valueNSString:helpInfo rowForHelp:0 KeyForHelp:"review_content"];
         reviewContent2TextView.text = [SingletonIce valueNSString:helpInfo rowForHelp:1 KeyForHelp:"review_content"];
         reviewContent3TextView.text = [SingletonIce valueNSString:helpInfo rowForHelp:2 KeyForHelp:"review_content"];
@@ -252,6 +269,10 @@
 
 - (IBAction)save:(id)sender {
     
+    if (!bHasRight) {
+        [IosUtils MessageBox:nsRightMsg ];
+        return;
+    }
     [self getReviewInfo];
     
     if ( [nsReviewContent length] == 0) {

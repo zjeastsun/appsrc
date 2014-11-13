@@ -7,7 +7,9 @@
 //
 
 #import "MainViewController.h"
-
+#import "SingletonBridge.h"
+#import "IosUtils.h"
+#import "Global.h"
 @interface MainViewController ()
 
 @end
@@ -47,11 +49,22 @@
 */
 
 - (IBAction)toBreakRuleView:(id)sender {
+    
+    BRIDGE
+    if (![bridge hasRight:RIGHT_BREAK_TULE]) {
+        [IosUtils MessageBox:@"您没有违规抓拍的权限！" ];
+        return;
+    }
     UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"BreakRuleView"];
     [self presentViewController:viewController animated:YES completion:nil];
 }
 
 - (IBAction)toQueryView:(id)sender {
+    BRIDGE
+    if (![bridge hasRight:RIGHT_QUERY]) {
+        [IosUtils MessageBox:@"对不起，您没有查询的权限！" ];
+        return;
+    }
     UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"QueryView"];
     [self presentViewController:viewController animated:YES completion:nil];
 }
@@ -63,16 +76,31 @@
 
 
 - (IBAction)toReviewBreakRule:(id)sender {
+    BRIDGE
+    if (![bridge hasRight:RIGHT_REVIEW_BREAK_TULE]) {
+        [IosUtils MessageBox:@"对不起，您没有批阅违规的权限！" ];
+        return;
+    }
     UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReviewBreakRuleView"];
     [self presentViewController:viewController animated:YES completion:nil];
 }
 
 - (IBAction)toRectifyView:(id)sender {
+    BRIDGE
+    if (![bridge hasRight:RIGHT_RECTIFY]) {
+        [IosUtils MessageBox:@"对不起，您没有整改抓拍的权限！" ];
+        return;
+    }
     UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RectifyView"];
     [self presentViewController:viewController animated:YES completion:nil];
 }
 
 - (IBAction)toReviewRectifyView:(id)sender {
+    BRIDGE
+    if (![bridge hasRight:RIGHT_REVIEW_RECTIFY]) {
+        [IosUtils MessageBox:@"对不起，您没有批阅整改的权限！" ];
+        return;
+    }
     UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReviewRectifyView"];
     [self presentViewController:viewController animated:YES completion:nil];
 }

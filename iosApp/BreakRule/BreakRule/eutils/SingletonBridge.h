@@ -115,6 +115,9 @@
 + (string)getBreakRuleTypeByName:(NSString *)name;
 +(NSString *)getBreakRuleTypeNameById:(NSString *)nsId;
 
+/**是否有权限*/
+- (bool)hasRight:(string)sRightId;
+
 
 
 

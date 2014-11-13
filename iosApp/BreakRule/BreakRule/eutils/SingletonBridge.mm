@@ -110,4 +110,23 @@
     return nsBreakRuleType;
 }
 
+- (bool)hasRight:(string)sRightId
+{
+	string sTemp;
+    
+	if( [_nsLoginName isEqualToString:@"SysAdmin"] )
+	{
+		return true;
+	}
+    
+	for( unsigned int i=0; i<_helpRight.size(); i++)
+	{
+		if( _helpRight.valueString( i, "privilege_code" ) == sRightId )
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 @end

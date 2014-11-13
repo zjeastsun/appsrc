@@ -168,7 +168,7 @@ string getIPWithHostName(string hostName)
     }
     
     CSelectHelp	helpRight;
-    bResult = [oneIce getUserInfo:helpRight user:nsUser error:sError];
+    bResult = [oneIce getRight:helpRight user:nsUser error:sError];
     if( !bResult )
     {
         [IosUtils MessageBox:sError withTitle:"获取用户权限错误"];
