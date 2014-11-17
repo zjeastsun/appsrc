@@ -126,6 +126,9 @@
     }
     [theLock unlock];
 
+    if (helpInfo.size()==0) {
+        loadView.tipLabel.text = @"没有要批阅的整改信息";
+    }
 }
 
 - (void)queryDb

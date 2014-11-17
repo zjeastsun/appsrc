@@ -30,6 +30,9 @@
     IBOutlet UIImageView *imageView;
     IBOutlet UIActivityIndicatorView *actView;
     
+    IBOutlet UILabel *progressLabel;
+    IBOutlet UIProgressView *progressView;
+    
     CSelectHelp	helpInfo;
     string sCurFlowNode;
     string sReview_grade;
@@ -41,6 +44,9 @@
     CGRect keyboardRect;
     bool bHasRight;
     NSString *nsRightMsg;
+    
+    double fProgress;
+    bool bTransmit;//是否正在传输图片
     
 }
 - (IBAction)back:(id)sender;

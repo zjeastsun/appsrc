@@ -10,6 +10,8 @@
 #import "SingletonBridge.h"
 #import "IosUtils.h"
 
+ReviewRectifySingleViewController *pReviewRectifySingleView;
+
 @interface ReviewRectifySingleViewController ()
 
 @end
@@ -94,35 +96,8 @@
         return;
     }
     
-    bool bFileExits = [SingletonIce fileExistsInTemp:bridge.nsReviewRectify_PicNameSelected];
-    
-    bool bResult;
-    if ( !bFileExits ) {
-        bResult = [oneIce downloadFile:bridge.nsReviewRectify_PicNameSelected Callback:nil DoneCallback:nil];
-        
-        [actView stopAnimating];
-        [actView setHidden:YES];
-        
-        if (!bResult) {
-//            [IosUtils MessageBox:@"违规图片下载失败！"];
-            return;
-        }
-    }
     [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
 
-    
-    NSString *nsDesPathName = [SingletonIce getFullTempPathName:bridge.nsReviewRectify_PicNameSelected];
-    //获取保存得图片
-    
-    UIImage *img = [UIImage imageWithContentsOfFile:nsDesPathName];
-    [IosUtils fixOrientation:img];
-    imageView.image = img;
-    
-
-    [actView stopAnimating];
-    [actView setHidden:YES];
-
-    
 }
 
 - (void)queryRectifyInfo
@@ -138,24 +113,92 @@
 //        [IosUtils MessageBox:strError withTitle:"数据库错误"];
         return;
     }
+    [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
     
-    NSString *nsRectifyPicName = [SingletonIce valueNSString:helpRectifyInfo rowForHelp:0 KeyForHelp:"pic_name"];
-    bool bFileExits = [SingletonIce fileExistsInTemp:nsRectifyPicName];
+    NSThread *thread3 = [[NSThread alloc]initWithTarget:self selector:@selector(getRectifyPic) object:nil];
+    [thread3 start];
+}
+
+- (void)updateUIBRPic
+{
+    BRIDGE
     
+    NSString *nsDesPathName = [SingletonIce getFullTempPathName:bridge.nsReviewRectify_PicNameSelected];
+    //获取保存得图片
+    
+    UIImage *img = [UIImage imageWithContentsOfFile:nsDesPathName];
+    [IosUtils fixOrientation:img];
+    imageView.image = img;
+    
+    [actView stopAnimating];
+    [actView setHidden:YES];
+    
+    [self clearStateBR];
+}
+
+- (void)clearStateBR
+{
+    [progressViewBR setProgress:0];
+    [progressViewBR setHidden:YES];
+    
+    bTransmitBR = false;
+    [progressLabelBR setHidden:YES];
+}
+
+- (void)updateUIProcessBR
+{
+    [progressViewBR setProgress:fProgressBR/100];
+    progressLabelBR.text = [NSString stringWithFormat:@"已下载:%0.0f%%", fProgressBR ];
+    
+}
+
+void downProcessFinishedForReviewRectifyBR(string path, int iResult, const string &sError)
+{
+	printf("finished %s-- %d,%s", path.c_str(), iResult, sError.c_str());
+    
+}
+
+void downProcessForReviewRectifyBR(string path, double iProgress)
+{
+	printf("  %s-- %0.2f ", path.c_str(), iProgress );
+    pReviewRectifySingleView->fProgressBR = iProgress;
+    [pReviewRectifySingleView performSelectorOnMainThread:@selector(updateUIProcessBR) withObject:nil waitUntilDone:NO];
+    
+}
+
+bool downSetBreakSignalReviewRectifyBR()
+{
+	return !pReviewRectifySingleView->bTransmitBR;
+    
+}
+
+- (void)getReviewPic
+{
+    BRIDGE
+    ONEICE
+    
+    bool bFileExits = [SingletonIce fileExistsInTemp:bridge.nsReviewRectify_PicNameSelected];
+    
+    bool bResult;
     if ( !bFileExits ) {
-        bool bResult = [oneIce downloadFile:nsRectifyPicName Callback:nil DoneCallback:nil];
+        bResult = [oneIce downloadFile:bridge.nsReviewRectify_PicNameSelected Callback:downProcessForReviewRectifyBR DoneCallback:downProcessFinishedForReviewRectifyBR setBreakSignal:downSetBreakSignalReviewRectifyBR];
         
-        [rectifyActView stopAnimating];
-        [rectifyActView setHidden:YES];
+        [actView stopAnimating];
+        [actView setHidden:YES];
         
         if (!bResult) {
-//            [IosUtils MessageBox:@"整改图片下载失败！"];
+            //            [IosUtils MessageBox:@"违规图片下载失败！"];
             return;
         }
     }
+    [self performSelectorOnMainThread:@selector(updateUIBRPic) withObject:nil waitUntilDone:NO];
+}
+
+- (void)updateUIRectifyPic
+{
+    BRIDGE
     
-    [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
-    
+    NSString *nsRectifyPicName = [SingletonIce valueNSString:helpRectifyInfo rowForHelp:0 KeyForHelp:"pic_name"];
     NSString *nsDesPathNameRectify = [SingletonIce getFullTempPathName:nsRectifyPicName];
     //获取保存得图片
     
@@ -166,6 +209,67 @@
     [rectifyActView stopAnimating];
     [rectifyActView setHidden:YES];
     
+    [self clearStateRectify];
+}
+
+- (void)clearStateRectify
+{
+    [progressViewRectify setProgress:0];
+    [progressViewRectify setHidden:YES];
+    
+    bTransmitRectify = false;
+    [progressLabelRectify setHidden:YES];
+}
+
+- (void)updateUIProcessRectify
+{
+    [progressViewRectify setProgress:fProgressRectify/100];
+    progressLabelRectify.text = [NSString stringWithFormat:@"已下载:%0.0f%%", fProgressRectify ];
+    
+}
+
+void downProcessFinishedForReviewRectifyRectify(string path, int iResult, const string &sError)
+{
+	printf("finished %s-- %d,%s", path.c_str(), iResult, sError.c_str());
+    
+}
+
+void downProcessForReviewRectifyRectify(string path, double iProgress)
+{
+	printf("  %s-- %0.2f ", path.c_str(), iProgress );
+    pReviewRectifySingleView->fProgressRectify = iProgress;
+    [pReviewRectifySingleView performSelectorOnMainThread:@selector(updateUIProcessRectify) withObject:nil waitUntilDone:NO];
+    
+}
+
+bool downSetBreakSignalReviewRectifyRectify()
+{
+	return !pReviewRectifySingleView->bTransmitRectify;
+    
+}
+
+- (void)getRectifyPic
+{
+    BRIDGE
+    ONEICE
+    
+    string strError;
+    
+    NSString *nsRectifyPicName = [SingletonIce valueNSString:helpRectifyInfo rowForHelp:0 KeyForHelp:"pic_name"];
+    bool bFileExits = [SingletonIce fileExistsInTemp:nsRectifyPicName];
+    
+    if ( !bFileExits ) {
+        bool bResult = [oneIce downloadFile:nsRectifyPicName Callback:downProcessForReviewRectifyRectify DoneCallback:downProcessFinishedForReviewRectifyRectify setBreakSignal:downSetBreakSignalReviewRectifyRectify];
+        
+        [rectifyActView stopAnimating];
+        [rectifyActView setHidden:YES];
+        
+        if (!bResult) {
+            //            [IosUtils MessageBox:@"整改图片下载失败！"];
+            return;
+        }
+    }
+    [self performSelectorOnMainThread:@selector(updateUIRectifyPic) withObject:nil waitUntilDone:NO];
 }
 
 - (void)viewDidLoad
@@ -176,6 +280,8 @@
     [IosUtils addTapGuestureForKeyOnView:self.view];
     // 注册通知，当键盘将要弹出时执行keyboardWillShow方法。
     [self registerObserverForKeyboard];
+    
+    pReviewRectifySingleView = self;
     
     BRIDGE
     
@@ -194,11 +300,23 @@
     [rectifyActView setHidden:NO];
     [rectifyActView startAnimating];
     
+    [progressViewBR setProgress:0];
+    bTransmitBR = true;
+    progressLabelBR.text = @"正在加载...";
+    [progressViewRectify setProgress:0];
+    bTransmitRectify = true;
+    progressLabelRectify.text = @"正在加载...";
+    
     NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(queryReview) object:nil];
     [thread start];
     
     NSThread *thread1 = [[NSThread alloc]initWithTarget:self selector:@selector(queryRectifyInfo) object:nil];
     [thread1 start];
+    
+    NSThread *thread2 = [[NSThread alloc]initWithTarget:self selector:@selector(getReviewPic) object:nil];
+    [thread2 start];
+    
+    
 
     
     // Do any additional setup after loading the view.
@@ -231,6 +349,8 @@
 */
 
 - (IBAction)back:(id)sender {
+    bTransmitBR = false;
+    bTransmitRectify = false;
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -29,12 +29,21 @@
     IBOutlet UITextView *rectifyContentTextField;
     IBOutlet UITextField *flowState;
     
+    IBOutlet UILabel *progressLabelBR;
+    IBOutlet UILabel *progressLabelRectify;
+    IBOutlet UIProgressView *progressViewBR;
+    IBOutlet UIProgressView *progressViewRectify;
+    
     CSelectHelp	helpInfo;
     CSelectHelp helpRectifyInfo;
     
     string sReview_grade;
     string sReviewContent;
     
+    double fProgressBR;
+    double fProgressRectify;
+    bool bTransmitBR;//是否正在传输图片
+    bool bTransmitRectify;
 }
 
 - (IBAction)back:(id)sender;

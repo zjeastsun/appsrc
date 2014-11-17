@@ -33,6 +33,11 @@
     IBOutlet UITextView *breakRuleContentTextField;
     IBOutlet UITextView *rectifyContentTextField;
     
+    IBOutlet UILabel *progressLabelBR;
+    IBOutlet UILabel *progressLabelRectify;
+    IBOutlet UIProgressView *progressViewBR;
+    IBOutlet UIProgressView *progressViewRectify;
+    
     CSelectHelp	helpInfo;
     CSelectHelp helpRectifyInfo;
     
@@ -47,6 +52,11 @@
     
     bool bHasRight;
     NSString *nsRightMsg;
+    
+    double fProgressBR;
+    double fProgressRectify;
+    bool bTransmitBR;//是否正在传输图片
+    bool bTransmitRectify;
 }
 
 - (IBAction)back:(id)sender;

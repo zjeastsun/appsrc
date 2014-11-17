@@ -51,7 +51,7 @@
 - (IBAction)toBreakRuleView:(id)sender {
     
     BRIDGE
-    if (![bridge hasRight:RIGHT_BREAK_TULE]) {
+    if (![bridge hasRight:RIGHT_BREAK_RULE]) {
         [IosUtils MessageBox:@"您没有违规抓拍的权限！" ];
         return;
     }
@@ -77,7 +77,7 @@
 
 - (IBAction)toReviewBreakRule:(id)sender {
     BRIDGE
-    if (![bridge hasRight:RIGHT_REVIEW_BREAK_TULE]) {
+    if (![bridge hasRight:RIGHT_REVIEW_BREAK_RULE]) {
         [IosUtils MessageBox:@"对不起，您没有批阅违规的权限！" ];
         return;
     }

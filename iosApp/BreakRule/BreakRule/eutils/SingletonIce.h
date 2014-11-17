@@ -33,7 +33,7 @@
 + (bool)fileExistsInTemp:(NSString *)nsFileName;
 
 /**从服务器下载文件*/
-- (bool)downloadFile:(NSString *)nsFileName Callback:(ProgressFileCallback)pF DoneCallback:(ProgressFileDoneCallback)pFinished;
+- (bool)downloadFile:(NSString *)nsFileName Callback:(ProgressFileCallback)pF DoneCallback:(ProgressFileDoneCallback)pFinished setBreakSignal:(setBreakTransmitSignalCallback)pSignal;
 
 #pragma mark -
 #pragma mark 数据库查询函数

@@ -28,6 +28,8 @@
         _nsRuleTypeForQuery = @"全部";
         _nsRuleTypeForReviewRectify = @"全部";
         _nsRuleTypeForRectify = @"全部";
+
+        _helpRight = new CSelectHelp();
     }
     
     return self;
@@ -119,9 +121,9 @@
 		return true;
 	}
     
-	for( unsigned int i=0; i<_helpRight.size(); i++)
+	for( unsigned int i=0; i<_helpRight->size(); i++)
 	{
-		if( _helpRight.valueString( i, "privilege_code" ) == sRightId )
+		if( _helpRight->valueString( i, "privilege_code" ) == sRightId )
 		{
 			return true;
 		}

@@ -193,9 +193,8 @@ BreakRuleTakePhotoViewController *pBR;
 }
 
 - (IBAction)back:(id)sender {
-    if (bTransmit) {
-        return;
-    }
+    bTransmit = false;
+    
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -387,20 +386,35 @@ BreakRuleTakePhotoViewController *pBR;
 
 void ProcessFinished(string path, int iResult, const string &sError)
 {
-	printf("finished %s--%d,%s", path.c_str(), iResult, sError.c_str());
-    [pBR->progressView setHidden:YES];
-    [pBR->progressLabel setHidden:YES];
+	printf("finished %s-- %d,%s", path.c_str(), iResult, sError.c_str());
+
+    [pBR clearState];
 }
 
 void Process(string path, double iProgress)
 {
-	printf("  %s--%0.2f ", path.c_str(), iProgress );
+	printf("  %s-- %0.2f ", path.c_str(), iProgress );
     pBR->fProgress = iProgress;
     [pBR performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
    
 }
- 
--(void)insertInfoToDb:(NSString *)param
+
+bool setBreakSignal()
+{
+	return !pBR->bTransmit;
+    
+}
+
+- (void)clearState
+{
+    [progressView setProgress:0];
+    [progressView setHidden:YES];
+    
+    bTransmit = false;
+    [progressLabel setHidden:YES];
+}
+
+- (void)insertInfoToDb:(NSString *)param
 {
     ONEICE
     BRIDGE
@@ -417,6 +431,7 @@ void Process(string path, double iProgress)
     if( sPicName == "" )
     {
         [IosUtils MessageBox:"获取照片ID失败" withTitle:"数据库错误"];
+        [self clearState];
         return;
     }
     
@@ -434,11 +449,13 @@ void Process(string path, double iProgress)
     
     string sDesPathName = [nsDesPathName UTF8String];
     
-    iResult = oneIce.g_db->upload(sDesPathName, REMOTE_PIC_PATH, Process, ProcessFinished);
+    iResult = oneIce.g_db->upload(sDesPathName, REMOTE_PIC_PATH, Process, ProcessFinished, setBreakSignal);
     if( iResult<0 )
     {
-        [IosUtils MessageBox:"上传照片失败" withTitle:"传输错误"];
-        bTransmit = false;
+        if (iResult!=-2) {
+            [IosUtils MessageBox:"上传照片错误" withTitle:"传输错误"];
+        }
+        [self clearState];
         return;
     }
     
@@ -456,12 +473,12 @@ void Process(string path, double iProgress)
     if( !bResult )
     {
         [IosUtils MessageBox:strError withTitle:"数据库错误"];
+        [self clearState];
         return;
     }
     
     bridge.nsContent = @"";
     
-    bTransmit = false;
     [self back:nil];
 }
 

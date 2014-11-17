@@ -18,7 +18,7 @@
 @property (strong, nonatomic) NSString *nsOrgNameSelected;//当前选择的项目名称
 
 //权限信息------------------------------------------------------------------------------
-@property (nonatomic) CSelectHelp helpRight;
+@property (nonatomic) CSelectHelp *helpRight;
 
 //违规抓拍--------------------------------------------------------------------------------
 @property (strong, nonatomic) NSString *nsRuleType;

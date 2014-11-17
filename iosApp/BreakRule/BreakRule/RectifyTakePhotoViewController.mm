@@ -29,6 +29,58 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
     return self;
 }
 
+- (void)clearStateDown
+{
+    [progressDownView setProgress:0];
+    [progressDownView setHidden:YES];
+    
+    bTransmitDown = false;
+    [progressDownLabel setHidden:YES];
+}
+
+- (void)updateUIPic
+{
+    BRIDGE
+    
+    NSString *nsDesPathName = [SingletonIce getFullTempPathName:bridge.nsRectify_PicNameSelected];
+    //获取保存得图片
+    
+    UIImage *img = [UIImage imageWithContentsOfFile:nsDesPathName];
+    [IosUtils fixOrientation:img];
+    breakRuleImageView.image = img;
+    
+    [actView stopAnimating];
+    [actView setHidden:YES];
+    [self clearStateDown];
+}
+
+- (void)updateUIProcessDown
+{
+    [progressDownView setProgress:fProgressDown/100];
+    progressDownLabel.text = [NSString stringWithFormat:@"已下载:%0.0f%%", fProgressDown ];
+    
+}
+
+void downloadProcessFinishedForRectify(string path, int iResult, const string &sError)
+{
+	printf("finished %s-- %d,%s", path.c_str(), iResult, sError.c_str());
+    
+}
+
+void downloadProcessForRectify(string path, double iProgress)
+{
+	printf("  %s-- %0.2f ", path.c_str(), iProgress );
+    pRectifyTakePhotoView->fProgressDown = iProgress;
+    [pRectifyTakePhotoView performSelectorOnMainThread:@selector(updateUIProcessDown) withObject:nil waitUntilDone:NO];
+    
+}
+
+bool setBreakSignalDownForRectify()
+{
+	return !pRectifyTakePhotoView->bTransmitDown;
+    
+}
+
 - (void)downloadPic
 {
     BRIDGE
@@ -38,7 +90,7 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
     
     bool bResult;
     if ( !bFileExits ) {
-        bResult = [oneIce downloadFile:bridge.nsRectify_PicNameSelected Callback:nil DoneCallback:nil];
+        bResult = [oneIce downloadFile:bridge.nsRectify_PicNameSelected Callback:downloadProcessForRectify DoneCallback:downloadProcessFinishedForRectify  setBreakSignal:setBreakSignalDownForRectify];
         
         [actView stopAnimating];
         [actView setHidden:YES];
@@ -49,31 +101,15 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
         }
     }
     
-    NSString *nsDesPathName = [SingletonIce getFullTempPathName:bridge.nsRectify_PicNameSelected];
-    //获取保存得图片
-    
-    UIImage *img = [UIImage imageWithContentsOfFile:nsDesPathName];
-    breakRuleImageView.image = img;
-    
-    [actView stopAnimating];
-    [actView setHidden:YES];
+    [self performSelectorOnMainThread:@selector(updateUIPic) withObject:nil waitUntilDone:NO];
     
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    bTransmit = false;
-    [progressLabel setHidden:YES];
+    bTransmitUp = false;
     
-//    breakRuleImageView.userInteractionEnabled = YES;
-//    rectifyImageView.userInteractionEnabled = YES;
-//    
-//    //点击放大图片
-//    UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(magnifyImage)];
-//    
-//    [breakRuleImageView addGestureRecognizer:tap];
-//    [rectifyImageView addGestureRecognizer:tap];
     [IosUtils addTapGuestureForImageView:breakRuleImageView];
     [IosUtils addTapGuestureForImageView:rectifyImageView];
     
@@ -82,14 +118,20 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
     [self registerObserverForKeyboard];
     
     pRectifyTakePhotoView = self;
-    [progressView setHidden:YES];
-    [progressView setProgressViewStyle:UIProgressViewStyleDefault]; //设置进度条类型
+    [progressUpView setHidden:YES];
+    [progressUpView setProgressViewStyle:UIProgressViewStyleDefault]; //设置进度条类型
+    [progressUpLabel setHidden:YES];
     
     BRIDGE
     breakRuleTextView.text = bridge.nsRectify_BreakRuleContentSelected;
     
     [actView setHidden:NO];
     [actView startAnimating];
+    
+    [progressDownView setProgress:0];
+    bTransmitDown = true;
+    progressDownLabel.text = @"正在加载...";
+    
     NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(downloadPic) object:nil];
     [thread start];
     
@@ -129,15 +171,15 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
 */
 
 - (IBAction)back:(id)sender {
-    if (bTransmit) {
-        return;
-    }
+
+    bTransmitUp = false;
+    bTransmitDown = false;
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)save:(id)sender {
     
-    if (bTransmit) {
+    if (bTransmitUp) {
         return;
     }
     
@@ -152,12 +194,13 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
         [IosUtils MessageBox:@"您还没有拍照或者导入照片！"];
         return;
     }
-    [progressView setProgress:0];
-    [progressView setHidden:NO];
-    [progressLabel setHidden:NO];
-    progressLabel.text = @"正在上传...";
+    [progressUpView setProgress:0];
+    [progressUpView setHidden:NO];
+    [progressUpLabel setHidden:NO];
+    progressUpLabel.text = @"正在上传...";
     
-    bTransmit = true;
+    
+    bTransmitUp = true;
     NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(insertInfoToDb:) object:nil];
     [thread start];
 }
@@ -302,25 +345,39 @@ RectifyTakePhotoViewController *pRectifyTakePhotoView;
     
 }
 
-- (void)updateUI
+- (void)updateUIProcessUp
 {
-    [pRectifyTakePhotoView->progressView setProgress:fProgress/100];
-    progressLabel.text = [NSString stringWithFormat:@"已上传:%0.0f%%", fProgress ];
+    [pRectifyTakePhotoView->progressUpView setProgress:fProgressUp/100];
+    progressUpLabel.text = [NSString stringWithFormat:@"已上传:%0.0f%%", fProgressUp ];
 }
 
-void ProcessFinishedForRectify(string path, int iResult, const string &sError)
+void uploadProcessFinishedForRectify(string path, int iResult, const string &sError)
 {
-	printf("finished %s--%d,%s", path.c_str(), iResult, sError.c_str());
-    [pRectifyTakePhotoView->progressView setHidden:YES];
-    [pRectifyTakePhotoView->progressLabel setHidden:YES];
+	printf("finished %s-- %d,%s", path.c_str(), iResult, sError.c_str());
+    [pRectifyTakePhotoView clearStateUp];
 }
 
-void ProcessForRectify(string path, double iProgress)
+void uploadProcessForRectify(string path, double iProgress)
 {
-	printf("  %s--%0.2f ", path.c_str(), iProgress );
-    pRectifyTakePhotoView->fProgress = iProgress;
-    [pRectifyTakePhotoView performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+	printf("  %s-- %0.2f ", path.c_str(), iProgress );
+    pRectifyTakePhotoView->fProgressUp = iProgress;
+    [pRectifyTakePhotoView performSelectorOnMainThread:@selector(updateUIProcessUp) withObject:nil waitUntilDone:NO];
     
+}
+
+bool setBreakSignalUpForRectify()
+{
+	return !pRectifyTakePhotoView->bTransmitUp;
+    
+}
+
+- (void)clearStateUp
+{
+    [progressUpView setProgress:0];
+    [progressUpView setHidden:YES];
+    
+    bTransmitUp = false;
+    [progressUpLabel setHidden:YES];
 }
 
 -(void)insertInfoToDb:(NSString *)param
@@ -338,6 +395,7 @@ void ProcessForRectify(string path, double iProgress)
     if( sPicName == "" )
     {
         [IosUtils MessageBox:"获取照片ID错误" withTitle:"数据库错误"];
+        [self clearStateUp];
         return;
     }
     
@@ -355,10 +413,14 @@ void ProcessForRectify(string path, double iProgress)
     
     string sDesPathName = [nsDesPathName UTF8String];
     
-    iResult = oneIce.g_db->upload(sDesPathName, REMOTE_PIC_PATH, ProcessForRectify, ProcessFinishedForRectify);
+    iResult = oneIce.g_db->upload(sDesPathName, REMOTE_PIC_PATH, uploadProcessForRectify, uploadProcessFinishedForRectify, setBreakSignalUpForRectify);
     if( iResult<0 )
     {
-        [IosUtils MessageBox:"上传照片错误" withTitle:"传输错误"];
+        if (iResult!=-2) {
+            [IosUtils MessageBox:"上传照片错误" withTitle:"传输错误"];
+        }
+        
+        [self clearStateUp];
         return;
     }
     
@@ -367,11 +429,10 @@ void ProcessForRectify(string path, double iProgress)
     if( !bResult )
     {
 //        [IosUtils MessageBox:strError withTitle:"数据库错误"];
-        bTransmit = false;
+        [self clearStateUp];
         return;
     }
     
-    bTransmit = false;
     [self back:nil];
 }
 

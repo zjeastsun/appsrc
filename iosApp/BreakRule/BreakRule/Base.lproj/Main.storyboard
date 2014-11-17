@@ -537,7 +537,7 @@
                                         <color key="backgroundColor" red="0.8531759511" green="0.8531759511" blue="0.8531759511" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="30C-Uc-ObD">
-                                        <rect key="frame" x="62" y="233" width="37" height="37"/>
+                                        <rect key="frame" x="62" y="204" width="37" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </activityIndicatorView>
@@ -561,8 +561,20 @@
                                         <rect key="frame" x="165" y="308" width="150" height="2"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </progressView>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="fVn-6w-YA1">
+                                        <rect key="frame" x="6" y="308" width="150" height="2"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </progressView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.49999999999999961" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已上传:100%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SwI-jC-rgz">
                                         <rect key="frame" x="189" y="241" width="102" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已上传:100%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ud2-9Q-JNO">
+                                        <rect key="frame" x="29" y="241" width="102" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -622,8 +634,10 @@
                         <outlet property="actView" destination="30C-Uc-ObD" id="dw4-4E-zNn"/>
                         <outlet property="breakRuleImageView" destination="qPu-Bb-4pk" id="bhK-dg-f5L"/>
                         <outlet property="breakRuleTextView" destination="iiN-KQ-XlF" id="s28-27-PjB"/>
-                        <outlet property="progressLabel" destination="SwI-jC-rgz" id="MRX-dg-CgY"/>
-                        <outlet property="progressView" destination="YAW-qe-emV" id="VcG-4Q-UWJ"/>
+                        <outlet property="progressDownLabel" destination="Ud2-9Q-JNO" id="gGQ-yd-Ssa"/>
+                        <outlet property="progressDownView" destination="fVn-6w-YA1" id="pwH-1q-Nwx"/>
+                        <outlet property="progressUpLabel" destination="SwI-jC-rgz" id="MKM-a4-cwE"/>
+                        <outlet property="progressUpView" destination="YAW-qe-emV" id="FoS-p7-URw"/>
                         <outlet property="rectifyImageView" destination="E2L-OO-1zi" id="gbF-qy-FJy"/>
                         <outlet property="rectifyTextView" destination="Amp-Ft-Zqw" id="1l8-6h-6c7"/>
                         <outlet property="scrollView" destination="bPl-Jp-nSp" id="FMC-4D-2m1"/>
@@ -1149,7 +1163,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         <rect key="frame" x="26" y="149" width="269" height="331"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="www.myxui.com" borderStyle="roundedRect" minimumFontSize="17" id="E2k-yx-La7">
+                                    <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="E2k-yx-La7">
                                         <rect key="frame" x="44" y="374" width="129" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1856,9 +1870,21 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         </connections>
                                     </textView>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="uaU-lU-f4b">
-                                        <rect key="frame" x="142" y="293" width="37" height="37"/>
+                                        <rect key="frame" x="142" y="255" width="37" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </activityIndicatorView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.49999999999999961" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已下载:100%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vt5-83-FGy">
+                                        <rect key="frame" x="41" y="300" width="238" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="x5G-Qh-UQE">
+                                        <rect key="frame" x="0.0" y="391" width="320" height="2"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </progressView>
                                 </subviews>
                                 <connections>
                                     <outlet property="delegate" destination="qVl-Or-5Fn" id="HGA-1k-1GZ"/>
@@ -1884,6 +1910,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="breakRuleContentTextField" destination="6sd-5J-iPC" id="YXR-o6-r1O"/>
                         <outlet property="imageView" destination="Yx8-cB-p40" id="7BP-k8-rYL"/>
                         <outlet property="orgNameTextField" destination="NRt-Bj-Nbh" id="elV-uG-3F6"/>
+                        <outlet property="progressLabel" destination="Vt5-83-FGy" id="Eps-RY-Cqj"/>
+                        <outlet property="progressView" destination="x5G-Qh-UQE" id="7Xk-XU-Y06"/>
                         <outlet property="reviewContent1TextView" destination="npY-lU-Aca" id="gI4-kW-iM4"/>
                         <outlet property="reviewContent2TextView" destination="Qdu-kq-SAC" id="pQM-3A-GoX"/>
                         <outlet property="reviewContent3TextView" destination="QsX-qZ-rs9" id="HV7-iq-wph"/>
@@ -2143,8 +2171,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         </connections>
                                     </textView>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="4Bp-Xx-wIr">
-                                        <rect key="frame" x="61" y="376" width="37" height="37"/>
+                                        <rect key="frame" x="61" y="348" width="37" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="color" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="整改图片：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PQn-eN-2n4">
                                         <rect key="frame" x="162" y="303" width="85" height="21"/>
@@ -2165,8 +2194,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         <color key="backgroundColor" red="0.8531759511" green="0.8531759511" blue="0.8531759511" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="WMb-zN-eOq">
-                                        <rect key="frame" x="220" y="376" width="37" height="37"/>
+                                        <rect key="frame" x="220" y="348" width="37" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="color" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="整改内容：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gua-Fv-5ZV">
                                         <rect key="frame" x="3" y="236" width="85" height="21"/>
@@ -2181,6 +2211,30 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已上传:100%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rJv-vJ-HVb">
+                                        <rect key="frame" x="28" y="384" width="102" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已上传:100%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uRZ-vm-jWL">
+                                        <rect key="frame" x="187" y="384" width="102" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="a2E-xo-3qP">
+                                        <rect key="frame" x="5" y="453" width="150" height="2"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </progressView>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="bBJ-FM-MZH">
+                                        <rect key="frame" x="164" y="453" width="150" height="2"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </progressView>
                                 </subviews>
                                 <connections>
                                     <outlet property="delegate" destination="qrv-8s-lrl" id="RLB-dg-nLN"/>
@@ -2207,6 +2261,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="imageView" destination="eyq-kz-NK7" id="RAV-Gg-J1U"/>
                         <outlet property="imageViewRectify" destination="wFN-Hq-Ywu" id="tcn-KU-ruE"/>
                         <outlet property="orgNameTextField" destination="h5O-Uz-Bwf" id="Y4Z-1g-gz6"/>
+                        <outlet property="progressLabelBR" destination="rJv-vJ-HVb" id="s21-Az-4AN"/>
+                        <outlet property="progressLabelRectify" destination="uRZ-vm-jWL" id="1A4-hY-l1u"/>
+                        <outlet property="progressViewBR" destination="a2E-xo-3qP" id="N4b-s8-l6t"/>
+                        <outlet property="progressViewRectify" destination="bBJ-FM-MZH" id="38Z-J4-Nq2"/>
                         <outlet property="rectifyActView" destination="WMb-zN-eOq" id="zgd-bC-nwM"/>
                         <outlet property="rectifyContentTextField" destination="qOm-yv-lpS" id="TjD-ag-aDB"/>
                         <outlet property="reviewContent1TextView" destination="b5N-yO-SRB" id="Nc7-cB-E77"/>
@@ -2315,7 +2373,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="aTi-kR-uvY">
-                                        <rect key="frame" x="61" y="400" width="37" height="37"/>
+                                        <rect key="frame" x="61" y="367" width="37" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="整改图片：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RLi-ie-brZ">
@@ -2337,7 +2395,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         <color key="backgroundColor" red="0.8531759511" green="0.8531759511" blue="0.8531759511" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="nAd-FP-MC8">
-                                        <rect key="frame" x="220" y="400" width="37" height="37"/>
+                                        <rect key="frame" x="220" y="367" width="37" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="整改内容：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Or6-LP-g02">
@@ -2372,6 +2430,30 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已上传:100%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AFa-HS-kN2">
+                                        <rect key="frame" x="28" y="408" width="102" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已上传:100%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vfL-YP-KQU">
+                                        <rect key="frame" x="187" y="408" width="102" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="13H-QU-hDg">
+                                        <rect key="frame" x="5" y="477" width="150" height="2"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </progressView>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="Mwv-49-Ydp">
+                                        <rect key="frame" x="164" y="477" width="150" height="2"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </progressView>
                                 </subviews>
                                 <connections>
                                     <outlet property="delegate" destination="s4x-ha-u85" id="NsQ-KB-kuc"/>
@@ -2394,6 +2476,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="imageView" destination="Xit-gs-Qug" id="bYz-yN-gz8"/>
                         <outlet property="imageViewRectify" destination="gQ6-0v-9tU" id="ibj-uV-piL"/>
                         <outlet property="orgNameTextField" destination="khw-S3-UqC" id="388-3D-Z6O"/>
+                        <outlet property="progressLabelBR" destination="AFa-HS-kN2" id="zEH-ZS-chd"/>
+                        <outlet property="progressLabelRectify" destination="vfL-YP-KQU" id="Fft-fQ-OJg"/>
+                        <outlet property="progressViewBR" destination="13H-QU-hDg" id="WD7-lp-YNi"/>
+                        <outlet property="progressViewRectify" destination="Mwv-49-Ydp" id="YWq-2O-M5U"/>
                         <outlet property="rectifyActView" destination="nAd-FP-MC8" id="0Vg-Qm-xId"/>
                         <outlet property="rectifyContentTextField" destination="1z9-gc-RVu" id="Rua-6t-HTr"/>
                         <outlet property="rectifyTimeTextField" destination="qS9-5O-yVs" id="DQW-JH-5Lj"/>

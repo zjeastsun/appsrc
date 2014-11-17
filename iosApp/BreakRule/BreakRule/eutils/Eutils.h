@@ -1720,6 +1720,7 @@ public:
 #include <Ice/BuiltinSequences.h>
 typedef void(*ProgressFileCallback)(string path, double iProgress);
 typedef void(*ProgressFileDoneCallback)(string path, int iResult, const string& sError);
+typedef bool(*setBreakTransmitSignalCallback)();
 
 class CICEBaseDBUtil
 {
@@ -1818,7 +1819,7 @@ public:
 	int getFileCompressed(const ::std::string& sFile, int pos, int num, Ice::ByteSeq& bytes) const;
     
 	//下载文件
-	bool downloadFile(const string& sFile, const string& sDestPath, ProgressFileCallback pF = NULL, ProgressFileDoneCallback pFinished = NULL);
+	bool downloadFile(const string& sFile, const string& sDestPath, ProgressFileCallback pF = NULL, ProgressFileDoneCallback pFinished = NULL, setBreakTransmitSignalCallback pSignal = NULL);
     
     
 	//上传文件
@@ -1826,7 +1827,7 @@ public:
      *  sFile 本地文件
      *  sRemotePath 远程目录
      */
-	int upload(const string& sFile, const string& sRemotePath, ProgressFileCallback pF = NULL, ProgressFileDoneCallback pFinished = NULL);
+	int upload(const string& sFile, const string& sRemotePath, ProgressFileCallback pF = NULL, ProgressFileDoneCallback pFinished = NULL, setBreakTransmitSignalCallback pSignal = NULL);
     
 	//上传文件
 	int uploadFileCompressed(const ::std::string& sSrcFile, ::Ice::Int pos,int num,const ::Ice::ByteSeq& fileContent);
@@ -2041,9 +2042,9 @@ public:
         return m_db.getFileCompressed(sFile, pos, num, bytes);
     }
     
-    bool downloadFile(const string& sFile, const string& sDestPath, ProgressFileCallback pF = NULL, ProgressFileDoneCallback pFinished = NULL)
+    bool downloadFile(const string& sFile, const string& sDestPath, ProgressFileCallback pF = NULL, ProgressFileDoneCallback pFinished = NULL, setBreakTransmitSignalCallback pSignal = NULL)
     {
-        return m_db.downloadFile(sFile, sDestPath, pF, pFinished);
+        return m_db.downloadFile(sFile, sDestPath, pF, pFinished, pSignal);
     }
     
     //上传文件
@@ -2053,15 +2054,22 @@ public:
         return m_db.uploadFileCompressed(sSrcFile, pos,num, fileContent);
     }
     
-    int upload(const string& sFile, const string& sRemotePath, ProgressFileCallback pF = NULL, ProgressFileDoneCallback pFinished = NULL)
+    int upload(const string& sFile, const string& sRemotePath, ProgressFileCallback pF = NULL, ProgressFileDoneCallback pFinished = NULL, setBreakTransmitSignalCallback pSignal = NULL)
     {
-        return m_db.upload(sFile, sRemotePath, pF,pFinished);
+        return m_db.upload(sFile, sRemotePath, pF,pFinished, pSignal);
     }
     
     void setFileCache(int iCacheSize)
 	{
 		m_db.setFileCache(iCacheSize);
 	}
+    
+    void setFileRetryTimes( int iCount )
+    {
+        m_db.setFileRetryTimes(iCount);
+    }
+
+    
 ///////////////////////////////////////////////
     
     int plugin(const string& pname,const string& cmd,const string& param,string& out)

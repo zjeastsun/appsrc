@@ -2843,7 +2843,7 @@ int CICEBaseDBUtil::uploadFileCompressed(const ::std::string& sSrcFile, ::Ice::I
 }
 
 bool CICEBaseDBUtil::downloadFile(const string& sFile, const string& sDestPath, ProgressFileCallback pF,
-                                  ProgressFileDoneCallback pFinished)
+                                  ProgressFileDoneCallback pFinished, setBreakTransmitSignalCallback pSignal)
 {
 	//int iRetryTimes = 10;
     
@@ -2879,6 +2879,18 @@ bool CICEBaseDBUtil::downloadFile(const string& sFile, const string& sDestPath, 
 	Ice::ByteSeq bytes;
 	while (iSize > iCurPos)
 	{
+        
+        if( pSignal && pSignal() )
+        {
+            if (pFinished)
+            {
+                sError = "用户中断传输";
+                pFinished(sFile, -2, sError);
+                
+                remove(sNewSaveFileTmp.c_str());
+            }
+            return false;
+        }
         
 		bytes.clear();
 		//保存的值在bytes
@@ -2941,11 +2953,10 @@ bool CICEBaseDBUtil::downloadFile(const string& sFile, const string& sDestPath, 
     
 }
 
-int CICEBaseDBUtil::upload(const string& sSrcFile,const string& sRemotePath, ProgressFileCallback pF , ProgressFileDoneCallback pFinished )
+int CICEBaseDBUtil::upload(const string& sSrcFile,const string& sRemotePath, ProgressFileCallback pF , ProgressFileDoneCallback pFinished, setBreakTransmitSignalCallback pSignal)
 {
 	int iCacheSize = getFileCache();
 	int iRetryTimes = getFileRetryTimes();
-    
     
 	
 	string sFileName;
@@ -2980,6 +2991,15 @@ int CICEBaseDBUtil::upload(const string& sSrcFile,const string& sRemotePath, Pro
 	int iCurRetry = 0;
 	while ((iRead = fread(&bytes[0], 1, iCacheSize, fp)) > 0)
 	{
+        if( pSignal && pSignal() )
+        {
+            if (pFinished)
+            {
+                pFinished(sSrcFile, -2, "用户中断传输");
+            }
+            return -2;
+        }
+
 		int iWrite = IC_GET_DB->UploadFile(sRemotePath + "/" + sFileName, iCurPos, static_cast<int>(bytes.size()), bytes);
         
 		if (iWrite <= 0)

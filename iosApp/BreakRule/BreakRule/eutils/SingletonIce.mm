@@ -21,6 +21,7 @@
     if (self = [super init]) {
         _g_db = new CICEDBUtil();
         _g_db->setFileCache(CACHE_SIZE);
+        _g_db->setFileRetryTimes(RETRRY_TIMES);
         bridge = [SingletonBridge sharedInstance];
 
     }
@@ -93,7 +94,7 @@
     return false;
 }
 
-- (bool)downloadFile:(NSString *)nsFileName Callback:(ProgressFileCallback)pF DoneCallback:(ProgressFileDoneCallback)pFinished
+- (bool)downloadFile:(NSString *)nsFileName Callback:(ProgressFileCallback)pF DoneCallback:(ProgressFileDoneCallback)pFinished setBreakSignal:(setBreakTransmitSignalCallback)pSignal
 {
     if (nsFileName == nil) {
         return false;
@@ -105,7 +106,7 @@
     string sFileName = REMOTE_PIC_PATH;
     sFileName += [nsFileName UTF8String];
     
-    bool bResult = _g_db->downloadFile(sFileName, sDesPathName, pF, pFinished);
+    bool bResult = _g_db->downloadFile(sFileName, sDesPathName, pF, pFinished, pSignal);
     
     return bResult;
 }

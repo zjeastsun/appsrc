@@ -18,15 +18,18 @@
     IBOutlet UIImageView *breakRuleImageView;
     IBOutlet UIImageView *rectifyImageView;
     IBOutlet UIScrollView *scrollView;
-    IBOutlet UILabel *progressLabel;
+    IBOutlet UILabel *progressUpLabel;
+    IBOutlet UILabel *progressDownLabel;
     
     
     /** 弹出键盘fame */
     CGRect keyboardRect;
     UITextView *textViewSelected;
     
-    IBOutlet UIProgressView *progressView;
-    double fProgress;
+    IBOutlet UIProgressView *progressUpView;
+    IBOutlet UIProgressView *progressDownView;
+    double fProgressUp;
+    double fProgressDown;
     
     IBOutlet UIActivityIndicatorView *actView;
     
@@ -39,7 +42,8 @@
     
     PHOTOINFO stPhotoInfo;
     
-    bool bTransmit;//是否正在传输图片
+    bool bTransmitUp;//是否正在传输图片
+    bool bTransmitDown;
 }
 - (IBAction)back:(id)sender;
 - (IBAction)save:(id)sender;

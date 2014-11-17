@@ -55,6 +55,17 @@
     
 }
 
+-(void)setNSUserDafaults
+{
+    BRIDGE
+    
+    NSUserDefaults * def =[NSUserDefaults standardUserDefaults];
+//    [def setObject:serverAddressTextField.text forKey:@"server address"];
+//    [def setObject:projectNameTextField.text forKey:@"project name"];
+//    [def setObject:bridge.nsOrgIdSelected forKey:@"project id"];
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -177,7 +188,7 @@ string getIPWithHostName(string hostName)
     }
     
     if (helpRight.size()>0) {
-        bridge.helpRight.copy(helpRight);
+        bridge.helpRight->copy(helpRight);
     }
     
     [actView stopAnimating];
@@ -337,6 +348,7 @@ string getIPWithHostName(string hostName)
     //    [superview DidAppear:animated];
     scrollView.frame = CGRectMake(0, 0, kWidthOfMainScreen, kHeightOfMainScreen);
 //    [scrollView setContentSize:CGSizeMake(320, 700)];
+    [self getNSUserDafaults];
 
 }
 

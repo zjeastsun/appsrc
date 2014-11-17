@@ -129,6 +129,9 @@
     }
     [theLock unlock];
 
+    if (helpInfo.size()==0) {
+        loadView.tipLabel.text = @"没有待整改抓拍的违规信息";
+    }
 }
 
 - (void)queryDb

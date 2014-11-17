@@ -10,6 +10,8 @@
 #import "SingletonBridge.h"
 #import "IosUtils.h"
 
+ReviewBreakRuleSingleViewController *pReviewBR;
+
 @interface ReviewBreakRuleSingleViewController ()
 
 @end
@@ -77,38 +79,13 @@
     }
     orgNameTextField.text = bridge.nsReviewBR_OrgNameSelected;
     
+    
+    
 }
 
-
-
-- (void)queryReview
+- (void)updateUIPic
 {
     BRIDGE
-    ONEICE
-
-    string strError;
-    int iResult = [oneIce getReviewBreakRuleSingle:helpInfo error:strError];
-    if( iResult<0 )
-    {
-//        [IosUtils MessageBox:strError withTitle:"数据库错误"];
-        return;
-    }
-    
-    bool bFileExits = [SingletonIce fileExistsInTemp:bridge.nsReviewBR_PicNameSelected];
-
-    if ( !bFileExits ) {
-        bool bResult = [oneIce downloadFile:bridge.nsReviewBR_PicNameSelected Callback:nil DoneCallback:nil];
-        
-        [actView stopAnimating];
-        [actView setHidden:YES];
-        
-        if (!bResult) {
-//            [IosUtils MessageBox:@"图片下载失败！"];
-            return;
-        }
-    }
-    
-    [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
     
     NSString *nsDesPathName = [SingletonIce getFullTempPathName:bridge.nsReviewBR_PicNameSelected];
     //获取保存得图片
@@ -119,12 +96,89 @@
     
     [actView stopAnimating];
     [actView setHidden:YES];
+    [self clearState];
+}
 
+- (void)clearState
+{
+    [progressView setProgress:0];
+    [progressView setHidden:YES];
+    
+    bTransmit = false;
+    [progressLabel setHidden:YES];
+}
+
+- (void)updateUIProcess
+{
+    [progressView setProgress:fProgress/100];
+    progressLabel.text = [NSString stringWithFormat:@"已下载:%0.0f%%", fProgress ];
+    
+}
+
+void downloadProcessFinishedForReviewBR(string path, int iResult, const string &sError)
+{
+	printf("finished %s-- %d,%s", path.c_str(), iResult, sError.c_str());
+    
+}
+
+void downloadProcessForReviewBR(string path, double iProgress)
+{
+	printf("  %s-- %0.2f ", path.c_str(), iProgress );
+    pReviewBR->fProgress = iProgress;
+    [pReviewBR performSelectorOnMainThread:@selector(updateUIProcess) withObject:nil waitUntilDone:NO];
+    
+}
+
+bool downloadSetBreakSignal()
+{
+	return !pReviewBR->bTransmit;
+    
+}
+
+- (void)queryReview
+{
+    ONEICE
+
+    string strError;
+    int iResult = [oneIce getReviewBreakRuleSingle:helpInfo error:strError];
+    if( iResult<0 )
+    {
+        [IosUtils MessageBox:"请重新刷新页面！" withTitle:"网络错误"];
+        return;
+    }
+    [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+}
+
+- (void)getReviewPic
+{
+    BRIDGE
+    ONEICE
+    
+    bool bFileExits = [SingletonIce fileExistsInTemp:bridge.nsReviewBR_PicNameSelected];
+    
+    if ( !bFileExits ) {
+        bool bResult = [oneIce downloadFile:bridge.nsReviewBR_PicNameSelected Callback:downloadProcessForReviewBR DoneCallback:downloadProcessFinishedForReviewBR setBreakSignal:downloadSetBreakSignal];
+        
+        [actView stopAnimating];
+        [actView setHidden:YES];
+        
+        if (!bResult) {
+            //            [IosUtils MessageBox:@"图片下载失败！"];
+            [self clearState];
+            return;
+        }
+    }
+    
+    [self performSelectorOnMainThread:@selector(updateUIPic) withObject:nil waitUntilDone:NO];
+    
+    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    pReviewBR = self;
     
     [IosUtils addTapGuestureForImageView:imageView];
     [IosUtils addTapGuestureForKeyOnView:self.view];
@@ -145,9 +199,15 @@
     [actView setHidden:NO];
     [actView startAnimating];
     
+    [progressView setProgress:0];
+    bTransmit = true;
+    progressLabel.text = @"正在加载...";
+    
     NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(queryReview) object:nil];
     [thread start];
     
+    NSThread *thread1 = [[NSThread alloc]initWithTarget:self selector:@selector(getReviewPic) object:nil];
+    [thread1 start];
     // Do any additional setup after loading the view.
 }
 
@@ -178,6 +238,7 @@
 */
 
 - (IBAction)back:(id)sender {
+    bTransmit = false;
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
