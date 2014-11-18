@@ -3,6 +3,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <ImageIO/ImageIO.h>
 #import "SJAvatarBrowser.h"
+#import "PZPhotoView.h"
 
 @implementation IosUtils
 
@@ -59,24 +60,6 @@
 
 #pragma mark -
 #pragma mark 照片处理函数
-//点击放大图片
-+ (void)addTapGuestureForImageView:(UIImageView *)imageView 
-{
-    imageView.userInteractionEnabled = YES;
-    
-    UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(magnifyImage:)];
-    [imageView addGestureRecognizer:tap];
-}
-
-+ (void)magnifyImage:(UITapGestureRecognizer*)tapGr
-{
-    UIImageView *imageView= (UIImageView*) tapGr.view;
-    NSLog(@"局部放大");
-    if (imageView.image != nil) {
-        [SJAvatarBrowser showImage:imageView];//调用方法
-    }
-    
-}
 
 //无法正常获取数据，如下代码还有问题？
 + (PHOTOINFO)getPhotoInfo:(NSDictionary *)info fromAlbum:(bool)bAlbum
@@ -280,5 +263,6 @@
     string sTime = [nsTime UTF8String];
     return sTime;
 }
+
 
 @end

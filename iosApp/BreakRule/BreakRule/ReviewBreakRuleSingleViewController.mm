@@ -174,13 +174,35 @@ bool downloadSetBreakSignal()
     
 }
 
+- (void)addTapGuestureForImageView:(UIImageView *)imaView
+{
+    imaView.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(magnifyImage:)];
+    [imaView addGestureRecognizer:tap];
+}
+
+- (void)magnifyImage:(UITapGestureRecognizer*)tapGr
+{
+    UIImageView *imaView= (UIImageView*) tapGr.view;
+    NSLog(@"局部放大");
+    if (imaView.image != nil) {
+        BRIDGE
+        bridge.image = imaView.image;
+        UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MagnifyImageView"];
+        [self presentViewController:viewController animated:YES completion:nil];
+        
+    }
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     pReviewBR = self;
     
-    [IosUtils addTapGuestureForImageView:imageView];
+    [self addTapGuestureForImageView:imageView];
     [IosUtils addTapGuestureForKeyOnView:self.view];
     // 注册通知，当键盘将要弹出时执行keyboardWillShow方法。
     [self registerObserverForKeyboard];
@@ -242,8 +264,10 @@ bool downloadSetBreakSignal()
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)getReviewInfo
+- (bool)getReviewInfo
 {
+    bool bResult = true;
+    
     BRIDGE
     string sCurNodeId = [bridge.nsReviewBR_CurFlowNodeIdSelected UTF8String];
     int iCurNodeId = atoi(sCurNodeId.c_str());
@@ -272,7 +296,12 @@ bool downloadSetBreakSignal()
 
                 
             default:
+            {
+                [IosUtils MessageBox:"流程ID号错误" withTitle:"数据库错误"];
+                bResult = false;
                 break;
+            }
+                
         }
     }
     else//无需整改结束流程
@@ -307,8 +336,15 @@ bool downloadSetBreakSignal()
         }
             
         default:
+        {
+            [IosUtils MessageBox:"流程ID号错误" withTitle:"数据库错误"];
+            bResult = false;
             break;
+            
+        }
     }
+    
+    return bResult;
     
 }
 
@@ -334,7 +370,7 @@ bool downloadSetBreakSignal()
         [IosUtils MessageBox:nsRightMsg ];
         return;
     }
-    [self getReviewInfo];
+    if( ![self getReviewInfo] ) return;
     
     if ( [nsReviewContent length] == 0) {
         [IosUtils MessageBox:"请输入批阅内容！" withTitle:"错误"];

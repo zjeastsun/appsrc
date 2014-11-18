@@ -18,8 +18,6 @@
 
 #pragma mark -
 #pragma mark 照片处理函数
-/**点击放大图片*/
-+ (void)addTapGuestureForImageView:(UIImageView *)imageView;
 /**获取照片信息*/
 + (PHOTOINFO)getPhotoInfo:(NSDictionary *)info fromAlbum:(bool)bAlbum;
 /**照片中写入gps信息*/

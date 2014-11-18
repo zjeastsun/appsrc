@@ -105,13 +105,35 @@ bool setBreakSignalDownForRectify()
     
 }
 
+- (void)addTapGuestureForImageView:(UIImageView *)imaView
+{
+    imaView.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(magnifyImage:)];
+    [imaView addGestureRecognizer:tap];
+}
+
+- (void)magnifyImage:(UITapGestureRecognizer*)tapGr
+{
+    UIImageView *imaView= (UIImageView*) tapGr.view;
+    NSLog(@"局部放大");
+    if (imaView.image != nil) {
+        BRIDGE
+        bridge.image = imaView.image;
+        UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MagnifyImageView"];
+        [self presentViewController:viewController animated:YES completion:nil];
+        
+    }
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     bTransmitUp = false;
     
-    [IosUtils addTapGuestureForImageView:breakRuleImageView];
-    [IosUtils addTapGuestureForImageView:rectifyImageView];
+    [self addTapGuestureForImageView:breakRuleImageView];
+    [self addTapGuestureForImageView:rectifyImageView];
     
     [IosUtils addTapGuestureForKeyOnView:self.view];
     // 注册通知，当键盘将要弹出时执行keyboardWillShow方法。

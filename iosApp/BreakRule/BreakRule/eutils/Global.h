@@ -1,5 +1,7 @@
 //全局定义
 //"Global.h"
+#include <string>
+using std::string;
 
 //服务器相关--------------------------------------------------
 const string CENT_ADDRESS = "www.myxui.com";//服务器地址

@@ -1,18 +1,21 @@
 //
-//  AboutViewController.m
+//  magnifyImageViewController.m
 //  BreakRule
 //
-//  Created by mac on 14-11-12.
+//  Created by mac on 14-11-18.
 //  Copyright (c) 2014年 mac. All rights reserved.
 //
 
-#import "AboutViewController.h"
+#import "magnifyImageViewController.h"
+#import "PZPhotoView.h"
+#import"Global.h"
+#import "SingletonBridge.h"
 
-@interface AboutViewController ()
+@interface magnifyImageViewController ()< PZPhotoViewDelegate>
 
 @end
 
-@implementation AboutViewController
+@implementation magnifyImageViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,10 +30,24 @@
 {
     [super viewDidLoad];
     
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
-    NSString *build = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"];
+    BRIDGE
     
-    verLabel.text = [NSString stringWithFormat:@"版本：%@.%@", version, build ];
+    PZPhotoView *photoView = [[PZPhotoView alloc] initWithFrame:kBoundsOfMainScreen];
+    
+    [UIView beginAnimations:@"view flip" context:nil];
+    [UIView setAnimationDuration:1];
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.view cache:YES];
+    [self.view addSubview:photoView];
+    [UIView commitAnimations];
+    
+    
+    UIImage *image = bridge.image;
+    
+    photoView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    photoView.photoViewDelegate = self;
+    
+    [photoView displayImage:image];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -50,8 +67,8 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-- (IBAction)back:(id)sender {
+- (void)photoViewDidSingleTap:(PZPhotoView *)photoView {
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
+
 @end

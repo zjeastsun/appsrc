@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface AboutViewController : UIViewController
-
+{
+    IBOutlet UILabel *verLabel;
+}
 - (IBAction)back:(id)sender;
 @end

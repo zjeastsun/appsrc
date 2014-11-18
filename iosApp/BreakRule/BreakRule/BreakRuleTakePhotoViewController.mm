@@ -32,6 +32,28 @@ BreakRuleTakePhotoViewController *pBR;
     return self;
 }
 
+- (void)addTapGuestureForImageView:(UIImageView *)imaView
+{
+    imaView.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(magnifyImage:)];
+    [imaView addGestureRecognizer:tap];
+}
+
+- (void)magnifyImage:(UITapGestureRecognizer*)tapGr
+{
+    UIImageView *imaView= (UIImageView*) tapGr.view;
+    NSLog(@"局部放大");
+    if (imaView.image != nil) {
+        BRIDGE
+        bridge.image = imaView.image;
+        UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MagnifyImageView"];
+        [self presentViewController:viewController animated:YES completion:nil];
+        
+    }
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -40,7 +62,8 @@ BreakRuleTakePhotoViewController *pBR;
     title = [[NSMutableArray alloc]initWithObjects:@"判定性质", @"违规选项",nil];
     subTitle = [[NSMutableArray alloc]initWithObjects:@"一般违规", @"自定义",nil];
 
-    [IosUtils addTapGuestureForImageView:imageView];
+//    [IosUtils addTapGuestureForImageView:imageView];
+    [self addTapGuestureForImageView:imageView];
     
     [IosUtils addTapGuestureForKeyOnView:self.view];
     // 注册通知，当键盘将要弹出时执行keyboardWillShow方法。
@@ -583,5 +606,6 @@ bool setBreakSignal()
 {
     [self adjustViewForKeyboardReveal:NO textView:textViewSelected];
 }
+
 
 @end

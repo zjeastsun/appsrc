@@ -27,12 +27,34 @@ QuerySingleViewController *pQueryView;
     return self;
 }
 
+- (void)addTapGuestureForImageView:(UIImageView *)imaView
+{
+    imaView.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(magnifyImage:)];
+    [imaView addGestureRecognizer:tap];
+}
+
+- (void)magnifyImage:(UITapGestureRecognizer*)tapGr
+{
+    UIImageView *imaView= (UIImageView*) tapGr.view;
+    NSLog(@"局部放大");
+    if (imaView.image != nil) {
+        BRIDGE
+        bridge.image = imaView.image;
+        UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MagnifyImageView"];
+        [self presentViewController:viewController animated:YES completion:nil];
+        
+    }
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    [IosUtils addTapGuestureForImageView:imageView];
-    [IosUtils addTapGuestureForImageView:imageViewRectify];
+    [self addTapGuestureForImageView:imageView];
+    [self addTapGuestureForImageView:imageViewRectify];
     
     pQueryView = self;
     

@@ -106,7 +106,7 @@
     cell.titleLabel.text = [SingletonIce valueNSString:helpInfo rowForHelp:row KeyForHelp:"org_name"];
     cell.descLabel.text = [SingletonIce valueNSString:helpInfo rowForHelp:row KeyForHelp:"break_rule_content"];
     
-    NSString *nsTime = [SingletonIce valueNSString:helpInfo rowForHelp:row KeyForHelp:"update_time"];
+    NSString *nsTime = [SingletonIce valueNSString:helpInfo rowForHelp:row KeyForHelp:"pic_time"];
     NSString *nsSubTime = [nsTime substringWithRange:NSMakeRange(2, 14)];
     cell.timeLabel.text = nsSubTime;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

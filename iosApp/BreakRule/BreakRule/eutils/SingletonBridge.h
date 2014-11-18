@@ -103,6 +103,8 @@
 @property (strong, nonatomic) NSString *nsQueryStartTime;//查询时间
 @property (strong, nonatomic) NSString *nsQueryEndTime;
 
+//放大的图片
+@property (strong, nonatomic) UIImage *image;
 //---------------------------------------------------------------------------------------------
 + (SingletonBridge *)sharedInstance;
 - (void)unInit;
