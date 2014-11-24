@@ -11,7 +11,7 @@
 	<key>CFBundleIconFile</key>
 	<string>exe.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>hehe.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>www.eastsun.net.teachPush</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -23,7 +23,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>7</string>
+	<string>0</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>

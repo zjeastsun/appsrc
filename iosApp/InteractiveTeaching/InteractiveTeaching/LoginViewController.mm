@@ -53,9 +53,6 @@
     nsOrgNameSelected = [def valueForKey:@"project name"];
     bridge.nsOrgNameSelected = nsOrgNameSelected;
     
-    userField.text =  [def valueForKey:@"user"];
-    pwdField.text =  [def valueForKey:@"pwd"];
-    
 }
 
 -(void)setNSUserDafaults
@@ -63,9 +60,6 @@
     BRIDGE
     
     NSUserDefaults * def =[NSUserDefaults standardUserDefaults];
-
-    [def setObject:userField.text forKey:@"user"];
-    [def setObject:pwdField.text forKey:@"pwd"];
 //    [def setObject:serverAddressTextField.text forKey:@"server address"];
 //    [def setObject:projectNameTextField.text forKey:@"project name"];
 //    [def setObject:bridge.nsOrgIdSelected forKey:@"project id"];
@@ -218,8 +212,6 @@ string getIPWithHostName(string hostName)
 //    return;
     [actView setHidden:NO];
     [actView startAnimating];
-    
-    [self setNSUserDafaults];
     
     NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(dbHandleThread:) object:nil];
     [thread start];

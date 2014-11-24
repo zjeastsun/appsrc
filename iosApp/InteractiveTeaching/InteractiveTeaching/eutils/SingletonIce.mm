@@ -297,49 +297,7 @@
     return sNodeId;
     
 }
-- (int)getPreReviewBreakRule:(CSelectHelp &)help error:(string &)strError
-{
-    string sNodeId = [self getNodeIdForReviewBR];
-    
-    string sIfRuleType;
-    if ([bridge.nsRuleTypeForReviewBR isEqualToString:@"全部"])
-    {
-        sIfRuleType = "";
-    }
-    else
-    {
-        string sRuleType = [SingletonBridge getBreakRuleTypeByName:bridge.nsRuleTypeForReviewBR];
-        util::string_format(sIfRuleType, " and a.break_rule_type=%s ", sRuleType.c_str());
-    }
-    
-    if (bridge.nsReviewStartTime == nil || bridge.nsReviewEndTime == nil)
-    {
-        NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
-        [dateformatter setDateFormat:@"YYYY-MM-dd"];
-        
-        NSDate *  endDate=[NSDate date];
-        bridge.nsReviewEndTime=[dateformatter stringFromDate:endDate];
-        
-        NSDate* startDate = [[NSDate alloc] init];
-        startDate = [endDate dateByAddingTimeInterval:-60*3600*24];
-        bridge.nsReviewStartTime =[dateformatter stringFromDate:startDate];
-    }
-    
-    string sStartTime, sEndTime;
-    sStartTime = [bridge.nsReviewStartTime UTF8String];
-    sEndTime = [bridge.nsReviewEndTime UTF8String];
-    sEndTime += " 23:59:59";
-    
-    string sql;
-    util::string_format(sql, "SELECT top 20 a.pic_time, a.node_id, a.pic_name, a.update_time, c.node_name, b.org_name, a.break_rule_id, a.break_rule_type, substring(break_rule_content,0,100)  as  break_rule_content FROM BR_BREAK_RULE_INFO a, T_ORGANIZATION b, FLOW_NODE c where a.org_id =b.org_id  and c.node_id=a.node_id and  a.node_id in ( %s ) %s and a.update_time>='%s' and a.update_time<='%s' order by pic_time desc",
-        sNodeId.c_str(), sIfRuleType.c_str(), sStartTime.c_str(), sEndTime.c_str());
-    
-    int iResult = _g_db->select(sql, help, strError);
-    
-    return iResult;
-}
 
-/*
 - (int)getPreReviewBreakRule:(CSelectHelp &)help error:(string &)strError
 {
     string strParam="";
@@ -384,7 +342,6 @@
 
     return iResult;
 }
-*/
 
 - (int)getReviewBreakRuleSingle:(CSelectHelp &)help error:(string &)strError
 {
@@ -548,49 +505,6 @@
 
 - (int)getPreReviewRectify:(CSelectHelp &)help error:(string &)strError
 {
-    string sNodeId = [self getNodeIdForReviewRectify];
-    
-    string sIfRuleType;
-    if ([bridge.nsRuleTypeForReviewRectify isEqualToString:@"全部"])
-    {
-        sIfRuleType = "";
-    }
-    else
-    {
-        string sRuleType = [SingletonBridge getBreakRuleTypeByName:bridge.nsRuleTypeForReviewRectify];
-        util::string_format(sIfRuleType, " and a.break_rule_type=%s ", sRuleType.c_str());
-    }
-    
-    if (bridge.nsReviewRectifyStartTime == nil || bridge.nsReviewRectifyEndTime == nil)
-    {
-        NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
-        [dateformatter setDateFormat:@"YYYY-MM-dd"];
-        
-        NSDate *  endDate=[NSDate date];
-        bridge.nsReviewRectifyEndTime=[dateformatter stringFromDate:endDate];
-        
-        NSDate* startDate = [[NSDate alloc] init];
-        startDate = [endDate dateByAddingTimeInterval:-60*3600*24];
-        bridge.nsReviewRectifyStartTime =[dateformatter stringFromDate:startDate];
-    }
-    
-    string sStartTime, sEndTime;
-    sStartTime = [bridge.nsReviewRectifyStartTime UTF8String];
-    sEndTime = [bridge.nsReviewRectifyEndTime UTF8String];
-    sEndTime += " 23:59:59";
-    
-    string sql;
-    util::string_format(sql, "SELECT top 20 a.pic_time, a.node_id, a.pic_name, a.update_time, c.node_name, b.org_name, a.break_rule_id, a.break_rule_type, substring(break_rule_content,0,100)  as  break_rule_content FROM BR_BREAK_RULE_INFO a, T_ORGANIZATION b,FLOW_NODE c where a.org_id =b.org_id  and c.node_id=a.node_id and  a.node_id in ( %s )  %s and a.update_time>='%s' and a.update_time<='%s' and a.break_rule_id  in ( select break_rule_id from BR_RECTIFY_INFO  ) order by pic_time desc ",
-        sNodeId.c_str(), sIfRuleType.c_str(), sStartTime.c_str(), sEndTime.c_str());
-
-    
-    int iResult = _g_db->select(sql, help, strError);
-    
-    return iResult;
-}
-/*
-- (int)getPreReviewRectify:(CSelectHelp &)help error:(string &)strError
-{
     string strParam="";
     string sqlcode="get_break_last_view_reform";
     SelectHelpParam helpParam;
@@ -634,7 +548,6 @@
 
     return iResult;
 }
-*/
 
 - (int)getReviewRectifySingle:(CSelectHelp &)help error:(string &)strError
 {
